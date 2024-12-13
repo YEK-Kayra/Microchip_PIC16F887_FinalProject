@@ -1,0 +1,43 @@
+[PROJECT]
+Target=EEprom_i2c.hex
+Processor_Text=PIC16F690
+CCSVersion=5.049
+Compiler=PCM
+[Target Data]
+FileList=EEprom_i2c.c
+[EEprom_i2c.c]
+Type=4
+[mru-list]
+1=EEprom_i2c.c
+
+[defines]
+buildcount=5
+
+[ProjectLog]
+Days=2
+D1=10-12-2024
+D1_L=2
+D1_L1=[80767]Stopped Editing.
+TotalEdit=9
+TotalDebug=0
+D1_E=3
+D1_D=0
+D1_L2=[84330]Project Closed.
+D2=11-12-2024
+D2_L=6
+D2_L1=[65299]Project Opened.
+D2_L2=[77577]Started Editing.
+D2_L3=[77903]Stopped Editing.
+D2_L4=[78535]Started Editing.
+D2_L5=[78823]Stopped Editing.
+D2_E=6
+D2_D=0
+D2_L6=[78823]Project Closed.
+
+[Opened Files]
+1=..\..\..\..\TemelCCS çalýþmalarý\Kesmeler için\main.c
+t1=1
+Count=1
+[Units]
+Count=1
+1=EEprom_i2c (main)

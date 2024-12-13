@@ -1,0 +1,492 @@
+CCS PCM C Compiler, Version 5.049, 5967               11-Ara-24 21:53
+
+               Filename:   C:\Users\yunus\OneDrive\Masaüstü\DersBitirme\Proteus\I2C_Eeprom\CSS_Code\EEprom_i2c.lst
+
+               ROM used:   345 words (8%)
+                           Largest free fragment is 2048
+               RAM used:   11 (4%) at main() level
+                           14 (6%) worst case
+               Stack used: 1 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   0A8
+0003:  NOP
+.................... #include <16F690.h> 
+.................... //////////// Standard Header file for the PIC16F690 device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2014 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F690 
+0004:  DATA 53,3A
+0005:  DATA 61,39
+0006:  DATA F4,34
+0007:  DATA EE,33
+0008:  DATA A0,34
+0009:  DATA B2,31
+000A:  DATA A0,36
+000B:  DATA 6F,32
+000C:  DATA 75,36
+000D:  DATA 65,17
+000E:  DATA 2E,17
+000F:  DATA AE,06
+0010:  DATA 0A,00
+0011:  MOVF   0B,W
+0012:  MOVWF  29
+0013:  BCF    0B.7
+0014:  BSF    03.5
+0015:  BSF    03.6
+0016:  BSF    0C.7
+0017:  BSF    0C.0
+0018:  NOP
+0019:  NOP
+001A:  BCF    03.5
+001B:  BCF    03.6
+001C:  BTFSC  29.7
+001D:  BSF    0B.7
+001E:  BSF    03.6
+001F:  MOVF   0C,W
+0020:  ANDLW  7F
+0021:  BTFSC  03.2
+0022:  GOTO   067
+0023:  BCF    03.6
+0024:  MOVWF  29
+0025:  BSF    03.6
+0026:  MOVF   0D,W
+0027:  BCF    03.6
+0028:  MOVWF  2A
+0029:  BSF    03.6
+002A:  MOVF   0F,W
+002B:  BCF    03.6
+002C:  MOVWF  2B
+002D:  MOVF   29,W
+002E:  BTFSS  0C.4
+002F:  GOTO   02E
+0030:  MOVWF  19
+0031:  MOVF   2A,W
+0032:  BSF    03.6
+0033:  MOVWF  0D
+0034:  BCF    03.6
+0035:  MOVF   2B,W
+0036:  BSF    03.6
+0037:  MOVWF  0F
+0038:  BCF    03.6
+0039:  MOVF   0B,W
+003A:  MOVWF  2C
+003B:  BCF    0B.7
+003C:  BSF    03.5
+003D:  BSF    03.6
+003E:  BSF    0C.7
+003F:  BSF    0C.0
+0040:  NOP
+0041:  NOP
+0042:  BCF    03.5
+0043:  BCF    03.6
+0044:  BTFSC  2C.7
+0045:  BSF    0B.7
+0046:  BSF    03.6
+0047:  RLF    0C,W
+0048:  RLF    0E,W
+0049:  ANDLW  7F
+004A:  BTFSC  03.2
+004B:  GOTO   067
+004C:  BCF    03.6
+004D:  MOVWF  29
+004E:  BSF    03.6
+004F:  MOVF   0D,W
+0050:  BCF    03.6
+0051:  MOVWF  2A
+0052:  BSF    03.6
+0053:  MOVF   0F,W
+0054:  BCF    03.6
+0055:  MOVWF  2B
+0056:  MOVF   29,W
+0057:  BTFSS  0C.4
+0058:  GOTO   057
+0059:  MOVWF  19
+005A:  MOVF   2A,W
+005B:  BSF    03.6
+005C:  MOVWF  0D
+005D:  BCF    03.6
+005E:  MOVF   2B,W
+005F:  BSF    03.6
+0060:  MOVWF  0F
+0061:  INCF   0D,F
+0062:  BTFSC  03.2
+0063:  INCF   0F,F
+0064:  BCF    03.6
+0065:  GOTO   011
+0066:  BSF    03.6
+0067:  BCF    03.6
+0068:  BCF    0A.3
+0069:  GOTO   0E3 (RETURN)
+....................  
+.................... #list 
+....................  
+....................   
+.................... #define GP0 PIN_C0 
+.................... #define GP1 PIN_C1 
+.................... #define GP2 PIN_C2 
+.................... #define GP3 PIN_C3 
+.................... #define GP4 PIN_C4 
+.................... #define GP5 PIN_C5 
+.................... #define GP6 PIN_C6 
+.................... #define GP7 PIN_C7 
+....................   
+.................... #fuses INTRC_IO, NOWDT, NOPROTECT, BROWNOUT                             /* Ext. oscilator, no watchdog, no code protect, no brownout (until voltage  
+....................                                                                             rises on power up the PIC is held in reset = inactive) reset */ 
+....................   
+.................... #use delay(clock=4M)                                                        /* Specify clock frequency, to use "delay_()" function */ 
+*
+007A:  MOVLW  2A
+007B:  MOVWF  04
+007C:  BCF    03.7
+007D:  MOVF   00,W
+007E:  BTFSC  03.2
+007F:  GOTO   08E
+0080:  MOVLW  01
+0081:  MOVWF  21
+0082:  CLRF   20
+0083:  DECFSZ 20,F
+0084:  GOTO   083
+0085:  DECFSZ 21,F
+0086:  GOTO   082
+0087:  MOVLW  4A
+0088:  MOVWF  20
+0089:  DECFSZ 20,F
+008A:  GOTO   089
+008B:  GOTO   08C
+008C:  DECFSZ 00,F
+008D:  GOTO   080
+008E:  RETURN
+.................... #use rs232 (baud=9600, xmit=PIN_B7, rcv=PIN_B5, parity=N, bits=8, errors) 
+.................... #use i2c (master, sda=PIN_B4, scl=PIN_B6, FAST, FORCE_HW)                                       /* Master mode, SDA pin = RB4, SCL pin = RB6, force hardware i2c functions */ 
+*
+006A:  BCF    14.7
+006B:  BCF    0C.3
+006C:  MOVF   29,W
+006D:  MOVWF  13
+006E:  MOVLW  02
+006F:  BTFSC  14.7
+0070:  GOTO   078
+0071:  BTFSS  0C.3
+0072:  GOTO   071
+0073:  MOVLW  00
+0074:  BSF    03.5
+0075:  BTFSC  11.6
+0076:  MOVLW  01
+0077:  BCF    03.5
+0078:  MOVWF  21
+0079:  RETURN
+*
+008F:  BCF    14.6
+0090:  BSF    03.5
+0091:  BSF    11.3
+0092:  BTFSC  11.3
+0093:  GOTO   092
+0094:  BCF    03.5
+0095:  BTFSS  20.0
+0096:  GOTO   09A
+0097:  BSF    03.5
+0098:  BCF    11.5
+0099:  BCF    03.5
+009A:  BTFSC  20.0
+009B:  GOTO   09F
+009C:  BSF    03.5
+009D:  BSF    11.5
+009E:  BCF    03.5
+009F:  BSF    03.5
+00A0:  BSF    11.4
+00A1:  BTFSC  11.4
+00A2:  GOTO   0A1
+00A3:  BCF    03.5
+00A4:  MOVF   13,W
+00A5:  MOVWF  21
+00A6:  BCF    0A.3
+00A7:  GOTO   13B (RETURN)
+....................   
+.................... #define SLAVE1_WRT_CON_BYTE 0b10100000                                      /* This byte should contain the control byte from the 
+....................                                                                             datasheet with control code, AN0, AN1, AN2 pins, READ or WRITE bit */ 
+....................                                                                             /* bit<0> = 0 for write and 1 for read 
+....................                                                                             bits<1:3> = the values of the AN0:2 pins 
+....................                                                                             bits<4:7> = control code of "1010" for EEPROM24AA128 */ 
+....................                                                                             /* !!! Dont forget that these must be put as the most significant bits first, 
+....................                                                                             A0, A1, A2 become A2, A1, A0, making: 
+....................                                                                             10100000 = control 4 bits/A2, A1, A0,/Read or write */ 
+....................                                                                             /* HEX = 0xA0 */ 
+....................                                                                              
+.................... #define SLAVE1_READ_CON_BYTE 0b10100001                                     /* This byte should contain the control byte from the 
+....................                                                                             datasheet with control code, AN0, AN1, AN2 pins, READ or WRITE bit */ 
+....................                                                                             /* bit<0> = 0 for write and 1 for read 
+....................                                                                             bits<1:3> = the values of the AN0:2 pins 
+....................                                                                             bits<4:7> = control code of "1010" for EEPROM24AA128 */ 
+....................                                                                             /* !!! Dont forget that these must be put as the most significant bits first, 
+....................                                                                             A0, A1, A2 become A2, A1, A0, making: 
+....................                                                                             10100001 = control 4 bits/A2, A1, A0,/Read or write */ 
+....................                                                                             /* HEX = A1 */ 
+....................                                                                              
+.................... #define SLAVE1_WRITE_ADDRESS_2_BYTES 0x00A2 
+.................... #define SLAVE1_READ_ADDRESS_2_BYTES 0x00A3 
+.................... //==================================== 
+....................   
+.................... void main() 
+00A8:  MOVF   03,W
+00A9:  ANDLW  1F
+00AA:  MOVWF  03
+00AB:  MOVLW  61
+00AC:  BSF    03.5
+00AD:  MOVWF  0F
+00AE:  CLRF   10
+00AF:  MOVF   0F,W
+00B0:  BCF    03.5
+00B1:  CLRF   24
+00B2:  BSF    03.5
+00B3:  BCF    1B.3
+00B4:  MOVLW  19
+00B5:  MOVWF  19
+00B6:  MOVLW  A6
+00B7:  MOVWF  18
+00B8:  MOVLW  90
+00B9:  BCF    03.5
+00BA:  MOVWF  18
+00BB:  BSF    03.5
+00BC:  BSF    06.6
+00BD:  BSF    06.4
+00BE:  MOVLW  02
+00BF:  MOVWF  13
+00C0:  MOVLW  28
+00C1:  BCF    03.5
+00C2:  MOVWF  14
+00C3:  BSF    03.5
+00C4:  BCF    14.7
+00C5:  BCF    14.6
+00C6:  BCF    03.5
+00C7:  CLRF   26
+00C8:  CLRF   25
+00C9:  BSF    03.6
+00CA:  BCF    1F.0
+00CB:  BCF    1F.1
+00CC:  BCF    1F.2
+00CD:  BCF    1F.3
+00CE:  BCF    03.6
+00CF:  BCF    1F.6
+00D0:  MOVLW  00
+00D1:  BSF    03.6
+00D2:  MOVWF  1E
+00D3:  CLRF   19
+00D4:  CLRF   1A
+00D5:  BSF    03.5
+00D6:  CLRF   1E
+00D7:  BCF    03.5
+00D8:  CLRF   1B
+00D9:  BCF    03.6
+00DA:  BCF    0D.5
+00DB:  BCF    03.7
+.................... { 
+....................    unsigned int8 i; 
+....................    unsigned int8 data; 
+....................     
+....................    while(1) 
+....................    { 
+....................       printf ("Starting i2c module....\r\n"); 
+00DC:  MOVLW  04
+00DD:  BSF    03.6
+00DE:  MOVWF  0D
+00DF:  MOVLW  00
+00E0:  MOVWF  0F
+00E1:  BCF    03.6
+00E2:  GOTO   011
+....................                             /* to write data */ 
+....................       i2c_start(); 
+00E3:  BSF    03.5
+00E4:  BSF    11.0
+00E5:  BTFSC  11.0
+00E6:  GOTO   0E5
+....................       i2c_write(SLAVE1_WRT_CON_BYTE);           /* 1. Following the start condition, the next byte is control code (1010)\chip select (A2, A1, A0), R/W bit (logic low).  
+00E7:  MOVLW  A0
+00E8:  BCF    03.5
+00E9:  MOVWF  29
+00EA:  CALL   06A
+....................                                                    This indicates to the addressed slave that the address high byte will follow after it has generated an Acknowledge bit */ 
+....................       delay_ms (10);                            /* delay 10ms for the acknowledge bit to be sent, because we dont record it with the microcontroller */ 
+00EB:  MOVLW  0A
+00EC:  MOVWF  2A
+00ED:  CALL   07A
+....................        
+....................       i2c_write (0x80);                     /* 2. The next byte is the high order byte of the word address and will be written into the Address Pointer of 24AA128 */ 
+00EE:  MOVLW  80
+00EF:  MOVWF  29
+00F0:  CALL   06A
+....................   
+....................       i2c_write (0x00);                     /* 3. The next byte is the least significant address byte */      
+00F1:  CLRF   29
+00F2:  CALL   06A
+....................        
+....................       i2c_write (0x01);                     /* 4. After receiving another acknowledge signal from the 24AA128, the master will transmit tha data word to be written into  
+00F3:  MOVLW  01
+00F4:  MOVWF  29
+00F5:  CALL   06A
+....................                                                    the  addressed memory location */ 
+....................                             /* After a byte write command, the internal address counter will point 
+....................                             /* to the address location following the one that was just written, because its automatically EEPROM hardware incremented */ 
+....................       i2c_write (0x02); 
+00F6:  MOVLW  02
+00F7:  MOVWF  29
+00F8:  CALL   06A
+....................       i2c_stop ();                  /* 5. After another acknowledge bit, the master sends the stop condition */ 
+00F9:  BSF    03.5
+00FA:  BSF    11.2
+00FB:  BTFSC  11.2
+00FC:  GOTO   0FB
+....................       delay_ms (10);                        /* The information is kept in a buffer, until the "stop condition", after which 
+00FD:  MOVLW  0A
+00FE:  BCF    03.5
+00FF:  MOVWF  2A
+0100:  CALL   07A
+....................                             /* it is recorded in the EEPROM, so we need a delay, after the "stop condition" */ 
+....................   
+....................       /* to write data */ 
+....................       i2c_start(); 
+0101:  BSF    03.5
+0102:  BSF    11.0
+0103:  BTFSC  11.0
+0104:  GOTO   103
+....................       i2c_write(SLAVE1_WRT_CON_BYTE);           /* 1. Following the start condition, the next byte is control code (1010)\chip select (A2, A1, A0), R/W bit (logic low). This indicates to the addressed slave that the address high byte will follow after it has generated an Acknowledge bit */ 
+0105:  MOVLW  A0
+0106:  BCF    03.5
+0107:  MOVWF  29
+0108:  CALL   06A
+....................       delay_ms (10);                    /* delay 10ms for the acknowledge bit to be sent, because we dont record it with the microcontroller */ 
+0109:  MOVLW  0A
+010A:  MOVWF  2A
+010B:  CALL   07A
+....................        
+....................       i2c_write (0x80);                 /* 2. The next byte is the high order byte of the word address and will be written into the Address Pointer of 24AA128 */ 
+010C:  MOVLW  80
+010D:  MOVWF  29
+010E:  CALL   06A
+....................   
+....................       i2c_write (0x00);                 /* 3. The next byte is the least significant address byte */      
+010F:  CLRF   29
+0110:  CALL   06A
+....................        
+....................       i2c_write (0x02);                 /* 4. After receiving another acknowledge signal from the 24AA128, the master will transmit tha data word to be written into the addressed memory location */ 
+0111:  MOVLW  02
+0112:  MOVWF  29
+0113:  CALL   06A
+....................                             /* After a byte write command, the internal address counter will point 
+....................                             /* to the address location following the one that was just written, because its automatically EEPROM hardware incremented */ 
+....................       i2c_write (0x02); 
+0114:  MOVLW  02
+0115:  MOVWF  29
+0116:  CALL   06A
+....................       i2c_stop ();                  /* 5. After another acknowledge bit, the master sends the stop condition */ 
+0117:  BSF    03.5
+0118:  BSF    11.2
+0119:  BTFSC  11.2
+011A:  GOTO   119
+....................       delay_ms (10);                        /* The information is kept in a buffer, until the "stop condition", after which 
+011B:  MOVLW  0A
+011C:  BCF    03.5
+011D:  MOVWF  2A
+011E:  CALL   07A
+....................           
+....................                             /* To read data from a random address */ 
+....................       i2c_start(); 
+011F:  BSF    03.5
+0120:  BSF    11.0
+0121:  BTFSC  11.0
+0122:  GOTO   121
+....................       i2c_write(SLAVE1_WRT_CON_BYTE);           /* 1. Following the start condition, the next byte is control code (1010)\chip select (A2, A1, A0), R/W bit (logic low).  
+0123:  MOVLW  A0
+0124:  BCF    03.5
+0125:  MOVWF  29
+0126:  CALL   06A
+....................                                                    This indicates to the addressed slave that the address high byte will follow after it has generated an "acknowledge bit". 
+....................                                                    We set "the internal address pointer" as a part of a "write" operation, in 
+....................                                                    order to be able to use "sequential read" */ 
+....................       
+....................       i2c_write (0x80);                 /* 2. The next byte is the high order byte of the word address and will be written into the Address Pointer of 24AA128 */ 
+0127:  MOVLW  80
+0128:  MOVWF  29
+0129:  CALL   06A
+....................   
+....................       i2c_write (0x00);                 /* 3. The next byte is the least significant address byte */ 
+012A:  CLRF   29
+012B:  CALL   06A
+....................        
+....................       i2c_start ();                     /* 4. We send a start condition, instead of a "stop condition", after the "internal address pointer" has been set in 
+012C:  BSF    03.5
+012D:  BSF    11.1
+012E:  BTFSC  11.1
+012F:  GOTO   12E
+....................                                   a "write" operation */ 
+....................        
+....................       i2c_write (SLAVE1_READ_CON_BYTE);         /* 5. For sequentual read, we send a "read" control byte, after the "internal address pointer" has 
+0130:  MOVLW  A1
+0131:  BCF    03.5
+0132:  MOVWF  29
+0133:  CALL   06A
+....................                                                    been set in a "write" operation and after that a "start condition" has been generated */ 
+....................                                 
+....................       for (i=0; i<2 ;i++) 
+0134:  CLRF   27
+0135:  MOVF   27,W
+0136:  SUBLW  01
+0137:  BTFSS  03.0
+0138:  GOTO   14B
+....................       {   
+....................      data = i2c_read(0); 
+0139:  CLRF   20
+013A:  GOTO   08F
+013B:  MOVF   21,W
+013C:  MOVWF  28
+....................        
+....................          output_c (data); 
+013D:  BSF    03.5
+013E:  CLRF   07
+013F:  BCF    03.5
+0140:  MOVF   28,W
+0141:  MOVWF  07
+....................          delay_ms(1000); 
+0142:  MOVLW  04
+0143:  MOVWF  29
+0144:  MOVLW  FA
+0145:  MOVWF  2A
+0146:  CALL   07A
+0147:  DECFSZ 29,F
+0148:  GOTO   144
+0149:  INCF   27,F
+014A:  GOTO   135
+....................       } 
+....................      i2c_stop ();                   /* 6. The data for the EEPROM is kept in a buffer, until the stop condition is issues, 
+014B:  BSF    03.5
+014C:  BSF    11.2
+014D:  BTFSC  11.2
+014E:  GOTO   14D
+....................                                and written after that, so we need a delay after the stop condition */ 
+....................                             /* We make the delay 1 sec, in order to test the result of the program */ 
+.................... delay_ms (1000); 
+014F:  MOVLW  04
+0150:  BCF    03.5
+0151:  MOVWF  29
+0152:  MOVLW  FA
+0153:  MOVWF  2A
+0154:  CALL   07A
+0155:  DECFSZ 29,F
+0156:  GOTO   152
+0157:  GOTO   0DC
+....................   } 
+.................... } 
+0158:  SLEEP
+
+Configuration Fuses:
+   Word  1: 0FE4   INTRC_IO NOWDT PUT MCLR NOPROTECT NOCPD BROWNOUT IESO FCMEN

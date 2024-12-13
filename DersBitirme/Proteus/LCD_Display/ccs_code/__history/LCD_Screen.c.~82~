@@ -1,0 +1,135 @@
+///////////////////////////////////////////////////////////////////////////////
+////                             LCD.C                                     ////
+////                 Driver for common LCD modules                         ////
+////                                                                       ////
+////  lcd_init()   Must be called before any other function.               ////
+////                                                                       ////
+////  lcd_putc(c)  Will display c on the next position of the LCD.         ////
+////                 \a  Set cursor position to upper left                 ////
+////                 \f  Clear display, set cursor to upper left           ////
+////                 \n  Go to start of second line                        ////
+////                 \b  Move back one position                            ////
+////              If LCD_EXTENDED_NEWLINE is defined, the \n character     ////
+////              will erase all remanining characters on the current      ////
+////              line, and move the cursor to the beginning of the next   ////
+////              line.                                                    ////
+////              If LCD_EXTENDED_NEWLINE is defined, the \r character     ////
+////              will move the cursor to the start of the current         ////
+////              line.                                                    ////
+////                                                                       ////
+////  lcd_gotoxy(x,y) Set write position on LCD (upper left is 1,1)        ////
+////                                                                       ////
+////  lcd_getc(x,y)   Returns character at position x,y on LCD             ////
+////                                                                       ////
+////  lcd_cursor_on(int1 on)   Turn the cursor on (on=TRUE) or off         ////
+////              (on=FALSE).                                              ////
+////                                                                       ////
+////  lcd_set_cgram_char(w, *p)   Write a custom character to the CGRAM.   ////
+///////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////
+//                        USAGE OF ADC PINS 
+// A0 ==> LCD Screen, Option Surfing Potentiometer
+// A1 ==> Timer Potentiometer 
+// A2 ==> Vacuum and blowing setting Potentiometer
+//
+//
+///////////////////////////////////////////////////////////////////////////////
+
+
+
+#include <16f887.h>  // mikrodenetleyicimizi tanýtýyoruz
+
+#device ADC=10       // 10bitlik adc okumasý yapýlacak
+
+#use delay(clock=4M) // clock olarak osilatörümüzün frekansýný giriyoruz
+
+
+#include <lcd.c>     // ! delay(clock=x) fonksiyonunu #use ettikten
+                     // sonra tanýmlanmalý, aksi halde hata verir                     
+
+
+#use fast_io(a) //ADC pinlerinin tris ayarlarýný manuel yapýlacak
+
+
+
+#fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT
+
+
+unsigned long int val_ADC_Pot_Surf;
+unsigned long int val_ADC_Pot_Timer;
+unsigned long int val_ADC_Pot_VacuumBlowing;
+
+float val_Voltage_potSurf;
+float val_Voltage_potTimer;
+float val_Voltage_potSVacuumBlowing;
+
+void main(void) 
+{
+
+   //ADC YAPILANDIRMASI
+   set_tris_a(0x07); //0b 0000 0111 ==> PIN_A0, PIN_A1, PIN_A2
+   setup_adc(adc_clock_div_32); 
+   setup_adc_ports(ALL_ANALOG);
+
+   lcd_init(); // LCD ekranýmýzý baþlatacak
+   
+
+
+/////////////////////-MESAJ PROTOTÝPLERÝMÝZ-///////////////////////////
+
+      //---> SELAMLAMA FASLI
+//!      printf(lcd_putc,"Lutfen ID Karti");
+//!      lcd_gotoxy(4,2);
+//!      printf(lcd_putc,"Gosteriniz");
+//!      delay_ms(1000);
+//!      printf(lcd_putc,"\f");
+     
+      
+      //---> KARTI OKUTTUKTAN SONRA
+            //---> Olumlu ise 
+//!            printf(lcd_putc,"$Giris Basarili$");
+//!            lcd_gotoxy(4,2);
+//!            printf(lcd_putc,"Yukleniyor");
+//!            delay_ms(1000);
+//!            printf(lcd_putc,"\f");
+            
+            //---> Olumsuz ise
+//!            printf(lcd_putc," !Gecersiz ID!");
+//!            lcd_gotoxy(2,2);
+//!            printf(lcd_putc,"Tekrar Deneyin");
+//!            delay_ms(1000);
+//!            printf(lcd_putc,"\f");
+
+      //---> ISLEMLERIN POTANSIYOMETRE ILE GEZILMESI 
+            
+            //---> Süre Ýþlemleri
+                  
+   float val_Voltage_potSurf;
+float val_Voltage_potTimer;
+float val_Voltage_potSVacuumBlowing;   
+   
+unsigned long int val_ADC_Pot_Surf;
+unsigned long int val_ADC_Pot_Timer;
+unsigned long int val_ADC_Pot_VacuumBlowing;
+   
+   
+       while(1)
+       {
+       
+       
+        set_adc_channel(0);
+        delay_us(20);
+        val_ADC_Pot_Surf = read_adc();
+        val_Voltage_potSurf = (float)((val_ADC_Pot_Surf/1024.0)*5.0);
+        printf(lcd_putc,"\f%lu",val_ADC_Pot_Surf);
+        printf(lcd_putc,"\n Volt=%f V",val_Voltage_potSurf);
+        delay_ms(100);
+        
+        
+        
+        
+       }
+ 
+ 
+}

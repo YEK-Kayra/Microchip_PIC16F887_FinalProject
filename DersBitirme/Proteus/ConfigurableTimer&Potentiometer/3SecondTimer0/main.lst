@@ -1,0 +1,194 @@
+CCS PCM C Compiler, Version 5.049, 5967               11-Ara-24 23:23
+
+               Filename:   C:\Users\yunus\OneDrive\Masaüstü\TemelCCS çalýþmalarý\Kesmeler için\main.lst
+
+               ROM used:   94 words (1%)
+                           Largest free fragment is 2048
+               RAM used:   13 (4%) at main() level
+                           13 (4%) worst case
+               Stack used: 1 locations (0 in main + 1 for interrupts)
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   03C
+0003:  NOP
+0004:  MOVWF  7F
+0005:  SWAPF  03,W
+0006:  CLRF   03
+0007:  MOVWF  21
+0008:  MOVF   0A,W
+0009:  MOVWF  20
+000A:  CLRF   0A
+000B:  MOVF   04,W
+000C:  MOVWF  22
+000D:  MOVF   77,W
+000E:  MOVWF  23
+000F:  MOVF   78,W
+0010:  MOVWF  24
+0011:  MOVF   79,W
+0012:  MOVWF  25
+0013:  MOVF   7A,W
+0014:  MOVWF  26
+0015:  BCF    03.7
+0016:  BCF    03.5
+0017:  BTFSS  0B.5
+0018:  GOTO   01B
+0019:  BTFSC  0B.2
+001A:  GOTO   02C
+001B:  MOVF   22,W
+001C:  MOVWF  04
+001D:  MOVF   23,W
+001E:  MOVWF  77
+001F:  MOVF   24,W
+0020:  MOVWF  78
+0021:  MOVF   25,W
+0022:  MOVWF  79
+0023:  MOVF   26,W
+0024:  MOVWF  7A
+0025:  MOVF   20,W
+0026:  MOVWF  0A
+0027:  SWAPF  21,W
+0028:  MOVWF  03
+0029:  SWAPF  7F,F
+002A:  SWAPF  7F,W
+002B:  RETFIE
+002C:  BCF    0A.3
+002D:  BCF    0A.4
+002E:  GOTO   02F
+.................... #include <16f887.h> 
+.................... //////////// Standard Header file for the PIC16F887 device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2014 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F887 
+....................  
+.................... #list 
+....................  
+....................  
+.................... #use delay(clock=4M) 
+.................... #use fast_io(b)  
+....................  
+.................... #fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT 
+....................  
+.................... #define ledPin pin_B0 
+....................  
+....................  
+.................... //-->REGISTER DEFINATIONS 
+.................... #byte my_TIM0_OPTION_REG = 0x81  
+.................... #byte my_TIM0_MODULE_REG = 0x01  
+.................... #byte my_INTCON_REG      = 0x0B 
+....................  
+.................... int timer0_isr_counter=0; 
+....................  
+....................  
+.................... #INT_TIMER0 
+.................... void systemTimer0_isr(){ 
+....................  
+....................    timer0_isr_counter++; 
+002F:  INCF   27,F
+....................     
+....................    // 64mS * 47 is for about 3008mS = 3second 
+....................    if(timer0_isr_counter == 47){ 
+0030:  MOVF   27,W
+0031:  SUBLW  2F
+0032:  BTFSS  03.2
+0033:  GOTO   037
+....................     
+....................    output_toggle(ledPin); 
+0034:  MOVLW  01
+0035:  XORWF  06,F
+....................     
+....................    timer0_isr_counter=0; 
+0036:  CLRF   27
+....................    } 
+....................  
+....................  
+....................    //Clear timer0 overflow interrupt flag  
+....................    //my_INTCON_REG is 0x24 before we clear it, 
+....................    // 0x24 shows that(before clear): 
+....................    //       =>TIM0 Overflow bit is 1 
+....................    //       =>TIM0 Overflow Interrupt Enable bit is 1 
+....................    // 
+....................    //after clear , myINTCON_REG's flag bit is 0 
+....................    my_INTCON_REG &= 0xFB;  
+0037:  BCF    0B.2
+....................     
+....................  
+0038:  BCF    0B.2
+0039:  BCF    0A.3
+003A:  BCF    0A.4
+003B:  GOTO   01B
+.................... } 
+....................  
+....................  
+....................  
+.................... void main(void)  
+003C:  MOVF   03,W
+003D:  ANDLW  1F
+003E:  MOVWF  03
+003F:  CLRF   27
+0040:  BSF    03.5
+0041:  BSF    03.6
+0042:  MOVF   09,W
+0043:  ANDLW  C0
+0044:  MOVWF  09
+0045:  BCF    03.6
+0046:  BCF    1F.4
+0047:  BCF    1F.5
+0048:  MOVLW  00
+0049:  BSF    03.6
+004A:  MOVWF  08
+004B:  BCF    03.5
+004C:  CLRF   07
+004D:  CLRF   08
+004E:  CLRF   09
+004F:  BCF    03.7
+.................... { 
+....................  
+....................  
+.................... //---> TIMER & INTERRUPT CONFIGURATION  <---// 
+....................  
+....................      //T(overflow) = InstructionTime*PSC*(256-TIM0_val) 
+....................      //       64mS = 1uS * 256 * (256-56) 
+....................      my_TIM0_OPTION_REG &= 0xC7 ; 
+0050:  MOVLW  C7
+0051:  BSF    03.5
+0052:  BCF    03.6
+0053:  ANDWF  01,F
+....................      my_TIM0_MODULE_REG = 56; 
+0054:  MOVLW  38
+0055:  BCF    03.5
+0056:  MOVWF  01
+....................       
+....................      // Enable interrupts by setting GIE (Global Interrupt Enable)  
+....................      // and TOIE (Timer0 Overflow Interrupt Enable) bits in INTCON register 
+....................      my_INTCON_REG = 0xA0; 
+0057:  MOVLW  A0
+0058:  MOVWF  0B
+....................       
+....................      set_tris_b(0x00);                
+0059:  MOVLW  00
+005A:  BSF    03.5
+005B:  MOVWF  06
+....................  
+....................  
+....................  while(1) 
+....................  { 
+005C:  GOTO   05C
+....................   
+....................    
+....................  } 
+.................... }  
+005D:  SLEEP
+
+Configuration Fuses:
+   Word  1: 2CF2   HS NOWDT NOPUT MCLR NOPROTECT NOCPD NOBROWNOUT IESO FCMEN NOLVP NODEBUG
+   Word  2: 0700   BORV40 NOWRT

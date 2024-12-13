@@ -1,0 +1,78 @@
+#include <16f887.h>
+
+#use delay(clock=4M)
+
+#use fast_io(b) // The pins on port B will be used for display scanning.
+#use fast_io(e) // The pins on port E will be used to switch this scanning
+
+#fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT
+
+//transistor on&off pins
+#define pin_HundredDigit_switch pin_E2
+#define pin_TensDigit_switch    pin_E0 
+#define pin_UnitDigit_switch    pin_E1 
+
+//Values that will be implemented into the b ports
+int8 segmentTable[16] ={
+                     0x3F,0x06,0x5B,0x4F,0x66,
+                     0x6D,0x7D,0x07,0x7F,0x6F      
+                      };
+                     
+int8 indexOfSegment=0;
+
+int8 number_unitDigit=0;
+int8 number_tensDigit=0;
+int8 number_hundredDigit =0;
+
+int  idx_units=0;
+int  idx_Tens=0;
+int  idx_Hundreds=0;
+
+void main(void) 
+{
+
+
+   set_tris_b(0x00);                      //display pinlerini çýkýþ olarak ata
+   
+   output_drive(pin_HundredDigit_switch);
+   output_drive(pin_TensDigit_switch);
+   output_drive(pin_UnitDigit_switch);
+   
+   output_high(pin_UnitDigit_switch);     //birler basamaðýný aç
+   output_high(pin_TensDigit_switch);     //onlar basamaðýný aç
+   output_high(pin_HundredDigit_switch);  //yüzler basamaðýný aç
+   
+   output_b(segmentTable[indexOfSegment]); //baþlangýç deðerini birler ve onlar basamaðýna yükle
+   
+ while(1) //Sonsuz döngü baþlangýcý
+ {
+ 
+////// TARAMA KODU 
+        for(int k = 0 ; k <100 ; k++){
+        
+         //Transistor ile basamak deðiþimlerini yap
+          output_high(pin_UnitDigit_switch);     //birler basamaðýný aç
+          output_low(pin_TensDigit_switch);      //onlar basamaðýný kapa
+          output_low(pin_HundredDigit_switch);   //yüzler basamaðýný kapa
+          
+          //number_unitDigit = idx_units; //hangi indisteki sayý ise onu birlerin içine at
+          output_b(segmentTable[number_unitDigit]); //ilgili numarayý ekrana bas, içeriden sayý çekiyoruz yani
+          delay_ms(10);                             //tarama yaparken bu süreyi kullan
+          
+         
+          //Transistor ile basamak deðiþimlerini yap
+          output_low(pin_UnitDigit_switch);      //birler basamaðýný kapa
+          output_high(pin_TensDigit_switch);     //onlar basamaðýný aç
+          output_low(pin_HundredDigit_switch);   //yüzler basamaðýný kapa
+          
+          
+          //number_tensDigit = idx_Tens; //hangi indisteki sayý ise onu birlerin içine at
+          output_b(segmentTable[number_tensDigit]); //ilgili numarayý ekrana bas, içeriden sayý çekiyoruz yani
+          delay_ms(10);  
+          
+        }
+        number_unitDigit++;
+        number_tensDigit++;
+             
+ }
+} 

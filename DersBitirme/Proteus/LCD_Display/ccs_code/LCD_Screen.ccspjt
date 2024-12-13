@@ -1,0 +1,65 @@
+[PROJECT]
+Target=LCD_Screen.hex
+Processor_Text=PIC16F887
+CCSVersion=5.049
+Compiler=PCM
+[Target Data]
+FileList=LCD_Screen.c
+[LCD_Screen.c]
+Type=4
+[mru-list]
+1=LCD_Screen.c
+
+[defines]
+buildcount=43
+
+[Opened Files]
+1=LCD_Screen.c
+t1=149
+Count=2
+2=..\..\GraduationProject_3DigitDisplay\ccs_code\3digitDisplayControl.c
+t2=25
+3=..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c
+t3=317
+
+[ProjectLog]
+Days=2
+D1=09-12-2024
+D1_L=16
+D1_L1=[72865]Stopped Editing.
+D1_L2=[73069]Started Editing.
+D1_L3=[73650]Stopped Editing.
+D1_L4=[73902]Started Editing.
+D1_L5=[75521]Stopped Editing.
+TotalEdit=107
+TotalDebug=0
+D1_E=36
+D1_D=0
+D1_L6=[75521]Project Closed.
+D1_L7=[81444]Project Opened.
+D1_L8=[81501]Started Editing.
+D1_L9=[81896]Stopped Editing.
+D1_L10=[82989]Started Editing.
+D1_L11=[84405]Stopped Editing.
+D1_L12=[84449]Started Editing.
+D1_L13=[84832]Stopped Editing.
+D1_L14=[84996]Started Editing.
+D1_L15=[85416]Stopped Editing.
+D1_L16=[85701]Started Editing.
+D2=10-12-2024
+D2_L=10
+D2_L1=[269]Stopped Editing.
+D2_L2=[536]Started Editing.
+D2_L3=[2615]Stopped Editing.
+D2_E=71
+D2_D=0
+D2_L4=[2615]Project Closed.
+D2_L5=[46817]Project Opened.
+D2_L6=[46887]Started Editing.
+D2_L7=[47187]Stopped Editing.
+D2_L8=[48117]Started Editing.
+D2_L9=[48417]Stopped Editing.
+D2_L10=[48430]Project Closed.
+[Units]
+Count=1
+1=LCD_Screen (main)

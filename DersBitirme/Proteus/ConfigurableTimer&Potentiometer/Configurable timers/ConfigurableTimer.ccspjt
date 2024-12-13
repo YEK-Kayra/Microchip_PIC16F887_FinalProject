@@ -1,0 +1,37 @@
+[PROJECT]
+Target=ConfigurableTimer.hex
+Processor_Text=PIC16F887
+CCSVersion=5.049
+Compiler=PCM
+[Target Data]
+FileList=ConfigurableTimer.c
+[ConfigurableTimer.c]
+Type=4
+[mru-list]
+1=ConfigurableTimer.c
+
+[defines]
+buildcount=8
+
+[Opened Files]
+1=ConfigurableTimer.c
+t1=9
+Count=1
+
+[ProjectLog]
+Days=1
+D1=12-12-2024
+D1_L=6
+D1_L1=[2916]Stopped Editing.
+D1_L2=[3022]Started Editing.
+D1_L3=[3330]Stopped Editing.
+D1_L4=[3390]Started Editing.
+D1_L5=[3618]Stopped Editing.
+TotalEdit=15
+TotalDebug=0
+D1_E=15
+D1_D=0
+D1_L6=[3618]Project Closed.
+[Units]
+Count=1
+1=ConfigurableTimer (main)

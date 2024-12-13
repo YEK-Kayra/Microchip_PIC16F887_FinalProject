@@ -1,0 +1,72 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+015     CCP_1
+015     CCP_1_LOW
+016     CCP_1_HIGH
+020     @SCRATCH
+021     @SCRATCH
+021     _RETURN_
+022     @SCRATCH
+023     @SCRATCH
+024     rs232_errors
+025-026 @sprintf_string
+027     main.i
+028     main.data
+029     @I2C_WRITEU_1.P1
+029     @I2C_READU_1.P2
+029     main.@SCRATCH1
+029     @PSTRINGC7_9600_55_53.@SCRATCH1
+02A     @delay_ms1.P1
+02A     @PSTRINGC7_9600_55_53.@SCRATCH2
+02B     @PSTRINGC7_9600_55_53.@SCRATCH3
+02C     @PSTRINGC7_9600_55_53.@SCRATCH4
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
+11B.6   C2OUT
+11B.7   C1OUT
+
+ROM Allocation:
+000004  @const583.call
+000011  @PSTRINGC7_9600_55_53
+00006A  @I2C_WRITEU_1
+00007A  @delay_ms1
+00008F  @I2C_READU_1
+0000A8  main
+0000A8  @cinit1
+0000DB  @cinit2
+
+Project Directory:
+    C:\Users\yunus\OneDrive\Masaüstü\DersBitirme\Proteus\I2C_Eeprom\CSS_Code\
+
+Project Files:
+    EEprom_i2c.c                                            [10-Ara-24 22:24  CRC=BF5CD689]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F690.h [08-Eyl-15 15:14  CRC=79E20B50]
+
+Source signature=B320ED29
+Program memory checksum=0000
+Program memory CRC=0000
+Hex file CRC=FF13
+
+Units:
+    EEprom_i2c (main)
+
+Compiler Settings:
+    Processor:      PIC16F690
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Compile Mode:       CCS5
+
+Output Files:
+    XREF file:   EEprom_i2c.xsym
+    Errors:      EEprom_i2c.err
+    Ext Symbols: EEprom_i2c.esym
+    INHX8:       EEprom_i2c.hex
+    Symbols:     EEprom_i2c.sym
+    List:        EEprom_i2c.lst
+    Debug/COFF:  EEprom_i2c.cof
+    Project:     EEprom_i2c.ccspjt
+    Call Tree:   EEprom_i2c.tre
+    Statistics:  EEprom_i2c.STA

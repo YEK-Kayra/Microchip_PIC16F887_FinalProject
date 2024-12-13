@@ -1,0 +1,40 @@
+[PROJECT]
+Target=3digitDisplayControl.hex
+Processor_Text=PIC16F887
+CCSVersion=5.049
+Compiler=PCM
+[Target Data]
+FileList=3digitDisplayControl.c
+[3digitDisplayControl.c]
+Type=4
+[mru-list]
+1=3digitDisplayControl.c
+
+[defines]
+buildcount=10
+
+[Opened Files]
+1=3digitDisplayControl.c
+t1=1
+Count=1
+
+[ProjectLog]
+Days=2
+D1=08-12-2024
+D1_L=6
+D1_L1=[74600]Started Editing.
+D1_L2=[75485]Stopped Editing.
+D1_L3=[75964]Started Editing.
+D1_L4=[78250]Stopped Editing.
+TotalEdit=48
+TotalDebug=0
+D1_E=48
+D1_D=0
+D1_L5=[78250]Project Closed.
+D1_L6=[83624]Project Opened.
+D2=09-12-2024
+D2_L=1
+D2_L1=[226]Project Closed.
+[Units]
+Count=1
+1=3digitDisplayControl (main)

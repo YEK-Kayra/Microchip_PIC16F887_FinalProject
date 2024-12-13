@@ -1,0 +1,162 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+008     lcd
+008     lcdlat
+015     CCP_1
+015     CCP_1_LOW
+016     CCP_1_HIGH
+01B     CCP_2
+01B     CCP_2_LOW
+01C     CCP_2_HIGH
+020-027 checkMark
+028-029 val_ADC_Pot_Surf
+02A-02B val_ADC_Pot_Timer
+02C-02D val_ADC_Pot_VacuumBlowing
+02E-031 val_Voltage_potSurf
+032-035 val_Voltage_potTimer
+036-039 val_Voltage_potSVacuumBlowing
+03A-03B @sprintf_string
+03C-03F @PRINTF_L32D_626FPFPF.P1
+03C-03F @DIVFF.P2
+03C-03D @PRINTF_LU_626.P3
+03C     lcd_init.i
+03C-03D @ITOF.P1
+03C     @PSTRINGCN7_626.P2
+03C     MAIN.@SCRATCH1
+03C     @PSTRINGC7_626.@SCRATCH1
+03D-040 lcd_init.LCD_INIT_STRING
+03D     MAIN.@SCRATCH2
+03D     @PSTRINGC7_626.@SCRATCH2
+03D     @PSTRINGCN7_626.@SCRATCH1
+03E     MAIN.@SCRATCH3
+03E     @PSTRINGC7_626.@SCRATCH3
+03E     @PRINTF_LU_626.@SCRATCH1
+03E     @PSTRINGCN7_626.@SCRATCH2
+03F     MAIN.@SCRATCH4
+03F     @PSTRINGC7_626.@SCRATCH4
+03F     @PRINTF_LU_626.@SCRATCH2
+03F     @PSTRINGCN7_626.@SCRATCH3
+040     @PRINTF_L32D_626FPFPF.P1
+040-043 @DIVFF.P2
+040     @PRINTF_LU_626.@SCRATCH3
+040     @PSTRINGCN7_626.@SCRATCH4
+041     lcd_init.@SCRATCH1
+041     @PRINTF_LU_626.@SCRATCH4
+041     @PRINTF_L32D_626FPFPF.@SCRATCH1
+042     @PRINTF_LU_626.@SCRATCH5
+042     @PRINTF_L32D_626FPFPF.@SCRATCH2
+043     @PRINTF_LU_626.@SCRATCH6
+043     @PRINTF_L32D_626FPFPF.@SCRATCH3
+044     @DIVFF.@SCRATCH1
+044     @PRINTF_LU_626.@SCRATCH7
+044     @PRINTF_L32D_626FPFPF.@SCRATCH4
+045     @DIVFF.@SCRATCH2
+045     @PRINTF_L32D_626FPFPF.@SCRATCH5
+046     @DIVFF.@SCRATCH3
+046     @PRINTF_L32D_626FPFPF.@SCRATCH6
+047     @DIVFF.@SCRATCH4
+047     @PRINTF_L32D_626FPFPF.@SCRATCH7
+048     @DIVFF.@SCRATCH5
+048     @PRINTF_L32D_626FPFPF.@SCRATCH8
+049-04C @DIV3232.P1
+049-04C @FTOSD.P2
+049     lcd_putc.c
+049-04C @MULFF.P1
+049     @DIVFF.@SCRATCH6
+04A     @delay_ms1.P1
+04A     lcd_gotoxy.x
+04B     lcd_gotoxy.y
+04C     lcd_gotoxy.address
+04D-050 @DIV3232.P1
+04D-050 @MULFF.P2
+04D     lcd_gotoxy.@SCRATCH1
+04D     @FTOSD.@SCRATCH1
+04E     lcd_send_byte.address
+04F     lcd_send_byte.n
+050     lcd_read_byte.low
+050     lcd_send_byte.@SCRATCH1
+051     lcd_read_byte.high
+051     lcd_send_nibble.n
+051     @MULFF.@SCRATCH1
+051     @DIV3232.@SCRATCH1
+052     lcd_read_byte.@SCRATCH1
+052     @MULFF.@SCRATCH2
+052     @DIV3232.@SCRATCH2
+053     @MULFF.@SCRATCH3
+053     @DIV3232.@SCRATCH3
+054     @MULFF.@SCRATCH4
+054     @DIV3232.@SCRATCH4
+055     @MULFF.@SCRATCH5
+055     @DIV3232.@SCRATCH5
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+088     lcdtris
+107.6   C1OUT
+108.6   C2OUT
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  @const648.call
+00000C  @const653.call
+000012  @const666.call
+000018  @delay_ms1
+00002D  lcd_send_nibble
+000039  lcd_read_nibble
+00003F  lcd_send_byte
+000045  lcd_read_byte
+00007F  lcd_init
+0000BD  lcd_gotoxy
+0000CF  lcd_putc
+0000FB  @PSTRINGC7_626
+000151  @ITOF
+000170  @DIVFF
+00023C  @MULFF
+0002B1  @PRINTF_LU_626
+000316  @PSTRINGCN7_626
+00036F  @DIV3232
+0003BE  @PRINTF_L32D_626FPFPF
+0003E5  @FTOSD
+0004A0  MAIN
+0004A0  @cinit1
+0004B4  @cinit2
+
+Project Directory:
+    C:\Users\yunus\OneDrive\Masaüstü\DersBitirme\Proteus\LCD_Display\ccs_code\
+
+Project Files:
+    LCD_Screen.c                                            [10-Ara-24 13:01  CRC=315FC53E]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f887.h [08-Eyl-15 15:15  CRC=E224733F]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c [19-Eyl-13 16:38  CRC=D1A6378A]
+
+Source signature=B6D0A791
+Program memory checksum=0000
+Program memory CRC=0000
+Hex file CRC=4045
+
+Units:
+    LCD_Screen (main)
+
+Compiler Settings:
+    Processor:      PIC16F887
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Compile Mode:       CCS5
+
+Output Files:
+    XREF file:   LCD_Screen.xsym
+    Errors:      LCD_Screen.err
+    Ext Symbols: LCD_Screen.esym
+    INHX8:       LCD_Screen.hex
+    Symbols:     LCD_Screen.sym
+    List:        LCD_Screen.lst
+    Debug/COFF:  LCD_Screen.cof
+    Project:     LCD_Screen.ccspjt
+    Call Tree:   LCD_Screen.tre
+    Statistics:  LCD_Screen.STA

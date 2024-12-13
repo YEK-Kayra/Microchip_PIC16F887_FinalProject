@@ -1,0 +1,50 @@
+
+ROM used:   345/4096 (8%)
+            345/4096 (8%) including unused fragments
+
+            0.4 Average locations per line
+            10.1 Average locations per statement
+
+RAM used:   11/254 (4%) at main() level
+            14/254 (6%) worst case
+
+Stack used: 1 worst case (1 in main + 0 for interrupts)
+Stack size: 8
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+  116    34 100  EEprom_i2c.c
+  724     0   0  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F690.h
+----- -----
+  840    34 Total
+
+Page ROM  %  RAM    Vol Diff  Functions:
+---- --- --- ---    --- ----  ----------
+0     21   6    1             @delay_ms1
+0     16   5    1             @I2C_WRITEU_1
+0     25   7    1             @I2C_READU_1
+0    177  51    3    884  3.9  main
+0     13   4    0             @const583
+0     89  26    4             @PSTRINGC7_9600_55_53
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               1
+    Statements              34
+    Comments                179
+    Volume (V)              900
+    Difficulty (D)          3.6
+    Effort to implement (E) 3256
+    Time to implement (T)   3 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   1
+    Maintainability (MI)    126
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00003     4  0  
+00004-007FF   341  1703  
+00800-00FFF     0  2048  
+
+
+

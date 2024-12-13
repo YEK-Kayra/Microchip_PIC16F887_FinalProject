@@ -1,0 +1,71 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01B     CCP_2_LOW
+01B     CCP_2
+01C     CCP_2_HIGH
+020-02F segmentTable
+030     number_unitDigit
+031     number_tensDigit
+032     number_hundredDigit
+033     TimingNumber
+034     MyTimeTicker
+035     @delay_ms1.P1
+035     main.@SCRATCH1
+036     @DIV88.P1
+037     @DIV88.P1
+038     @DIV88.@SCRATCH1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+107.6   C1OUT
+108.6   C2OUT
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  @DIV88
+000019  @delay_ms1
+00002E  main
+00002E  @cinit1
+000046  @cinit2
+
+Project Directory:
+    C:\Users\yunus\OneDrive\Masaüstü\DersBitirme\Proteus\GraduationProject_3DigitDisplay\ccs_code\
+
+Project Files:
+    3digitDisplayControl.c                                  [08-Ara-24 21:41  CRC=54B8228A]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f887.h [08-Eyl-15 15:15  CRC=E224733F]
+
+Source signature=19010908
+Program memory checksum=0000
+Program memory CRC=0000
+Hex file CRC=E88C
+
+Units:
+    3digitDisplayControl (main)
+
+Compiler Settings:
+    Processor:      PIC16F887
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Compile Mode:       CCS5
+
+Output Files:
+    XREF file:   3digitDisplayControl.xsym
+    Errors:      3digitDisplayControl.err
+    Ext Symbols: 3digitDisplayControl.esym
+    INHX8:       3digitDisplayControl.hex
+    Symbols:     3digitDisplayControl.sym
+    List:        3digitDisplayControl.lst
+    Debug/COFF:  3digitDisplayControl.cof
+    Project:     3digitDisplayControl.ccspjt
+    Call Tree:   3digitDisplayControl.tre
+    Statistics:  3digitDisplayControl.STA

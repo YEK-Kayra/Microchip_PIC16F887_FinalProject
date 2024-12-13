@@ -1,0 +1,9 @@
+>>> Warning 203 "LCD_Screen.c" Line 127(1,1): Condition always TRUE
+>>> Warning 202 "LCD_Screen.c" Line 62(6,15): Variable never used:   checkMark
+>>> Warning 202 "LCD_Screen.c" Line 76(19,36): Variable never used:   val_ADC_Pot_Timer
+>>> Warning 202 "LCD_Screen.c" Line 77(19,44): Variable never used:   val_ADC_Pot_VacuumBlowing
+>>> Warning 202 "LCD_Screen.c" Line 82(7,27): Variable never used:   val_Voltage_potTimer
+>>> Warning 202 "LCD_Screen.c" Line 83(7,36): Variable never used:   val_Voltage_potSVacuumBlowing
+      Memory usage:   ROM=17%      RAM=10% - 16%
+      0 Errors,  6 Warnings.
+Build Successful.

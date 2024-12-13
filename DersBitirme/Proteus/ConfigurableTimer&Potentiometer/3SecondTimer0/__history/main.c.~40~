@@ -1,0 +1,64 @@
+#include <16f887.h>
+
+#use delay(clock=4M)
+#use fast_io(b) 
+
+#fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT
+
+#define ledPin pin_B0
+
+
+//-->REGISTER DEFINATIONS
+#byte my_TIM0_OPTION_REG = 0x81 
+#byte my_TIM0_MODULE_REG = 0x01 
+#byte my_INTCON_REG      = 0x0B
+
+int timer0_isr_counter=0;
+
+
+#INT_TIMER0
+void systemTimer0_isr(){
+
+   timer0_isr_counter++;
+   
+   // 64mS * 47 is for about 3008mS = 3second
+   if(timer0_isr_counter == 47){
+   
+   output_toggle(ledPin);
+   
+   timer0_isr_counter=0;
+   }
+   
+   my_INTCON_REG &= 0xA0;
+   
+}
+
+
+
+void main(void) 
+{
+
+
+//---> TIMER CONFIGURATION <---//
+
+     //T(overflow) = InstructionTime*PSC*(256-TIM0_val)
+     //       64mS = 1uS * 256 * (256-56)
+     my_TIM0_OPTION_REG &= 0xC7 ;
+     my_TIM0_MODULE_REG = 56;
+     
+     //enable_interrupts(INT_TIMER0); 
+     //enable_interrupts(GLOBAL);
+     my_INTCON_REG = 0xA0;
+     
+     
+     
+      
+     set_tris_b(0x00);               
+
+
+ while(1)
+ {
+ 
+  
+ }
+} 

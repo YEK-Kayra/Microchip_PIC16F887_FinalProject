@@ -1,0 +1,310 @@
+CCS PCM C Compiler, Version 5.049, 5967               08-Ara-24 21:41
+
+               Filename:   C:\Users\yunus\OneDrive\Masaüstü\DersBitirme\Proteus\GraduationProject_3DigitDisplay\ccs_code\3digitDisplayControl.lst
+
+               ROM used:   190 words (2%)
+                           Largest free fragment is 2048
+               RAM used:   27 (7%) at main() level
+                           30 (8%) worst case
+               Stack used: 1 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   02E
+0003:  NOP
+.................... #include <16f887.h> 
+.................... //////////// Standard Header file for the PIC16F887 device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2014 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F887 
+0004:  MOVF   37,W
+0005:  CLRF   78
+0006:  SUBWF  36,W
+0007:  BTFSC  03.0
+0008:  GOTO   00C
+0009:  MOVF   36,W
+000A:  MOVWF  77
+000B:  GOTO   018
+000C:  CLRF   77
+000D:  MOVLW  08
+000E:  MOVWF  38
+000F:  RLF    36,F
+0010:  RLF    77,F
+0011:  MOVF   37,W
+0012:  SUBWF  77,W
+0013:  BTFSC  03.0
+0014:  MOVWF  77
+0015:  RLF    78,F
+0016:  DECFSZ 38,F
+0017:  GOTO   00F
+0018:  RETURN
+....................  
+.................... #list 
+....................  
+....................  
+.................... #use delay(clock=4M) 
+0019:  MOVLW  35
+001A:  MOVWF  04
+001B:  BCF    03.7
+001C:  MOVF   00,W
+001D:  BTFSC  03.2
+001E:  GOTO   02D
+001F:  MOVLW  01
+0020:  MOVWF  78
+0021:  CLRF   77
+0022:  DECFSZ 77,F
+0023:  GOTO   022
+0024:  DECFSZ 78,F
+0025:  GOTO   021
+0026:  MOVLW  4A
+0027:  MOVWF  77
+0028:  DECFSZ 77,F
+0029:  GOTO   028
+002A:  GOTO   02B
+002B:  DECFSZ 00,F
+002C:  GOTO   01F
+002D:  RETURN
+....................  
+.................... #use fast_io(b) // B portlarý 3 display için de ortak kullanýlacak 
+.................... #use fast_io(e) // E portlarýndan e0,e1,e2 tarama yapacak anahtar pinleri 
+....................  
+.................... #fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT 
+....................  
+.................... //Tarama anahtar pinlerini tanýmlayalým 
+.................... #define pin_HundredDigit_switch pin_E2 
+.................... #define pin_TensDigit_switch    pin_E0  
+.................... #define pin_UnitDigit_switch    pin_E1  
+....................  
+.................... //Display ekranlarýmýzda gösterilecek rakamlarý yazalým 
+.................... int8 segmentTable[16] ={ 
+....................                      0x3F,0x06,0x5B,0x4F,0x66, 
+....................                      0x6D,0x7D,0x07,0x7F,0x6F       
+....................                       }; 
+*
+0047:  MOVLW  3F
+0048:  BCF    03.6
+0049:  MOVWF  20
+004A:  MOVLW  06
+004B:  MOVWF  21
+004C:  MOVLW  5B
+004D:  MOVWF  22
+004E:  MOVLW  4F
+004F:  MOVWF  23
+0050:  MOVLW  66
+0051:  MOVWF  24
+0052:  MOVLW  6D
+0053:  MOVWF  25
+0054:  MOVLW  7D
+0055:  MOVWF  26
+0056:  MOVLW  07
+0057:  MOVWF  27
+0058:  MOVLW  7F
+0059:  MOVWF  28
+005A:  MOVLW  6F
+005B:  MOVWF  29
+005C:  CLRF   2A
+005D:  CLRF   2B
+005E:  CLRF   2C
+005F:  CLRF   2D
+0060:  CLRF   2E
+0061:  CLRF   2F
+....................                       
+....................  
+.................... //Gelen timer deðerini basamaklara ayýr 
+.................... int8 number_unitDigit=0; 
+.................... int8 number_tensDigit=0; 
+.................... int8 number_hundredDigit =0; 
+....................  
+.................... //Sayacý tarafýndan atacanak deðer 
+.................... int TimingNumber = 177; 
+....................  
+.................... //For döngüsü için 1 saniye ye saydýr 
+.................... int8 MyTimeTicker = 0; 
+....................  
+.................... void main(void)  
+*
+002E:  MOVF   03,W
+002F:  ANDLW  1F
+0030:  MOVWF  03
+0031:  CLRF   30
+0032:  CLRF   31
+0033:  CLRF   32
+0034:  MOVLW  B1
+0035:  MOVWF  33
+0036:  CLRF   34
+0037:  BSF    03.5
+0038:  BSF    03.6
+0039:  MOVF   09,W
+003A:  ANDLW  C0
+003B:  MOVWF  09
+003C:  BCF    03.6
+003D:  BCF    1F.4
+003E:  BCF    1F.5
+003F:  MOVLW  00
+0040:  BSF    03.6
+0041:  MOVWF  08
+0042:  BCF    03.5
+0043:  CLRF   07
+0044:  CLRF   08
+0045:  CLRF   09
+0046:  BCF    03.7
+.................... { 
+....................  
+....................    //display pinlerini çýkýþ olarak ata 
+....................    set_tris_b(0x00);                       
+*
+0062:  MOVLW  00
+0063:  BSF    03.5
+0064:  MOVWF  06
+....................     
+....................    //Display switchlerini çýkýþ olarak ata 
+....................    output_drive(pin_HundredDigit_switch);  
+0065:  BCF    09.2
+....................    output_drive(pin_TensDigit_switch); 
+0066:  BCF    09.0
+....................    output_drive(pin_UnitDigit_switch); 
+0067:  BCF    09.1
+....................     
+....................    //Basamaklarýn gözükmesi için gerilim uygula 
+....................    output_high(pin_UnitDigit_switch);     
+0068:  BCF    03.5
+0069:  BSF    09.1
+....................    output_high(pin_TensDigit_switch);      
+006A:  BSF    09.0
+....................    output_high(pin_HundredDigit_switch);   
+006B:  BSF    09.2
+....................     
+....................    //baþlangýç deðerini segmentlere yükle 
+....................    output_b(segmentTable[0]);  
+006C:  MOVF   20,W
+006D:  MOVWF  06
+....................     
+....................  while(1) //Sonsuz döngü baþlangýcý 
+....................  { 
+....................   
+....................  
+....................          //TimingNumber zamanlayýcýdan alýnacak 
+....................          number_unitDigit    = (TimingNumber%10);   
+006E:  MOVF   33,W
+006F:  MOVWF  36
+0070:  MOVLW  0A
+0071:  MOVWF  37
+0072:  CALL   004
+0073:  MOVF   77,W
+0074:  MOVWF  30
+....................          number_tensDigit    = ((TimingNumber/10)%10);  
+0075:  MOVF   33,W
+0076:  MOVWF  36
+0077:  MOVLW  0A
+0078:  MOVWF  37
+0079:  CALL   004
+007A:  MOVF   78,W
+007B:  MOVWF  36
+007C:  MOVLW  0A
+007D:  MOVWF  37
+007E:  CALL   004
+007F:  MOVF   77,W
+0080:  MOVWF  31
+....................          number_hundredDigit = ((TimingNumber/100)%10);    
+0081:  MOVF   33,W
+0082:  MOVWF  36
+0083:  MOVLW  64
+0084:  MOVWF  37
+0085:  CALL   004
+0086:  MOVF   78,W
+0087:  MOVWF  36
+0088:  MOVLW  0A
+0089:  MOVWF  37
+008A:  CALL   004
+008B:  MOVF   77,W
+008C:  MOVWF  32
+....................           
+....................         for(MyTimeTicker = 0 ; MyTimeTicker <33 ; MyTimeTicker++){ 
+008D:  CLRF   34
+008E:  MOVF   34,W
+008F:  SUBLW  20
+0090:  BTFSS  03.0
+0091:  GOTO   0BB
+....................          
+....................           //Transistor ile basamak deðiþimlerini yap 
+....................           output_high(pin_UnitDigit_switch);     //birler basamaðýný aç 
+0092:  BSF    09.1
+....................           output_low(pin_TensDigit_switch);      //onlar basamaðýný kapa 
+0093:  BCF    09.0
+....................           output_low(pin_HundredDigit_switch);   //yüzler basamaðýný kapa 
+0094:  BCF    09.2
+....................           output_b(segmentTable[number_unitDigit]); //ilgili numarayý ekrana bas, içeriden sayý çekiyoruz yani 
+0095:  MOVLW  20
+0096:  ADDWF  30,W
+0097:  MOVWF  04
+0098:  BCF    03.7
+0099:  MOVF   00,W
+009A:  MOVWF  35
+009B:  MOVWF  06
+....................           delay_ms(10);                             //tarama yaparken bu süreyi kullan 
+009C:  MOVLW  0A
+009D:  MOVWF  35
+009E:  CALL   019
+....................            
+....................           //Transistor ile basamak deðiþimlerini yap 
+....................           output_low(pin_UnitDigit_switch);      //birler basamaðýný kapa 
+009F:  BCF    09.1
+....................           output_high(pin_TensDigit_switch);     //onlar basamaðýný aç 
+00A0:  BSF    09.0
+....................           output_low(pin_HundredDigit_switch);   //yüzler basamaðýný kapa           
+00A1:  BCF    09.2
+....................           output_b(segmentTable[number_tensDigit]); //ilgili numarayý ekrana bas, içeriden sayý çekiyoruz yani 
+00A2:  MOVLW  20
+00A3:  ADDWF  31,W
+00A4:  MOVWF  04
+00A5:  BCF    03.7
+00A6:  MOVF   00,W
+00A7:  MOVWF  35
+00A8:  MOVWF  06
+....................           delay_ms(10);   
+00A9:  MOVLW  0A
+00AA:  MOVWF  35
+00AB:  CALL   019
+....................            
+....................           //Transistor ile basamak deðiþimlerini yap 
+....................           output_low(pin_UnitDigit_switch);       //birler basamaðýný kapa 
+00AC:  BCF    09.1
+....................           output_low(pin_TensDigit_switch);       //onlar basamaðýný kapa 
+00AD:  BCF    09.0
+....................           output_high(pin_HundredDigit_switch);   //yüzler basamaðýný aç 
+00AE:  BSF    09.2
+....................           output_b(segmentTable[number_hundredDigit]); //ilgili numarayý ekrana bas, içeriden sayý çekiyoruz yani 
+00AF:  MOVLW  20
+00B0:  ADDWF  32,W
+00B1:  MOVWF  04
+00B2:  BCF    03.7
+00B3:  MOVF   00,W
+00B4:  MOVWF  35
+00B5:  MOVWF  06
+....................           delay_ms(10);  
+00B6:  MOVLW  0A
+00B7:  MOVWF  35
+00B8:  CALL   019
+00B9:  INCF   34,F
+00BA:  GOTO   08E
+....................            
+....................         } 
+.................... TimingNumber++; 
+00BB:  INCF   33,F
+00BC:  GOTO   06E
+....................  } 
+.................... }  
+00BD:  SLEEP
+
+Configuration Fuses:
+   Word  1: 2CF2   HS NOWDT NOPUT MCLR NOPROTECT NOCPD NOBROWNOUT IESO FCMEN NOLVP NODEBUG
+   Word  2: 0700   BORV40 NOWRT
