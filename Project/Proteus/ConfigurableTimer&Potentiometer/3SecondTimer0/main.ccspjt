@@ -41,8 +41,9 @@ D1_L17=[84672]Started Editing.
 D1_L18=[84679]Stopped Editing.
 D1_L19=[84679]Project Closed.
 D2=13-12-2024
-D2_L=1
+D2_L=2
 D2_L1=[38710]Project Opened.
+D2_L2=[44125]Project Closed.
 
 [Opened Files]
 1=main.c
