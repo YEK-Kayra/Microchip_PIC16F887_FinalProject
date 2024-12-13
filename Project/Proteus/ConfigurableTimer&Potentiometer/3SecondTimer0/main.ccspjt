@@ -14,7 +14,7 @@ Type=4
 buildcount=12
 
 [ProjectLog]
-Days=1
+Days=2
 D1=11-12-2024
 D1_L=19
 D1_L1=[78882]Started Editing.
@@ -40,6 +40,9 @@ D1_L16=[84654]Project Opened.
 D1_L17=[84672]Started Editing.
 D1_L18=[84679]Stopped Editing.
 D1_L19=[84679]Project Closed.
+D2=13-12-2024
+D2_L=1
+D2_L1=[38710]Project Opened.
 
 [Opened Files]
 1=main.c
