@@ -28,11 +28,14 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////
-//                        USAGE OF ADC PINS 
+//                         USAGE OF ADC PINS                                 
+// There will be 12 different speed and time settings.
+// The time will be increased in increments of 20 seconds,
+// while the speed will be increased in percentages.
+//
 // A0 ==> LCD Screen, Option Surfing Potentiometer
 // A1 ==> Timer Potentiometer 
 // A2 ==> Vacuum and blowing setting Potentiometer
-//
 //
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -56,8 +59,28 @@
 #fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT
 
 
-unsigned long int deger;
-float gerilim;
+byte checkMark[8] = {
+  0b00000,
+  0b00001,
+  0b00011,
+  0b00110,
+  0b01100,
+  0b11100,
+  0b01100,
+  0b00000
+};
+
+
+//Potansiyometrelerden gelen dijital deðerleri tutacak
+unsigned long int val_ADC_Pot_Surf;
+unsigned long int val_ADC_Pot_Timer;
+unsigned long int val_ADC_Pot_VacuumBlowing;
+
+
+//Gerilim Düþümlerini izlemek için 
+float val_Voltage_potSurf;
+float val_Voltage_potTimer;
+float val_Voltage_potSVacuumBlowing;
 
 void main(void) 
 {
@@ -74,11 +97,11 @@ void main(void)
 /////////////////////-MESAJ PROTOTÝPLERÝMÝZ-///////////////////////////
 
       //---> SELAMLAMA FASLI
-//!      printf(lcd_putc,"Lutfen ID Karti");
-//!      lcd_gotoxy(4,2);
-//!      printf(lcd_putc,"Gosteriniz");
-//!      delay_ms(1000);
-//!      printf(lcd_putc,"\f");
+      printf(lcd_putc,"Lutfen ID Karti");
+      lcd_gotoxy(4,2);
+      printf(lcd_putc,"Gosteriniz");
+      delay_ms(1000);
+      printf(lcd_putc,"\f");
      
       
       //---> KARTI OKUTTUKTAN SONRA
@@ -98,23 +121,45 @@ void main(void)
 
       //---> ISLEMLERIN POTANSIYOMETRE ILE GEZILMESI 
             
-            //---> Süre Ýþlemleri
-                  
-      
-   
-   
-   
-   
-       while(1)
-       {
-        set_adc_channel(0);
-        delay_us(20);
-        deger=read_adc();
-        gerilim=deger/204.6;
-        
-          printf(lcd_putc,"\f%lu",deger);
-         printf(lcd_putc,"\n Volt=%f V",gerilim);
-       }
+            //lcd_set_cgram_char(0, &checkMark); //0 yazýlmasý ilk özel karakteri alýr, 1 yazýlýrsa 2.özel karakterini de kaydedersin
+           
+                        
+    while(1)
+    {
+    
+    
+    
+    
+    
+    
+    
+   /////////////////////-DEÐER OKUMA BLOÐU-///////////////////////////
+     set_adc_channel(0);
+     delay_us(20);
+     val_ADC_Pot_Surf = read_adc();
+     val_Voltage_potSurf = (float)((val_ADC_Pot_Surf/1024.0)*5.0);
+     printf(lcd_putc,"\f%lu",val_ADC_Pot_Surf);
+     printf(lcd_putc,"\n Volt=%f V",val_Voltage_potSurf);
+     delay_ms(1000);
+//!     
+//!     set_adc_channel(1);
+//!     delay_us(20);
+//!     val_ADC_Pot_Timer = read_adc();
+//!     val_Voltage_potTimer = (float)((val_ADC_Pot_Timer/1024.0)*5.0);
+//!     printf(lcd_putc,"\f%lu",val_ADC_Pot_Timer);
+//!     printf(lcd_putc,"\n Volt=%f V",val_Voltage_potTimer);
+//!     delay_ms(1000);
+//!     
+//!     
+//!     set_adc_channel(2);
+//!     delay_us(20);
+//!     val_ADC_Pot_VacuumBlowing = read_adc();
+//!     val_Voltage_potSVacuumBlowing = (float)((val_ADC_Pot_VacuumBlowing/1024.0)*5.0);
+//!     printf(lcd_putc,"\f%lu",val_ADC_Pot_VacuumBlowing);
+//!     printf(lcd_putc,"\n Volt=%f V",val_Voltage_potSVacuumBlowing);
+//!     delay_ms(1000);
+       
+    }
  
  
 }

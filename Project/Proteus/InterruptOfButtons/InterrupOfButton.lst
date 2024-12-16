@@ -1,0 +1,139 @@
+CCS PCM C Compiler, Version 5.049, 5967               16-Ara-24 18:43
+
+               Filename:   C:\Users\yunus\OneDrive\Masaüstü\Microchip_PIC16F887_FinalProject\Project\Proteus\InterruptOfButtons\InterrupOfButton.lst
+
+               ROM used:   71 words (1%)
+                           Largest free fragment is 2048
+               RAM used:   6 (2%) at main() level
+                           7 (2%) worst case
+               Stack used: 0 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   01B
+0003:  NOP
+.................... #include <16f887.h> 
+.................... //////////// Standard Header file for the PIC16F887 device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2014 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F887 
+....................  
+.................... #list 
+....................  
+....................  
+.................... //--> DEVICES 
+.................... #device ADC = 10  //10-bit ADC reading will be performed 
+....................  
+.................... //--> FUSES 
+.................... #fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT 
+....................  
+.................... //--> USEs 
+.................... #use delay(clock=4M) 
+0004:  MOVLW  22
+0005:  MOVWF  04
+0006:  BCF    03.7
+0007:  MOVF   00,W
+0008:  BTFSC  03.2
+0009:  GOTO   018
+000A:  MOVLW  01
+000B:  MOVWF  78
+000C:  CLRF   77
+000D:  DECFSZ 77,F
+000E:  GOTO   00D
+000F:  DECFSZ 78,F
+0010:  GOTO   00C
+0011:  MOVLW  4A
+0012:  MOVWF  77
+0013:  DECFSZ 77,F
+0014:  GOTO   013
+0015:  GOTO   016
+0016:  DECFSZ 00,F
+0017:  GOTO   00A
+0018:  BCF    0A.3
+0019:  BCF    0A.4
+001A:  GOTO   03E (RETURN)
+.................... #use fast_io(b) 
+.................... #use fast_io(e) 
+....................  
+.................... //--> PIN DEFINATIONS 
+.................... #define ledPin pin_B0 
+.................... #define tickButton pin_E0 
+....................  
+.................... void main(void)  
+001B:  MOVF   03,W
+001C:  ANDLW  1F
+001D:  MOVWF  03
+001E:  BSF    03.5
+001F:  BSF    03.6
+0020:  MOVF   09,W
+0021:  ANDLW  C0
+0022:  MOVWF  09
+0023:  BCF    03.6
+0024:  BCF    1F.4
+0025:  BCF    1F.5
+0026:  MOVLW  00
+0027:  BSF    03.6
+0028:  MOVWF  08
+0029:  BCF    03.5
+002A:  CLRF   07
+002B:  CLRF   08
+002C:  CLRF   09
+002D:  BCF    03.7
+.................... { 
+....................  
+....................  set_tris_b(0x00); 
+002E:  MOVLW  00
+002F:  BSF    03.5
+0030:  BCF    03.6
+0031:  MOVWF  06
+....................  set_tris_e(0x01);    
+0032:  BSF    09.0
+0033:  BCF    09.1
+0034:  BCF    09.2
+0035:  BCF    09.3
+....................  
+....................  
+....................   do{  
+....................           
+....................    output_toggle(ledPin); 
+0036:  MOVLW  01
+0037:  BCF    03.5
+0038:  XORWF  06,F
+....................    delay_ms(500); 
+0039:  MOVLW  02
+003A:  MOVWF  21
+003B:  MOVLW  FA
+003C:  MOVWF  22
+003D:  GOTO   004
+003E:  DECFSZ 21,F
+003F:  GOTO   03B
+....................     
+....................    }while(input(tickButton) != 1); 
+0040:  BTFSC  09.0
+0041:  GOTO   044
+0042:  BSF    03.5
+0043:  GOTO   036
+....................        
+....................    output_low(ledPin); 
+0044:  BCF    06.0
+....................        
+....................       while(1){ 
+0045:  GOTO   045
+....................        
+....................       } 
+....................        
+.................... } 
+0046:  SLEEP
+
+Configuration Fuses:
+   Word  1: 2CF2   HS NOWDT NOPUT MCLR NOPROTECT NOCPD NOBROWNOUT IESO FCMEN NOLVP NODEBUG
+   Word  2: 0700   BORV40 NOWRT

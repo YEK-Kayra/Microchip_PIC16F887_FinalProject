@@ -1,0 +1,28 @@
+[PROJECT]
+Target=ConfigurableTimerAndPotentiometer.hex
+Processor_Text=PIC16F887
+CCSVersion=5.049
+Compiler=PCM
+[Target Data]
+FileList=ConfigurableTimerAndPotentiometer.c
+[ConfigurableTimerAndPotentiometer.c]
+Type=4
+[mru-list]
+1=ConfigurableTimerAndPotentiometer.c
+
+[defines]
+buildcount=22
+
+[ProjectLog]
+Days=1
+D1=16-12-2024
+D1_L=1
+D1_L1=[70911]Started Editing.
+
+[Opened Files]
+1=ConfigurableTimerAndPotentiometer.c
+t1=113
+Count=1
+[Units]
+Count=1
+1=ConfigurableTimerAndPotentiometer (main)

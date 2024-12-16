@@ -1,0 +1,38 @@
+
+
+
+
+
+
+void main(void) 
+{
+
+
+ set_tris_e(0x01);   
+
+
+
+
+ do {
+       val_ADC_Pot_Surf = read_adc();  
+       
+       ADC_TO_INDEXofTIMER(val_ADC_Pot_Surf);
+       
+       if (val_ADC_Pot_Surf != previous_ADC_value) 
+       {
+           printf(lcd_putc, "\fADC : %lu", val_ADC_Pot_Surf);
+           delay_ms(1);
+           printf(lcd_putc,"\nIndex=%d",optionIndex_timer);
+           delay_ms(1);
+           previous_ADC_value = val_ADC_Pot_Surf; 
+       }
+       
+       delay_ms(25);
+      } while (0);
+      
+      
+      while(1){
+      
+      }
+      
+}

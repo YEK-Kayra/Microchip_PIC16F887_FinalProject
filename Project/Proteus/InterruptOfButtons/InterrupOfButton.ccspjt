@@ -1,0 +1,37 @@
+[PROJECT]
+Target=InterrupOfButton.hex
+Processor_Text=PIC16F887
+CCSVersion=5.049
+Compiler=PCM
+[Target Data]
+FileList=InterrupOfButton.c
+[InterrupOfButton.c]
+Type=4
+[mru-list]
+1=InterrupOfButton.c
+
+[defines]
+buildcount=7
+
+[ProjectLog]
+Days=1
+D1=16-12-2024
+D1_L=6
+D1_L1=[50517]Stopped Editing.
+TotalEdit=11
+TotalDebug=0
+D1_E=11
+D1_D=0
+D1_L2=[50517]Project Closed.
+D1_L3=[66106]Project Opened.
+D1_L4=[67201]Started Editing.
+D1_L5=[67531]Stopped Editing.
+D1_L6=[67531]Project Closed.
+
+[Opened Files]
+1=..\ConfigurableTimer&Potentiometer\Configurable timers & Potentiometer\ConfigurableTimerAndPotentiometer.c
+t1=93
+Count=1
+[Units]
+Count=1
+1=InterrupOfButton (main)

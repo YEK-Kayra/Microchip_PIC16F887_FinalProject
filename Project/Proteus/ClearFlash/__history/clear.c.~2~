@@ -1,0 +1,8 @@
+#include "16f887.h"
+
+void main(){
+
+while(1){
+}
+
+}

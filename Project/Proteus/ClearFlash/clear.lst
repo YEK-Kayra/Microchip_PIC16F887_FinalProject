@@ -1,0 +1,64 @@
+CCS PCM C Compiler, Version 5.049, 5967               15-Ara-24 02:03
+
+               Filename:   C:\Users\yunus\OneDrive\Masaüstü\Microchip_PIC16F887_FinalProject\Project\Proteus\ClearFlash\clear.lst
+
+               ROM used:   25 words (0%)
+                           Largest free fragment is 2048
+               RAM used:   5 (1%) at main() level
+                           5 (1%) worst case
+               Stack used: 0 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   004
+0003:  NOP
+.................... #include "16f887.h" 
+.................... //////////// Standard Header file for the PIC16F887 device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2014 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F887 
+....................  
+.................... #list 
+....................  
+.................... #use delay(clock=4M) 
+....................  
+.................... void main(){ 
+0004:  MOVF   03,W
+0005:  ANDLW  1F
+0006:  MOVWF  03
+0007:  BSF    03.5
+0008:  BSF    03.6
+0009:  MOVF   09,W
+000A:  ANDLW  C0
+000B:  MOVWF  09
+000C:  BCF    03.6
+000D:  BCF    1F.4
+000E:  BCF    1F.5
+000F:  MOVLW  00
+0010:  BSF    03.6
+0011:  MOVWF  08
+0012:  BCF    03.5
+0013:  CLRF   07
+0014:  CLRF   08
+0015:  CLRF   09
+0016:  BCF    03.7
+....................  
+.................... while(1){ 
+0017:  GOTO   017
+.................... } 
+....................  
+.................... } 
+0018:  SLEEP
+
+Configuration Fuses:
+   Word  1: 2FE7   RC NOWDT PUT MCLR NOPROTECT NOCPD BROWNOUT IESO FCMEN NOLVP NODEBUG
+   Word  2: 0700   BORV40 NOWRT

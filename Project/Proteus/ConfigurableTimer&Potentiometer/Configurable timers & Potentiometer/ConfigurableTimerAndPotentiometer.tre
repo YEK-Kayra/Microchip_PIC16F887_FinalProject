@@ -1,0 +1,58 @@
+ÀÄConfigurableTimerAndPotentiometer
+   ÃÄMAIN  0/236  Ram=2
+   ³  ÃÄ@cinit1  (Inline)  Ram=0
+   ³  ÃÄlcd_init  0/62  Ram=6
+   ³  ³  ÃÄ@delay_ms1  0/21  Ram=1
+   ³  ³  ÃÄlcd_send_nibble  0/12  Ram=1
+   ³  ³  ÃÄ@delay_ms1  0/21  Ram=1
+   ³  ³  ÃÄlcd_send_nibble  0/12  Ram=1
+   ³  ³  ÃÄ@delay_ms1  0/21  Ram=1
+   ³  ³  ÀÄlcd_send_byte  0/64  Ram=3
+   ³  ³     ÃÄlcd_read_byte  (Inline)  Ram=3
+   ³  ³     ³  ÃÄlcd_read_nibble  0/6  Ram=0
+   ³  ³     ³  ÀÄlcd_read_nibble  0/6  Ram=0
+   ³  ³     ÃÄlcd_send_nibble  0/12  Ram=1
+   ³  ³     ÀÄlcd_send_nibble  0/12  Ram=1
+   ³  ÃÄ@delay_ms1  0/21  Ram=1
+   ³  ÃÄ@MUL1616  0/23  Ram=5
+   ³  ÃÄ@DIV1616  0/39  Ram=5
+   ³  ÃÄ@PSTRINGCN7_626  0/87  Ram=5
+   ³  ³  ÃÄlcd_putc  0/44  Ram=1
+   ³  ³  ³  ÃÄlcd_gotoxy  0/18  Ram=4
+   ³  ³  ³  ³  ÀÄlcd_send_byte  0/64  Ram=3
+   ³  ³  ³  ³     ÀÄ*
+   ³  ³  ³  ÃÄlcd_send_byte  0/64  Ram=3
+   ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ÃÄ@delay_ms1  0/21  Ram=1
+   ³  ³  ³  ÃÄlcd_gotoxy  0/18  Ram=4
+   ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ÃÄlcd_send_byte  0/64  Ram=3
+   ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ÀÄlcd_send_byte  0/64  Ram=3
+   ³  ³  ³     ÀÄ*
+   ³  ³  ÀÄlcd_putc  0/44  Ram=1
+   ³  ³     ÀÄ*
+   ³  ÃÄ@PRINTF_LU_626  0/101  Ram=9
+   ³  ³  ÀÄlcd_putc  0/44  Ram=1
+   ³  ³     ÀÄ*
+   ³  ÃÄ@delay_ms1  0/21  Ram=1
+   ³  ÃÄ@PSTRINGCN7_626  0/87  Ram=5
+   ³  ³  ÀÄ*
+   ³  ÃÄ@PRINTF_D_626  0/89  Ram=6
+   ³  ³  ÃÄ@DIV88  0/21  Ram=3
+   ³  ³  ÃÄ@DIV88  0/21  Ram=3
+   ³  ³  ÃÄlcd_putc  0/44  Ram=1
+   ³  ³  ³  ÀÄ*
+   ³  ³  ÃÄlcd_putc  0/44  Ram=1
+   ³  ³  ³  ÀÄ*
+   ³  ³  ÃÄlcd_putc  0/44  Ram=1
+   ³  ³  ³  ÀÄ*
+   ³  ³  ÀÄlcd_putc  0/44  Ram=1
+   ³  ³     ÀÄ*
+   ³  ÃÄ@delay_ms1  0/21  Ram=1
+   ³  ÃÄlcd_putc  0/44  Ram=1
+   ³  ³  ÀÄ*
+   ³  ÃÄ@ITOF  0/31  Ram=2
+   ³  ÃÄ@MULFF  0/119  Ram=13
+   ³  ÀÄ@SFTOI  0/33  Ram=4
+   ÀÄsystemTimer0_isr  0/20  Ram=0

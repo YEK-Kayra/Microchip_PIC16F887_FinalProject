@@ -1,6 +1,6 @@
-CCS PCM C Compiler, Version 5.049, 5967               12-Ara-24 00:57
+CCS PCM C Compiler, Version 5.049, 5967               16-Ara-24 13:21
 
-               Filename:   C:\Users\yunus\OneDrive\Masaüstü\TemelCCS çalýþmalarý\Kesmeler için\Configurable timers\ConfigurableTimer.lst
+               Filename:   C:\Users\yunus\OneDrive\Masaüstü\Microchip_PIC16F887_FinalProject\Project\Proteus\ConfigurableTimer&Potentiometer\Configurable timers\ConfigurableTimer.lst
 
                ROM used:   344 words (4%)
                            Largest free fragment is 2048
@@ -264,13 +264,14 @@ CCS PCM C Compiler, Version 5.049, 5967               12-Ara-24 00:57
 ....................  
 .................... #define ledPin pin_B0 
 ....................  
-.................... //-->REGISTER DEFINATIONS 
+.................... //--> REGISTER DEFINATIONS 
 .................... #byte my_TIM0_OPTION_REG = 0x81  
 .................... #byte my_TIM0_MODULE_REG = 0x01  
 .................... #byte my_INTCON_REG      = 0x0B 
 ....................  
 .................... long timer0_isr_counter=0; 
 .................... long desired_value=0.0; 
+.................... // Client desired second value that will be choosed 
 .................... int time_arr[12] = {20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240};   
 *
 0111:  MOVLW  14
@@ -299,11 +300,14 @@ CCS PCM C Compiler, Version 5.049, 5967               12-Ara-24 00:57
 0128:  MOVLW  F0
 0129:  MOVWF  36
 ....................  
+.................... //--> MACROS 
 .................... #define TimerScalingFactor ((1000.0) / 64.0) 
 .................... #define SECOND_TO_ISR_COUNT(time_arr, time_idx) \ 
 ....................    do{ \ 
 ....................       desired_value = ((time_arr[time_idx]) * TimerScalingFactor); \ 
 ....................    }while(0) 
+....................     
+....................  
 ....................  
 ....................  
 .................... #INT_TIMER0 
@@ -325,19 +329,17 @@ CCS PCM C Compiler, Version 5.049, 5967               12-Ara-24 00:57
 0037:  SUBWF  28,W
 0038:  BTFSS  03.2
 0039:  GOTO   03E
-....................     
-....................    output_toggle(ledPin); 
+....................       output_toggle(ledPin); 
 003A:  MOVLW  01
 003B:  XORWF  06,F
-....................     
-....................    timer0_isr_counter=0; 
+....................       timer0_isr_counter=0; 
 003C:  CLRF   28
 003D:  CLRF   27
 ....................    } 
 ....................  
 ....................  
-....................    //Clear timer0 overflow interrupt flag  
-....................    //my_INTCON_REG is 0x24 before we clear it, 
+....................    // Clear timer0 overflow interrupt flag  
+....................    // my_INTCON_REG is 0x24 before we clear it, 
 ....................    // 0x24 shows that(before clear): 
 ....................    //       =>TIM0 Overflow bit is 1 
 ....................    //       =>TIM0 Overflow Interrupt Enable bit is 1 
@@ -425,8 +427,8 @@ CCS PCM C Compiler, Version 5.049, 5967               12-Ara-24 00:57
 014C:  MOVF   78,W
 014D:  MOVWF  29
 ....................       
-....................      //T(overflow) = InstructionTime*PSC*(256-TIM0_val) 
-....................      //       64mS = 1uS * 256 * (256-56) 
+....................      // T(overflow) = InstructionTime*PSC*(256-TIM0_val) 
+....................      //        64mS = 1uS * 256 * (256-56) 
 ....................      my_TIM0_OPTION_REG &= 0xC7 ; 
 014E:  MOVLW  C7
 014F:  BSF    03.5

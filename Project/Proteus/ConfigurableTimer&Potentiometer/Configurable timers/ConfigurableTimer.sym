@@ -80,13 +80,13 @@ ROM Allocation:
 000110  @cinit2
 
 Project Directory:
-    C:\Users\yunus\OneDrive\Masaüstü\TemelCCS çalýþmalarý\Kesmeler için\Configurable timers\
+    C:\Users\yunus\OneDrive\Masaüstü\Microchip_PIC16F887_FinalProject\Project\Proteus\ConfigurableTimer&Potentiometer\Configurable timers\
 
 Project Files:
-    ConfigurableTimer.c                                     [12-Ara-24 00:57  CRC=6573BACE]
-    ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f887.h [08-Eyl-15 15:15  CRC=E224733F]
+    ConfigurableTimer.c                                     [16-Ara-24 13:21  CRC=C970556B]
+    ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f887.h [08-Eyl-15 15:15  CRC=E224733F]
 
-Source signature=29BCA14C
+Source signature=8DB93BE9
 Program memory checksum=0000
 Program memory CRC=0000
 Hex file CRC=FA55

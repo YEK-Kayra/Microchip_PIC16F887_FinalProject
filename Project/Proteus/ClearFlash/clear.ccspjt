@@ -1,0 +1,35 @@
+[PROJECT]
+Target=clear.hex
+Processor_Text=PIC16F887
+CCSVersion=5.049
+Compiler=PCM
+[Target Data]
+FileList=clear.c
+[clear.c]
+Type=4
+[mru-list]
+1=clear.c
+
+[defines]
+buildcount=5
+
+[Opened Files]
+1=clear.c
+t1=1
+Count=2
+2=..\ConfigurableTimer&Potentiometer\Configurable timers & Potentiometer\ConfigurableTimerAndPotentiometer.c
+t2=1
+[Units]
+Count=1
+1=clear (main)
+
+[ProjectLog]
+Days=1
+D1=15-12-2024
+D1_L=2
+D1_L1=[7401]Stopped Editing.
+TotalEdit=8
+TotalDebug=0
+D1_E=8
+D1_D=0
+D1_L2=[7401]Project Closed.

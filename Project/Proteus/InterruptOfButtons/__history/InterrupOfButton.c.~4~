@@ -1,0 +1,46 @@
+#include <16f887.h>
+
+//--> DEVICES
+#device ADC = 10  //10-bit ADC reading will be performed
+
+//--> FUSES
+#fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT
+
+//--> USEs
+#use delay(clock=4M)
+#use fast_io(b)
+#use fast_io(e)
+
+
+//--> PIN DEFINATIONS
+#define ledPin pin_B0
+#define tickButton pin_E0
+
+
+
+
+
+void main(void) 
+{
+
+
+ set_tris_e(0x01);   
+
+
+
+
+ do { 
+       
+   output_toggle(ledPin);
+   delay_ms(500);
+   
+   
+   
+      } while (input((tickButton) != 1);
+      
+      
+      while(1){
+      
+      }
+      
+}

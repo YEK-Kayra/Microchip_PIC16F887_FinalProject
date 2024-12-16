@@ -26,7 +26,7 @@
  </MODULE>
  <MODULE name="VSMDEBUG">
   <PWI>
-   <POPUP w="800" x="48" flags="00000002" y="160" h="200" pid="0" iid="-1">
+   <POPUP w="800" x="48" flags="00000002" y="160" h="539" pid="0" iid="-1">
     <PROPERTIES>
      <ITEM name="Message Column Width">661</ITEM>
      <ITEM name="ShowGrid">No</ITEM>
@@ -97,10 +97,10 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="869" x="1051" flags="0000800b" y="264" h="545" pid="1" iid="1">
+   <POPUP w="876" x="49" flags="0000000a" y="159" h="828" pid="1" iid="1">
     <PROPERTIES/>
    </POPUP>
-   <POPUP w="875" x="38" flags="0000000b" y="316" h="439" pid="2" iid="1">
+   <POPUP w="875" x="128" flags="0000000a" y="488" h="439" pid="2" iid="1">
     <PROPERTIES>
      <ITEM name="Address Column Width">93</ITEM>
      <ITEM name="AutoResize">No</ITEM>
@@ -126,5 +126,10 @@
   <BREAKPOINT LINE="22" FILE="../Configurable timers/ConfigurableTimer.c" ADDRESS="4294967295" PROJECT="1"/>
   <BREAKPOINT LINE="23" FILE="../Configurable timers/ConfigurableTimer.c" ADDRESS="4294967295" PROJECT="1"/>
   <BREAKPOINT LINE="61" FILE="../Configurable timers/ConfigurableTimer.c" ADDRESS="4294967295" PROJECT="1"/>
+  <BREAKPOINT LINE="114" FILE="../Configurable timers &amp; Potentiometer/ConfigurableTimerAndPotentiometer.c" ADDRESS="4294967295" PROJECT="1"/>
+  <BREAKPOINT LINE="129" FILE="../Configurable timers &amp; Potentiometer/ConfigurableTimerAndPotentiometer.c" ADDRESS="4294967295" PROJECT="1"/>
+  <BREAKPOINT LINE="34" FILE="../../InterruptOfButtons/InterrupOfButton.c" ADDRESS="4294967295" PROJECT="1"/>
+  <BREAKPOINT LINE="37" FILE="../../InterruptOfButtons/InterrupOfButton.c" ADDRESS="4294967295" PROJECT="1"/>
+  <BREAKPOINT LINE="41" FILE="../../InterruptOfButtons/InterrupOfButton.c" ADDRESS="4294967295" PROJECT="1"/>
  </MODULE>
 </WORKSPACE>

@@ -1,0 +1,61 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+015     CCP_1
+015     CCP_1_LOW
+016     CCP_1_HIGH
+01B     CCP_2_LOW
+01B     CCP_2
+01C     CCP_2_HIGH
+021     main.@SCRATCH1
+022     @delay_ms1.P1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+107.6   C1OUT
+108.6   C2OUT
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  @delay_ms1
+00001B  @cinit1
+00001B  main
+00002D  @cinit2
+
+Project Directory:
+    C:\Users\yunus\OneDrive\Masaüstü\Microchip_PIC16F887_FinalProject\Project\Proteus\InterruptOfButtons\
+
+Project Files:
+    InterrupOfButton.c                                      [16-Ara-24 14:21  CRC=A2492E15]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f887.h [08-Eyl-15 15:15  CRC=E224733F]
+
+Source signature=66921493
+Program memory checksum=0000
+Program memory CRC=0000
+Hex file CRC=ED99
+
+Units:
+    InterrupOfButton (main)
+
+Compiler Settings:
+    Processor:      PIC16F887
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Compile Mode:       CCS5
+
+Output Files:
+    XREF file:   InterrupOfButton.xsym
+    Errors:      InterrupOfButton.err
+    Ext Symbols: InterrupOfButton.esym
+    INHX8:       InterrupOfButton.hex
+    Symbols:     InterrupOfButton.sym
+    List:        InterrupOfButton.lst
+    Debug/COFF:  InterrupOfButton.cof
+    Project:     InterrupOfButton.ccspjt
+    Call Tree:   InterrupOfButton.tre
+    Statistics:  InterrupOfButton.STA

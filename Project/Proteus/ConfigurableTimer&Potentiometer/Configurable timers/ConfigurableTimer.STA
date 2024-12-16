@@ -13,10 +13,10 @@ Stack size: 8
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-   79    15 100  ConfigurableTimer.c
-  773     0   0  ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f887.h
+   81    15 100  ConfigurableTimer.c
+  773     0   0  ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f887.h
 ----- -----
-  852    15 Total
+  854    15 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
@@ -30,14 +30,14 @@ Page ROM  %  RAM    Vol Diff  Functions:
 Program metrics:
     Functions               2
     Statements              15
-    Comments                147
+    Comments                149
     Volume (V)              376
     Difficulty (D)          6.6
     Effort to implement (E) 2490
     Time to implement (T)   2 minutes
     Est Delivered Bugs (B)  0
     Cyclomatic Complexity   2
-    Maintainability (MI)    144
+    Maintainability (MI)    147
 
  Segment     Used  Free
 -----------  ----  ----

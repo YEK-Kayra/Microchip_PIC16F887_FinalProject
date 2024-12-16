@@ -59,17 +59,6 @@
 #fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT
 
 
-byte checkMark[8] = {
-  0b00000,
-  0b00001,
-  0b00011,
-  0b00110,
-  0b01100,
-  0b11100,
-  0b01100,
-  0b00000
-};
-
 
 //Potansiyometrelerden gelen dijital deðerleri tutacak
 unsigned long int val_ADC_Pot_Surf;
