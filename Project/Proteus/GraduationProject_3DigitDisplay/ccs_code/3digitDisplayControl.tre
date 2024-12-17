@@ -1,11 +1,13 @@
 ÀÄ3digitDisplayControl
-   ÀÄmain  0/144  Ram=1
-      ÃÄ@cinit1  (Inline)  Ram=0
-      ÃÄ@DIV88  0/21  Ram=3
-      ÃÄ@DIV88  0/21  Ram=3
-      ÃÄ@DIV88  0/21  Ram=3
-      ÃÄ@DIV88  0/21  Ram=3
-      ÃÄ@DIV88  0/21  Ram=3
-      ÃÄ@delay_ms1  0/21  Ram=1
-      ÃÄ@delay_ms1  0/21  Ram=1
+   ÃÄMAIN  0/168  Ram=1
+   ³  ÃÄ@cinit1  (Inline)  Ram=0
+   ³  ÃÄ@DIV88  0/21  Ram=3
+   ³  ÃÄ@DIV88  0/21  Ram=3
+   ³  ÃÄ@DIV88  0/21  Ram=3
+   ³  ÃÄ@DIV88  0/21  Ram=3
+   ³  ÃÄ@DIV88  0/21  Ram=3
+   ³  ÃÄ@delay_ms1  0/21  Ram=1
+   ³  ÃÄ@delay_ms1  0/21  Ram=1
+   ³  ÀÄ@delay_ms1  0/21  Ram=1
+   ÀÄsystem_OK_Button_isr  0/13  Ram=1
       ÀÄ@delay_ms1  0/21  Ram=1

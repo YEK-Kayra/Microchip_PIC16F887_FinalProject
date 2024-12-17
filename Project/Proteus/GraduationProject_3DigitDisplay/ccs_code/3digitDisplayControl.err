@@ -1,4 +1,1 @@
->>> Warning 203 "3digitDisplayControl.c" Line 52(1,1): Condition always TRUE
-      Memory usage:   ROM=2%      RAM=7% - 8%
-      0 Errors,  1 Warnings.
-Build Successful.
+>>> Warning 203 "3digitDisplayControl.c" Line 76(1,1): Condition always TRUE

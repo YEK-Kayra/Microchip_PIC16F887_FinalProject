@@ -11,22 +11,22 @@ Type=4
 1=3digitDisplayControl.c
 
 [defines]
-buildcount=10
+buildcount=15
 
 [Opened Files]
-1=3digitDisplayControl.c
+1=..\..\InterruptOfButtons\withRegisterLevel\RegisterLevel_EXTinterrupt.c
 t1=1
 Count=1
 
 [ProjectLog]
-Days=3
+Days=4
 D1=08-12-2024
 D1_L=6
 D1_L1=[74600]Started Editing.
 D1_L2=[75485]Stopped Editing.
 D1_L3=[75964]Started Editing.
 D1_L4=[78250]Stopped Editing.
-TotalEdit=48
+TotalEdit=72
 TotalDebug=0
 D1_E=48
 D1_D=0
@@ -36,8 +36,27 @@ D2=09-12-2024
 D2_L=1
 D2_L1=[226]Project Closed.
 D3=17-12-2024
-D3_L=1
+D3_L=9
 D3_L1=[81929]Project Opened.
+D3_L2=[82428]Started Editing.
+D3_L3=[83424]Stopped Editing.
+D3_L4=[85173]Started Editing.
+D3_L5=[85179]Stopped Editing.
+D3_E=12
+D3_D=0
+D3_L6=[85179]Project Closed.
+D3_L7=[85281]Project Opened.
+D3_L8=[85351]Started Editing.
+D3_L9=[85678]Stopped Editing.
+D4=18-12-2024
+D4_L=5
+D4_L1=[273]Started Editing.
+D4_L2=[627]Stopped Editing.
+D4_L3=[1591]Started Editing.
+D4_L4=[2190]Stopped Editing.
+D4_E=12
+D4_D=0
+D4_L5=[2190]Project Closed.
 [Units]
 Count=1
 1=3digitDisplayControl (main)

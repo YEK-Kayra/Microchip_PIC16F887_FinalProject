@@ -1,19 +1,62 @@
-CCS PCM C Compiler, Version 5.049, 5967               08-Ara-24 21:41
+CCS PCM C Compiler, Version 5.049, 5967               18-Ara-24 00:35
 
-               Filename:   C:\Users\yunus\OneDrive\Masaüstü\DersBitirme\Proteus\GraduationProject_3DigitDisplay\ccs_code\3digitDisplayControl.lst
+               Filename:   C:\Users\yunus\OneDrive\Masaüstü\Microchip_PIC16F887_FinalProject\Project\Proteus\GraduationProject_3DigitDisplay\ccs_code\3digitDisplayControl.lst
 
-               ROM used:   190 words (2%)
+               ROM used:   270 words (3%)
                            Largest free fragment is 2048
-               RAM used:   27 (7%) at main() level
-                           30 (8%) worst case
-               Stack used: 1 locations
+               RAM used:   35 (10%) at main() level
+                           40 (11%) worst case
+               Stack used: 3 locations (1 in main + 2 for interrupts)
                Stack size: 8
 
 *
 0000:  MOVLW  00
 0001:  MOVWF  0A
-0002:  GOTO   02E
+0002:  GOTO   066
 0003:  NOP
+0004:  MOVWF  7F
+0005:  SWAPF  03,W
+0006:  CLRF   03
+0007:  MOVWF  21
+0008:  MOVF   0A,W
+0009:  MOVWF  20
+000A:  CLRF   0A
+000B:  MOVF   04,W
+000C:  MOVWF  22
+000D:  MOVF   77,W
+000E:  MOVWF  23
+000F:  MOVF   78,W
+0010:  MOVWF  24
+0011:  MOVF   79,W
+0012:  MOVWF  25
+0013:  MOVF   7A,W
+0014:  MOVWF  26
+0015:  BCF    03.7
+0016:  BCF    03.5
+0017:  BTFSS  0B.4
+0018:  GOTO   01B
+0019:  BTFSC  0B.1
+001A:  GOTO   02C
+001B:  MOVF   22,W
+001C:  MOVWF  04
+001D:  MOVF   23,W
+001E:  MOVWF  77
+001F:  MOVF   24,W
+0020:  MOVWF  78
+0021:  MOVF   25,W
+0022:  MOVWF  79
+0023:  MOVF   26,W
+0024:  MOVWF  7A
+0025:  MOVF   20,W
+0026:  MOVWF  0A
+0027:  SWAPF  21,W
+0028:  MOVWF  03
+0029:  SWAPF  7F,F
+002A:  SWAPF  7F,W
+002B:  RETFIE
+002C:  BCF    0A.3
+002D:  BCF    0A.4
+002E:  GOTO   044
 .................... #include <16f887.h> 
 .................... //////////// Standard Header file for the PIC16F887 device //////////////// 
 .................... /////////////////////////////////////////////////////////////////////////// 
@@ -26,56 +69,60 @@ CCS PCM C Compiler, Version 5.049, 5967               08-Ara-24 21:41
 .................... //// form are not restricted in any way.                               //// 
 .................... /////////////////////////////////////////////////////////////////////////// 
 .................... #device PIC16F887 
-0004:  MOVF   37,W
-0005:  CLRF   78
-0006:  SUBWF  36,W
-0007:  BTFSC  03.0
-0008:  GOTO   00C
-0009:  MOVF   36,W
-000A:  MOVWF  77
-000B:  GOTO   018
-000C:  CLRF   77
-000D:  MOVLW  08
-000E:  MOVWF  38
-000F:  RLF    36,F
-0010:  RLF    77,F
-0011:  MOVF   37,W
-0012:  SUBWF  77,W
-0013:  BTFSC  03.0
-0014:  MOVWF  77
-0015:  RLF    78,F
-0016:  DECFSZ 38,F
-0017:  GOTO   00F
-0018:  RETURN
+*
+0051:  MOVF   3F,W
+0052:  CLRF   78
+0053:  SUBWF  3E,W
+0054:  BTFSC  03.0
+0055:  GOTO   059
+0056:  MOVF   3E,W
+0057:  MOVWF  77
+0058:  GOTO   065
+0059:  CLRF   77
+005A:  MOVLW  08
+005B:  MOVWF  40
+005C:  RLF    3E,F
+005D:  RLF    77,F
+005E:  MOVF   3F,W
+005F:  SUBWF  77,W
+0060:  BTFSC  03.0
+0061:  MOVWF  77
+0062:  RLF    78,F
+0063:  DECFSZ 40,F
+0064:  GOTO   05C
+0065:  RETURN
 ....................  
 .................... #list 
 ....................  
 ....................  
 .................... #use delay(clock=4M) 
-0019:  MOVLW  35
-001A:  MOVWF  04
-001B:  BCF    03.7
-001C:  MOVF   00,W
-001D:  BTFSC  03.2
-001E:  GOTO   02D
-001F:  MOVLW  01
-0020:  MOVWF  78
-0021:  CLRF   77
-0022:  DECFSZ 77,F
-0023:  GOTO   022
-0024:  DECFSZ 78,F
-0025:  GOTO   021
-0026:  MOVLW  4A
-0027:  MOVWF  77
-0028:  DECFSZ 77,F
-0029:  GOTO   028
-002A:  GOTO   02B
-002B:  DECFSZ 00,F
-002C:  GOTO   01F
-002D:  RETURN
+*
+002F:  MOVLW  42
+0030:  MOVWF  04
+0031:  BCF    03.7
+0032:  MOVF   00,W
+0033:  BTFSC  03.2
+0034:  GOTO   043
+0035:  MOVLW  01
+0036:  MOVWF  78
+0037:  CLRF   77
+0038:  DECFSZ 77,F
+0039:  GOTO   038
+003A:  DECFSZ 78,F
+003B:  GOTO   037
+003C:  MOVLW  4A
+003D:  MOVWF  77
+003E:  DECFSZ 77,F
+003F:  GOTO   03E
+0040:  GOTO   041
+0041:  DECFSZ 00,F
+0042:  GOTO   035
+0043:  RETURN
 ....................  
 .................... #use fast_io(b) // B portlarý 3 display için de ortak kullanýlacak 
 .................... #use fast_io(e) // E portlarýndan e0,e1,e2 tarama yapacak anahtar pinleri 
+.................... #use fast_io(d) // D portundan buton kesmesinin çalýþma kontrolü için eklendi 
+....................  
 ....................  
 .................... #fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT 
 ....................  
@@ -83,41 +130,46 @@ CCS PCM C Compiler, Version 5.049, 5967               08-Ara-24 21:41
 .................... #define pin_HundredDigit_switch pin_E2 
 .................... #define pin_TensDigit_switch    pin_E0  
 .................... #define pin_UnitDigit_switch    pin_E1  
+.................... #define pin_led                 pin_D0 
 ....................  
 .................... //Display ekranlarýmýzda gösterilecek rakamlarý yazalým 
-.................... int8 segmentTable[16] ={ 
-....................                      0x3F,0x06,0x5B,0x4F,0x66, 
-....................                      0x6D,0x7D,0x07,0x7F,0x6F       
-....................                       }; 
-*
-0047:  MOVLW  3F
-0048:  BCF    03.6
-0049:  MOVWF  20
-004A:  MOVLW  06
-004B:  MOVWF  21
-004C:  MOVLW  5B
-004D:  MOVWF  22
-004E:  MOVLW  4F
-004F:  MOVWF  23
-0050:  MOVLW  66
-0051:  MOVWF  24
-0052:  MOVLW  6D
-0053:  MOVWF  25
-0054:  MOVLW  7D
-0055:  MOVWF  26
-0056:  MOVLW  07
-0057:  MOVWF  27
-0058:  MOVLW  7F
-0059:  MOVWF  28
-005A:  MOVLW  6F
-005B:  MOVWF  29
-005C:  CLRF   2A
-005D:  CLRF   2B
-005E:  CLRF   2C
-005F:  CLRF   2D
-0060:  CLRF   2E
-0061:  CLRF   2F
+.................... //!int8 segmentTable[16] ={ 
+.................... //!                     0x3F,0x06,0x5B,0x4F,0x66, 
+.................... //!                     0x6D,0x7D,0x07,0x7F,0x6F       
+.................... //!                      }; 
 ....................                       
+.................... int8 segmentTable[16] = { //b1 den baþlayarak b7 de bitecek 
+....................     0x7E, 0x0C, 0xB6, 0x9E, 0xCC,  
+....................     0xDA, 0xFA, 0x0E, 0xFE, 0xDE 
+.................... };                      
+*
+007F:  MOVLW  7E
+0080:  BCF    03.6
+0081:  MOVWF  28
+0082:  MOVLW  0C
+0083:  MOVWF  29
+0084:  MOVLW  B6
+0085:  MOVWF  2A
+0086:  MOVLW  9E
+0087:  MOVWF  2B
+0088:  MOVLW  CC
+0089:  MOVWF  2C
+008A:  MOVLW  DA
+008B:  MOVWF  2D
+008C:  MOVLW  FA
+008D:  MOVWF  2E
+008E:  MOVLW  0E
+008F:  MOVWF  2F
+0090:  MOVLW  FE
+0091:  MOVWF  30
+0092:  MOVLW  DE
+0093:  MOVWF  31
+0094:  CLRF   32
+0095:  CLRF   33
+0096:  CLRF   34
+0097:  CLRF   35
+0098:  CLRF   36
+0099:  CLRF   37
 ....................  
 .................... //Gelen timer deðerini basamaklara ayýr 
 .................... int8 number_unitDigit=0; 
@@ -125,68 +177,106 @@ CCS PCM C Compiler, Version 5.049, 5967               08-Ara-24 21:41
 .................... int8 number_hundredDigit =0; 
 ....................  
 .................... //Sayacý tarafýndan atacanak deðer 
-.................... int TimingNumber = 177; 
+.................... int TimingNumber = 123; 
 ....................  
 .................... //For döngüsü için 1 saniye ye saydýr 
 .................... int8 MyTimeTicker = 0; 
 ....................  
+....................  
+.................... #int_EXT 
+.................... void system_OK_Button_isr(){ 
+....................     
+....................    output_toggle(pin_led); 
+*
+0044:  MOVLW  01
+0045:  XORWF  08,F
+....................    delay_ms(500); 
+0046:  MOVLW  02
+0047:  MOVWF  41
+0048:  MOVLW  FA
+0049:  MOVWF  42
+004A:  CALL   02F
+004B:  DECFSZ 41,F
+004C:  GOTO   048
+....................  
+004D:  BCF    0B.1
+004E:  BCF    0A.3
+004F:  BCF    0A.4
+0050:  GOTO   01B
+.................... } 
+....................  
+....................  
 .................... void main(void)  
 *
-002E:  MOVF   03,W
-002F:  ANDLW  1F
-0030:  MOVWF  03
-0031:  CLRF   30
-0032:  CLRF   31
-0033:  CLRF   32
-0034:  MOVLW  B1
-0035:  MOVWF  33
-0036:  CLRF   34
-0037:  BSF    03.5
-0038:  BSF    03.6
-0039:  MOVF   09,W
-003A:  ANDLW  C0
-003B:  MOVWF  09
-003C:  BCF    03.6
-003D:  BCF    1F.4
-003E:  BCF    1F.5
-003F:  MOVLW  00
-0040:  BSF    03.6
-0041:  MOVWF  08
-0042:  BCF    03.5
-0043:  CLRF   07
-0044:  CLRF   08
-0045:  CLRF   09
-0046:  BCF    03.7
+0066:  MOVF   03,W
+0067:  ANDLW  1F
+0068:  MOVWF  03
+0069:  CLRF   38
+006A:  CLRF   39
+006B:  CLRF   3A
+006C:  MOVLW  7B
+006D:  MOVWF  3B
+006E:  CLRF   3C
+006F:  BSF    03.5
+0070:  BSF    03.6
+0071:  MOVF   09,W
+0072:  ANDLW  C0
+0073:  MOVWF  09
+0074:  BCF    03.6
+0075:  BCF    1F.4
+0076:  BCF    1F.5
+0077:  MOVLW  00
+0078:  BSF    03.6
+0079:  MOVWF  08
+007A:  BCF    03.5
+007B:  CLRF   07
+007C:  CLRF   08
+007D:  CLRF   09
+007E:  BCF    03.7
 .................... { 
 ....................  
-....................    //display pinlerini çýkýþ olarak ata 
-....................    set_tris_b(0x00);                       
+....................    //display pinlerini çýkýþ/giriþ olarak ata 
+....................    set_tris_b(0x01);       
 *
-0062:  MOVLW  00
-0063:  BSF    03.5
-0064:  MOVWF  06
+009A:  MOVLW  01
+009B:  BSF    03.5
+009C:  MOVWF  06
+....................     
 ....................     
 ....................    //Display switchlerini çýkýþ olarak ata 
 ....................    output_drive(pin_HundredDigit_switch);  
-0065:  BCF    09.2
+009D:  BCF    09.2
 ....................    output_drive(pin_TensDigit_switch); 
-0066:  BCF    09.0
+009E:  BCF    09.0
 ....................    output_drive(pin_UnitDigit_switch); 
-0067:  BCF    09.1
+009F:  BCF    09.1
+....................    output_drive(pin_led); 
+00A0:  BCF    08.0
 ....................     
 ....................    //Basamaklarýn gözükmesi için gerilim uygula 
 ....................    output_high(pin_UnitDigit_switch);     
-0068:  BCF    03.5
-0069:  BSF    09.1
+00A1:  BCF    03.5
+00A2:  BSF    09.1
 ....................    output_high(pin_TensDigit_switch);      
-006A:  BSF    09.0
+00A3:  BSF    09.0
 ....................    output_high(pin_HundredDigit_switch);   
-006B:  BSF    09.2
+00A4:  BSF    09.2
 ....................     
 ....................    //baþlangýç deðerini segmentlere yükle 
 ....................    output_b(segmentTable[0]);  
-006C:  MOVF   20,W
-006D:  MOVWF  06
+00A5:  MOVF   28,W
+00A6:  MOVWF  06
+....................     
+....................     
+....................    ext_int_edge(L_TO_H); //Harici kesme Lojik 0'dan 1'e geçerken 
+00A7:  BSF    03.5
+00A8:  BSF    01.6
+....................    enable_interrupts(INT_EXT); //Harici kesme aktif 
+00A9:  BCF    03.5
+00AA:  BSF    0B.4
+....................    enable_interrupts(GLOBAL); //Aktif kesmeler için genel kesme yetkisi ver  
+00AB:  MOVLW  C0
+00AC:  IORWF  0B,F
 ....................     
 ....................  while(1) //Sonsuz döngü baþlangýcý 
 ....................  { 
@@ -194,116 +284,133 @@ CCS PCM C Compiler, Version 5.049, 5967               08-Ara-24 21:41
 ....................  
 ....................          //TimingNumber zamanlayýcýdan alýnacak 
 ....................          number_unitDigit    = (TimingNumber%10);   
-006E:  MOVF   33,W
-006F:  MOVWF  36
-0070:  MOVLW  0A
-0071:  MOVWF  37
-0072:  CALL   004
-0073:  MOVF   77,W
-0074:  MOVWF  30
+00AD:  MOVF   3B,W
+00AE:  MOVWF  3E
+00AF:  MOVLW  0A
+00B0:  MOVWF  3F
+00B1:  CALL   051
+00B2:  MOVF   77,W
+00B3:  MOVWF  38
 ....................          number_tensDigit    = ((TimingNumber/10)%10);  
-0075:  MOVF   33,W
-0076:  MOVWF  36
-0077:  MOVLW  0A
-0078:  MOVWF  37
-0079:  CALL   004
-007A:  MOVF   78,W
-007B:  MOVWF  36
-007C:  MOVLW  0A
-007D:  MOVWF  37
-007E:  CALL   004
-007F:  MOVF   77,W
-0080:  MOVWF  31
+00B4:  MOVF   3B,W
+00B5:  MOVWF  3E
+00B6:  MOVLW  0A
+00B7:  MOVWF  3F
+00B8:  CALL   051
+00B9:  MOVF   78,W
+00BA:  MOVWF  3E
+00BB:  MOVLW  0A
+00BC:  MOVWF  3F
+00BD:  CALL   051
+00BE:  MOVF   77,W
+00BF:  MOVWF  39
 ....................          number_hundredDigit = ((TimingNumber/100)%10);    
-0081:  MOVF   33,W
-0082:  MOVWF  36
-0083:  MOVLW  64
-0084:  MOVWF  37
-0085:  CALL   004
-0086:  MOVF   78,W
-0087:  MOVWF  36
-0088:  MOVLW  0A
-0089:  MOVWF  37
-008A:  CALL   004
-008B:  MOVF   77,W
-008C:  MOVWF  32
+00C0:  MOVF   3B,W
+00C1:  MOVWF  3E
+00C2:  MOVLW  64
+00C3:  MOVWF  3F
+00C4:  CALL   051
+00C5:  MOVF   78,W
+00C6:  MOVWF  3E
+00C7:  MOVLW  0A
+00C8:  MOVWF  3F
+00C9:  CALL   051
+00CA:  MOVF   77,W
+00CB:  MOVWF  3A
 ....................           
 ....................         for(MyTimeTicker = 0 ; MyTimeTicker <33 ; MyTimeTicker++){ 
-008D:  CLRF   34
-008E:  MOVF   34,W
-008F:  SUBLW  20
-0090:  BTFSS  03.0
-0091:  GOTO   0BB
+00CC:  CLRF   3C
+00CD:  MOVF   3C,W
+00CE:  SUBLW  20
+00CF:  BTFSS  03.0
+00D0:  GOTO   10C
 ....................          
 ....................           //Transistor ile basamak deðiþimlerini yap 
 ....................           output_high(pin_UnitDigit_switch);     //birler basamaðýný aç 
-0092:  BSF    09.1
+00D1:  BSF    09.1
 ....................           output_low(pin_TensDigit_switch);      //onlar basamaðýný kapa 
-0093:  BCF    09.0
+00D2:  BCF    09.0
 ....................           output_low(pin_HundredDigit_switch);   //yüzler basamaðýný kapa 
-0094:  BCF    09.2
+00D3:  BCF    09.2
 ....................           output_b(segmentTable[number_unitDigit]); //ilgili numarayý ekrana bas, içeriden sayý çekiyoruz yani 
-0095:  MOVLW  20
-0096:  ADDWF  30,W
-0097:  MOVWF  04
-0098:  BCF    03.7
-0099:  MOVF   00,W
-009A:  MOVWF  35
-009B:  MOVWF  06
+00D4:  MOVLW  28
+00D5:  ADDWF  38,W
+00D6:  MOVWF  04
+00D7:  BCF    03.7
+00D8:  MOVF   00,W
+00D9:  MOVWF  3D
+00DA:  MOVWF  06
+00DB:  CLRF   27
+00DC:  BTFSC  0B.7
+00DD:  BSF    27.7
+00DE:  BCF    0B.7
 ....................           delay_ms(10);                             //tarama yaparken bu süreyi kullan 
-009C:  MOVLW  0A
-009D:  MOVWF  35
-009E:  CALL   019
+00DF:  MOVLW  0A
+00E0:  MOVWF  42
+00E1:  CALL   02F
+00E2:  BTFSC  27.7
+00E3:  BSF    0B.7
 ....................            
 ....................           //Transistor ile basamak deðiþimlerini yap 
 ....................           output_low(pin_UnitDigit_switch);      //birler basamaðýný kapa 
-009F:  BCF    09.1
+00E4:  BCF    09.1
 ....................           output_high(pin_TensDigit_switch);     //onlar basamaðýný aç 
-00A0:  BSF    09.0
+00E5:  BSF    09.0
 ....................           output_low(pin_HundredDigit_switch);   //yüzler basamaðýný kapa           
-00A1:  BCF    09.2
+00E6:  BCF    09.2
 ....................           output_b(segmentTable[number_tensDigit]); //ilgili numarayý ekrana bas, içeriden sayý çekiyoruz yani 
-00A2:  MOVLW  20
-00A3:  ADDWF  31,W
-00A4:  MOVWF  04
-00A5:  BCF    03.7
-00A6:  MOVF   00,W
-00A7:  MOVWF  35
-00A8:  MOVWF  06
+00E7:  MOVLW  28
+00E8:  ADDWF  39,W
+00E9:  MOVWF  04
+00EA:  BCF    03.7
+00EB:  MOVF   00,W
+00EC:  MOVWF  3D
+00ED:  MOVWF  06
+00EE:  CLRF   27
+00EF:  BTFSC  0B.7
+00F0:  BSF    27.7
+00F1:  BCF    0B.7
 ....................           delay_ms(10);   
-00A9:  MOVLW  0A
-00AA:  MOVWF  35
-00AB:  CALL   019
+00F2:  MOVLW  0A
+00F3:  MOVWF  42
+00F4:  CALL   02F
+00F5:  BTFSC  27.7
+00F6:  BSF    0B.7
 ....................            
 ....................           //Transistor ile basamak deðiþimlerini yap 
 ....................           output_low(pin_UnitDigit_switch);       //birler basamaðýný kapa 
-00AC:  BCF    09.1
+00F7:  BCF    09.1
 ....................           output_low(pin_TensDigit_switch);       //onlar basamaðýný kapa 
-00AD:  BCF    09.0
+00F8:  BCF    09.0
 ....................           output_high(pin_HundredDigit_switch);   //yüzler basamaðýný aç 
-00AE:  BSF    09.2
+00F9:  BSF    09.2
 ....................           output_b(segmentTable[number_hundredDigit]); //ilgili numarayý ekrana bas, içeriden sayý çekiyoruz yani 
-00AF:  MOVLW  20
-00B0:  ADDWF  32,W
-00B1:  MOVWF  04
-00B2:  BCF    03.7
-00B3:  MOVF   00,W
-00B4:  MOVWF  35
-00B5:  MOVWF  06
+00FA:  MOVLW  28
+00FB:  ADDWF  3A,W
+00FC:  MOVWF  04
+00FD:  BCF    03.7
+00FE:  MOVF   00,W
+00FF:  MOVWF  3D
+0100:  MOVWF  06
+0101:  CLRF   27
+0102:  BTFSC  0B.7
+0103:  BSF    27.7
+0104:  BCF    0B.7
 ....................           delay_ms(10);  
-00B6:  MOVLW  0A
-00B7:  MOVWF  35
-00B8:  CALL   019
-00B9:  INCF   34,F
-00BA:  GOTO   08E
+0105:  MOVLW  0A
+0106:  MOVWF  42
+0107:  CALL   02F
+0108:  BTFSC  27.7
+0109:  BSF    0B.7
+010A:  INCF   3C,F
+010B:  GOTO   0CD
 ....................            
 ....................         } 
-.................... TimingNumber++; 
-00BB:  INCF   33,F
-00BC:  GOTO   06E
+010C:  GOTO   0AD
+....................    
 ....................  } 
 .................... }  
-00BD:  SLEEP
+010D:  SLEEP
 
 Configuration Fuses:
    Word  1: 2CF2   HS NOWDT NOPUT MCLR NOPROTECT NOCPD NOBROWNOUT IESO FCMEN NOLVP NODEBUG

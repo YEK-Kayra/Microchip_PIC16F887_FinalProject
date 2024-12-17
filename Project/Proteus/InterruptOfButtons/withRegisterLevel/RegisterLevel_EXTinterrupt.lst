@@ -1,0 +1,223 @@
+CCS PCM C Compiler, Version 5.049, 5967               18-Ara-24 01:16
+
+               Filename:   C:\Users\yunus\OneDrive\Masaüstü\Microchip_PIC16F887_FinalProject\Project\Proteus\InterruptOfButtons\withRegisterLevel\RegisterLevel_EXTinterrupt.lst
+
+               ROM used:   109 words (1%)
+                           Largest free fragment is 2048
+               RAM used:   14 (4%) at main() level
+                           16 (4%) worst case
+               Stack used: 0 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   04F
+0003:  NOP
+0004:  MOVWF  7F
+0005:  SWAPF  03,W
+0006:  CLRF   03
+0007:  MOVWF  21
+0008:  MOVF   0A,W
+0009:  MOVWF  20
+000A:  CLRF   0A
+000B:  MOVF   04,W
+000C:  MOVWF  22
+000D:  MOVF   77,W
+000E:  MOVWF  23
+000F:  MOVF   78,W
+0010:  MOVWF  24
+0011:  MOVF   79,W
+0012:  MOVWF  25
+0013:  MOVF   7A,W
+0014:  MOVWF  26
+0015:  BCF    03.7
+0016:  BCF    03.5
+0017:  BTFSS  0B.4
+0018:  GOTO   01B
+0019:  BTFSC  0B.1
+001A:  GOTO   02C
+001B:  MOVF   22,W
+001C:  MOVWF  04
+001D:  MOVF   23,W
+001E:  MOVWF  77
+001F:  MOVF   24,W
+0020:  MOVWF  78
+0021:  MOVF   25,W
+0022:  MOVWF  79
+0023:  MOVF   26,W
+0024:  MOVWF  7A
+0025:  MOVF   20,W
+0026:  MOVWF  0A
+0027:  SWAPF  21,W
+0028:  MOVWF  03
+0029:  SWAPF  7F,F
+002A:  SWAPF  7F,W
+002B:  RETFIE
+002C:  BCF    0A.3
+002D:  BCF    0A.4
+002E:  GOTO   02F
+.................... #include <16f887.h> 
+.................... //////////// Standard Header file for the PIC16F887 device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2014 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F887 
+....................  
+.................... #list 
+....................  
+....................  
+.................... #use delay(clock=4M) 
+*
+0034:  MOVLW  2A
+0035:  MOVWF  04
+0036:  BCF    03.7
+0037:  MOVF   00,W
+0038:  BTFSC  03.2
+0039:  GOTO   048
+003A:  MOVLW  01
+003B:  MOVWF  78
+003C:  CLRF   77
+003D:  DECFSZ 77,F
+003E:  GOTO   03D
+003F:  DECFSZ 78,F
+0040:  GOTO   03C
+0041:  MOVLW  4A
+0042:  MOVWF  77
+0043:  DECFSZ 77,F
+0044:  GOTO   043
+0045:  GOTO   046
+0046:  DECFSZ 00,F
+0047:  GOTO   03A
+....................  
+.................... #use fast_io(b) // B portlarý 3 display için de ortak kullanýlacak 
+....................  
+....................  
+.................... #fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT 
+....................  
+.................... #byte my_INTCON_REG      = 0x0B 
+.................... #byte my_OPTION_REG      = 0x81  
+....................  
+.................... #define pin_led pin_B1 
+....................  
+....................  
+....................  
+.................... typedef struct{ 
+....................     
+....................     unsigned mPS0    : 1;   // Prescaler Rate Select bit 0 (bit 0) 
+....................     unsigned mPS1    : 1;   // Prescaler Rate Select bit 1 (bit 1) 
+....................     unsigned mPS2    : 1;   // Prescaler Rate Select bit 2 (bit 2) 
+....................     unsigned mPSA    : 1;   // Prescaler Assignment bit   (bit 3) 
+....................     unsigned mT0SE   : 1;   // TMR0 Source Edge Select bit (bit 4) 
+....................     unsigned mT0CS   : 1;   // TMR0 Clock Source Select bit (bit 5) 
+....................     unsigned mINTEDG : 1;   // Interrupt Edge Select bit (bit 6) 
+....................     unsigned mRBPU   : 1;   // Weak Pull-up Enable bit (bit 7) 
+....................  
+.................... }OPTIONreg_bit; 
+....................  
+.................... typedef struct{ 
+....................  
+....................     unsigned mRBIF : 1;   // bit 0, RB Port Change Interrupt Flag bit  
+....................     unsigned mINTF : 1;   // bit 1, INT External Interrupt Flag bit  
+....................     unsigned mT0IF : 1;   // bit 2, TMR0 Overflow Interrupt Flag bit  
+....................     unsigned mRBIE : 1;   // bit 3, RB Port Change Interrupt Enable bit 
+....................     unsigned mINTE : 1;   // bit 4, INT External Interrupt Enable bit  
+....................     unsigned mT0IE : 1;   // bit 5, TMR0 Overflow Interrupt Enable bit 
+....................     unsigned mPEIE : 1;   // bit 6, Peripheral Interrupt Enable bit  
+....................     unsigned mGIE  : 1;   // bit 7, Global Interrupt Enable bit  
+....................      
+.................... }INTCONreg_bit; 
+....................  
+.................... volatile INTCONreg_bit INTCONbits;   
+.................... volatile OPTIONreg_bit OPTIONbits;  
+....................  
+....................  
+....................  
+.................... #int_EXT 
+.................... void system_OK_Button_isr(){ 
+....................     
+....................    output_toggle(pin_led); 
+*
+002F:  MOVLW  02
+0030:  XORWF  06,F
+....................    delay_ms(500); 
+0031:  MOVWF  29
+0032:  MOVLW  FA
+0033:  MOVWF  2A
+*
+0048:  DECFSZ 29,F
+0049:  GOTO   032
+....................    INTCONbits.mINTF   = 0; //Clear flag 
+004A:  BCF    27.1
+....................     
+004B:  BCF    0B.1
+004C:  BCF    0A.3
+004D:  BCF    0A.4
+004E:  GOTO   01B
+.................... } 
+....................  
+....................  
+.................... void main(void)  
+004F:  MOVF   03,W
+0050:  ANDLW  1F
+0051:  MOVWF  03
+0052:  BSF    03.5
+0053:  BSF    03.6
+0054:  MOVF   09,W
+0055:  ANDLW  C0
+0056:  MOVWF  09
+0057:  BCF    03.6
+0058:  BCF    1F.4
+0059:  BCF    1F.5
+005A:  MOVLW  00
+005B:  BSF    03.6
+005C:  MOVWF  08
+005D:  BCF    03.5
+005E:  CLRF   07
+005F:  CLRF   08
+0060:  CLRF   09
+0061:  BCF    03.7
+.................... { 
+....................  
+....................    
+....................    //b0_pin giriþ olarak ayarlandý 
+....................    set_tris_b(0x01);      
+0062:  MOVLW  01
+0063:  BSF    03.5
+0064:  BCF    03.6
+0065:  MOVWF  06
+....................     
+....................    OPTIONbits.mINTEDG = 1; //Interrupt at rising edge 
+0066:  BCF    03.5
+0067:  BSF    28.6
+....................    INTCONbits.mINTF   = 0; //Clear flag 
+0068:  BCF    27.1
+....................    INTCONbits.mINTE   = 1; //External Interrupt EnableS 
+0069:  BSF    27.4
+....................    INTCONbits.mGIE    = 1; 
+006A:  BSF    27.7
+....................     
+.................... //!   ext_int_edge(L_TO_H); //Harici kesme Lojik 0'dan 1'e geçerken 
+.................... //!   enable_interrupts(INT_EXT); //Harici kesme aktif 
+.................... //!   enable_interrupts(GLOBAL); //Aktif kesmeler için genel kesme yetkisi ver  
+....................     
+....................  while(1) //Sonsuz döngü baþlangýcý 
+....................  { 
+006B:  GOTO   06B
+....................   
+....................  
+....................          
+....................    
+....................  } 
+.................... }  
+006C:  SLEEP
+
+Configuration Fuses:
+   Word  1: 2CF2   HS NOWDT NOPUT MCLR NOPROTECT NOCPD NOBROWNOUT IESO FCMEN NOLVP NODEBUG
+   Word  2: 0700   BORV40 NOWRT

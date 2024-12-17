@@ -1,0 +1,63 @@
+#include <16f887.h>
+
+#use delay(clock=4M)
+
+#use fast_io(b) // B portlarý 3 display için de ortak kullanýlacak
+
+
+#fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT
+
+#byte my_INTCON_REG      = 0x0B
+
+typedef struct{
+
+#bit GIE;
+#bit PEIE;  
+#bit T0IE;  
+#bit INTE;  
+#bit RBIE;  
+#bit T0IF;  
+#bit INTF; 
+#bit RBIF; 
+
+}INTCONreg_bit;
+
+INTCONreg_bit INTCONreg;
+
+
+INTCONreg.G
+
+
+#int_EXT
+void system_OK_Button_isr(){
+   
+   output_toggle(pin_led);
+   delay_ms(500);
+   
+}
+
+
+void main(void) 
+{
+
+   //b0_pin giriþ olarak ayarlandý
+   set_tris_b(0x01);     
+   
+   //Register Level external interrupt config
+   
+   
+   
+
+   //Buralar register yazýlacak
+   ext_int_edge(L_TO_H); //Harici kesme Lojik 0'dan 1'e geçerken
+   enable_interrupts(INT_EXT); //Harici kesme aktif
+   enable_interrupts(GLOBAL); //Aktif kesmeler için genel kesme yetkisi ver 
+   
+ while(1) //Sonsuz döngü baþlangýcý
+ {
+ 
+
+        
+  
+ }
+} 

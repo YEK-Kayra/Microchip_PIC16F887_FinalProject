@@ -4,6 +4,8 @@
 
 #use fast_io(b) // B portlarý 3 display için de ortak kullanýlacak
 #use fast_io(e) // E portlarýndan e0,e1,e2 tarama yapacak anahtar pinleri
+#use fast_io(d) // D portundan buton kesmesinin çalýþma kontrolü için eklendi
+
 
 #fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT
 
@@ -11,13 +13,18 @@
 #define pin_HundredDigit_switch pin_E2
 #define pin_TensDigit_switch    pin_E0 
 #define pin_UnitDigit_switch    pin_E1 
+#define pin_led                 pin_D0
 
 //Display ekranlarýmýzda gösterilecek rakamlarý yazalým
-int8 segmentTable[16] ={
-                     0x3F,0x06,0x5B,0x4F,0x66,
-                     0x6D,0x7D,0x07,0x7F,0x6F      
-                      };
+//!int8 segmentTable[16] ={
+//!                     0x3F,0x06,0x5B,0x4F,0x66,
+//!                     0x6D,0x7D,0x07,0x7F,0x6F      
+//!                      };
                      
+int8 segmentTable[16] = { //b1 den baþlayarak b7 de bitecek
+    0x7E, 0x0C, 0xB6, 0x9E, 0xCC, 
+    0xDA, 0xFA, 0x0E, 0xFE, 0xDE
+};                     
 
 //Gelen timer deðerini basamaklara ayýr
 int8 number_unitDigit=0;
@@ -25,21 +32,33 @@ int8 number_tensDigit=0;
 int8 number_hundredDigit =0;
 
 //Sayacý tarafýndan atacanak deðer
-int TimingNumber = 177;
+int TimingNumber = 123;
 
 //For döngüsü için 1 saniye ye saydýr
 int8 MyTimeTicker = 0;
 
+
+#int_EXT
+void system_OK_Button_isr(){
+   
+   output_toggle(pin_led);
+   delay_ms(500);
+
+}
+
+
 void main(void) 
 {
 
-   //display pinlerini çýkýþ olarak ata
-   set_tris_b(0x00);                      
+   //display pinlerini çýkýþ/giriþ olarak ata
+   set_tris_b(0x01);      
+   
    
    //Display switchlerini çýkýþ olarak ata
    output_drive(pin_HundredDigit_switch); 
    output_drive(pin_TensDigit_switch);
    output_drive(pin_UnitDigit_switch);
+   output_drive(pin_led);
    
    //Basamaklarýn gözükmesi için gerilim uygula
    output_high(pin_UnitDigit_switch);    
@@ -48,6 +67,11 @@ void main(void)
    
    //baþlangýç deðerini segmentlere yükle
    output_b(segmentTable[0]); 
+   
+   
+   ext_int_edge(L_TO_H); //Harici kesme Lojik 0'dan 1'e geçerken
+   enable_interrupts(INT_EXT); //Harici kesme aktif
+   enable_interrupts(GLOBAL); //Aktif kesmeler için genel kesme yetkisi ver 
    
  while(1) //Sonsuz döngü baþlangýcý
  {

@@ -1,0 +1,5 @@
+ÀÄRegisterLevel_EXTinterrupt
+   ÃÄMAIN  0/30  Ram=0
+   ³  ÀÄ@cinit1  (Inline)  Ram=0
+   ÀÄsystem_OK_Button_isr  0/32  Ram=1
+      ÀÄ@delay_ms1  (Inline)  Ram=1

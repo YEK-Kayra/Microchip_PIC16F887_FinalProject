@@ -1,0 +1,50 @@
+
+ROM used:   109/8192 (1%)
+            109/8192 (1%) including unused fragments
+
+            0.1 Average locations per line
+            10.9 Average locations per statement
+
+RAM used:   14/368 (4%) at main() level
+            16/368 (4%) worst case
+
+Stack used: 0 worst case (0 in main + 0 for interrupts)
+Stack size: 8
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   82    10 100  RegisterLevel_EXTinterrupt.c
+  773     0   0  ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f887.h
+----- -----
+  855    10 Total
+
+Page ROM  %  RAM    Vol Diff  Functions:
+---- --- --- ---    --- ----  ----------
+ Inline         1             @delay_ms1
+0     32  29    1     61  1.9  system_OK_Button_isr
+0     30  28    0    160  2.7  MAIN
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               2
+    Statements              10
+    Comments                157
+    Volume (V)              271
+    Difficulty (D)          4.4
+    Effort to implement (E) 1184
+    Time to implement (T)   1 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   1
+    Maintainability (MI)    165
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00003     4  0  
+00004-0002E    43  0  
+0002F-007FF    62  1939  
+00800-00FFF     0  2048  
+01000-017FF     0  2048  
+01800-01FFF     0  2048  
+
+
+

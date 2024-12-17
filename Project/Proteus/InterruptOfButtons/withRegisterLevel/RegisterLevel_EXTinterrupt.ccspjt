@@ -1,0 +1,33 @@
+[PROJECT]
+Target=RegisterLevel_EXTinterrupt.hex
+Processor_Text=PIC16F887
+CCSVersion=5.049
+Compiler=PCM
+[Target Data]
+FileList=RegisterLevel_EXTinterrupt.c
+[RegisterLevel_EXTinterrupt.c]
+Type=4
+[mru-list]
+1=RegisterLevel_EXTinterrupt.c
+
+[defines]
+buildcount=2
+
+[Opened Files]
+1=RegisterLevel_EXTinterrupt.c
+t1=49
+Count=1
+[Units]
+Count=1
+1=RegisterLevel_EXTinterrupt (main)
+
+[ProjectLog]
+Days=1
+D1=18-12-2024
+D1_L=2
+D1_L1=[4864]Stopped Editing.
+TotalEdit=44
+TotalDebug=0
+D1_E=44
+D1_D=0
+D1_L2=[4864]Project Closed.
