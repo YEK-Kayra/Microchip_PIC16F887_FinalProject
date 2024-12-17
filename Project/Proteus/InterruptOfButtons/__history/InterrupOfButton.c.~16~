@@ -1,0 +1,30 @@
+#include <16f887.h>
+
+//--> DEVICES
+
+
+//--> FUSES
+#fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT
+
+//--> USEs
+#use delay(clock=4M)
+
+//--> PIN DEFINATIONS
+
+
+#int_ext
+void ButtonInterrups
+
+void main(void) 
+{
+
+ set_tris_b(0x00);
+ set_tris_e(0x01);   
+
+
+    
+      while(1){
+      
+      }
+      
+}

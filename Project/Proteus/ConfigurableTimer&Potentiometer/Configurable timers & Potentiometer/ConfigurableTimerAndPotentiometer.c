@@ -66,6 +66,7 @@ void systemTimer0_isr(){
    // (64mS * desired_value) is for about desired_duration
    if(timer0_isr_counter == desired_value){
       output_toggle(ledPin);
+      my_INTCON_REG = 0x80; //Disable Timer0 Interrupt
       timer0_isr_counter=0;   
    }
    
@@ -85,7 +86,7 @@ void main(void)
 {
       set_tris_b(0x00);
       set_tris_e(0x01);   
-
+      output_low(ledPin);
 
       lcd_init(); // LCD ekranýmýzý baþlatacak
       

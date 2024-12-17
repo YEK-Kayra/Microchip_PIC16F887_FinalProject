@@ -1,0 +1,51 @@
+#include <16f887.h>
+
+//--> DEVICES
+
+//--> FUSES
+#fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT
+
+//--> USEs
+#use delay(clock=4M)
+#use fast_io(b)
+#use fast_io(e)
+
+//--> PIN DEFINATIONS
+#define button_pin pin_E0
+#define led_pin pin_B0
+
+
+#int_ext
+void system_OK_Button_isr(){
+   
+   output_toggle(led_pin);
+
+}
+
+
+
+
+void main(void) 
+{
+   
+   set_tris_b(0x00);
+   set_tris_e(0x01);  
+   
+   output_low(led_pin);
+
+   ext_int_edge(L_TO_H);
+   
+   enable_interrupts(INT_EXT);
+   enable_interrupts(GLOBAL);
+
+    
+      while(1){
+      
+      }
+      
+}
+
+
+
+
+

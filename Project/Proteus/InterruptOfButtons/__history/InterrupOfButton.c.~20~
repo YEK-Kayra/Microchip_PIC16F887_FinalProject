@@ -1,0 +1,65 @@
+#include <16f887.h>
+
+//--> DEVICES
+
+
+//--> FUSES
+#fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT
+
+//--> USEs
+#use delay(clock=4M)
+
+//--> PIN DEFINATIONS
+
+
+#INT_EXT
+void system_OK_Button_isr(){
+   
+}
+
+void main(void) 
+{
+
+ set_tris_b(0x00);
+ set_tris_e(0x01);   
+
+
+    
+      while(1){
+      
+      }
+      
+}
+
+
+
+#include <16F887.h>
+#device ADC=10
+#use delay(clock=4MHz)
+
+#INT_EXT2
+void ext2_isr() {
+    output_toggle(PIN_B1); // Harici kesme 2 ISR'si (B1 pinini toggle)
+}
+
+#INT_EXT3
+void ext3_isr() {
+    output_toggle(PIN_B2); // Harici kesme 3 ISR'si (B2 pinini toggle)
+}
+
+void main() {
+    // Harici kesme kenar ayarlarý
+    ext_int_edge(2, H_TO_L); // EXT2: Yüksekten düþüðe tetikleme
+    ext_int_edge(3, L_TO_H); // EXT3: Düþükten yükseðe tetikleme
+
+    // Kesme ayarlarý
+    enable_interrupts(INT_EXT2); // EXT2 etkin
+    enable_interrupts(INT_EXT3); // EXT3 etkin
+    enable_interrupts(GLOBAL);   // Genel kesmeleri etkinleþtir
+
+    while(TRUE) {
+        // Ana döngüde sürekli çalýþan kodlar
+        delay_ms(500);
+    }
+}
+

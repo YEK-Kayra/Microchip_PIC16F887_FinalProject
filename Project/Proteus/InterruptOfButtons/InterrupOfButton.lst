@@ -1,19 +1,62 @@
-CCS PCM C Compiler, Version 5.049, 5967               16-Ara-24 18:43
+CCS PCM C Compiler, Version 5.049, 5967               17-Ara-24 21:09
 
                Filename:   C:\Users\yunus\OneDrive\Masaüstü\Microchip_PIC16F887_FinalProject\Project\Proteus\InterruptOfButtons\InterrupOfButton.lst
 
-               ROM used:   71 words (1%)
+               ROM used:   111 words (1%)
                            Largest free fragment is 2048
-               RAM used:   6 (2%) at main() level
-                           7 (2%) worst case
-               Stack used: 0 locations
+               RAM used:   12 (3%) at main() level
+                           14 (4%) worst case
+               Stack used: 1 locations (0 in main + 1 for interrupts)
                Stack size: 8
 
 *
 0000:  MOVLW  00
 0001:  MOVWF  0A
-0002:  GOTO   01B
+0002:  GOTO   04E
 0003:  NOP
+0004:  MOVWF  7F
+0005:  SWAPF  03,W
+0006:  CLRF   03
+0007:  MOVWF  21
+0008:  MOVF   0A,W
+0009:  MOVWF  20
+000A:  CLRF   0A
+000B:  MOVF   04,W
+000C:  MOVWF  22
+000D:  MOVF   77,W
+000E:  MOVWF  23
+000F:  MOVF   78,W
+0010:  MOVWF  24
+0011:  MOVF   79,W
+0012:  MOVWF  25
+0013:  MOVF   7A,W
+0014:  MOVWF  26
+0015:  BCF    03.7
+0016:  BCF    03.5
+0017:  BTFSS  0B.4
+0018:  GOTO   01B
+0019:  BTFSC  0B.1
+001A:  GOTO   02C
+001B:  MOVF   22,W
+001C:  MOVWF  04
+001D:  MOVF   23,W
+001E:  MOVWF  77
+001F:  MOVF   24,W
+0020:  MOVWF  78
+0021:  MOVF   25,W
+0022:  MOVWF  79
+0023:  MOVF   26,W
+0024:  MOVWF  7A
+0025:  MOVF   20,W
+0026:  MOVWF  0A
+0027:  SWAPF  21,W
+0028:  MOVWF  03
+0029:  SWAPF  7F,F
+002A:  SWAPF  7F,W
+002B:  RETFIE
+002C:  BCF    0A.3
+002D:  BCF    0A.4
+002E:  GOTO   02F
 .................... #include <16f887.h> 
 .................... //////////// Standard Header file for the PIC16F887 device //////////////// 
 .................... /////////////////////////////////////////////////////////////////////////// 
@@ -31,108 +74,119 @@ CCS PCM C Compiler, Version 5.049, 5967               16-Ara-24 18:43
 ....................  
 ....................  
 .................... //--> DEVICES 
-.................... #device ADC = 10  //10-bit ADC reading will be performed 
 ....................  
 .................... //--> FUSES 
 .................... #fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT 
 ....................  
 .................... //--> USEs 
 .................... #use delay(clock=4M) 
-0004:  MOVLW  22
-0005:  MOVWF  04
-0006:  BCF    03.7
-0007:  MOVF   00,W
-0008:  BTFSC  03.2
-0009:  GOTO   018
-000A:  MOVLW  01
-000B:  MOVWF  78
-000C:  CLRF   77
-000D:  DECFSZ 77,F
-000E:  GOTO   00D
-000F:  DECFSZ 78,F
-0010:  GOTO   00C
-0011:  MOVLW  4A
-0012:  MOVWF  77
-0013:  DECFSZ 77,F
-0014:  GOTO   013
-0015:  GOTO   016
-0016:  DECFSZ 00,F
-0017:  GOTO   00A
-0018:  BCF    0A.3
-0019:  BCF    0A.4
-001A:  GOTO   03E (RETURN)
+*
+0034:  MOVLW  28
+0035:  MOVWF  04
+0036:  BCF    03.7
+0037:  MOVF   00,W
+0038:  BTFSC  03.2
+0039:  GOTO   048
+003A:  MOVLW  01
+003B:  MOVWF  78
+003C:  CLRF   77
+003D:  DECFSZ 77,F
+003E:  GOTO   03D
+003F:  DECFSZ 78,F
+0040:  GOTO   03C
+0041:  MOVLW  4A
+0042:  MOVWF  77
+0043:  DECFSZ 77,F
+0044:  GOTO   043
+0045:  GOTO   046
+0046:  DECFSZ 00,F
+0047:  GOTO   03A
 .................... #use fast_io(b) 
 .................... #use fast_io(e) 
 ....................  
 .................... //--> PIN DEFINATIONS 
-.................... #define ledPin pin_B0 
-.................... #define tickButton pin_E0 
+.................... #define led_pin pin_B1 
+....................  
+....................  
+.................... #int_EXT 
+.................... void system_OK_Button_isr(){ 
+....................     
+....................    output_toggle(led_pin); 
+*
+002F:  MOVLW  02
+0030:  XORWF  06,F
+....................    delay_ms(500); 
+0031:  MOVWF  27
+0032:  MOVLW  FA
+0033:  MOVWF  28
+*
+0048:  DECFSZ 27,F
+0049:  GOTO   032
+....................  
+004A:  BCF    0B.1
+004B:  BCF    0A.3
+004C:  BCF    0A.4
+004D:  GOTO   01B
+.................... } 
+....................  
+....................  
+....................  
 ....................  
 .................... void main(void)  
-001B:  MOVF   03,W
-001C:  ANDLW  1F
-001D:  MOVWF  03
-001E:  BSF    03.5
-001F:  BSF    03.6
-0020:  MOVF   09,W
-0021:  ANDLW  C0
-0022:  MOVWF  09
-0023:  BCF    03.6
-0024:  BCF    1F.4
-0025:  BCF    1F.5
-0026:  MOVLW  00
-0027:  BSF    03.6
-0028:  MOVWF  08
-0029:  BCF    03.5
-002A:  CLRF   07
-002B:  CLRF   08
-002C:  CLRF   09
-002D:  BCF    03.7
+004E:  MOVF   03,W
+004F:  ANDLW  1F
+0050:  MOVWF  03
+0051:  BSF    03.5
+0052:  BSF    03.6
+0053:  MOVF   09,W
+0054:  ANDLW  C0
+0055:  MOVWF  09
+0056:  BCF    03.6
+0057:  BCF    1F.4
+0058:  BCF    1F.5
+0059:  MOVLW  00
+005A:  BSF    03.6
+005B:  MOVWF  08
+005C:  BCF    03.5
+005D:  CLRF   07
+005E:  CLRF   08
+005F:  CLRF   09
+0060:  BCF    03.7
 .................... { 
-....................  
-....................  set_tris_b(0x00); 
-002E:  MOVLW  00
-002F:  BSF    03.5
-0030:  BCF    03.6
-0031:  MOVWF  06
-....................  set_tris_e(0x01);    
-0032:  BSF    09.0
-0033:  BCF    09.1
-0034:  BCF    09.2
-0035:  BCF    09.3
-....................  
-....................  
-....................   do{  
-....................           
-....................    output_toggle(ledPin); 
-0036:  MOVLW  01
-0037:  BCF    03.5
-0038:  XORWF  06,F
-....................    delay_ms(500); 
-0039:  MOVLW  02
-003A:  MOVWF  21
-003B:  MOVLW  FA
-003C:  MOVWF  22
-003D:  GOTO   004
-003E:  DECFSZ 21,F
-003F:  GOTO   03B
 ....................     
-....................    }while(input(tickButton) != 1); 
-0040:  BTFSC  09.0
-0041:  GOTO   044
-0042:  BSF    03.5
-0043:  GOTO   036
-....................        
-....................    output_low(ledPin); 
-0044:  BCF    06.0
-....................        
+....................    set_tris_b(0x01); 
+0061:  MOVLW  01
+0062:  BSF    03.5
+0063:  BCF    03.6
+0064:  MOVWF  06
+....................  
+....................     
+....................    output_low(led_pin); 
+0065:  BCF    03.5
+0066:  BCF    06.1
+....................     
+....................  ext_int_edge(L_TO_H); //Harici kesme Lojik 0'dan 1'e geçerken 
+0067:  BSF    03.5
+0068:  BSF    01.6
+....................  enable_interrupts(INT_EXT); //Harici kesme aktif 
+0069:  BCF    03.5
+006A:  BSF    0B.4
+....................  enable_interrupts(GLOBAL); //Aktif kesmeler için genel kesme yetkisi ver  
+006B:  MOVLW  C0
+006C:  IORWF  0B,F
+....................      
 ....................       while(1){ 
-0045:  GOTO   045
+006D:  GOTO   06D
 ....................        
 ....................       } 
 ....................        
 .................... } 
-0046:  SLEEP
+....................  
+006E:  SLEEP
+....................  
+....................  
+....................  
+....................  
 
 Configuration Fuses:
    Word  1: 2CF2   HS NOWDT NOPUT MCLR NOPROTECT NOCPD NOBROWNOUT IESO FCMEN NOLVP NODEBUG

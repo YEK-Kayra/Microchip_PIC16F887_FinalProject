@@ -1,7 +1,6 @@
 #include <16f887.h>
 
 //--> DEVICES
-#device ADC = 10  //10-bit ADC reading will be performed
 
 //--> FUSES
 #fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT
@@ -12,27 +11,39 @@
 #use fast_io(e)
 
 //--> PIN DEFINATIONS
-#define ledPin pin_B0
-#define tickButton pin_E0
+#define led_pin pin_B1
+
+
+#int_EXT
+void system_OK_Button_isr(){
+   
+   output_toggle(led_pin);
+   delay_ms(500);
+
+}
+
+
+
 
 void main(void) 
 {
-
- set_tris_b(0x00);
- set_tris_e(0x01);   
-
-
-  do{ 
-         
-   output_toggle(ledPin);
-   delay_ms(500);
    
-   }while(input(tickButton) != 1);
-      
-   output_low(ledPin);
-      
+   set_tris_b(0x01);
+
+   
+   output_low(led_pin);
+   
+ ext_int_edge(L_TO_H); //Harici kesme Lojik 0'dan 1'e geçerken
+ enable_interrupts(INT_EXT); //Harici kesme aktif
+ enable_interrupts(GLOBAL); //Aktif kesmeler için genel kesme yetkisi ver 
+    
       while(1){
       
       }
       
 }
+
+
+
+
+

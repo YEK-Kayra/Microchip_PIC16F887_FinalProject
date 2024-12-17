@@ -11,14 +11,14 @@ Type=4
 1=InterrupOfButton.c
 
 [defines]
-buildcount=7
+buildcount=30
 
 [ProjectLog]
-Days=1
+Days=2
 D1=16-12-2024
 D1_L=6
 D1_L1=[50517]Stopped Editing.
-TotalEdit=11
+TotalEdit=37
 TotalDebug=0
 D1_E=11
 D1_D=0
@@ -27,11 +27,33 @@ D1_L3=[66106]Project Opened.
 D1_L4=[67201]Started Editing.
 D1_L5=[67531]Stopped Editing.
 D1_L6=[67531]Project Closed.
+D2=17-12-2024
+D2_L=16
+D2_L1=[57563]Project Opened.
+D2_L2=[57632]Started Editing.
+D2_L3=[57988]Stopped Editing.
+D2_L4=[58037]Started Editing.
+D2_L5=[58574]Stopped Editing.
+D2_L6=[58642]Started Editing.
+D2_L7=[59525]Stopped Editing.
+D2_L8=[59884]Started Editing.
+D2_L9=[60184]Stopped Editing.
+D2_E=26
+D2_D=0
+D2_L10=[61242]Project Closed.
+D2_L11=[74861]Project Opened.
+D2_L12=[75787]Started Editing.
+D2_L13=[76713]Stopped Editing.
+D2_L14=[80316]Started Editing.
+D2_L15=[80616]Stopped Editing.
+D2_L16=[81899]Project Closed.
 
 [Opened Files]
-1=..\ConfigurableTimer&Potentiometer\Configurable timers & Potentiometer\ConfigurableTimerAndPotentiometer.c
-t1=93
+1=InterrupOfButton.c
+t1=9
 Count=1
+2=..\..\..\..\dis_kesme.c
+t2=1
 [Units]
 Count=1
 1=InterrupOfButton (main)

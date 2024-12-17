@@ -19,7 +19,7 @@ t1=1
 Count=1
 
 [ProjectLog]
-Days=2
+Days=3
 D1=08-12-2024
 D1_L=6
 D1_L1=[74600]Started Editing.
@@ -35,6 +35,9 @@ D1_L6=[83624]Project Opened.
 D2=09-12-2024
 D2_L=1
 D2_L1=[226]Project Closed.
+D3=17-12-2024
+D3_L=1
+D3_L1=[81929]Project Opened.
 [Units]
 Count=1
 1=3digitDisplayControl (main)
