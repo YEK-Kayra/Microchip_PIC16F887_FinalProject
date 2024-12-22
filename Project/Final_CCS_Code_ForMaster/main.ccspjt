@@ -11,21 +11,23 @@ Type=4
 1=main.c
 
 [defines]
-buildcount=42
+buildcount=59
 
 [Opened Files]
 1=main.c
-t1=143
+t1=93
 Count=1
+2=..\Proteus\ConfigurableTimer&Potentiometer\Configurable timers & Potentiometer\ConfigurableTimerAndPotentiometer.c
+t2=29
 
 [ProjectLog]
-Days=1
+Days=2
 D1=22-12-2024
-D1_L=20
+D1_L=24
 D1_L1=[69479]Stopped Editing.
 D1_L2=[69635]Started Editing.
 D1_L3=[69697]Stopped Editing.
-TotalEdit=64
+TotalEdit=252
 TotalDebug=0
 D1_E=64
 D1_D=0
@@ -46,6 +48,20 @@ D1_L17=[76646]Stopped Editing.
 D1_L18=[77559]Started Editing.
 D1_L19=[79736]Stopped Editing.
 D1_L20=[79823]Started Editing.
+D1_L21=[84154]Stopped Editing.
+D1_L22=[84288]Started Editing.
+D1_L23=[84597]Stopped Editing.
+D1_L24=[84700]Started Editing.
+D2=23-12-2024
+D2_L=6
+D2_L1=[21]Stopped Editing.
+D2_L2=[412]Started Editing.
+D2_L3=[1500]Stopped Editing.
+D2_L4=[1536]Started Editing.
+D2_L5=[2252]Stopped Editing.
+D2_E=188
+D2_D=0
+D2_L6=[2252]Project Closed.
 [Units]
 Count=1
 1=main (main)

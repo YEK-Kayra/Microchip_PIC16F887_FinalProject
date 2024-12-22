@@ -66,7 +66,7 @@ int8 ClientNumber;// Will be used as given on the right --> MikroClient[ClientNu
 //-VAR-->POTENTIOMETERS
 int Index_OptionMenu;
 unsigned long int val_ADC_Pot_Surf;
-unsigned long int val_ADC_Pot_Timer;
+
 
 
 /********************************************************/
@@ -109,12 +109,6 @@ void SubSystem_uart_CheckTheMessage(void);
             Index_OptionMenu = 4;    \
           }                            \
    }while(0)
-   
-#define ADC_TO_INDEXofTIME_MONEY_MENU(val_ADC_Pot_Timer) \
-   do{ \
-            \
-   }while(0)
-   
 
 
 /********************************************************/

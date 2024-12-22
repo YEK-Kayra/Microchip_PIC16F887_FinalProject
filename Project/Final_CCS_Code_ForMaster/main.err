@@ -1,4 +1,7 @@
->>> Warning 203 "main.c" Line 123(1,1): Condition always TRUE
-      Memory usage:   ROM=8%      RAM=6% - 11%
-      0 Errors,  1 Warnings.
+>>> Warning 204 "main.c" Line 162(1,1): Condition always FALSE
+>>> Warning 204 "main.c" Line 176(1,1): Condition always FALSE
+>>> Warning 203 "main.c" Line 194(1,1): Condition always TRUE
+>>> Warning 202 "main.c" Line 61(31,42): Variable never used:   MikroClient
+      Memory usage:   ROM=12%      RAM=10% - 15%
+      0 Errors,  4 Warnings.
 Build Successful.

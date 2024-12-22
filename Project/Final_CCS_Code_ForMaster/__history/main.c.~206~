@@ -59,14 +59,11 @@ int8 OPS_Status;  //55 means ops will be canceled, otherwise ops will be going o
 
 //-VAR-->Keeps Clients
 MikroleumClient_HandleTypeDef MikroClient[2]; //Each customer keeps their own records
-                                              //MikroClient[0] Mr. Selcuk //ClientNumber=0
-                                              //MikroClient[1] Mr. Emre   //ClientNumber=1
-int8 ClientNumber;// Will be used as given on the right --> MikroClient[ClientNumber]                                        
 
 //-VAR-->POTENTIOMETERS
 int Index_OptionMenu;
 unsigned long int val_ADC_Pot_Surf;
-unsigned long int val_ADC_Pot_Timer;
+
 
 
 /********************************************************/
@@ -109,12 +106,6 @@ void SubSystem_uart_CheckTheMessage(void);
             Index_OptionMenu = 4;    \
           }                            \
    }while(0)
-   
-#define ADC_TO_INDEXofTIME_MONEY_MENU(val_ADC_Pot_Timer) \
-   do{ \
-            \
-   }while(0)
-   
 
 
 /********************************************************/
@@ -146,7 +137,6 @@ void main(void)
         
     }while(systemLock!=1);
  
-    delay_ms(3000);
   
       //Potansiyometreden deðerler okuyacak, opsiyonlarý gezmek için
       //ileri butonuna basýlýnca pot hangi opsiyonda ise o opsiyona gidilecek
@@ -163,34 +153,11 @@ void main(void)
       
        //Use index value to show selected option and other one
        NavigateOperationMenu();
-          
-          //The client wants to see the next section based on the selected option
-          if(input(button_NEXT) == 1)
-          {
-
-                  do{
-                  //Get Timer_Pot ADC value(0-1024)
-                  val_ADC_Pot_Timer = read_adc(); 
-                  
-                  //Convert Surf_Pot ADC value into the option menu index
-                  ADC_TO_INDEXofTIME_MONEY_MENU(val_ADC_Pot_Timer);
-                  
-                  //Shows time & money
-                  NavigateTimeMoneyPreferenceMenu();
-                  
-                     //Break the while condation
-                     if(input(button_BACK) == 1){
-                        break;
-                     }
-                  
-                  }while(OPS_Status!=55); 
-          }
        
-       delay_ms(500);
-  
+       
+      
       }while(OPS_Status!=55);
-        
-       
+          
     while(1)
     {
     
@@ -209,6 +176,7 @@ void SubSystem_Init(void){
  trisSetting_Init();
  interruptSetting_Init();
  adcSetting_Init();
+ 
 }
 
 //Function-2
@@ -218,23 +186,21 @@ void trisSetting_Init(){
 
 //Function-3
 void interruptSetting_Init(){
-     //-CONFIG--> OPERATION CANCEL BUTTON 
-       ext_int_edge(L_TO_H); //Harici kesme Lojik 0'dan 1'e geçerken
-       enable_interrupts(INT_EXT); //Harici kesme aktif
-       enable_interrupts(GLOBAL); //Aktif kesmeler için genel kesme yetkisi ver
-     //-CONFIG--> TIMER0 
+//-CONFIG--> OPERATION CANCEL BUTTON 
+ ext_int_edge(L_TO_H); //Harici kesme Lojik 0'dan 1'e geçerken
+ enable_interrupts(INT_EXT); //Harici kesme aktif
+ enable_interrupts(GLOBAL); //Aktif kesmeler için genel kesme yetkisi ver
 }
 
 //Function-4
 void adcSetting_Init(){
-     //-CONFIG--> Surfing Potentiometer
-        setup_adc(adc_clock_div_32); 
-        setup_adc_ports(sAN0);
-        set_adc_channel(0); 
-        delay_us(200);
-        
-     //-CONFIG--> Timer Potentiometer
-     //-CONFIG--> Process Intensity Potentiometer
+  //-CONFIG--> Surfing Potentiometer
+  setup_adc(adc_clock_div_32); 
+  setup_adc_ports(sAN0);
+  set_adc_channel(0); 
+  delay_us(200);
+  //-CONFIG--> Timer Potentiometer
+  //-CONFIG--> Process Intensity Potentiometer
 }
 
 /* ======== -END- SYSTEM CONFIGURATION FUNCTIONS -END- ======== */
@@ -248,7 +214,6 @@ void adcSetting_Init(){
  *        prompts the user to present their ID card.
  */
 void SubSystem_lcd_IdleStatus(void){
-      printf(lcd_putc,"\f");
       lcd_gotoxy(4,1);
       printf(lcd_putc,"Mikroleum'a");
       lcd_gotoxy(4,2);
@@ -256,7 +221,7 @@ void SubSystem_lcd_IdleStatus(void){
       delay_ms(500);
       printf(lcd_putc,"\f");
       
-      lcd_gotoxy(1,1);
+      lcd_gotoxy(4,1);
       printf(lcd_putc,"Lutfen ID Karti");
       lcd_gotoxy(4,2);
       printf(lcd_putc,"Gosteriniz");
@@ -281,29 +246,34 @@ printf(lcd_putc, "\f"); // LCD'yi temizle
         lcd_gotoxy(1, 1);
         printf(lcd_putc, "2-Su Islem <-");
         lcd_gotoxy(1, 2);
-        printf(lcd_putc, "3-Hava Islem");       
+        printf(lcd_putc, "3-Hava Islem");
+        
     }
     
     // 3. Seçenek
         if (Index_OptionMenu == 2) {
         lcd_gotoxy(1, 1);
-        printf(lcd_putc, "3-Hava Islem <-");
+        printf(lcd_putc, "1-Kopuk Islem <-");
         lcd_gotoxy(1, 2);
-        printf(lcd_putc, "4-Cila Islem");   
+        printf(lcd_putc, "2-Su Islem");   
     } 
 
     // 4. Seçenek
     if (Index_OptionMenu == 3) {
         lcd_gotoxy(1, 1);
-        printf(lcd_putc, "4-Cila Islem <-");
+        printf(lcd_putc, "2-Su Islem <-");
         lcd_gotoxy(1, 2);
-        printf(lcd_putc, "5-Kayit Islem");    
+        printf(lcd_putc, "3-Hava Islem");
+        
     }
     
-    // 5. Seçenek
+        // 4. Seçenek
     if (Index_OptionMenu == 4) {
         lcd_gotoxy(1, 1);
-        printf(lcd_putc, "5-Kayit Islem <-"); 
+        printf(lcd_putc, "2-Su Islem <-");
+        lcd_gotoxy(1, 2);
+        printf(lcd_putc, "3-Hava Islem");
+        
     }
 
 
@@ -327,7 +297,7 @@ void NavigateTimeMoneyPreferenceMenu(void){
 void SubSystem_uart_CheckTheMessage(void){
    
    if(readed_ID == '+'){      //Mr. Selçuk's ID
-      ClientNumber = 0;       //System works for Mr. Selcuk
+   
       lcd_gotoxy(4,1);
       printf(lcd_putc,"Hosgeldiniz");
       lcd_gotoxy(4,2);
@@ -335,7 +305,7 @@ void SubSystem_uart_CheckTheMessage(void){
       systemLock = 1;
    }
    else if(readed_ID == '*'){ //Mr. Emre's ID
-      ClientNumber = 1;       //System works for Mr. Emre
+   
       lcd_gotoxy(4,1);
       printf(lcd_putc,"Hosgeldiniz");
       lcd_gotoxy(4,2);

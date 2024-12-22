@@ -109,12 +109,6 @@ void SubSystem_uart_CheckTheMessage(void);
             Index_OptionMenu = 4;    \
           }                            \
    }while(0)
-   
-#define ADC_TO_INDEXofTIME_MONEY_MENU(val_ADC_Pot_Timer) \
-   do{ \
-            \
-   }while(0)
-   
 
 
 /********************************************************/
