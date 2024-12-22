@@ -1,8 +1,0 @@
-*** Error 18 "deneme.c" Line 11(10,17): File can not be opened
-    Not in source "i2c.h"
-    Not in local "i2c.h"
-    Not in project "C:\Users\yunus\OneDrive\Masaüstü\DersBitirme\ApplicationCode\i2c.h"
-    Not in "C:\Program Files (x86)\PICC\Devices\i2c.h"
-    Not in "C:\Program Files (x86)\PICC\Drivers\i2c.h"
-      1 Errors,  0 Warnings.
-Build Failed.

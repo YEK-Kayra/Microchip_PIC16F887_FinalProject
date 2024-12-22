@@ -1,0 +1,38 @@
+[PROJECT]
+Target=MainSlave.hex
+Processor_Text=PIC16F887
+CCSVersion=5.049
+Compiler=PCM
+[Target Data]
+FileList=MainSlave.c
+[MainSlave.c]
+Type=4
+[mru-list]
+1=MainSlave.c
+
+[defines]
+buildcount=5
+
+[ProjectLog]
+Days=1
+D1=22-12-2024
+D1_L=7
+D1_L1=[72863]Started Editing.
+D1_L2=[72886]Stopped Editing.
+TotalEdit=15
+TotalDebug=0
+D1_E=15
+D1_D=0
+D1_L3=[72886]Project Closed.
+D1_L4=[72901]Project Opened.
+D1_L5=[72953]Started Editing.
+D1_L6=[73239]Stopped Editing.
+D1_L7=[73239]Project Closed.
+
+[Opened Files]
+1=MainSlave.c
+t1=21
+Count=1
+[Units]
+Count=1
+1=MainSlave (main)

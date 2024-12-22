@@ -1,0 +1,10 @@
+/**
+ * @brief   [FONKSİYONUN NE YAPTIĞINI KISA AÇIKLAYIN]
+ * 
+ * @param   [PARAMETRE_ADI]  [PARAMETRENİN AÇIKLAMASI]
+ * @param   [PARAMETRE_ADI]  [PARAMETRENİN AÇIKLAMASI]
+ * 
+ * @return  NONE
+ */
+
+

@@ -1,0 +1,48 @@
+#include <16f887.h>  
+
+
+#use delay(clock=4M)
+#use fast_io(ALL)  
+#use rs232(baud=9600, parity=N, uart1, bits=8) 
+
+
+#fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT
+
+
+#define selcukID_button pin_D0
+#define emreID_button   pin_D1
+#define idleID_button   pin_D2
+
+char related_ID;
+
+
+void main(void) 
+{
+
+   set_tris_d(0x07); //D0, D1, D2 ports will be input pin
+   
+    while(1)
+    {
+      
+        
+      if(input(selcukID_button) == 1){
+      related_ID = '+'; 
+      }
+      
+      else if(input(emreID_button) == 1){
+       related_ID = '*'; 
+      }
+      
+      else if(input(idleID_button) == 1){
+      related_ID = '.'; 
+      }
+      
+      putc(related_ID); 
+   
+      delay_ms(50); //50ms bekle.
+     
+
+    }
+ 
+ 
+}

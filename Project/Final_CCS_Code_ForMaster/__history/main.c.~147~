@@ -1,0 +1,195 @@
+//Ister bisiklet ol ister tir, ne olursan ol yine gel
+
+#include <16f887.h>
+
+#ZERO_RAM
+
+/********************************************************/
+/*               SYSTEM USES                            */
+/********************************************************/
+#use delay(clock=4M) 
+#use rs232(baud=9600,parity=N,uart1,bits=8)
+#use fast_io(b)
+
+/********************************************************/
+/*               SYSTEM INCLUDES                        */
+/********************************************************/
+#include <lcd.c>    
+      
+                                        
+/********************************************************/
+/*               SYSTEM FUSES                           */
+/********************************************************/                                         
+#fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT
+
+
+/********************************************************/
+/*               SYSTEM VARIABLES                       */
+/********************************************************/
+char readed_ID;   //Coming data will be When came from slave PIC
+int8 systemLock;  //If the ID is valid, system open. Otherwise it will remain locked
+int8 OPS_Status;  //55 means ops will be canceled, otherwise ops will be going on
+
+/********************************************************/
+/*               SYSTEM DEFINATION                      */
+/********************************************************/
+/* ======== SYSTEM INPUT & OUTPUT ======== */
+#define button_NEXT           pin_A3
+#define button_BACK           pin_A4
+#define button_Select         pin_A5
+#define button_RemoveSelect   pin_C0
+#define button_OPS_START      pin_C1
+#define button_OPS_CANCEL     pin_B0
+
+
+/********************************************************/
+/*               FUNCTIONS PROTOTYPES                   */
+/********************************************************/
+/* ======== SYSTEM CONFIGURATION FUNCTIONS PROTOTYPES  ======== */
+void SubSystem_Init(void);
+void trisSetting_Init(void);
+void interruptSetting_Init(void);
+void adcSetting_Init(void);
+
+
+/* ======== LCD SCREEN FUNCTIONS PROTOTYPES  ======== */
+void SubSystem_lcd_IdleStatus(void);
+void NavigateOperationMenu(void);
+void NavigateTimeMoneyPreferenceMenu(void);
+
+
+/* ======== UART SERIAL COM. FUNCTIONS PROTOTYPES  ======== */
+void SubSystem_uart_CheckTheMessage(void);
+
+
+/********************************************************/
+/*               SYSTEM INTERRUPTS                      */
+/********************************************************/
+#int_EXT
+void system_isr_OperationCANCEL(){
+  OPS_Status = 55;
+}
+
+
+void main(void) 
+{
+  
+   //-->System parameters will be initialized
+   SubSystem_Init();
+      
+   //-->Wait until unlock the system
+   do{
+     SubSystem_lcd_IdleStatus();   //Greeting the customer
+     if(kbhit())
+     {
+        readed_ID = getc();
+        SubSystem_uart_CheckTheMessage();
+     }      
+  }while(systemLock!=1);
+ 
+  
+      //Potansiyometreden deðerler okuyacak, opsiyonlarý gezmek için
+      //ileri butonuna basýlýnca pot hangi opsiyonda ise o opsiyona gidilecek
+      //geri butonuna basýlýnca pot ile tekrardan yukardan aþaðý gezilebilecek
+      
+         //diyelim ki bir opsiyonun içine girdi, pot kullanarak zamanlama ayarlarý ile oynuyor, 
+         //çift týk ile ilgili zaman ve ücreti seçebilecek, tek týk ile de bozabilecek
+      do{
+      
+      
+      
+      }while(OPS_Status!=55);
+          
+    while(1)
+    {
+    
+   
+   
+    }
+ 
+ 
+}
+
+
+/* ======== SYSTEM CONFIGURATION FUNCTIONS ======== */
+//Function-1
+void SubSystem_Init(void){
+ lcd_init();
+ trisSetting_Init();
+ interruptSetting_Init();
+ adcSetting_Init();
+ 
+}
+
+//Function-2
+void trisSetting_Init(){
+   set_tris_b(0x01);
+}
+
+//Function-3
+void interruptSetting_Init(){
+//-CONFIG--> OPERATION CANCEL BUTTON 
+ ext_int_edge(L_TO_H); //Harici kesme Lojik 0'dan 1'e geçerken
+ enable_interrupts(INT_EXT); //Harici kesme aktif
+ enable_interrupts(GLOBAL); //Aktif kesmeler için genel kesme yetkisi ver
+}
+
+//Function-4
+void adcSetting_Init(){
+
+}
+
+
+
+
+
+/* ======== LCD SCREEN FUNCTIONS ======== */
+//Function-1
+void SubSystem_lcd_IdleStatus(void){
+      lcd_gotoxy(4,1);
+      printf(lcd_putc,"Mikroleum'a");
+      lcd_gotoxy(4,2);
+      printf(lcd_putc,"Hosgeldiniz");
+      delay_ms(500);
+      printf(lcd_putc,"\f");
+      
+      lcd_gotoxy(4,1);
+      printf(lcd_putc,"Lutfen ID Karti");
+      lcd_gotoxy(4,2);
+      printf(lcd_putc,"Gosteriniz");
+      delay_ms(500);
+      printf(lcd_putc,"\f");
+}
+
+//Function-2
+void NavigateOperationMenu(void){
+
+}
+
+
+/* ======== UART PROTOCOL FUNCTIONS ======== */
+//Function-1
+void SubSystem_uart_CheckTheMessage(void){
+   
+   if(readed_ID == '+'){      //Mr. Selçuk's ID
+   
+      lcd_gotoxy(4,1);
+      printf(lcd_putc,"Hosgeldiniz");
+      lcd_gotoxy(4,2);
+      printf(lcd_putc,"Selcuk Bey");
+      systemLock = 1;
+   }
+   else if(readed_ID == '*'){ //Mr. Emre's ID
+   
+      lcd_gotoxy(4,1);
+      printf(lcd_putc,"Hosgeldiniz");
+      lcd_gotoxy(4,2);
+      printf(lcd_putc,"Emre Bey");
+      systemLock = 1;
+   }
+   else if(readed_ID == '.'){ //Slave pic is idle status
+   
+       systemLock = 0;
+   }
+
+}

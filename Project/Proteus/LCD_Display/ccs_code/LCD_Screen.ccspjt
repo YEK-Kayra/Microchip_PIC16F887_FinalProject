@@ -11,19 +11,19 @@ Type=4
 1=LCD_Screen.c
 
 [defines]
-buildcount=43
+buildcount=46
 
 [Opened Files]
-1=LCD_Screen.c
-t1=149
-Count=2
-2=..\..\GraduationProject_3DigitDisplay\ccs_code\3digitDisplayControl.c
-t2=25
+1=..\..\..\..\..\Proteus-CSS_projects\19_12_24 labý\code\code1\pot_lcd.c
+t1=1
+Count=1
+2=LCD_Screen.c
+t2=9
 3=..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c
 t3=317
 
 [ProjectLog]
-Days=2
+Days=3
 D1=09-12-2024
 D1_L=16
 D1_L1=[72865]Stopped Editing.
@@ -31,7 +31,7 @@ D1_L2=[73069]Started Editing.
 D1_L3=[73650]Stopped Editing.
 D1_L4=[73902]Started Editing.
 D1_L5=[75521]Stopped Editing.
-TotalEdit=107
+TotalEdit=112
 TotalDebug=0
 D1_E=36
 D1_D=0
@@ -60,6 +60,20 @@ D2_L7=[47187]Stopped Editing.
 D2_L8=[48117]Started Editing.
 D2_L9=[48417]Stopped Editing.
 D2_L10=[48430]Project Closed.
+D3=19-12-2024
+D3_L=10
+D3_L1=[39566]Project Opened.
+D3_L2=[39612]Started Editing.
+D3_L3=[39831]Stopped Editing.
+D3_E=5
+D3_D=0
+D3_L4=[39831]Project Closed.
+D3_L5=[39910]Project Opened.
+D3_L6=[39916]Started Editing.
+D3_L7=[39925]Stopped Editing.
+D3_L8=[39925]Project Closed.
+D3_L9=[49178]Project Opened.
+D3_L10=[50205]Project Closed.
 [Units]
 Count=1
 1=LCD_Screen (main)

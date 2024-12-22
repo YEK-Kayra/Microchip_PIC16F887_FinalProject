@@ -1,10 +1,10 @@
-C L "MAIN" 0 52 22 "FUNCTION"
-D G "__PCM__" 0 167 ""5.049""
-D G "__DEVICE__" 0 167 "887"
-D G "__DATE__" 0 167 ""10-Ara-24""
-D G "__TIME__" 0 167 ""13:01:54""
-D G "_UNICODE" 0 167 ""?""
-D G "__EVAL" 0 167 ""?"" "LCD.C                                     ////"
+C L "MAIN" 0 52 14 "FUNCTION"
+D G "__PCM__" 0 152 ""5.049""
+D G "__DEVICE__" 0 152 "887"
+D G "__DATE__" 0 152 ""19-Ara-24""
+D G "__TIME__" 0 152 ""11:03:25""
+D G "_UNICODE" 0 152 ""?""
+D G "__EVAL" 0 152 ""?"" "LCD.C                                     ////"
 c L "set_tris_a" 1 1 6 "FUNCTION"
 f N "set_tris_a" 1 39 ""
 v L "value" 1 39 "int8" `54 
@@ -1179,15 +1179,14 @@ V L "on" 2 443 "int8" `637
 F G "lcd_cursor_on" 2 444 "void(int8 on)" `636 
 C L "lcd_cursor_on" 2 2 1 "FUNCTION"
 C L "lcd_cursor_on" 2 2 1 "FUNCTION"
-V G "checkMark" 0 62 "int8[8]" `638 
-V G "val_ADC_Pot_Surf" 0 75 "int16" `639 
-V G "val_ADC_Pot_Timer" 0 76 "int16" `640 
-V G "val_ADC_Pot_VacuumBlowing" 0 77 "int16" `641  "Gerilim Düþümlerini izlemek için"
-V G "val_Voltage_potSurf" 0 81 "float" `642 
-V G "val_Voltage_potTimer" 0 82 "float" `643 
-V G "val_Voltage_potSVacuumBlowing" 0 83 "float" `644 
-F N "MAIN" 0 85 ""
-F G "MAIN" 0 86 "void()" `645  "ADC YAPILANDIRMASI"
+V G "val_ADC_Pot_Surf" 0 64 "int16" `638 
+V G "val_ADC_Pot_Timer" 0 65 "int16" `639 
+V G "val_ADC_Pot_VacuumBlowing" 0 66 "int16" `640  "Gerilim D???mlerini izlemek i?in"
+V G "val_Voltage_potSurf" 0 70 "float" `641 
+V G "val_Voltage_potTimer" 0 71 "float" `642 
+V G "val_Voltage_potSVacuumBlowing" 0 72 "float" `643 
+F N "MAIN" 0 74 ""
+F G "MAIN" 0 75 "void(int8 )" `644  "ADC YAPILANDIRMASI"
 C L "MAIN" 0 52 1 "FUNCTION"
 C L "MAIN" 0 52 3 "FUNCTION"
 C L "MAIN" 0 52 15 "FUNCTION"

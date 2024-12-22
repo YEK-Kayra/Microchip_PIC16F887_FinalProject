@@ -1,0 +1,51 @@
+[PROJECT]
+Target=main.hex
+Processor_Text=PIC16F887
+CCSVersion=5.049
+Compiler=PCM
+[Target Data]
+FileList=main.c
+[main.c]
+Type=4
+[mru-list]
+1=main.c
+
+[defines]
+buildcount=42
+
+[Opened Files]
+1=main.c
+t1=143
+Count=1
+
+[ProjectLog]
+Days=1
+D1=22-12-2024
+D1_L=20
+D1_L1=[69479]Stopped Editing.
+D1_L2=[69635]Started Editing.
+D1_L3=[69697]Stopped Editing.
+TotalEdit=64
+TotalDebug=0
+D1_E=64
+D1_D=0
+D1_L4=[69697]Project Closed.
+D1_L5=[69713]Project Opened.
+D1_L6=[69730]Started Editing.
+D1_L7=[70546]Stopped Editing.
+D1_L8=[70886]Started Editing.
+D1_L9=[71679]Stopped Editing.
+D1_L10=[71679]Project Closed.
+D1_L11=[71701]Project Opened.
+D1_L12=[71709]Project Closed.
+D1_L13=[73251]Project Opened.
+D1_L14=[73269]Started Editing.
+D1_L15=[73668]Stopped Editing.
+D1_L16=[74032]Started Editing.
+D1_L17=[76646]Stopped Editing.
+D1_L18=[77559]Started Editing.
+D1_L19=[79736]Stopped Editing.
+D1_L20=[79823]Started Editing.
+[Units]
+Count=1
+1=main (main)

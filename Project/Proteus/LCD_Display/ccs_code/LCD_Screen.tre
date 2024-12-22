@@ -1,5 +1,5 @@
 ÀÄLCD_Screen
-   ÀÄMAIN  0/208  Ram=4
+   ÀÄMAIN  0/194  Ram=4
       ÃÄ@cinit1  (Inline)  Ram=0
       ÃÄlcd_init  0/62  Ram=6
       ³  ÃÄ@delay_ms1  0/21  Ram=1

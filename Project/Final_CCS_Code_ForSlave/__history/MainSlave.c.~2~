@@ -1,0 +1,56 @@
+#include <16f887.h>  
+
+#use delay(clock=4M)
+
+#use fast_io(ALL)  
+
+#use rs232(baud=9600, parity=N, uart1, bits=8) 
+
+#fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT
+
+
+char related_ID;
+
+
+void main(void) 
+{
+
+   //ADC YAPILANDIRMASI
+   set_tris_a(0x01); //0b 0000 0001 ==> PIN_A0
+   setup_adc(adc_clock_div_32); 
+   setup_adc_ports(ALL_ANALOG);
+
+   lcd_init(); // LCD ekranýmýzý baþlatacak
+   
+
+    while(1)
+    {
+     
+   /////////////////////-DEÐER OKUMA BLOÐU-///////////////////////////
+     set_adc_channel(0);
+     delay_us(20);
+     val_ADC_Pot_Surf = read_adc();
+   
+     
+     lcd_gotoxy(1,1); //LCD imlecini 1.sütun 1.satýra götür.
+     lcd_putc("ADC degeri: "); //Ekrana "ADC deðeri: " yaz. 
+     lcd_gotoxy(12,1); //LCD imlecini 12.sütun 1.satýra götür.
+     printf(lcd_putc, "%4ld", val_ADC_Pot_Surf); //Ekrana "ang_bilgi" deðerini yaz
+     
+     
+     
+        putc(val_ADC_Pot_Surf & 0xFF); // En düþük byte'ý gönder
+        putc(val_ADC_Pot_Surf >> 8);   // En yüksek byte'ý gönder
+        
+        // Ýnsan tarafýndan okunabilir formatta göndermek için:
+        printf("ADC Value: %lu\r\n", val_ADC_Pot_Surf);
+     
+     delay_ms(50); //50ms bekle.
+     
+
+
+       
+    }
+ 
+ 
+}
