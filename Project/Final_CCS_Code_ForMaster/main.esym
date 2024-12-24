@@ -1,10 +1,9 @@
-F N "SubSystem_uart_CheckTheMessage" 0 327 ""
-D G "__PCM__" 0 353 ""5.049""
-D G "__DEVICE__" 0 353 "887"
-D G "__DATE__" 0 353 ""23-Ara-24""
-D G "__TIME__" 0 353 ""00:36:53""
-D G "_UNICODE" 0 353 ""?""
-D G "__EVAL" 0 353 ""?"" "Ister bisiklet ol ister tir, ne olursan ol yine gel"
+D G "__PCM__" 0 422 ""5.049""
+D G "__DEVICE__" 0 422 "887"
+D G "__DATE__" 0 422 ""23-Ara-24""
+D G "__TIME__" 0 422 ""23:47:24""
+D G "_UNICODE" 0 422 ""?""
+D G "__EVAL" 0 422 ""?"" "Ister bisiklet ol ister tir, ne olursan ol yine gel"
 c L "set_tris_a" 1 1 6 "FUNCTION"
 f N "set_tris_a" 1 39 ""
 v L "value" 1 39 "int8" `54 
@@ -1362,46 +1361,68 @@ F N "ldexp" 3 2207 ""
 V L "value" 3 2207 "float" `781 
 V L "exp" 3 2207 "sint8" `782 
 F G "ldexp" 3 2208 "float(float value,sint8 exp)" `780 
-T G "MikroleumClient_HandleTypeDef" 0 48 "{int8 time_Foaming,int8 time_Washing,int8 time_Ventilation,int8 time_Polishing}" `788  "SYSTEM VARIABLES                       *"
-V G "readed_ID" 0 56 "int8" `789  "Coming data will be When came from slave PIC"
-V G "systemLock" 0 57 "int8" `790  "If the ID is valid, system open. Otherwise it will remain locked"
-V G "OPS_Status" 0 58 "int8" `791  "55 means ops will be canceled, otherwise ops will be going on"
-V G "MikroClient" 0 61 "MikroleumClient_HandleTypeDef[2]" `792  "Each customer keeps their own records"
-V G "ClientNumber" 0 64 "int8" `793  "Will be used as given on the right --> MikroClient[ClientNumber]"
-V G "Index_OptionMenu" 0 67 "int8" `794 
-V G "val_ADC_Pot_Surf" 0 68 "int16" `795 
-V G "val_ADC_Pot_Timer" 0 69 "int16" `796  "SYSTEM DEFINATION                      *"
-D G "button_NEXT" 0 76 "pin_A3"
-D G "button_BACK" 0 77 "pin_A4"
-D G "button_Select" 0 78 "pin_A5"
-D G "button_RemoveSelect" 0 79 "pin_C0"
-D G "button_OPS_START" 0 80 "pin_C1"
-D G "button_OPS_CANCEL" 0 81 "pin_B0"
+D G "EEPROM_SDA" 4 41 "PIN_C4"
+D G "EEPROM_SCL" 4 42 "PIN_C3"
+D G "EEPROM_ADDRESS" 4 49 "long int"
+D G "EEPROM_SIZE" 4 50 "1024"
+F N "init_ext_eeprom" 4 52 ""
+F G "init_ext_eeprom" 4 52 "void()" `788 
+F N "ext_eeprom_ready" 4 57 ""
+F G "ext_eeprom_ready" 4 57 "int8()" `789 
+V L "ack" 4 58 "int1" `790 
+C L "ext_eeprom_ready" 4 3 1 "FUNCTION"
+C L "ext_eeprom_ready" 4 3 1 "FUNCTION"
+F N "write_ext_eeprom" 4 65 ""
+V L "address" 4 65 "int16" `792 
+V L "data" 4 65 "int8" `793 
+F G "write_ext_eeprom" 4 65 "void(int16 address,int8 data)" `791 
+F N "read_ext_eeprom" 4 75 ""
+V L "address" 4 75 "int16" `795 
+F G "read_ext_eeprom" 4 75 "int8(int16 address)" `794 
+V L "data" 4 76 "int8" `796 
+T G "MikroleumClient_HandleTypeDef" 0 48 "{int16 time_Foaming,int16 time_Washing,int16 time_Ventilation,int16 time_Polishing}" `802  "SYSTEM VARIABLES                       *"
+V G "readed_ID" 0 56 "int8" `803  "Coming data will be When came from slave PIC"
+V G "systemLock" 0 57 "int8" `804  "If the ID is valid, system open. Otherwise it will remain locked"
+V G "OPS_Status" 0 58 "int8" `805  "55 means ops will be canceled, otherwise ops will be going on"
+V G "SelectionState" 0 59 "int8" `806  "Put 'X' if button_Select is HIGH, put empty character if button_RemoveSelect is HIGH"
+V G "MikroClient" 0 62 "MikroleumClient_HandleTypeDef[2]" `807  "Each customer keeps their own records"
+V G "ClientNumber" 0 65 "int8" `808  "Will be used as given on the right --> MikroClient[ClientNumber]"
+V G "Index_OptionMenu" 0 68 "int8" `809 
+V G "Index_TimeMoneyPreference" 0 69 "int8" `810 
+V G "val_ADC_Pot_Surf" 0 70 "int16" `811 
+V G "val_ADC_Pot_Timer" 0 71 "int16" `812 
+V G "time_arr" 0 73 "int16[12]" `813 
+D G "button_NEXT" 0 79 "pin_A3"
+D G "button_BACK" 0 80 "pin_A4"
+D G "button_Select" 0 81 "pin_A5"
+D G "button_RemoveSelect" 0 82 "pin_C0"
+D G "button_OPS_START" 0 83 "pin_C1"
+D G "button_OPS_CANCEL" 0 84 "pin_B0"
 C L "SubSystem_Init" 0 25 2 "FUNCTION"
-F N "SubSystem_Init" 0 88 ""
-f G "SubSystem_Init" 0 88 "void()" `797 
-F N "trisSetting_Init" 0 89 ""
-f G "trisSetting_Init" 0 89 "void()" `798 
-F N "interruptSetting_Init" 0 90 ""
-f G "interruptSetting_Init" 0 90 "void()" `799 
-F N "adcSetting_Init" 0 91 ""
-f G "adcSetting_Init" 0 91 "void()" `800  "======== LCD SCREEN FUNCTIONS PROTOTYPES  ======== *"
-F N "SubSystem_lcd_IdleStatus" 0 94 ""
-f G "SubSystem_lcd_IdleStatus" 0 94 "void()" `801 
-F N "NavigateOperationMenu" 0 95 ""
-f G "NavigateOperationMenu" 0 95 "void()" `802 
-F N "NavigateTimeMoneyPreferenceMenu" 0 96 ""
-f G "NavigateTimeMoneyPreferenceMenu" 0 96 "void()" `803  "======== UART SERIAL COM. FUNCTIONS PROTOTYPES  ======== *"
-F N "SubSystem_uart_CheckTheMessage" 0 99 ""
-f G "SubSystem_uart_CheckTheMessage" 0 99 "void()" `804  "SYSTEM MACROS                          *"
-D G "ADC_TO_INDEXofOPTION_MENU" 0 105 "(val_ADC_Pot_Surf) Š   do{                                        Š          Index_OptionMenu = ((val_ADC_Pot_Surf*5)/1020);  Š          if(Index_OptionMenu >= 5){ Š            Index_OptionMenu = 4;    Š          }                            Š   }while(0)"
-D G "ADC_TO_INDEXofTIME_MONEY_MENU" 0 113 "(val_ADC_Pot_Timer) Š   do{ Š            Š   }while(0)"
-C L "SubSystem_uart_CheckTheMessage" 0 25 1 "FUNCTION"
-F N "system_isr_OperationCANCEL" 0 124 ""
-F G "system_isr_OperationCANCEL" 0 124 "void()" `805 
-C L "MAIN" 0 25 1 "FUNCTION"
-F N "MAIN" 0 131 ""
-F G "MAIN" 0 132 "void()" `806  "-->System parameters will be initialized"
+F N "SubSystem_Init" 0 91 ""
+f G "SubSystem_Init" 0 91 "void()" `814 
+F N "trisSetting_Init" 0 92 ""
+f G "trisSetting_Init" 0 92 "void(int16 ,int16 )" `815 
+F N "interruptSetting_Init" 0 93 ""
+f G "interruptSetting_Init" 0 93 "void(int16 )" `816 
+F N "adcSetting_Init" 0 94 ""
+f G "adcSetting_Init" 0 94 "void()" `817  "======== LCD SCREEN FUNCTIONS PROTOTYPES  ======== *"
+F N "SubSystem_lcd_IdleStatus" 0 97 ""
+f G "SubSystem_lcd_IdleStatus" 0 97 "void()" `818 
+F N "NavigateOperationMenu" 0 98 ""
+f G "NavigateOperationMenu" 0 98 "void()" `819 
+F N "NavigateTimeMoneyPreferenceMenu" 0 99 ""
+f G "NavigateTimeMoneyPreferenceMenu" 0 99 "void(int8 )" `820  "======== UART SERIAL COM. FUNCTIONS PROTOTYPES  ======== *"
+F N "SubSystem_uart_CheckTheMessage" 0 102 ""
+f G "SubSystem_uart_CheckTheMessage" 0 102 "void()" `821  "SYSTEM MACROS                          *"
+D G "ADC_TO_INDEXofOPTION_MENU" 0 109 "(val_ADC_Pot_Surf)        Š   do{                                        Š          Index_OptionMenu = ((val_ADC_Pot_Surf*5)/1020);  Š          if(Index_OptionMenu >= 5){                       Š            Index_OptionMenu = 4;                          Š          }                                                Š   }while(0)"
+D G "ADC_TO_INDEXofTIME_MONEY_MENU" 0 117 "(val_ADC_Pot_Timer)              Š   do{                                                                Š          Index_TimeMoneyPreference = ((val_ADC_Pot_Timer*12)/1020);  Š          if(Index_TimeMoneyPreference >= 12){                        Š             Index_TimeMoneyPreference = 11;                          Š          }                                                           Š   }while(0)"
+C L "SubSystem_uart_CheckTheMessage" 0 25 5 "FUNCTION"
+F N "system_isr_OperationCANCEL" 0 136 ""
+F G "system_isr_OperationCANCEL" 0 136 "void()" `822 
+C L "MAIN" 0 25 3 "FUNCTION"
+F N "MAIN" 0 146 ""
+F G "MAIN" 0 147 "void()" `823  "-->System parameters will be initialized"
 C L "MAIN" 0 25 1 "FUNCTION"
 C L "MAIN" 0 25 1 "FUNCTION"
 C L "MAIN" 0 25 5 "FUNCTION"
@@ -1413,49 +1434,53 @@ C L "MAIN" 0 25 1 "FUNCTION"
 C L "MAIN" 0 25 1 "FUNCTION"
 C L "MAIN" 0 25 1 "FUNCTION"
 C L "MAIN" 0 25 1 "FUNCTION"
+C L "MAIN" 0 25 1 "FUNCTION"
+C L "MAIN" 0 25 1 "FUNCTION"
+C L "MAIN" 0 25 1 "FUNCTION"
 C L "SubSystem_Init" 0 25 2 "FUNCTION"
-F N "SubSystem_Init" 0 207 ""
-F G "SubSystem_Init" 0 207 "void()" `797 
+F N "SubSystem_Init" 0 246 ""
+F G "SubSystem_Init" 0 246 "void()" `814 
 C L "trisSetting_Init" 0 25 1 "FUNCTION"
-F N "trisSetting_Init" 0 215 ""
-F G "trisSetting_Init" 0 215 "void()" `798 
+F N "trisSetting_Init" 0 254 ""
+F G "trisSetting_Init" 0 254 "void()" `815 
 C L "interruptSetting_Init" 0 25 1 "FUNCTION"
-F N "interruptSetting_Init" 0 220 ""
-F G "interruptSetting_Init" 0 220 "void()" `799  "-CONFIG--> OPERATION CANCEL BUTTON"
+F N "interruptSetting_Init" 0 259 ""
+F G "interruptSetting_Init" 0 259 "void()" `816  "-CONFIG--> OPERATION CANCEL BUTTON"
 C L "interruptSetting_Init" 0 25 1 "FUNCTION"
 C L "interruptSetting_Init" 0 25 1 "FUNCTION"
 C L "interruptSetting_Init" 0 25 2 "FUNCTION"
 C L "adcSetting_Init" 0 25 1 "FUNCTION"
-F N "adcSetting_Init" 0 229 ""
-F G "adcSetting_Init" 0 229 "void()" `800  "-CONFIG--> Surfing Potentiometer"
+F N "adcSetting_Init" 0 268 ""
+F G "adcSetting_Init" 0 268 "void()" `817  "-CONFIG--> Surfing Potentiometer"
 C L "adcSetting_Init" 0 25 2 "FUNCTION"
 C L "SubSystem_lcd_IdleStatus" 0 25 2 "FUNCTION"
-C L "SubSystem_lcd_IdleStatus" 0 246 1 "*"
-C L "SubSystem_lcd_IdleStatus" 0 246 1 "*"
-F N "SubSystem_lcd_IdleStatus" 0 250 ""
-F G "SubSystem_lcd_IdleStatus" 0 250 "void()" `801 
-C L "NavigateOperationMenu" 0 246 1 "FUNCTION"
-F N "NavigateOperationMenu" 0 268 ""
-F G "NavigateOperationMenu" 0 268 "void()" `802 
-C L "NavigateOperationMenu" 0 246 2 "FUNCTION"
-C L "NavigateOperationMenu" 0 246 1 "FUNCTION"
-C L "NavigateOperationMenu" 0 246 1 "FUNCTION"
-C L "NavigateOperationMenu" 0 246 1 "FUNCTION"
-C L "NavigateOperationMenu" 0 246 1 "FUNCTION"
-C L "NavigateTimeMoneyPreferenceMenu" 0 246 1 "FUNCTION"
-F N "NavigateTimeMoneyPreferenceMenu" 0 313 ""
-F G "NavigateTimeMoneyPreferenceMenu" 0 313 "void()" `803  "======== -END- LCD SCREEN FUNCTIONS -END- ======== *"
-C L "SubSystem_uart_CheckTheMessage" 0 246 1 "FUNCTION"
-C L "SubSystem_uart_CheckTheMessage" 0 322 1 "*"
-C L "SubSystem_uart_CheckTheMessage" 0 322 1 "*"
-C L "SubSystem_uart_CheckTheMessage" 0 322 1 "*"
-F N "SubSystem_uart_CheckTheMessage" 0 327 ""
-F G "SubSystem_uart_CheckTheMessage" 0 327 "void()" `804 
-C L "SubSystem_uart_CheckTheMessage" 0 322 1 "FUNCTION"
-C L "SubSystem_uart_CheckTheMessage" 0 322 1 "FUNCTION"
-C L "SubSystem_uart_CheckTheMessage" 0 322 1 "FUNCTION"
-C L "SubSystem_uart_CheckTheMessage" 0 322 1 "FUNCTION"
-C L "SubSystem_uart_CheckTheMessage" 0 322 1 "FUNCTION"
+C L "SubSystem_lcd_IdleStatus" 0 284 1 "*"
+C L "SubSystem_lcd_IdleStatus" 0 284 1 "*"
+F N "SubSystem_lcd_IdleStatus" 0 288 ""
+F G "SubSystem_lcd_IdleStatus" 0 288 "void()" `818 
+C L "NavigateOperationMenu" 0 284 1 "FUNCTION"
+F N "NavigateOperationMenu" 0 306 ""
+F G "NavigateOperationMenu" 0 306 "void()" `819 
+C L "NavigateOperationMenu" 0 284 2 "FUNCTION"
+C L "NavigateOperationMenu" 0 284 1 "FUNCTION"
+C L "NavigateOperationMenu" 0 284 1 "FUNCTION"
+C L "NavigateOperationMenu" 0 284 1 "FUNCTION"
+C L "NavigateOperationMenu" 0 284 1 "FUNCTION"
+C L "NavigateTimeMoneyPreferenceMenu" 0 284 1 "FUNCTION"
+F N "NavigateTimeMoneyPreferenceMenu" 0 351 ""
+F G "NavigateTimeMoneyPreferenceMenu" 0 351 "void()" `820 
+C L "NavigateTimeMoneyPreferenceMenu" 0 284 1 "FUNCTION"
+C L "SubSystem_uart_CheckTheMessage" 0 284 2 "FUNCTION"
+C L "SubSystem_uart_CheckTheMessage" 0 392 1 "*"
+C L "SubSystem_uart_CheckTheMessage" 0 392 1 "*"
+C L "SubSystem_uart_CheckTheMessage" 0 392 1 "*"
+F N "SubSystem_uart_CheckTheMessage" 0 397 ""
+F G "SubSystem_uart_CheckTheMessage" 0 397 "void()" `821 
+C L "SubSystem_uart_CheckTheMessage" 0 392 1 "FUNCTION"
+C L "SubSystem_uart_CheckTheMessage" 0 392 1 "FUNCTION"
+C L "SubSystem_uart_CheckTheMessage" 0 392 1 "FUNCTION"
+C L "SubSystem_uart_CheckTheMessage" 0 392 1 "FUNCTION"
+C L "SubSystem_uart_CheckTheMessage" 0 392 1 "FUNCTION"
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep_ulpwu" 1 0
@@ -1595,3 +1620,8 @@ F B "gets" 1 3
 F B "kbhit" 0 1
 F B "set_uart_speed" 1 3
 F B "setup_uart" 1 3
+F B "i2c_read" 0 2
+F B "i2c_write" 1 2
+F B "i2c_start" 0 2
+F B "i2c_stop" 0 1
+F B "i2c_isr_state" 0 1

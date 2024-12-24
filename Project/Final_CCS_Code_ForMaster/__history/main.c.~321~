@@ -20,7 +20,7 @@
 /********************************************************/
 #include <lcd.c>    
 #include <math.h>       
-//#include <2408.c>    will be unlocked in soooon :)                                   
+                                       
 /********************************************************/
 /*               SYSTEM FUSES                           */
 /********************************************************/                                         
@@ -69,6 +69,8 @@ int Index_OptionMenu;
 int Index_TimeMoneyPreference;
 unsigned long int val_ADC_Pot_Surf;
 unsigned long int val_ADC_Pot_Timer;
+unsigned long int val_ADC_Pot_Intensity;
+
 
 unsigned long int time_arr[12] = {20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240};//Seconds
 
@@ -178,12 +180,9 @@ void main(void)
              //Convert Surf_Pot ADC value into the option menu index
              ADC_TO_INDEXofOPTION_MENU(val_ADC_Pot_Surf);
             
-             //Use index value to show selected option and other one
+            //Use index value to show selected option and other one
              NavigateOperationMenu();
-             
-             //Clear selection
-             SelectionState = ' ';
-             
+                
                 //The client wants to see the next section based on the selected option
                 if(input(button_NEXT) == 1)
                 {
@@ -213,23 +212,10 @@ void main(void)
   
       }while(OPS_Status!=55);
       
-      
-      
       printf(lcd_putc,"\f");
       lcd_gotoxy(2,1);
       printf(lcd_putc,"CLOSING");
-      delay_ms(1000);
-      printf(lcd_putc,"\f");  
-      lcd_gotoxy(1,1);
-      printf(lcd_putc, "Kopuk:%ld", MikroClient[ClientNumber].time_Foaming);
-      lcd_gotoxy(1,2);
-      printf(lcd_putc, "Su::%ld",MikroClient[ClientNumber].time_Washing);
-      delay_ms(2000);
-      printf(lcd_putc,"\f");  
-      lcd_gotoxy(1,1);
-      printf(lcd_putc, "Hava:%ld", MikroClient[ClientNumber].time_Ventilation);
-      delay_ms(2000);
-      
+       
     while(1)
     {
     
@@ -349,8 +335,8 @@ void NavigateOperationMenu(void){
 
 //Function-3
 void NavigateTimeMoneyPreferenceMenu(void){
-   
-   printf(lcd_putc, "\f"); 
+   printf(lcd_putc, "\f"); // LCD'yi temizle
+      
    lcd_gotoxy(1,1);
    printf(lcd_putc, "Ucret:%d tl",Index_TimeMoneyPreference*2+2);
    lcd_gotoxy(1,2);
@@ -364,23 +350,20 @@ void NavigateTimeMoneyPreferenceMenu(void){
    if(input(button_Select) == 1){
       SelectionState = 'X';
       
-      //-->The values will be saved into foaming, washing, ventilation register according to the Index_OptionMenu
-      if(Index_OptionMenu == 0){
-         MikroClient[ClientNumber].time_Foaming = time_arr[Index_TimeMoneyPreference];
+      if(Index_OptionMenu==0){//will be saved into foaming register
+      MikroClient[ClientNumber].time_Foaming = time_arr[Index_TimeMoneyPreference]
       }
-      else if(Index_OptionMenu == 1){
-         MikroClient[ClientNumber].time_Washing = time_arr[Index_TimeMoneyPreference];
-      }
-      else if(Index_OptionMenu == 2){
-         MikroClient[ClientNumber].time_Ventilation = time_arr[Index_TimeMoneyPreference];
-      }
+      
    }
-   
    if(input(button_RemoveSelect) == 1){
       SelectionState = ' ';
    }
    
+   
+   
+   
    delay_ms(80);
+   
 }
 
 /* ======== -END- LCD SCREEN FUNCTIONS -END- ======== */

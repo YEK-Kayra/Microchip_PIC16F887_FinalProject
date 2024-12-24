@@ -20,7 +20,7 @@
 /********************************************************/
 #include <lcd.c>    
 #include <math.h>       
-//#include <2408.c>    will be unlocked in soooon :)                                   
+                                       
 /********************************************************/
 /*               SYSTEM FUSES                           */
 /********************************************************/                                         
@@ -183,7 +183,6 @@ void main(void)
              
              //Clear selection
              SelectionState = ' ';
-             
                 //The client wants to see the next section based on the selected option
                 if(input(button_NEXT) == 1)
                 {
@@ -213,18 +212,18 @@ void main(void)
   
       }while(OPS_Status!=55);
       
-      
-      
       printf(lcd_putc,"\f");
       lcd_gotoxy(2,1);
       printf(lcd_putc,"CLOSING");
       delay_ms(1000);
+      
       printf(lcd_putc,"\f");  
       lcd_gotoxy(1,1);
       printf(lcd_putc, "Kopuk:%ld", MikroClient[ClientNumber].time_Foaming);
       lcd_gotoxy(1,2);
       printf(lcd_putc, "Su::%ld",MikroClient[ClientNumber].time_Washing);
       delay_ms(2000);
+      
       printf(lcd_putc,"\f");  
       lcd_gotoxy(1,1);
       printf(lcd_putc, "Hava:%ld", MikroClient[ClientNumber].time_Ventilation);
