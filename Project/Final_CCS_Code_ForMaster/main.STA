@@ -1,97 +1,100 @@
 
-ROM used:   1826/8192 (22%)
-            1826/8192 (22%) including unused fragments
+ROM used:   2396/8192 (29%)
+            2620/8192 (32%) including unused fragments
 
-            0.5 Average locations per line
-            3.5 Average locations per statement
+            0.6 Average locations per line
+            4.5 Average locations per statement
 
-RAM used:   72/368 (20%) at main() level
-            91/368 (25%) worst case
+RAM used:   85/368 (23%) at main() level
+            113/368 (31%) worst case
 
-Stack used: 6 worst case (5 in main + 1 for interrupts)
+Stack used: 7 worst case (6 in main + 1 for interrupts)
 Stack size: 8
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  421   152  29  main.c
+  493   189  36  main.c
   773     0   0  ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f887.h
   456    84  16  ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c
- 2227   257  50  ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\math.h
-   88    23   4  ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\2408.c
+ 2227   257  48  ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\math.h
 ----- -----
- 3965   516 Total
+ 3949   530 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
 0     21   1    1             @delay_ms1
  Inline         3    596  5.9  lcd_read_byte
 0      6   0    0     59  4.2  lcd_read_nibble
-0     12   1    1    179  3.3  lcd_send_nibble
-0     72   4    3    460  4.7  lcd_send_byte
+0     14   1    1    179  3.3  lcd_send_nibble
+0     80   3    3    460  4.7  lcd_send_byte
  Inline         6    814  7.2  lcd_init
-0     18   1    4    208  6.3  lcd_gotoxy
-0     44   2    1    354  4.7  lcd_putc
+0     20   1    4    208  6.3  lcd_gotoxy
+0     58   2    1    354  4.7  lcd_putc
 0      6   0    0     18  1.0  system_isr_OperationCANCEL
-0    358  20    2   1744  7.8  MAIN
+1    572  24    2   2527  8.8  MAIN
 0     21   1    5             @MUL1616
 0     37   2    5             @DIV1616
-0      4   0    0             @const833
-0     86   5    4             @PSTRINGC7_629
-0      5   0    0     48  1.3  @const839
-0     87   5    5     17  0.8  @PSTRINGCN7_629
-0    128   7    9     48  1.1  @PRINTF_LD_629
-0      4   0    0     59  1.6  @const844
-0      5   0    0             @const846
-0     94   5    0     48  1.3  SubSystem_Init
+0      4   0    0             @const823
+0     85   4    4             @PSTRINGC7_629
+0      5   0    0             @const829
+0     90   4    5             @PSTRINGCN7_629
+0    132   6    9             @PRINTF_LD_629
+0      4   0    0             @const834
+0      5   0    0             @const836
+0      5   0    0     48  1.3  @const837
+0    104   4    0     48  1.3  SubSystem_Init
  Inline         0     17  0.8  trisSetting_Init
  Inline         0     48  1.1  interruptSetting_Init
  Inline         0     59  1.6  adcSetting_Init
-0     73   4    1    423  1.9  SubSystem_lcd_IdleStatus
-0      6   0    0    921  2.9  @const848
-0      6   0    0             @const849
-0      8   0    0             @const851
-0      6   0    0             @const852
-0    126   7    0    921  2.9  NavigateOperationMenu
-0      9   0    0             @const855
+0     91   4    1    423  1.9  SubSystem_lcd_IdleStatus
+0      6   0    0             @const839
+0      6   0    0             @const840
+0      8   0    0             @const842
+0      6   0    0             @const843
+0    146   6    0    921  2.9  NavigateOperationMenu
+0      9   0    0             @const846
+0      6   0    0             @const847
+0      7   0    0             @const848
+0      7   0    0             @const849
+0      8   0    0             @const850
+0      7   0    0             @const851
+0      8   0    0             @const852
+0      7   0    0             @const853
+0      9   0    0    935  5.7  @const854
+0    344  14    4    935  5.7  NavigateTimeMoneyPreferenceMenu
 0      6   0    0             @const856
-0      7   0    0             @const857
-0      7   0    0    935  5.7  @const858
-0      8   0    0             @const859
-0      7   0    0             @const860
-0      8   0    0             @const861
-0      7   0    0             @const862
-0      9   0    0             @const863
-0    316  17    4    935  5.7  NavigateTimeMoneyPreferenceMenu
-0      6   0    0    519  3.7  @const865
 0     21   1    3             @DIV88
  Inline         6             @PRINTF_D_629
-0      5   0    0             @const872
-0      3   0    0             @const873
-0     72   4    0    519  3.7  SubSystem_uart_CheckTheMessage
-0      6   0    0             @const875
-0      6   0    0             @const876
-0      6   0    0             @const877
-0      5   0    0             @const878
+0      5   0    0             @const863
+0      3   0    0             @const864
+0    225   9    4    754  4.8  NavigatePolishingMenu
+0      7   0    0             @const868
+0      3   0    0             @const870
+0     80   3    0    519  3.7  SubSystem_uart_CheckTheMessage
+0      6   0    0    519  3.7  @const872
+0      6   0    0             @const873
+0      6   0    0             @const874
+0      5   0    0             @const875
  Inline         0             @cinit1
 
 Program metrics:
-    Functions               24
-    Statements              516
-    Comments                683
-    Volume (V)              16805
-    Difficulty (D)          78.7
-    Effort to implement (E) 1322605
-    Time to implement (T)   20 hours, 25 minutes
+    Functions               21
+    Statements              530
+    Comments                644
+    Volume (V)              17158
+    Difficulty (D)          76.8
+    Effort to implement (E) 1317026
+    Time to implement (T)   20 hours, 19 minutes
     Est Delivered Bugs (B)  4
-    Cyclomatic Complexity   44
-    Maintainability (MI)    133
+    Cyclomatic Complexity   47
+    Maintainability (MI)    121
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00003     4  0  
 00004-0004E    75  0  
-0004F-007FF  1747  222  
-00800-00FFF     0  2048  
+0004F-007FF  1745  224  
+00800-00FFF   572  1476  
 01000-017FF     0  2048  
 01800-01FFF     0  2048  
 

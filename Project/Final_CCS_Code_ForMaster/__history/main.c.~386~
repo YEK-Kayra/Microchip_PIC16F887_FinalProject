@@ -430,7 +430,7 @@ void NavigateTimeMoneyPreferenceMenu(void){
 void NavigatePolishingMenu(){
    printf(lcd_putc, "\f"); 
    lcd_gotoxy(1,1);
-   printf(lcd_putc, "Ucret:%ld tl",(35*mililitrePolish[Index_PolishMililitre]));
+   printf(lcd_putc, "Ucret:%d tl",(35*mililitrePolish[Index_PolishMililitre]));
    lcd_gotoxy(1,2);
    printf(lcd_putc, "Ml:%ld",(unsigned long int)(100*mililitrePolish[Index_PolishMililitre]));
    lcd_gotoxy(10,2);

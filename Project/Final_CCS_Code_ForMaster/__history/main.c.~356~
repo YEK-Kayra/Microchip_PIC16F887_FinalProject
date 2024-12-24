@@ -67,13 +67,11 @@ int8 ClientNumber;   // Will be used as given on the right --> MikroClient[Clien
 //-VAR-->POTENTIOMETERS
 int Index_OptionMenu;
 int Index_TimeMoneyPreference;
-int Index_PolishMililitre;
 unsigned long int val_ADC_Pot_Surf;
 unsigned long int val_ADC_Pot_Timer;
-unsigned long int val_ADC_Pot_Polish;
 
 unsigned long int time_arr[12] = {20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240};//Seconds
-unsigned long int mililitrePolish[5] = {1,2,3,4,5}; // 1x100ml , 2x100ml, ... 5x100ml
+int         mililitrePolish[5] = {1,2,3,4,5}; // 1x100ml , 2x100ml, ... 5x100ml
 
 /********************************************************/
 /*               SYSTEM DEFINATION                      */
@@ -100,7 +98,6 @@ void adcSetting_Init(void);
 void SubSystem_lcd_IdleStatus(void);
 void NavigateOperationMenu(void);
 void NavigateTimeMoneyPreferenceMenu(void);
-void NavigatePolishingMenu(void);
 
 /* ======== UART SERIAL COM. FUNCTIONS PROTOTYPES  ======== */
 void SubSystem_uart_CheckTheMessage(void);
@@ -125,16 +122,6 @@ void SubSystem_uart_CheckTheMessage(void);
              Index_TimeMoneyPreference = 11;                          \
           }                                                           \
    }while(0)
-   
-#define ADC_TO_INDEXofPolish(val_ADC_Pot_Polish)        \
-   do{                                        \
-          Index_PolishMililitre = ((val_ADC_Pot_Polish*5)/1020);  \
-          if(Index_PolishMililitre >= 5){                       \
-            Index_PolishMililitre = 4;                          \
-          }                                                \
-   }while(0)
-   
-   
 /* ======== -END- SYSTEM POTENTIOMETER INDEXER -END- ======== */   
 
 /* ======== -BEGIN- SYSTEM TIMER TIME CONFIG -BEGIN- ======== */
@@ -222,33 +209,6 @@ void main(void)
                         
                         }while(OPS_Status!=55); 
                 }
-                
-                
-                if((input(button_NEXT) == 1) && (Index_OptionMenu == 3)){
-   
-                        do{
-                              //Start Of Conversation for ADC_Timer
-                              set_adc_channel(1);
-                              
-                              //Get Timer_Pot ADC value(0-1024)
-                              
-                              val_ADC_Pot_Polish = read_adc(); 
-                              
-                              //Convert Timer_Pot ADC value into the option menu index
-                              ADC_TO_INDEXofPolish(val_ADC_Pot_Polish);
-                              
-                              //Use index value to show time & money & preference
-                              NavigatePolishingMenu();
-                              
-                              //Break the while condation
-                              if(input(button_BACK) == 1){
-                                 break;
-                              }
-                        
-                        }while(OPS_Status!=55); 
-                
-                }
-                
              
              delay_ms(100);
   
@@ -269,8 +229,6 @@ void main(void)
       printf(lcd_putc,"\f");  
       lcd_gotoxy(1,1);
       printf(lcd_putc, "Hava:%ld", MikroClient[ClientNumber].time_Ventilation);
-      lcd_gotoxy(1,2);
-       printf(lcd_putc, "Cila:%ld", MikroClient[ClientNumber].mililitre_Polishing);
       delay_ms(2000);
       
     while(1)
@@ -430,9 +388,9 @@ void NavigateTimeMoneyPreferenceMenu(void){
 void NavigatePolishingMenu(){
    printf(lcd_putc, "\f"); 
    lcd_gotoxy(1,1);
-   printf(lcd_putc, "Ucret:%ld tl",(35*mililitrePolish[Index_PolishMililitre]));
+   printf(lcd_putc, "Ucret:%d tl",);
    lcd_gotoxy(1,2);
-   printf(lcd_putc, "Ml:%ld",(unsigned long int)(100*mililitrePolish[Index_PolishMililitre]));
+   printf(lcd_putc, "Mililitre:%ld",);
    lcd_gotoxy(10,2);
    printf(lcd_putc, "Sec:");
    lcd_gotoxy(14,2);
@@ -444,7 +402,7 @@ void NavigatePolishingMenu(){
       
       //-->The values will be saved into foaming, washing, ventilation register according to the Index_OptionMenu
       if(Index_OptionMenu == 3){
-         MikroClient[ClientNumber].mililitre_Polishing = (100*mililitrePolish[Index_PolishMililitre]); 
+         MikroClient[ClientNumber].time_Foaming = time_arr[Index_TimeMoneyPreference];
       }
       
    }
