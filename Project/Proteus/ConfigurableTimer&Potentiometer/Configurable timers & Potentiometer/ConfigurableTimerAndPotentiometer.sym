@@ -133,42 +133,42 @@ FFF     @INTERRUPT_AREA
 
 ROM Allocation:
 00004F  systemTimer0_isr
-000065  @const799.call
-00006B  @const804.call
-000070  @delay_ms1
-000085  lcd_send_nibble
-000091  lcd_read_nibble
-000097  lcd_send_byte
-00009D  lcd_read_byte
-0000D7  lcd_init
-000115  @MUL1616
-00012C  @DIV1616
-000153  lcd_gotoxy
-000165  lcd_putc
-000191  @PSTRINGCN7_626
-0001E8  @PRINTF_LU_626
-00024D  @DIV88
-000262  @PRINTF_D_626
-0002BB  @ITOF
-0002DA  @MULFF
-000351  @SFTOI
-000372  @cinit1
-000372  MAIN
-00038A  @cinit2
+000064  @const799.call
+00006A  @const804.call
+00006F  @delay_ms1
+000084  lcd_send_nibble
+000090  lcd_read_nibble
+000096  lcd_send_byte
+00009C  lcd_read_byte
+0000D6  lcd_init
+000114  @MUL1616
+00012B  @DIV1616
+000152  lcd_gotoxy
+000164  lcd_putc
+000190  @PSTRINGCN7_626
+0001E7  @PRINTF_LU_626
+00024C  @DIV88
+000261  @PRINTF_D_626
+0002BA  @ITOF
+0002D9  @MULFF
+000350  @SFTOI
+000371  @cinit1
+000371  MAIN
+000389  @cinit2
 
 Project Directory:
     C:\Users\yunus\OneDrive\Masaüstü\Microchip_PIC16F887_FinalProject\Project\Proteus\ConfigurableTimer&Potentiometer\Configurable timers & Potentiometer\
 
 Project Files:
-    ConfigurableTimerAndPotentiometer.c                     [16-Ara-24 20:22  CRC=7A8F568D]
+    ConfigurableTimerAndPotentiometer.c                     [26-Ara-24 00:43  CRC=ACBC9809]
     ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f887.h [08-Eyl-15 15:15  CRC=E224733F]
     ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c [19-Eyl-13 16:38  CRC=D1A6378A]
     ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\math.h [16-Oca-15 10:40  CRC=6A8358B0]
 
-Source signature=0360B2B6
+Source signature=358DF432
 Program memory checksum=0000
 Program memory CRC=0000
-Hex file CRC=C6E7
+Hex file CRC=DB12
 
 Units:
     ConfigurableTimerAndPotentiometer (main)

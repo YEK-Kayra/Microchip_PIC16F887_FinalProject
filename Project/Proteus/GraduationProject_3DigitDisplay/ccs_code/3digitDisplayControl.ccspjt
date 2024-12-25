@@ -11,15 +11,17 @@ Type=4
 1=3digitDisplayControl.c
 
 [defines]
-buildcount=15
+buildcount=23
 
 [Opened Files]
-1=..\..\InterruptOfButtons\withRegisterLevel\RegisterLevel_EXTinterrupt.c
-t1=1
+1=3digitDisplayControl.c
+t1=101
 Count=1
+2=..\..\ConfigurableTimer&Potentiometer\Configurable timers & Potentiometer\ConfigurableTimerAndPotentiometer.c
+t2=1
 
 [ProjectLog]
-Days=4
+Days=5
 D1=08-12-2024
 D1_L=6
 D1_L1=[74600]Started Editing.
@@ -57,6 +59,12 @@ D4_L4=[2190]Stopped Editing.
 D4_E=12
 D4_D=0
 D4_L5=[2190]Project Closed.
+D5=26-12-2024
+D5_L=4
+D5_L1=[2929]Project Opened.
+D5_L2=[2938]Started Editing.
+D5_L3=[3671]Stopped Editing.
+D5_L4=[3672]Started Editing.
 [Units]
 Count=1
 1=3digitDisplayControl (main)

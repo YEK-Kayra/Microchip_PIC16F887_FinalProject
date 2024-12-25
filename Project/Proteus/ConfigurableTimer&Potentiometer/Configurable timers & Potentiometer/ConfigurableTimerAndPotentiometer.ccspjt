@@ -11,10 +11,10 @@ Type=4
 1=ConfigurableTimerAndPotentiometer.c
 
 [defines]
-buildcount=25
+buildcount=31
 
 [ProjectLog]
-Days=2
+Days=3
 D1=16-12-2024
 D1_L=11
 D1_L1=[70911]Started Editing.
@@ -27,7 +27,7 @@ D1_L7=[74570]Started Editing.
 D1_L8=[74894]Stopped Editing.
 D1_L9=[74997]Started Editing.
 D1_L10=[75205]Stopped Editing.
-TotalEdit=36
+TotalEdit=57
 TotalDebug=0
 D1_E=36
 D1_D=0
@@ -37,11 +37,27 @@ D2_L=3
 D2_L1=[52308]Project Opened.
 D2_L2=[53216]Project Opened.
 D2_L3=[56647]Project Closed.
+D3=26-12-2024
+D3_L=10
+D3_L1=[316]Project Opened.
+D3_L2=[343]Started Editing.
+D3_L3=[1393]Stopped Editing.
+D3_E=21
+D3_D=0
+D3_L4=[1393]Project Closed.
+D3_L5=[1522]Project Opened.
+D3_L6=[2466]Started Editing.
+D3_L7=[2766]Stopped Editing.
+D3_L8=[2766]Started Editing.
+D3_L9=[2929]Stopped Editing.
+D3_L10=[2929]Project Closed.
 
 [Opened Files]
-1=ConfigurableTimerAndPotentiometer.c
-t1=17
+1=..\..\GraduationProject_3DigitDisplay\ccs_code\3digitDisplayControl.c
+t1=1
 Count=1
+2=..\..\..\Final_CCS_Code_ForMaster\main.c
+t2=37
 [Units]
 Count=1
 1=ConfigurableTimerAndPotentiometer (main)

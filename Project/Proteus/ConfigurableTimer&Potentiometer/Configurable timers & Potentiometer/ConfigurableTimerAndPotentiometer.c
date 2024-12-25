@@ -21,9 +21,9 @@
 
 
 //--> REGISTER DEFINATIONS
-#byte my_TIM0_OPTION_REG = 0x81 
-#byte my_TIM0_MODULE_REG = 0x01 
-#byte my_INTCON_REG      = 0x0B
+#byte my_TIM0_OPTION_REG = 0x81  //Config register
+#byte my_TIM0_MODULE_REG = 0x01  //8 bit timer value storage register
+#byte my_INTCON_REG      = 0x0B  //General purpose interrupt register
 
 
 //--> USER VARIABLES
@@ -65,18 +65,16 @@ void systemTimer0_isr(){
    
    // (64mS * desired_value) is for about desired_duration
    if(timer0_isr_counter == desired_value){
-      output_toggle(ledPin);
-      my_INTCON_REG = 0x80; //Disable Timer0 Interrupt
+      output_toggle(ledPin); 
+      
+      //Disable Timer0 Interrupt
+      my_INTCON_REG &= 0xDF;
+      
       timer0_isr_counter=0;   
    }
    
-   // Clear timer0 overflow interrupt flag 
-   // my_INTCON_REG is 0x24 before we clear it,
-   // 0x24 shows that(before clear):
-   //       =>TIM0 Overflow bit is 1
-   //       =>TIM0 Overflow Interrupt Enable bit is 1
-   //
-   //after clear , myINTCON_REG's flag bit is 0
+   
+   // Clear timer0 overflow interrupt flag
    my_INTCON_REG &= 0xFB; 
 }
 //!
@@ -131,9 +129,12 @@ void main(void)
      //        64mS = 1uS * 256 * (256-56)
      my_TIM0_OPTION_REG &= 0xC7 ;
      my_TIM0_MODULE_REG = 56;
-     // Enable interrupts by setting GIE (Global Interrupt Enable) 
+     
+     // Enable interrupts by setting GIE (Global Interrupt Enable)
      // and TOIE (Timer0 Overflow Interrupt Enable) bits in INTCON register
-     my_INTCON_REG = 0xA0; 
+     my_INTCON_REG |= 0xA0; 
+     
+     
      
      // Client will choose one from the options shown below
      SECOND_TO_ISR_COUNT(time_arr, optionIndex_timer);  

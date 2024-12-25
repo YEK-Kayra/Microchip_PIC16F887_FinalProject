@@ -1,6 +1,6 @@
 
-ROM used:   1119/8192 (14%)
-            1119/8192 (14%) including unused fragments
+ROM used:   1118/8192 (14%)
+            1118/8192 (14%) including unused fragments
 
             0.3 Average locations per line
             2.9 Average locations per statement
@@ -13,12 +13,12 @@ Stack size: 8
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  147    45  12  ConfigurableTimerAndPotentiometer.c
+  148    45  12  ConfigurableTimerAndPotentiometer.c
   773     0   0  ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f887.h
   456    84  22  ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c
  2227   257  67  ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\math.h
 ----- -----
- 3603   386 Total
+ 3604   386 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
@@ -33,8 +33,8 @@ Page ROM  %  RAM    Vol Diff  Functions:
 0     33   3    4             @SFTOI
 0     31   3    2             @ITOF
 0    119  11   13             @MULFF
-0     22   2    0    119  3.4  systemTimer0_isr
-0    237  21    2   1063  7.5  MAIN
+0     21   2    0    119  3.4  systemTimer0_isr
+0    237  21    2   1066  8.0  MAIN
 0     23   2    5             @MUL1616
 0     39   3    5             @DIV1616
 0      6   1    0             @const799
@@ -48,20 +48,20 @@ Page ROM  %  RAM    Vol Diff  Functions:
 Program metrics:
     Functions               9
     Statements              386
-    Comments                532
-    Volume (V)              5842
-    Difficulty (D)          44.7
-    Effort to implement (E) 261224
-    Time to implement (T)   4 hours, 2 minutes
+    Comments                529
+    Volume (V)              5845
+    Difficulty (D)          45.2
+    Effort to implement (E) 264304
+    Time to implement (T)   4 hours, 5 minutes
     Est Delivered Bugs (B)  1
     Cyclomatic Complexity   15
-    Maintainability (MI)    46
+    Maintainability (MI)    44
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00003     4  0  
 00004-0004E    75  0  
-0004F-007FF  1040  929  
+0004F-007FF  1039  930  
 00800-00FFF     0  2048  
 01000-017FF     0  2048  
 01800-01FFF     0  2048  

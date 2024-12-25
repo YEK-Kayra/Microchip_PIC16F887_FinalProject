@@ -1,0 +1,229 @@
+#include <16f887.h>
+
+//--> DEVICES
+#device ADC = 10  //10-bit ADC reading will be performed
+
+#use delay(clock=4M)
+
+#use fast_io(b) // B portlarý 3 display için de ortak kullanýlacak
+#use fast_io(e) // E portlarýndan e0,e1,e2 tarama yapacak anahtar pinleri
+#use fast_io(d) // D portundan buton kesmesinin çalýþma kontrolü için eklendi
+
+
+#fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT
+
+//Tarama anahtar pinlerini tanýmlayalým
+#define pin_HundredDigit_switch pin_E2
+#define pin_TensDigit_switch    pin_E0 
+#define pin_UnitDigit_switch    pin_E1 
+
+#define pin_led                 pin_D0
+#define tickButton pin_C0
+
+
+//--> INCLUDES
+#include <lcd.c>   
+#include <math.h> 
+
+//--> REGISTER DEFINATIONS
+#byte my_TIM0_OPTION_REG = 0x81  //Config register
+#byte my_TIM0_MODULE_REG = 0x01  //8 bit timer value storage register
+#byte my_INTCON_REG      = 0x0B  //General purpose interrupt register
+
+
+                     
+int8 segmentTable[16] = { //b1 den baþlayarak b7 de bitecek
+    0x7E, 0x0C, 0xB6, 0x9E, 0xCC, 
+    0xDA, 0xFA, 0x0E, 0xFE, 0xDE
+};                     
+
+//Gelen timer deðerini basamaklara ayýr
+int8 number_unitDigit=0;
+int8 number_tensDigit=0;
+int8 number_hundredDigit =0;
+
+//Sayacý tarafýndan atacanak deðer
+int TimingNumber = 123;
+
+//For döngüsü için 1 saniye ye saydýr
+int8 MyTimeTicker = 0;
+
+
+
+//--> USER VARIABLES
+
+   //--> Timer Variable
+   long timer0_isr_counter=0;
+   long desired_value=0.0;
+   int time_arr[12] = {20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240};
+   int optionIndex_timer;
+   //To store the digital values coming from the potentiometers.
+   unsigned long int val_ADC_Pot_Surf;
+
+   unsigned long int previous_ADC_value = 0; //lcd flicker ýný azaltacak
+
+
+
+//--> MACROS
+
+   //--> Timer Desired Value Calculator 
+   #define TimerScalingFactor ((1000.0) / 64.0)
+   #define SECOND_TO_ISR_COUNT(time_arr, time_idx) \
+      do{ \
+         desired_value = ((time_arr[time_idx]) * TimerScalingFactor); \
+      }while(0)
+      
+   //--> Convert ADC Value into index of SecondArray 
+   #define ADC_TO_INDEXofTIMER(val_ADC_Pot_Surf) \
+   do{                                        \
+          optionIndex_timer = ((val_ADC_Pot_Surf*12)/1020);  \
+          if(optionIndex_timer >= 12){ \
+            optionIndex_timer = 11;    \
+          }                            \
+   }while(0)
+
+#int_EXT
+void system_OK_Button_isr(){
+   
+   output_toggle(pin_led);
+   delay_ms(500);
+
+}
+
+
+//--> TIMER INTERRUPS
+#INT_TIMER0
+void systemTimer0_isr(){
+
+   timer0_isr_counter++;
+   
+   // (64mS * desired_value) is for about desired_duration
+   if(timer0_isr_counter == desired_value){
+      //output_toggle(ledPin); 
+      
+      //Disable Timer0 Interrupt
+      my_INTCON_REG &= 0xDF;
+      
+      timer0_isr_counter=0;   
+   }
+   
+   
+   // Clear timer0 overflow interrupt flag
+   my_INTCON_REG &= 0xFB; 
+}
+
+
+void main(void) 
+{
+
+
+ //ADC YAPILANDIRMASI
+ 
+      setup_adc(adc_clock_div_32); 
+      setup_adc_ports(sAN0);
+      set_adc_channel(0); 
+      delay_us(200);
+      
+      
+      
+    do {
+       val_ADC_Pot_Surf = read_adc();  
+       
+       ADC_TO_INDEXofTIMER(val_ADC_Pot_Surf);
+       
+       if (val_ADC_Pot_Surf != previous_ADC_value) 
+       {
+           printf(lcd_putc, "\fADC : %lu", val_ADC_Pot_Surf);
+           delay_ms(10);
+           printf(lcd_putc,"\nIndex=%d",optionIndex_timer);
+           delay_ms(10);
+           previous_ADC_value = val_ADC_Pot_Surf; 
+       }
+     
+       if(input(tickButton) == 1){
+         break;
+       }
+       
+       }while(1);
+      
+       printf(lcd_putc, "\f");
+       setup_adc(ADC_OFF);
+       
+//---> TIMER & INTERRUPT CONFIGURATION  <---//
+     
+     // T(overflow) = InstructionTime*PSC*(256-TIM0_val)
+     //        64mS = 1uS * 256 * (256-56)
+     my_TIM0_OPTION_REG &= 0xC7 ;
+     my_TIM0_MODULE_REG = 56;
+     
+     // Enable interrupts by setting GIE (Global Interrupt Enable)
+     // and TOIE (Timer0 Overflow Interrupt Enable) bits in INTCON register
+     my_INTCON_REG |= 0xA0; 
+     
+     
+     
+     // Client will choose one from the options shown below
+     SECOND_TO_ISR_COUNT(time_arr, optionIndex_timer);    
+      
+      
+      
+
+   //display pinlerini çýkýþ/giriþ olarak ata
+   set_tris_b(0x01);      
+   
+   
+   //Display switchlerini çýkýþ olarak ata
+   output_drive(pin_HundredDigit_switch); 
+   output_drive(pin_TensDigit_switch);
+   output_drive(pin_UnitDigit_switch);
+   output_drive(pin_led);
+   
+   //Basamaklarýn gözükmesi için gerilim uygula
+   output_high(pin_UnitDigit_switch);    
+   output_high(pin_TensDigit_switch);     
+   output_high(pin_HundredDigit_switch);  
+   
+   //baþlangýç deðerini segmentlere yükle
+   output_b(segmentTable[0]); 
+   
+   
+   ext_int_edge(L_TO_H); //Harici kesme Lojik 0'dan 1'e geçerken
+   enable_interrupts(INT_EXT); //Harici kesme aktif
+   enable_interrupts(GLOBAL); //Aktif kesmeler için genel kesme yetkisi ver 
+   
+ while(1) //Sonsuz döngü baþlangýcý
+ {
+ 
+
+         //TimingNumber zamanlayýcýdan alýnacak
+         number_unitDigit    = (TimingNumber%10);  
+         number_tensDigit    = ((TimingNumber/10)%10); 
+         number_hundredDigit = ((TimingNumber/100)%10);   
+         
+        for(MyTimeTicker = 0 ; MyTimeTicker <33 ; MyTimeTicker++){
+        
+          //Transistor ile basamak deðiþimlerini yap
+          output_high(pin_UnitDigit_switch);     //birler basamaðýný aç
+          output_low(pin_TensDigit_switch);      //onlar basamaðýný kapa
+          output_low(pin_HundredDigit_switch);   //yüzler basamaðýný kapa
+          output_b(segmentTable[number_unitDigit]); //ilgili numarayý ekrana bas, içeriden sayý çekiyoruz yani
+          delay_ms(10);                             //tarama yaparken bu süreyi kullan
+          
+          //Transistor ile basamak deðiþimlerini yap
+          output_low(pin_UnitDigit_switch);      //birler basamaðýný kapa
+          output_high(pin_TensDigit_switch);     //onlar basamaðýný aç
+          output_low(pin_HundredDigit_switch);   //yüzler basamaðýný kapa          
+          output_b(segmentTable[number_tensDigit]); //ilgili numarayý ekrana bas, içeriden sayý çekiyoruz yani
+          delay_ms(10);  
+          
+          //Transistor ile basamak deðiþimlerini yap
+          output_low(pin_UnitDigit_switch);       //birler basamaðýný kapa
+          output_low(pin_TensDigit_switch);       //onlar basamaðýný kapa
+          output_high(pin_HundredDigit_switch);   //yüzler basamaðýný aç
+          output_b(segmentTable[number_hundredDigit]); //ilgili numarayý ekrana bas, içeriden sayý çekiyoruz yani
+          delay_ms(10); 
+          
+        }
+  
+ }
+} 
