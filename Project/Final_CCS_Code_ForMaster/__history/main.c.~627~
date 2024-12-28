@@ -92,7 +92,7 @@ int8 number_unitDigit=0;
 int8 number_tensDigit=0;
 int8 number_hundredDigit =0;
 
-unsigned long int8 CurrentTime;     // Current countdown value
+unsigned long int CurrentTime;     // Current countdown value
 
 int8 counter_StartOpsButtonTick=0;  /*
                                      * If the value is 1, start the foaming process.
@@ -101,7 +101,7 @@ int8 counter_StartOpsButtonTick=0;  /*
                                      * If the value is 4, start the polishing process.
                                      */
 unsigned long SelectedTime; //The SelectedTime variable will be sent to the macro to configure the desired_value variable
-
+unsigned long currentPolishAmount;
 
 /********************************************************/
 /*               SYSTEM DEFINATION                      */
@@ -120,7 +120,9 @@ unsigned long SelectedTime; //The SelectedTime variable will be sent to the macr
                                         * - Loads percentage progress into the system for polishing.
                                         */
                                         
-#define button_OPS_CANCEL     pin_B0   //Cancel all operations and close the system for the user.
+#define button_OPS_CANCEL      pin_B0   //Cancel all operations and close the system for the user.
+#define button_DrainPolishing  pin_C2   //It adds polish to the container while the button is pressed
+
 
 //-IO--OUTPUT---->7-Segment Display Scanning Section
 #define pin_HundredDigit_switch pin_E2
@@ -152,6 +154,7 @@ void SubSystem_uart_CheckTheMessage(void);
 
 /* ======== 7-SEGMENT DISPLAY FUNCTIONS PROTOTYPES  ======== */
 void sequentialDisplayScan(void);
+void loadZeroValue_2_DisplaySegment(void);
 
 /********************************************************/
 /*               SYSTEM MACROS                          */
@@ -220,25 +223,23 @@ void systemTimer0_isr(){
  */
    if(timer0_isr_counter == desired_value){
    
+      //CurrentTime=0;
+      timer0_isr_counter=0;  
       //Disable Timer0 Interrupt
       my_INTCON_REG &= 0xDF;
       
-      timer0_isr_counter=0;   
    }
    
+   
+   //If 1 second has passed
    if((timer0_isr_counter%16) == 0){
    
       //Decrease the current time value by one.
       CurrentTime-=1;
           
-         if(CurrentTime==0){
-         
-            //Load the initial value into the segments.
-            //output_b(segmentTable[0]);
-            
+         if(CurrentTime==0){     
             //Disable Timer0 Interrupt
-            my_INTCON_REG &= 0xDF;
-            
+            my_INTCON_REG &= 0xDF;     
          }
    }
    
@@ -377,19 +378,18 @@ void main(void)
                         printf(lcd_putc,"Operasyon");
                         lcd_gotoxy(4,2);
                         printf(lcd_putc,"Baslatildi");
+                        
                         //Wait 100 milliseconds to allow for button interference
-                        delay_ms(100);                      
+                        delay_ms(100); 
+                        
+                        //Increase the value by one, if clicked during each recheck
+                        counter_StartOpsButtonTick+=1;
+                        LockingMechanism = 1;
                         
                         do{
-                        
-                              if(input(button_OPS_START) == 1){
-                                    //Increase the value by one, if clicked during each recheck
-                                    counter_StartOpsButtonTick+=1;
-                                    LockingMechanism = 1; 
-                              }
                               
                               //Loads the foaming time
-                              if((counter_StartOpsButtonTick == 1) && LockingMechanism == 1){       
+                              if((counter_StartOpsButtonTick == 1) && (LockingMechanism == 1)){       
                                    
                                     //The SelectedTime variable will be sent to the macro to configure the desired_value variable
                                     SelectedTime = MikroClient[ClientNumber].time_Foaming;
@@ -407,19 +407,77 @@ void main(void)
                                     //The lock mechanism was broken to prevent re-evaluation
                                     LockingMechanism = 0;
                                                                                 
-                              }               
+                              }
                               
-                              //Display/scroll the CurrentTime value on the displays
-                              sequentialDisplayScan(); 
+                               //Loads the washing time
+                              if((counter_StartOpsButtonTick == 2) && (LockingMechanism == 1)){       
+                                   
+                                    //The SelectedTime variable will be sent to the macro to configure the desired_value variable
+                                    SelectedTime = MikroClient[ClientNumber].time_Washing;
                                     
-                        }while(CurrentTime!=0);
+                                    //The CurrentTime variable will hold the current number  to be displayed
+                                    CurrentTime = MikroClient[ClientNumber].time_Washing;
+                                    
+                                    //Determine the value that the desired_value variable will take.
+                                    SECOND_TO_ISR_COUNT(SelectedTime);  
+                                    
+                                    // Enable interrupts by setting GIE (Global Interrupt Enable)
+                                    // and TOIE (Timer0 Overflow Interrupt Enable) bits in INTCON register
+                                    my_INTCON_REG |= 0xA0;
+                                                                     
+                                    //The lock mechanism was broken to prevent re-evaluation
+                                    LockingMechanism = 0;
+                                                                                
+                              }
+                              
+                              //Loads the Ventilation time
+                              if((counter_StartOpsButtonTick == 3) && (LockingMechanism == 1)){       
+                                   
+                                    //The SelectedTime variable will be sent to the macro to configure the desired_value variable
+                                    SelectedTime = MikroClient[ClientNumber].time_Ventilation;
+                                    
+                                    //The CurrentTime variable will hold the current number  to be displayed
+                                    CurrentTime = MikroClient[ClientNumber].time_Ventilation;
+                                    
+                                    //Determine the value that the desired_value variable will take.
+                                    SECOND_TO_ISR_COUNT(SelectedTime);  
+                                    
+                                    // Enable interrupts by setting GIE (Global Interrupt Enable)
+                                    // and TOIE (Timer0 Overflow Interrupt Enable) bits in INTCON register
+                                    my_INTCON_REG |= 0xA0;
+                                                                     
+                                    //The lock mechanism was broken to prevent re-evaluation
+                                    LockingMechanism = 0;
+                                                                                
+                              }
+                              
+                              //Load the selected amount of polish
+                              if((counter_StartOpsButtonTick == 4) && (LockingMechanism == 1)){
+                              
+                                 if(input(button_DrainPolishing) == 1){
+                                    
+                                    delay_ms(200);
+                                 }
+                              
+                              }
+                              
+                              
+                              
+                             //Display/scroll the CurrentTime value on the displays
+                             sequentialDisplayScan();        
+                                  
+                             if((CurrentTime==1) && (SelectedTime==60)){
+                               break;
+                             }
+            
+                        }while( (CurrentTime!=0) );
                         
-                        
-                        
-                
                 }
                             
                delay_ms(100);
+               
+            //Load the initial value(0) into the segments.
+            loadZeroValue_2_DisplaySegment();
   
       }while(OPS_Status!=55);
       
@@ -627,6 +685,7 @@ void NavigatePolishingMenu(){
       //-->The values will be saved into foaming, washing, ventilation register according to the Index_OptionMenu
       if(Index_OptionMenu == 3){
          MikroClient[ClientNumber].mililitre_Polishing = (100*mililitrePolish[Index_PolishMililitre]); 
+         currentPolishAmount = MikroClient[ClientNumber].mililitre_Polishing;
       }
       
    }
@@ -727,6 +786,17 @@ void sequentialDisplayScan(){
           output_b(segmentTable[number_hundredDigit]); 
           delay_ms(10); 
    
+}
+
+void loadZeroValue_2_DisplaySegment(){
+
+   //Apply voltage to display the digits
+   output_high(pin_UnitDigit_switch);    
+   output_high(pin_TensDigit_switch);     
+   output_high(pin_HundredDigit_switch); 
+   
+   //Load the initial value into the segments.
+   output_b(segmentTable[0]); 
 }
 
 

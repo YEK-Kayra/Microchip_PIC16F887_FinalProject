@@ -92,7 +92,7 @@ int8 number_unitDigit=0;
 int8 number_tensDigit=0;
 int8 number_hundredDigit =0;
 
-unsigned long int8 CurrentTime;     // Current countdown value
+unsigned long int CurrentTime;     // Current countdown value
 
 int8 counter_StartOpsButtonTick=0;  /*
                                      * If the value is 1, start the foaming process.
@@ -221,22 +221,23 @@ void systemTimer0_isr(){
  */
    if(timer0_isr_counter == desired_value){
    
+      //CurrentTime=0;
+      timer0_isr_counter=0;  
       //Disable Timer0 Interrupt
       my_INTCON_REG &= 0xDF;
       
-      timer0_isr_counter=0;   
    }
    
+   
+   //If 1 second has passed
    if((timer0_isr_counter%16) == 0){
    
       //Decrease the current time value by one.
       CurrentTime-=1;
           
-         if(CurrentTime==0){
-                
+         if(CurrentTime==0){     
             //Disable Timer0 Interrupt
-            my_INTCON_REG &= 0xDF;
-            
+            my_INTCON_REG &= 0xDF;     
          }
    }
    
@@ -447,19 +448,16 @@ void main(void)
                                     LockingMechanism = 0;
                                                                                 
                               }
-                             
-                                
-                                   
-                                   
-                                   
+                              
                              //Display/scroll the CurrentTime value on the displays
                              sequentialDisplayScan();        
-                          
-                        }while(CurrentTime!=0);
-                        
-                        
-                        
-                
+                                  
+                             if((CurrentTime==1) && (SelectedTime==60)){
+                               break;
+                             }
+                            
+                            
+                        }while( (CurrentTime!=0) );
                 }
                             
                delay_ms(100);

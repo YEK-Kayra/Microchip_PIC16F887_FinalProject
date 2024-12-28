@@ -1,5 +1,5 @@
 ÀÄmain
-   ÃÄMAIN  1/710  Ram=2
+   ÃÄMAIN  1/766  Ram=2
    ³  ÃÄ@cinit1  (Inline)  Ram=0
    ³  ÃÄSubSystem_Init  0/123  Ram=0
    ³  ³  ÃÄlcd_init  (Inline)  Ram=6
@@ -163,7 +163,7 @@
    ³  ³  ÀÄ@delay_ms1  0/21  Ram=1
    ³  ÃÄ@MUL1616  0/23  Ram=5
    ³  ÃÄ@DIV1616  0/39  Ram=5
-   ³  ÃÄNavigatePolishingMenu  0/247  Ram=4
+   ³  ÃÄNavigatePolishingMenu  1/300  Ram=4
    ³  ³  ÃÄlcd_putc  0/58  Ram=1
    ³  ³  ³  ÀÄ*
    ³  ³  ÃÄlcd_gotoxy  0/20  Ram=4
@@ -211,16 +211,20 @@
    ³  ÃÄ@PSTRINGC7_629  0/116  Ram=4
    ³  ³  ÀÄ*
    ³  ÃÄ@delay_ms1  0/21  Ram=1
-   ³  ÃÄ@ITOF  1/31  Ram=2
-   ³  ÃÄ@MULFF  1/119  Ram=13
-   ³  ÃÄ@SFTOI  1/33  Ram=4
-   ³  ÃÄ@ITOF  1/31  Ram=2
-   ³  ÃÄ@MULFF  1/119  Ram=13
-   ³  ÃÄ@SFTOI  1/33  Ram=4
-   ³  ÃÄ@ITOF  1/31  Ram=2
-   ³  ÃÄ@MULFF  1/119  Ram=13
-   ³  ÃÄ@SFTOI  1/33  Ram=4
-   ³  ÃÄsequentialDisplayScan  1/134  Ram=2
+   ³  ÃÄ@ITOF  0/31  Ram=2
+   ³  ÃÄ@MULFF  0/119  Ram=13
+   ³  ÃÄ@SFTOI  0/33  Ram=4
+   ³  ÃÄ@ITOF  0/31  Ram=2
+   ³  ÃÄ@MULFF  0/119  Ram=13
+   ³  ÃÄ@SFTOI  0/33  Ram=4
+   ³  ÃÄ@ITOF  0/31  Ram=2
+   ³  ÃÄ@MULFF  0/119  Ram=13
+   ³  ÃÄ@SFTOI  0/33  Ram=4
+   ³  ÃÄ@delay_ms1  0/21  Ram=1
+   ³  ÃÄsequentialDisplayScan  1/181  Ram=2
+   ³  ³  ÃÄ@DIV1616  0/39  Ram=5
+   ³  ³  ÃÄ@DIV1616  0/39  Ram=5
+   ³  ³  ÃÄ@DIV1616  0/39  Ram=5
    ³  ³  ÃÄ@DIV1616  0/39  Ram=5
    ³  ³  ÃÄ@DIV1616  0/39  Ram=5
    ³  ³  ÃÄ@DIV1616  0/39  Ram=5
@@ -229,6 +233,8 @@
    ³  ³  ÃÄ@delay_ms1  0/21  Ram=1
    ³  ³  ÃÄ@delay_ms1  0/21  Ram=1
    ³  ³  ÀÄ@delay_ms1  0/21  Ram=1
+   ³  ÃÄsequentialDisplayScan  1/181  Ram=2
+   ³  ³  ÀÄ*
    ³  ÃÄ@delay_ms1  0/21  Ram=1
    ³  ÃÄloadZeroValue_2_DisplaySegment  0/10  Ram=0
    ³  ÀÄDisplayRecordsSequentiallyOnLCD  1/286  Ram=2

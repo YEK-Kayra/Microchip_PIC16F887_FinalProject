@@ -100,7 +100,13 @@ int8 counter_StartOpsButtonTick=0;  /*
                                      * If the value is 3, start the ventilation process.
                                      * If the value is 4, start the polishing process.
                                      */
-unsigned long SelectedTime; //The SelectedTime variable will be sent to the macro to configure the desired_value variable
+unsigned long SelectedTime;         //The SelectedTime variable will be sent to the macro to configure the desired_value variable
+unsigned long currentPolishAmount;
+int8 allProcessComplate_flag=0;    /** 
+                                     * allProcessComplete_flag tracks the completion status of all processes, including polishing.
+                                     * 0: Processes are still ongoing.
+                                     * 1: All processes are complete.
+                                     */
 
 
 /********************************************************/
@@ -120,7 +126,9 @@ unsigned long SelectedTime; //The SelectedTime variable will be sent to the macr
                                         * - Loads percentage progress into the system for polishing.
                                         */
                                         
-#define button_OPS_CANCEL     pin_B0   //Cancel all operations and close the system for the user.
+#define button_OPS_CANCEL      pin_B0   //Cancel all operations and close the system for the user.
+#define button_DrainPolishing  pin_C2   //It adds polish to the container while the button is pressed
+
 
 //-IO--OUTPUT---->7-Segment Display Scanning Section
 #define pin_HundredDigit_switch pin_E2
@@ -387,7 +395,7 @@ void main(void)
                         do{
                               
                               //Loads the foaming time
-                              if((counter_StartOpsButtonTick == 1) && LockingMechanism == 1){       
+                              if((counter_StartOpsButtonTick == 1) && (LockingMechanism == 1)){       
                                    
                                     //The SelectedTime variable will be sent to the macro to configure the desired_value variable
                                     SelectedTime = MikroClient[ClientNumber].time_Foaming;
@@ -408,7 +416,7 @@ void main(void)
                               }
                               
                                //Loads the washing time
-                              if((counter_StartOpsButtonTick == 2) && LockingMechanism == 1){       
+                              if((counter_StartOpsButtonTick == 2) && (LockingMechanism == 1)){       
                                    
                                     //The SelectedTime variable will be sent to the macro to configure the desired_value variable
                                     SelectedTime = MikroClient[ClientNumber].time_Washing;
@@ -429,7 +437,7 @@ void main(void)
                               }
                               
                               //Loads the Ventilation time
-                              if((counter_StartOpsButtonTick == 3) && LockingMechanism == 1){       
+                              if((counter_StartOpsButtonTick == 3) && (LockingMechanism == 1)){       
                                    
                                     //The SelectedTime variable will be sent to the macro to configure the desired_value variable
                                     SelectedTime = MikroClient[ClientNumber].time_Ventilation;
@@ -449,13 +457,49 @@ void main(void)
                                                                                 
                               }
                               
+                              //Load the selected amount of polish
+                              if((counter_StartOpsButtonTick == 4) && (LockingMechanism == 1)){
+                              
+                                    //The loop will exit when the polish is finished or if the process is canceled
+                                    do{
+                                    
+                                       if(input(button_DrainPolishing) == 1){
+                                          currentPolishAmount-=4;
+                                          delay_ms(100);
+                                          }
+                                          
+                                          if(currentPolishAmount<0){
+                                          currentPolishAmount=0;
+                                          }
+                                       //Display/scroll the CurrentTime value on the displays
+                                       sequentialDisplayScan();
+                                       
+                                    }while(currentPolishAmount != 0);
+                                       
+                                    LockingMechanism=0;
+                                    allProcessComplate_flag = 1;
+                              }
+                                                    
                              //Display/scroll the CurrentTime value on the displays
-                             sequentialDisplayScan();        
-                                  
-                                  if((CurrentTime==1) && (SelectedTime==60)){
+                             sequentialDisplayScan();
+                             
+                             
+                             /** 
+                               * These conditions are used to break out of the loop for various reasons, 
+                               * and will redirect the program back to the main menu.
+                               * 
+                               * - If allProcessComplete_flag is 1, indicating all processes are finished, the loop will exit.
+                               * - If CurrentTime equals 1 and SelectedTime equals 60, the loop will also exit.
+                               */
+                                if(allProcessComplate_flag == 1){
+                                    break;    
+                                }                                    
+                                if((CurrentTime==1) && (SelectedTime==60)){
                                   break;
-                                  }
+                                }
+            
                         }while( (CurrentTime!=0) );
+                        
                 }
                             
                delay_ms(100);
@@ -463,7 +507,7 @@ void main(void)
             //Load the initial value(0) into the segments.
             loadZeroValue_2_DisplaySegment();
   
-      }while(OPS_Status!=55);
+      }while(OPS_Status!=55);  
       
    //Display the record sequentially on the LCD
    DisplayRecordsSequentiallyOnLCD(); 
@@ -669,6 +713,7 @@ void NavigatePolishingMenu(){
       //-->The values will be saved into foaming, washing, ventilation register according to the Index_OptionMenu
       if(Index_OptionMenu == 3){
          MikroClient[ClientNumber].mililitre_Polishing = (100*mililitrePolish[Index_PolishMililitre]); 
+         currentPolishAmount = MikroClient[ClientNumber].mililitre_Polishing;
       }
       
    }
@@ -740,10 +785,22 @@ void SubSystem_uart_CheckTheMessage(void){
 /* ======== -BEGIN- 7-SEGMENT DISPLAY -BEGIN- ======== */
 void sequentialDisplayScan(){
 
+         //It indicates that the polishing process has now started
+         if((counter_StartOpsButtonTick == 4)){
+                  
+            number_unitDigit    = (currentPolishAmount%10);
+            number_tensDigit    = ((currentPolishAmount/10)%10);
+            
+         }
          //CurrentTime will be taken from the timer.
-         number_unitDigit    = (CurrentTime%10);  
-         number_tensDigit    = ((CurrentTime/10)%10); 
-         number_hundredDigit = ((CurrentTime/100)%10);   
+         else{
+            
+            number_unitDigit    = (CurrentTime%10);  
+            number_tensDigit    = ((CurrentTime/10)%10); 
+            number_hundredDigit = ((CurrentTime/100)%10);
+         }
+         
+   
          
         
          /*
