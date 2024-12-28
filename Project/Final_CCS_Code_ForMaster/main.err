@@ -1,0 +1,10 @@
+>>> Warning 204 "main.c" Line 304(1,1): Condition always FALSE
+>>> Warning 204 "main.c" Line 327(1,1): Condition always FALSE
+>>> Warning 204 "main.c" Line 353(1,1): Condition always FALSE
+>>> Warning 204 "main.c" Line 399(1,1): Condition always FALSE
+>>> Warning 204 "main.c" Line 420(1,1): Condition always FALSE
+>>> Warning 204 "main.c" Line 441(1,1): Condition always FALSE
+>>> Warning 203 "main.c" Line 476(1,1): Condition always TRUE
+      Memory usage:   ROM=41%      RAM=31% - 37%
+      0 Errors,  7 Warnings.
+Build Successful.

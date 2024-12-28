@@ -11,11 +11,11 @@ Type=4
 1=3digitDisplayControl.c
 
 [defines]
-buildcount=40
+buildcount=41
 
 [Opened Files]
-1=3digitDisplayControl.c
-t1=13
+1=..\..\..\Final_CCS_Code_ForMaster\main.c
+t1=360
 Count=1
 2=..\..\ConfigurableTimer&Potentiometer\Configurable timers & Potentiometer\ConfigurableTimerAndPotentiometer.c
 t2=1
@@ -28,7 +28,7 @@ D1_L1=[74600]Started Editing.
 D1_L2=[75485]Stopped Editing.
 D1_L3=[75964]Started Editing.
 D1_L4=[78250]Stopped Editing.
-TotalEdit=104
+TotalEdit=194
 TotalDebug=0
 D1_E=48
 D1_D=0
@@ -78,15 +78,21 @@ D6_E=12
 D6_D=0
 D6_L3=[794]Project Closed.
 D7=28-12-2024
-D7_L=6
+D7_L=12
 D7_L1=[51774]Project Opened.
 D7_L2=[52825]Started Editing.
 D7_L3=[52985]Stopped Editing.
-D7_E=3
+D7_E=93
 D7_D=0
 D7_L4=[52985]Project Closed.
 D7_L5=[54598]Project Opened.
 D7_L6=[55191]Started Editing.
+D7_L7=[56474]Stopped Editing.
+D7_L8=[57399]Started Editing.
+D7_L9=[59986]Stopped Editing.
+D7_L10=[60015]Started Editing.
+D7_L11=[62087]Stopped Editing.
+D7_L12=[62087]Project Closed.
 [Units]
 Count=1
 1=3digitDisplayControl (main)

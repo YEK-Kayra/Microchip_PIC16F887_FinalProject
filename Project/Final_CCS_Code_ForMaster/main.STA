@@ -1,102 +1,110 @@
 
-ROM used:   2455/8192 (30%)
-            2638/8192 (32%) including unused fragments
+ROM used:   3360/8192 (41%)
+            3361/8192 (41%) including unused fragments
 
-            0.6 Average locations per line
-            4.5 Average locations per statement
+            0.8 Average locations per line
+            5.4 Average locations per statement
 
-RAM used:   89/368 (24%) at main() level
-            113/368 (31%) worst case
+RAM used:   114/368 (31%) at main() level
+            135/368 (37%) worst case
 
-Stack used: 7 worst case (6 in main + 1 for interrupts)
+Stack used: 6 worst case (5 in main + 1 for interrupts)
 Stack size: 8
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  560   201  37  main.c
+  787   280  45  main.c
   773     0   0  ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f887.h
-  456    84  15  ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c
- 2227   257  47  ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\math.h
+  456    84  14  ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c
+ 2227   257  41  ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\math.h
 ----- -----
- 4016   542 Total
+ 4243   621 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
 0     21   1    1             @delay_ms1
  Inline         3    596  5.9  lcd_read_byte
 0      6   0    0     59  4.2  lcd_read_nibble
-0     14   1    1    179  3.3  lcd_send_nibble
-0     80   3    3    460  4.7  lcd_send_byte
+0     14   0    1    179  3.3  lcd_send_nibble
+0     80   2    3    460  4.7  lcd_send_byte
  Inline         6    814  7.2  lcd_init
 0     20   1    4    208  6.3  lcd_gotoxy
 0     58   2    1    354  4.7  lcd_putc
+1     33   1    4             @SFTOI
+1     31   1    2             @ITOF
+1    119   4   13             @MULFF
 0      7   0    0     35  1.7  system_isr_OperationCANCEL
-0     19   1    0     98  3.3  systemTimer0_isr
-1    330  13    2   1621  7.3  MAIN
+0     46   1    2    226  4.5  systemTimer0_isr
+1    710  21    2   3667  9.8  MAIN
 0     23   1    5             @MUL1616
-0     37   2    5             @DIV1616
-0    111   5    0     48  1.3  SubSystem_Init
- Inline         0     17  0.8  trisSetting_Init
- Inline         0     92  2.5  interruptSetting_Init
+0     39   1    5             @DIV1616
+0      5   0    0     67  1.2  @const842
+0    116   3    4     59  1.6  @PSTRINGC7_629
+0      6   0    0     78  1.6  @const847
+0    123   4    0     60  1.3  SubSystem_Init
+ Inline         0     67  1.2  trisSetting_Init
+ Inline         0     72  2.4  interruptSetting_Init
  Inline         0     59  1.6  adcSetting_Init
-0     91   4    1    423  1.9  SubSystem_lcd_IdleStatus
-0      6   0    0             @const830
-0     84   3    4             @PSTRINGC7_629
-0      6   0    0             @const835
-0      8   0    0             @const837
-0      6   0    0     48  1.3  @const838
-0    146   6    0    921  2.9  NavigateOperationMenu
-0      9   0    0    423  1.9  @const841
-0      6   0    0             @const842
-0      7   0    0             @const843
-0      7   0    0             @const844
-0      8   0    0             @const845
-0      7   0    0             @const846
-0      8   0    0             @const847
-0      7   0    0             @const848
-0      9   0    0    921  2.9  @const849
-0    348  14    4    935  5.7  NavigateTimeMoneyPreferenceMenu
-0      6   0    0             @const851
-0     90   4    5             @PSTRINGCN7_629
+ Inline         0     78  1.6  displaySetting_Init
+0     91   3    1    423  1.9  SubSystem_lcd_IdleStatus
+0      6   0    0             @const849
+0      6   0    0             @const850
+0      8   0    0    921  2.9  @const852
+0      6   0    0             @const853
+0    146   4    0    921  2.9  NavigateOperationMenu
+0      9   0    0             @const856
+0      6   0    0             @const857
+0      7   0    0             @const858
+0      7   0    0             @const859
+0      8   0    0             @const860
+0      7   0    0             @const861
+0      8   0    0    935  5.7  @const862
+0      7   0    0             @const863
+0      9   0    0             @const864
+0    382  11    4    935  5.7  NavigateTimeMoneyPreferenceMenu
+0      6   0    0             @const866
+0    122   4    5             @PSTRINGCN7_629
 0     23   1    3             @DIV88
  Inline         6             @PRINTF_D_629
-0      5   0    0             @const860
-0    132   5    9             @PRINTF_LD_629
-0      3   0    0             @const863
-0    225   9    4    754  4.8  NavigatePolishingMenu
-0      7   0    0             @const867
-0      3   0    0             @const869
-1    260  11    2    701  2.9  DisplayRecordsSequentiallyOnLCD
-0      4   0    0    754  4.8  @const872
-0      5   0    0             @const874
-0      4   0    0             @const875
-0      5   0    0             @const877
-0      5   0    0      3  0.0  @const878
-0     80   3    0    519  3.7  SubSystem_uart_CheckTheMessage
-0      6   0    0             @const879
-0      6   0    0             @const880
-0      6   0    0             @const881
-0      5   0    0             @const882
+0      5   0    0             @const875
+0    132   4    9    754  4.8  @PRINTF_LD_629
+0      3   0    0             @const878
+0    247   7    4    754  4.8  NavigatePolishingMenu
+0      7   0    0             @const881
+0      3   0    0             @const883
+1    286   9    2    701  2.9  DisplayRecordsSequentiallyOnLCD
+0      4   0    0             @const886
+0      5   0    0             @const888
+0      4   0    0             @const889
+0      5   0    0             @const891
+0      5   0    0             @const892
+0     80   2    0    519  3.7  SubSystem_uart_CheckTheMessage
+0      6   0    0             @const893
+0      6   0    0    544  3.3  @const894
+0      6   0    0             @const895
+0      5   0    0             @const896
+1    134   4    2    544  3.3  sequentialDisplayScan
+0     10   0    0     78  1.6  loadZeroValue_2_DisplaySegment
  Inline         0             @cinit1
 
 Program metrics:
-    Functions               25
-    Statements              542
-    Comments                669
-    Volume (V)              18997
-    Difficulty (D)          84.6
-    Effort to implement (E) 1607895
-    Time to implement (T)   24 hours, 49 minutes
-    Est Delivered Bugs (B)  5
-    Cyclomatic Complexity   48
+    Functions               30
+    Statements              621
+    Comments                739
+    Volume (V)              26044
+    Difficulty (D)          104.8
+    Effort to implement (E) 2729487
+    Time to implement (T)   42 hours, 7 minutes
+    Est Delivered Bugs (B)  7
+    Cyclomatic Complexity   64
     Maintainability (MI)    136
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00003     4  0  
 00004-00055    82  0  
-00056-007FF  1779  183  
-00800-00FFF   590  1458  
+00056-007FF  1961  1  
+00800-00FFF  1313  735  
 01000-017FF     0  2048  
 01800-01FFF     0  2048  
 

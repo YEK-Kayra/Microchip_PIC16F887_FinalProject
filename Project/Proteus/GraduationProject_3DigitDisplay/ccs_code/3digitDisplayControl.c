@@ -141,27 +141,31 @@ void main(void)
      
      
     do {
-       val_ADC_Pot_Surf = read_adc();  
-       
-       ADC_TO_INDEXofTIMER(val_ADC_Pot_Surf);
-       
-       if (val_ADC_Pot_Surf != previous_ADC_value) 
-       {
-           printf(lcd_putc, "\fADC : %lu", val_ADC_Pot_Surf);
-           delay_ms(10);
-           printf(lcd_putc,"\nIndex=%d",optionIndex_timer);
-           delay_ms(10);
-           previous_ADC_value = val_ADC_Pot_Surf; 
-       }
-     
-       if(input(tickButton) == 1){
-         break;
-       }
-       
+             val_ADC_Pot_Surf = read_adc();  
+             
+             //Hangi indexte ise ilgili deðeri oku
+             ADC_TO_INDEXofTIMER(val_ADC_Pot_Surf);
+             
+                if (val_ADC_Pot_Surf != previous_ADC_value) 
+                {
+                    printf(lcd_putc, "\fADC : %lu", val_ADC_Pot_Surf);
+                    delay_ms(10);
+                    printf(lcd_putc,"\nIndex=%d",optionIndex_timer);
+                    delay_ms(10);
+                    previous_ADC_value = val_ADC_Pot_Surf; 
+                }
+              
+                //Seçim yapýldý ve artýk deðeri timer a yüklemek için do-while döngüsünü kýr
+                if(input(tickButton) == 1){
+                  break;
+                }
+             
        }while(1);
-       
+      
+      //Display de gerisin geriye saydýracaðým deðer neyse onu yükle 
       TimingNumber =  time_arr[optionIndex_timer];
        
+       //artýk adc okumasýný kapatabilirsin
        printf(lcd_putc, "\f");
        setup_adc(ADC_OFF);
        
@@ -175,7 +179,8 @@ void main(void)
      // Enable interrupts by setting GIE (Global Interrupt Enable)
      // and TOIE (Timer0 Overflow Interrupt Enable) bits in INTCON register
      my_INTCON_REG |= 0xA0; 
-     // Client will choose one from the options shown below
+     
+     //indexi aldý , zaman dizisini de aldý , makroda dönüþütürüp desired value yi  bulacak
      SECOND_TO_ISR_COUNT(time_arr, optionIndex_timer);    
       
       

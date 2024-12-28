@@ -13,7 +13,8 @@
 /********************************************************/
 #use delay(clock=4M) 
 #use rs232(baud=9600,parity=N,uart1,bits=8)
-#use fast_io(b)
+#use fast_io(b) //Includes : The operation cancel button & The pins of the 7-segment display
+#use fast_io(e) //Includes : 7-segment display pins for scanning
 
 /********************************************************/
 /*               SYSTEM INCLUDES                        */
@@ -52,19 +53,21 @@ unsigned long int mililitre_Polishing;       //Process number-4
 /********************************************************/
 /*               SYSTEM VARIABLES                       */
 /********************************************************/
-//-VAR-->CRITICAL PART
-char readed_ID;      //Coming data will be When came from slave PIC
-int8 systemLock;     //If the ID is valid, system open. Otherwise it will remain locked
-int8 OPS_Status;     //55 means ops will be canceled, otherwise ops will be going on
-char SelectionState; //Put 'X' if button_Select is HIGH, put empty character if button_RemoveSelect is HIGH
 
-//-VAR-->Keeps Clients
+//------------ VAR --> CRITICAL PART <-- VAR ------------//
+char readed_ID;            //Coming data will be When came from slave PIC
+int8 systemLock;           //If the ID is valid, system open. Otherwise it will remain locked
+int8 OPS_Status;           //55 means ops will be canceled, otherwise ops will be going on
+char SelectionState;       //Put 'X' if button_Select is HIGH, put empty character if button_RemoveSelect is HIGH
+int8 LockingMechanism = 1; //Will protect the system against repetitive or incorrect operations
+
+//------------ VAR --> Keeps Clients <-- VAR ------------//
 MikroleumClient_HandleTypeDef MikroClient[2]; //Each customer keeps their own records
                                               //MikroClient[0] Mr. Selcuk //ClientNumber=0
                                               //MikroClient[1] Mr. Emre   //ClientNumber=1
-int8 ClientNumber;   // Will be used as given on the right --> MikroClient[ClientNumber]                                        
+int8 ClientNumber;                            // Will be used as given on the right --> MikroClient[ClientNumber]                                        
 
-//-VAR-->POTENTIOMETERS
+//------------ VAR --> POTENTIOMETERS <-- VAR ------------//
 int Index_OptionMenu;
 int Index_TimeMoneyPreference;
 int Index_PolishMililitre;
@@ -72,23 +75,59 @@ unsigned long int val_ADC_Pot_Surf;
 unsigned long int val_ADC_Pot_Timer;
 unsigned long int val_ADC_Pot_Polish;
 
-//-VAR-->TIMER & ARRAYS
+//------------ VAR --> TIMER & ARRAYS <-- VAR ------------//
 unsigned long int time_arr[12] = {20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240};//Seconds
 unsigned long int timer0_isr_counter=0;
 unsigned long int desired_value=0.0;
 unsigned long int mililitrePolish[5] = {1,2,3,4,5}; // 1x100ml , 2x100ml, ... 5x100ml
+
+//------------ VAR --> 7-SEGMENT DISPLAY NUMBERS <-- VAR ------------//
+int8 segmentTable[16] = { 
+    0x7E, 0x0C, 0xB6, 0x9E, 0xCC, //==> 0,1,2,3,4
+    0xDA, 0xFA, 0x0E, 0xFE, 0xDE  //==> 5,6,7,8,9
+};
+
+//Split the current time value into digits.
+int8 number_unitDigit=0;
+int8 number_tensDigit=0;
+int8 number_hundredDigit =0;
+
+unsigned long int CurrentTime;     // Current countdown value
+
+int8 counter_StartOpsButtonTick=0;  /*
+                                     * If the value is 1, start the foaming process.
+                                     * If the value is 2, start the washing process.
+                                     * If the value is 3, start the ventilation process.
+                                     * If the value is 4, start the polishing process.
+                                     */
+unsigned long SelectedTime; //The SelectedTime variable will be sent to the macro to configure the desired_value variable
 
 
 /********************************************************/
 /*               SYSTEM DEFINATION                      */
 /********************************************************/
 /* ======== SYSTEM INPUT & OUTPUT ======== */
-#define button_NEXT           pin_A3
-#define button_BACK           pin_A4
-#define button_Select         pin_A5
-#define button_RemoveSelect   pin_C0
-#define button_OPS_START      pin_C1
-#define button_OPS_CANCEL     pin_B0
+//-IO--INPUT---->LCD Screen Control Section 
+#define button_NEXT           pin_A3   //Proceed to the next operation.
+#define button_BACK           pin_A4   //Go back to the previous operation.
+#define button_Select         pin_A5   //Select the desired option.
+#define button_RemoveSelect   pin_C0   //Remove the option I canceled.
+
+#define button_OPS_START      pin_C1   /* button_OPS_START : 
+                                        * This button performs the following functions:
+                                        * - Starts the foaming, washing, ventilation, and polishing processes.
+                                        * - Triggers the countdown for foaming, washing, and ventilation.
+                                        * - Loads percentage progress into the system for polishing.
+                                        */
+                                        
+#define button_OPS_CANCEL     pin_B0   //Cancel all operations and close the system for the user.
+
+//-IO--OUTPUT---->7-Segment Display Scanning Section
+#define pin_HundredDigit_switch pin_E2
+#define pin_TensDigit_switch    pin_E0 
+#define pin_UnitDigit_switch    pin_E1 
+
+
 
 
 /********************************************************/
@@ -97,6 +136,7 @@ unsigned long int mililitrePolish[5] = {1,2,3,4,5}; // 1x100ml , 2x100ml, ... 5x
 /* ======== SYSTEM CONFIGURATION FUNCTIONS PROTOTYPES  ======== */
 void SubSystem_Init(void);
 void trisSetting_Init(void);
+void displaySetting_Init(void);
 void interruptSetting_Init(void);
 void adcSetting_Init(void);
 
@@ -110,6 +150,9 @@ void DisplayRecordsSequentiallyOnLCD(void);
 /* ======== UART SERIAL COM. FUNCTIONS PROTOTYPES  ======== */
 void SubSystem_uart_CheckTheMessage(void);
 
+/* ======== 7-SEGMENT DISPLAY FUNCTIONS PROTOTYPES  ======== */
+void sequentialDisplayScan(void);
+void loadZeroValue_2_DisplaySegment(void);
 
 /********************************************************/
 /*               SYSTEM MACROS                          */
@@ -144,9 +187,9 @@ void SubSystem_uart_CheckTheMessage(void);
 /* ======== -BEGIN- SYSTEM TIMER TIME CONFIG -BEGIN- ======== */
 //--> Timer Desired Value Calculator 
 #define TimerScalingFactor ((1000.0) / 64.0)
-#define SECOND_TO_ISR_COUNT(time_arr, Index_TimeMoneyPreference)                       \
-   do{                                                                \
-         desired_value = ((time_arr[Index_TimeMoneyPreference]) * TimerScalingFactor); \
+#define SECOND_TO_ISR_COUNT(SelectedTime)                     \
+   do{                                                        \
+         desired_value = (SelectedTime * TimerScalingFactor); \
    }while(0)
 
 /* ======== -END- SYSTEM TIMER TIME CONFIG -END- ======== */
@@ -170,15 +213,37 @@ void systemTimer0_isr(){
 
    timer0_isr_counter++;
    
-   // (64mS * desired_value) is for about desired_duration
+/*
+ * e.g., 20 seconds is equal to 20000 milliseconds.
+ * We divide by 64 because Timer 0 generates an interrupt every 64 milliseconds.
+ * (20000 milliseconds / 64 milliseconds) = 312.5
+ * This gives the desired value for the timing calculation.
+ */
    if(timer0_isr_counter == desired_value){
+   
+      //CurrentTime=0;
+      timer0_isr_counter=0;  
       //Disable Timer0 Interrupt
       my_INTCON_REG &= 0xDF;
-      timer0_isr_counter=0;   
+      
+   }
+   
+   
+   //If 1 second has passed
+   if((timer0_isr_counter%16) == 0){
+   
+      //Decrease the current time value by one.
+      CurrentTime-=1;
+          
+         if(CurrentTime==0){     
+            //Disable Timer0 Interrupt
+            my_INTCON_REG &= 0xDF;     
+         }
    }
    
    // Clear timer0 overflow interrupt flag
    my_INTCON_REG &= 0xFB; 
+   
 }
 /* ======== -END- TIMER_0 INTERRUPT -END- ======== */
 
@@ -190,7 +255,7 @@ void systemTimer0_isr(){
 void main(void) 
 {
   
-   //System parameters will be initialized
+   //System parameters and peripherals will be initialized
    SubSystem_Init();
       
    //Wait until unlock the system
@@ -245,6 +310,7 @@ void main(void)
              SelectionState = ' ';
              
                 //The client wants to see the next section based on the selected option
+                //Selections will be made for foaming, washing, and ventilation processes in this section
                 if((input(button_NEXT) == 1) && (Index_OptionMenu <= 2))
                 {
       
@@ -272,6 +338,7 @@ void main(void)
                 }
                 
                 
+                //In this section, only milliliter selection will be made for the polishing process
                 if((input(button_NEXT) == 1) && (Index_OptionMenu == 3)){
    
                         do{
@@ -296,8 +363,105 @@ void main(void)
                         }while(OPS_Status!=55); 
                 
                 }
+                
+                
+                /*
+                 * In this section, a countdown will start for the selected times.
+                 * Each time the button_OPS_START is pressed, a new countdown for the process will begin.
+                */
+                if(input(button_OPS_START) == 1){
+                
+                        printf(lcd_putc,"\f");
+                        lcd_gotoxy(4,1);
+                        printf(lcd_putc,"Operasyon");
+                        lcd_gotoxy(4,2);
+                        printf(lcd_putc,"Baslatildi");
+                        
+                        //Wait 100 milliseconds to allow for button interference
+                        delay_ms(100); 
+                        
+                        //Increase the value by one, if clicked during each recheck
+                        counter_StartOpsButtonTick+=1;
+                        LockingMechanism = 1;
+                        
+                        do{
+                              
+                              //Loads the foaming time
+                              if((counter_StartOpsButtonTick == 1) && LockingMechanism == 1){       
+                                   
+                                    //The SelectedTime variable will be sent to the macro to configure the desired_value variable
+                                    SelectedTime = MikroClient[ClientNumber].time_Foaming;
+                                    
+                                    //The CurrentTime variable will hold the current number  to be displayed
+                                    CurrentTime = MikroClient[ClientNumber].time_Foaming;
+                                    
+                                    //Determine the value that the desired_value variable will take.
+                                    SECOND_TO_ISR_COUNT(SelectedTime);  
+                                    
+                                    // Enable interrupts by setting GIE (Global Interrupt Enable)
+                                    // and TOIE (Timer0 Overflow Interrupt Enable) bits in INTCON register
+                                    my_INTCON_REG |= 0xA0;
+                                                                     
+                                    //The lock mechanism was broken to prevent re-evaluation
+                                    LockingMechanism = 0;
+                                                                                
+                              }
+                              
+                               //Loads the washing time
+                              if((counter_StartOpsButtonTick == 2) && LockingMechanism == 1){       
+                                   
+                                    //The SelectedTime variable will be sent to the macro to configure the desired_value variable
+                                    SelectedTime = MikroClient[ClientNumber].time_Washing;
+                                    
+                                    //The CurrentTime variable will hold the current number  to be displayed
+                                    CurrentTime = MikroClient[ClientNumber].time_Washing;
+                                    
+                                    //Determine the value that the desired_value variable will take.
+                                    SECOND_TO_ISR_COUNT(SelectedTime);  
+                                    
+                                    // Enable interrupts by setting GIE (Global Interrupt Enable)
+                                    // and TOIE (Timer0 Overflow Interrupt Enable) bits in INTCON register
+                                    my_INTCON_REG |= 0xA0;
+                                                                     
+                                    //The lock mechanism was broken to prevent re-evaluation
+                                    LockingMechanism = 0;
+                                                                                
+                              }
+                              
+                              //Loads the Ventilation time
+                              if((counter_StartOpsButtonTick == 3) && LockingMechanism == 1){       
+                                   
+                                    //The SelectedTime variable will be sent to the macro to configure the desired_value variable
+                                    SelectedTime = MikroClient[ClientNumber].time_Ventilation;
+                                    
+                                    //The CurrentTime variable will hold the current number  to be displayed
+                                    CurrentTime = MikroClient[ClientNumber].time_Ventilation;
+                                    
+                                    //Determine the value that the desired_value variable will take.
+                                    SECOND_TO_ISR_COUNT(SelectedTime);  
+                                    
+                                    // Enable interrupts by setting GIE (Global Interrupt Enable)
+                                    // and TOIE (Timer0 Overflow Interrupt Enable) bits in INTCON register
+                                    my_INTCON_REG |= 0xA0;
+                                                                     
+                                    //The lock mechanism was broken to prevent re-evaluation
+                                    LockingMechanism = 0;
+                                                                                
+                              }
+                              
+                             //Display/scroll the CurrentTime value on the displays
+                             sequentialDisplayScan();        
+                                  
+                                  if((CurrentTime==1) && (SelectedTime==60)){
+                                  break;
+                                  }
+                        }while( (CurrentTime!=0) );
+                }
                             
                delay_ms(100);
+               
+            //Load the initial value(0) into the segments.
+            loadZeroValue_2_DisplaySegment();
   
       }while(OPS_Status!=55);
       
@@ -311,11 +475,8 @@ void main(void)
             
     while(1)
     {
-    
-   
-   
+
     }
- 
  
 }
 
@@ -325,13 +486,21 @@ void main(void)
 void SubSystem_Init(void){
  lcd_init();
  trisSetting_Init();
+ displaySetting_Init();
  interruptSetting_Init();
  adcSetting_Init();
 }
 
 //Function-2
 void trisSetting_Init(){
-   set_tris_b(0x01);
+   set_tris_b(0x01); //B0       ==> Cancel all operations and close the system
+                     //B1 to B7 ==> 7-Segment Display 
+                     
+   //Assign the Display Scanning switches as outputs
+   output_drive(pin_HundredDigit_switch); 
+   output_drive(pin_TensDigit_switch);
+   output_drive(pin_UnitDigit_switch);
+     
 }
 
 //Function-3
@@ -349,9 +518,7 @@ void interruptSetting_Init(){
         //        64mS = 1uS * 256 * (256-56)
         my_TIM0_OPTION_REG &= 0xC7 ;
         my_TIM0_MODULE_REG = 56;
-        // Enable interrupts by setting GIE (Global Interrupt Enable)
-        // and TOIE (Timer0 Overflow Interrupt Enable) bits in INTCON register
-        my_INTCON_REG |= 0xA0; 
+
 }
 
 //Function-4
@@ -364,8 +531,19 @@ void adcSetting_Init(){
      //-CONFIG--> Process Intensity Potentiometer
 }
 
-/* ======== -END- SYSTEM CONFIGURATION FUNCTIONS -END- ======== */
+//Function-5
+void displaySetting_Init(){
 
+   //Apply voltage to display the digits
+   output_high(pin_UnitDigit_switch);    
+   output_high(pin_TensDigit_switch);     
+   output_high(pin_HundredDigit_switch); 
+   
+   //Load the initial value into the segments.
+   output_b(segmentTable[0]); 
+}
+
+/* ======== -END- SYSTEM CONFIGURATION FUNCTIONS -END- ======== */
 
 
 
@@ -557,3 +735,52 @@ void SubSystem_uart_CheckTheMessage(void){
 
 }
 /* ======== -END- UART PROTOCOL FUNCTIONS -END- ======== */
+
+
+/* ======== -BEGIN- 7-SEGMENT DISPLAY -BEGIN- ======== */
+void sequentialDisplayScan(){
+
+         //CurrentTime will be taken from the timer.
+         number_unitDigit    = (CurrentTime%10);  
+         number_tensDigit    = ((CurrentTime/10)%10); 
+         number_hundredDigit = ((CurrentTime/100)%10);   
+         
+        
+         /*
+          * Perform digit changes using the transistor.
+          * Display the corresponding value for the relevant digit.
+          * Wait for a millisecond to allow the human eye to perceive the change.
+          */
+          output_high(pin_UnitDigit_switch);     
+          output_low(pin_TensDigit_switch);      
+          output_low(pin_HundredDigit_switch);   
+          output_b(segmentTable[number_unitDigit]); 
+          delay_ms(10);                            
+          
+          output_low(pin_UnitDigit_switch);      
+          output_high(pin_TensDigit_switch);     
+          output_low(pin_HundredDigit_switch);          
+          output_b(segmentTable[number_tensDigit]); 
+          delay_ms(10);  
+          
+          output_low(pin_UnitDigit_switch);       
+          output_low(pin_TensDigit_switch);       
+          output_high(pin_HundredDigit_switch);   
+          output_b(segmentTable[number_hundredDigit]); 
+          delay_ms(10); 
+   
+}
+
+void loadZeroValue_2_DisplaySegment(){
+
+   //Apply voltage to display the digits
+   output_high(pin_UnitDigit_switch);    
+   output_high(pin_TensDigit_switch);     
+   output_high(pin_HundredDigit_switch); 
+   
+   //Load the initial value into the segments.
+   output_b(segmentTable[0]); 
+}
+
+
+/* ======== -END- 7-SEGMENT DISPLAY -END- ======== */
