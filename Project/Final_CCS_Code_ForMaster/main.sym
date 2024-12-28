@@ -1,14 +1,14 @@
 001     my_TIM0_MODULE_REG
 004-005 @WRITE_PROGRAM_MEMORY8.P1
 004-005 @READ_PROGRAM_MEMORY8.P2
-008     lcdlat
 008     lcd
+008     lcdlat
 00B     my_INTCON_REG
 015     CCP_1_LOW
 015     CCP_1
 016     CCP_1_HIGH
-01B     CCP_2_LOW
 01B     CCP_2
+01B     CCP_2_LOW
 01C     CCP_2_HIGH
 020     @INTERRUPT_AREA
 021     @INTERRUPT_AREA
@@ -39,38 +39,40 @@
 065-06E mililitrePolish
 06F-070 @sprintf_string
 071     @TRIS_C
-072-075 atan2.y
 072     lcd_init.i
-072     NavigateTimeMoneyPreferenceMenu.@SCRATCH1
+072-075 atan2.y
+072     SubSystem_lcd_IdleStatus.@SCRATCH1
 073-076 lcd_init.LCD_INIT_STRING
 073     MAIN.@SCRATCH1
 073     @PSTRINGC7_629.@SCRATCH1
-073     SubSystem_lcd_IdleStatus.@SCRATCH1
-073     NavigateTimeMoneyPreferenceMenu.@SCRATCH2
+073     NavigateTimeMoneyPreferenceMenu.@SCRATCH1
 073     NavigatePolishingMenu.@SCRATCH1
+073     DisplayRecordsSequentiallyOnLCD.@SCRATCH1
 074     @PRINTF_D_629.P1
 074     MAIN.@SCRATCH2
 074     @PSTRINGC7_629.@SCRATCH2
-074     NavigateTimeMoneyPreferenceMenu.@SCRATCH3
+074     NavigateTimeMoneyPreferenceMenu.@SCRATCH2
 074     NavigatePolishingMenu.@SCRATCH2
+074     DisplayRecordsSequentiallyOnLCD.@SCRATCH2
 075-076 @PRINTF_LD_629.P1
 075-076 @DIV1616.P2
 075     @PSTRINGCN7_629.P3
 075     @PRINTF_D_629.P4
 075     @PSTRINGC7_629.@SCRATCH3
-075     NavigateTimeMoneyPreferenceMenu.@SCRATCH4
+075     NavigateTimeMoneyPreferenceMenu.@SCRATCH3
 075     NavigatePolishingMenu.@SCRATCH3
 076.0   atan2.sign
 076     @PSTRINGC7_629.@SCRATCH4
+076     NavigateTimeMoneyPreferenceMenu.@SCRATCH4
 076     NavigatePolishingMenu.@SCRATCH4
 077     @SCRATCH
 078     @SCRATCH
 078     _RETURN_
 079     @SCRATCH
 07A     @SCRATCH
-07B-07C @MUL1616.P1
-07B-07E atan2.x
 07B-07C @DIV1616.P1
+07B-07C @MUL1616.P2
+07B-07E atan2.x
 07B     lcd_init.@SCRATCH1
 07B     @PSTRINGCN7_629.@SCRATCH1
 07B     @PRINTF_D_629.@SCRATCH1
@@ -91,8 +93,8 @@
 0A0     @PRINTF_LD_629.@SCRATCH1
 0A1     @DIV88.P1
 0A1     @PRINTF_LD_629.@SCRATCH2
-0A2     @PRINTF_LD_629.@SCRATCH3
 0A2     @DIV88.@SCRATCH1
+0A2     @PRINTF_LD_629.@SCRATCH3
 0A3     @PRINTF_LD_629.@SCRATCH4
 0A4     atan2.quad
 0A4     @PRINTF_LD_629.@SCRATCH5
@@ -114,8 +116,8 @@
 0FF     @INTERRUPT_AREA
 107.6   C1OUT
 108.6   C2OUT
-10D-10E @READ_PROGRAM_MEMORY8.P1
-10D-10E @WRITE_PROGRAM_MEMORY8.P2
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
 17F     @INTERRUPT_AREA
 1FF     @INTERRUPT_AREA
 27F     @INTERRUPT_AREA
@@ -150,33 +152,33 @@ FFF     @INTERRUPT_AREA
 ROM Allocation:
 000056  system_isr_OperationCANCEL
 00005D  systemTimer0_isr
-000070  @const829.call
-000074  @const835.call
-000079  @const840.call
-00007D  @const842.call
-000082  @const843.call
-000087  @const845.call
-00008D  @const846.call
-000093  @const848.call
-00009B  @const849.call
-0000A1  @const852.call
-0000AA  @const853.call
-0000B0  @const854.call
-0000B7  @const855.call
-0000BE  @const856.call
-0000C6  @const857.call
-0000CD  @const858.call
-0000D5  @const859.call
-0000DC  @const860.call
-0000E5  @const862.call
-0000EB  @const869.call
-0000F0  @const870.call
-0000F3  @const874.call
-0000FA  @const876.call
-0000FD  @const878.call
-000103  @const879.call
-000109  @const880.call
-00010F  @const881.call
+000070  @const830.call
+000076  @const835.call
+00007C  @const837.call
+000084  @const838.call
+00008A  @const841.call
+000093  @const842.call
+000099  @const843.call
+0000A0  @const844.call
+0000A7  @const845.call
+0000AF  @const846.call
+0000B6  @const847.call
+0000BE  @const848.call
+0000C5  @const849.call
+0000CE  @const851.call
+0000D4  @const860.call
+0000D9  @const863.call
+0000DC  @const867.call
+0000E3  @const869.call
+0000E6  @const872.call
+0000EA  @const874.call
+0000EF  @const875.call
+0000F3  @const877.call
+0000F8  @const878.call
+0000FD  @const879.call
+000103  @const880.call
+000109  @const881.call
+00010F  @const882.call
 000114  @delay_ms1
 000129  lcd_send_nibble
 000137  lcd_read_nibble
@@ -201,23 +203,24 @@ ROM Allocation:
 00050C  NavigateTimeMoneyPreferenceMenu
 000529  @PRINTF_D_629
 000668  NavigatePolishingMenu
-000800  MAIN
-000800  @cinit1
-000825  @cinit2
+000800  DisplayRecordsSequentiallyOnLCD
+000904  @cinit1
+000904  MAIN
+000929  @cinit2
 
 Project Directory:
     C:\Users\yunus\OneDrive\Masaüstü\Microchip_PIC16F887_FinalProject\Project\Final_CCS_Code_ForMaster\
 
 Project Files:
-    main.c                                                  [26-Ara-24 00:24  CRC=38CA84A7]
+    main.c                                                  [28-Ara-24 15:07  CRC=682CA4D5]
     ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f887.h [08-Eyl-15 15:15  CRC=E224733F]
     ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c [19-Eyl-13 16:38  CRC=D1A6378A]
     ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\math.h [16-Oca-15 10:40  CRC=6A8358B0]
 
-Source signature=C19BE0D0
+Source signature=F0FE00FE
 Program memory checksum=0000
 Program memory CRC=0000
-Hex file CRC=153C
+Hex file CRC=23D8
 
 Units:
     main (main)

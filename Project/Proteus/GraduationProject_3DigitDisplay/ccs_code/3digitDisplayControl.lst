@@ -1,4 +1,4 @@
-CCS PCM C Compiler, Version 5.049, 5967               28-Ara-24 14:24
+CCS PCM C Compiler, Version 5.049, 5967               28-Ara-24 15:21
 
                Filename:   C:\Users\yunus\OneDrive\Masaüstü\Microchip_PIC16F887_FinalProject\Project\Proteus\GraduationProject_3DigitDisplay\ccs_code\3digitDisplayControl.lst
 
@@ -6,7 +6,7 @@ CCS PCM C Compiler, Version 5.049, 5967               28-Ara-24 14:24
                            Largest free fragment is 2048
                RAM used:   62 (17%) at main() level
                            81 (22%) worst case
-               Stack used: 1 locations (0 in main + 1 for interrupts)
+               Stack used: 6 locations (5 in main + 1 for interrupts)
                Stack size: 8
 
 *
@@ -3612,7 +3612,7 @@ CCS PCM C Compiler, Version 5.049, 5967               28-Ara-24 14:24
 .................... #byte my_TIM0_OPTION_REG = 0x81  //Config register 
 .................... #byte my_TIM0_MODULE_REG = 0x01  //8 bit timer value storage register 
 .................... #byte my_INTCON_REG      = 0x0B  //General purpose interrupt register 
-....................  
+....................                                   
 ....................  
 ....................                       
 .................... int8 segmentTable[16] = { //b1 den baþlayarak b7 de bitecek 

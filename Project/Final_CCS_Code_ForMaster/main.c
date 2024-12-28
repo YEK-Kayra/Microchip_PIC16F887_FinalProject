@@ -105,6 +105,7 @@ void SubSystem_lcd_IdleStatus(void);
 void NavigateOperationMenu(void);
 void NavigateTimeMoneyPreferenceMenu(void);
 void NavigatePolishingMenu(void);
+void DisplayRecordsSequentiallyOnLCD(void);
 
 /* ======== UART SERIAL COM. FUNCTIONS PROTOTYPES  ======== */
 void SubSystem_uart_CheckTheMessage(void);
@@ -141,7 +142,6 @@ void SubSystem_uart_CheckTheMessage(void);
 /* ======== -END- SYSTEM POTENTIOMETER INDEXER -END- ======== */   
 
 /* ======== -BEGIN- SYSTEM TIMER TIME CONFIG -BEGIN- ======== */
-
 //--> Timer Desired Value Calculator 
 #define TimerScalingFactor ((1000.0) / 64.0)
 #define SECOND_TO_ISR_COUNT(time_arr, Index_TimeMoneyPreference)                       \
@@ -184,13 +184,16 @@ void systemTimer0_isr(){
 
 
 
+/********************************************************************************************************************/
+/*                                MAIN CODE & SEQUENTIAL STEPS OF THE OPERATION                                     */
+/********************************************************************************************************************/
 void main(void) 
 {
   
-   //-->System parameters will be initialized
+   //System parameters will be initialized
    SubSystem_Init();
       
-   //-->Wait until unlock the system
+   //Wait until unlock the system
    do{
            SubSystem_lcd_IdleStatus();   //Greeting the customer
            
@@ -203,6 +206,10 @@ void main(void)
     }while(systemLock!=1);
  
     delay_ms(1000);
+    
+    
+    
+    
   
 /**
  * @brief Program navigates through option menus using a potentiometer and buttons.
@@ -212,6 +219,12 @@ void main(void)
  * Specific sub-menus handle time/money preferences and polishing settings, with double-clicks for confirmation 
  * and single clicks for resetting choices.
  */
+
+
+/*-----------------------------------------------------------------------------------------------*/
+/*                   >>> BEGIN - SEQUENTIAL STEPS OF THE OPERATION - BEGIN <<<                   */
+/*-----------------------------------------------------------------------------------------------*/
+
 
       do{
              //Start Of Conversation for ADC_Surf
@@ -283,31 +296,19 @@ void main(void)
                         }while(OPS_Status!=55); 
                 
                 }
-                
-             
-             delay_ms(100);
+                            
+               delay_ms(100);
   
       }while(OPS_Status!=55);
       
+   //Display the record sequentially on the LCD
+   DisplayRecordsSequentiallyOnLCD(); 
       
+/*-----------------------------------------------------------------------------------------------*/
+/*                   >>> END - SEQUENTIAL STEPS OF THE OPERATION - END <<<                       */
+/*-----------------------------------------------------------------------------------------------*/      
       
-      printf(lcd_putc,"\f");
-      lcd_gotoxy(2,1);
-      printf(lcd_putc,"CLOSING");
-      delay_ms(1000);
-      printf(lcd_putc,"\f");  
-      lcd_gotoxy(1,1);
-      printf(lcd_putc, "Kopuk:%ld", MikroClient[ClientNumber].time_Foaming);
-      lcd_gotoxy(1,2);
-      printf(lcd_putc, "Su::%ld",MikroClient[ClientNumber].time_Washing);
-      delay_ms(2000);
-      printf(lcd_putc,"\f");  
-      lcd_gotoxy(1,1);
-      printf(lcd_putc, "Hava:%ld", MikroClient[ClientNumber].time_Ventilation);
-      lcd_gotoxy(1,2);
-       printf(lcd_putc, "Cila:%ld", MikroClient[ClientNumber].mililitre_Polishing);
-      delay_ms(2000);
-      
+            
     while(1)
     {
     
@@ -500,6 +501,27 @@ void NavigatePolishingMenu(){
    
    delay_ms(80);
 }
+
+//Function-5
+void DisplayRecordsSequentiallyOnLCD(){
+   printf(lcd_putc,"\f");
+   lcd_gotoxy(2,1);
+   printf(lcd_putc,"CLOSING");
+   delay_ms(1000);
+   printf(lcd_putc,"\f");  
+   lcd_gotoxy(1,1);
+   printf(lcd_putc, "Kopuk:%ld", MikroClient[ClientNumber].time_Foaming);
+   lcd_gotoxy(1,2);
+   printf(lcd_putc, "Su::%ld",MikroClient[ClientNumber].time_Washing);
+   delay_ms(2000);
+   printf(lcd_putc,"\f");  
+   lcd_gotoxy(1,1);
+   printf(lcd_putc, "Hava:%ld", MikroClient[ClientNumber].time_Ventilation);
+   lcd_gotoxy(1,2);
+    printf(lcd_putc, "Cila:%ld", MikroClient[ClientNumber].mililitre_Polishing);
+   delay_ms(2000);
+}
+
 /* ======== -END- LCD SCREEN FUNCTIONS -END- ======== */
 
 

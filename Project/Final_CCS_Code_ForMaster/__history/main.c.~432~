@@ -30,9 +30,9 @@
 /********************************************************/
 /*               SYSTEM REGISTER                        */
 /********************************************************/
-#byte my_TIM0_OPTION_REG = 0x81 
-#byte my_TIM0_MODULE_REG = 0x01 
-#byte my_INTCON_REG      = 0x0B
+#byte my_TIM0_OPTION_REG = 0x81  //Config register
+#byte my_TIM0_MODULE_REG = 0x01  //8 bit timer value storage register
+#byte my_INTCON_REG      = 0x0B  //General purpose interrupt register
 
 
 /********************************************************/
@@ -72,8 +72,12 @@ unsigned long int val_ADC_Pot_Surf;
 unsigned long int val_ADC_Pot_Timer;
 unsigned long int val_ADC_Pot_Polish;
 
+//-VAR-->TIMER & ARRAYS
 unsigned long int time_arr[12] = {20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240};//Seconds
+unsigned long int timer0_isr_counter=0;
+unsigned long int desired_value=0.0;
 unsigned long int mililitrePolish[5] = {1,2,3,4,5}; // 1x100ml , 2x100ml, ... 5x100ml
+
 
 /********************************************************/
 /*               SYSTEM DEFINATION                      */
@@ -138,11 +142,11 @@ void SubSystem_uart_CheckTheMessage(void);
 
 /* ======== -BEGIN- SYSTEM TIMER TIME CONFIG -BEGIN- ======== */
 
-   //--> Timer Desired Value Calculator 
+//--> Timer Desired Value Calculator 
 #define TimerScalingFactor ((1000.0) / 64.0)
 #define SECOND_TO_ISR_COUNT(time_arr, Index_TimeMoneyPreference)                       \
    do{                                                                \
-         desired_value = ((time_arr[time_idx]) * TimerScalingFactor); \
+         desired_value = ((time_arr[Index_TimeMoneyPreference]) * TimerScalingFactor); \
    }while(0)
 
 /* ======== -END- SYSTEM TIMER TIME CONFIG -END- ======== */
@@ -155,15 +159,34 @@ void SubSystem_uart_CheckTheMessage(void);
 /* ======== -BEGIN- EXTERNAL INTERRUPT -BEGIN- ======== */
 #int_EXT
 void system_isr_OperationCANCEL(){
-  OPS_Status = 55;
+  OPS_Status = 55;       //That's a password to break do-while's loops
+  my_INTCON_REG &= 0XFD; //Clear External Interrupt Flag bit 
 }
 /* ======== -END- EXTERNAL INTERRUPT -END- ======== */
 
 /* ======== -BEGIN- TIMER_0 INTERRUPT -BEGIN- ======== */
+#INT_TIMER0
+void systemTimer0_isr(){
+
+   timer0_isr_counter++;
+   
+   // (64mS * desired_value) is for about desired_duration
+   if(timer0_isr_counter == desired_value){
+      //Disable Timer0 Interrupt
+      my_INTCON_REG &= 0xDF;
+      timer0_isr_counter=0;   
+   }
+   
+   // Clear timer0 overflow interrupt flag
+   my_INTCON_REG &= 0xFB; 
+}
 /* ======== -END- TIMER_0 INTERRUPT -END- ======== */
 
 
 
+/********************************************************/
+/*               MAIN CODE &                            */
+/********************************************************/
 void main(void) 
 {
   
@@ -183,15 +206,25 @@ void main(void)
     }while(systemLock!=1);
  
     delay_ms(1000);
+    
+    
+    
+    
   
-      //Potansiyometreden deðerler okuyacak, opsiyonlarý gezmek için
-      //ileri butonuna basýlýnca pot hangi opsiyonda ise o opsiyona gidilecek
-      //geri butonuna basýlýnca pot ile tekrardan yukardan aþaðý gezilebilecek
-      //diyelim ki bir opsiyonun içine girdi, pot kullanarak zamanlama ayarlarý ile oynuyor, 
-      //çift týk ile ilgili zaman ve ücreti seçebilecek, tek týk ile de bozabilecek
+/**
+ * @brief Program navigates through option menus using a potentiometer and buttons.
+ * 
+ * Reads potentiometer values to select options or adjust parameters like time and cost.
+ * The "NEXT" button moves forward or confirms selection, while the "BACK" button allows returning or resetting.
+ * Specific sub-menus handle time/money preferences and polishing settings, with double-clicks for confirmation 
+ * and single clicks for resetting choices.
+ */
+
       do{
              //Start Of Conversation for ADC_Surf
              set_adc_channel(0);
+             //Provide sufficient acquisition time.
+             delay_us(20);
              
              //Get Surf_Pot ADC value(0-1024)
              val_ADC_Pot_Surf = read_adc();  
@@ -212,6 +245,8 @@ void main(void)
                         do{
                               //Start Of Conversation for ADC_Timer
                               set_adc_channel(1);
+                              //Provide sufficient acquisition time.
+                              delay_us(20);
                               
                               //Get Timer_Pot ADC value(0-1024)
                               val_ADC_Pot_Timer = read_adc(); 
@@ -255,6 +290,10 @@ void main(void)
                         }while(OPS_Status!=55); 
                 
                 }
+                
+                
+                
+                
                 
              
              delay_ms(100);
@@ -307,21 +346,31 @@ void trisSetting_Init(){
 
 //Function-3
 void interruptSetting_Init(){
-     //-CONFIG--> OPERATION CANCEL BUTTON 
-       ext_int_edge(L_TO_H); //Harici kesme Lojik 0'dan 1'e geçerken
-       enable_interrupts(INT_EXT); //Harici kesme aktif
-       enable_interrupts(GLOBAL); //Aktif kesmeler için genel kesme yetkisi ver
-     //-CONFIG--> TIMER0 
+//---> OPERATION CANCEL BUTTON CONFIGURATION  <---//
+
+        //Interrupt on rising edge of INT pin 
+        my_TIM0_OPTION_REG |= 0x40;
+        //External Interrupt Enable &  Global Interrupt Enable 
+        my_INTCON_REG |= 0x90; 
+     
+//---> TIMER & INTERRUPT CONFIGURATION  <---//
+     
+        // T(overflow) = InstructionTime*PSC*(256-TIM0_val)
+        //        64mS = 1uS * 256 * (256-56)
+        my_TIM0_OPTION_REG &= 0xC7 ;
+        my_TIM0_MODULE_REG = 56;
+        // Enable interrupts by setting GIE (Global Interrupt Enable)
+        // and TOIE (Timer0 Overflow Interrupt Enable) bits in INTCON register
+        my_INTCON_REG |= 0xA0; 
 }
 
 //Function-4
 void adcSetting_Init(){
-     //-CONFIG--> Surfing Potentiometer
+     //-CONFIG--> Surfing Potentiometer & Timer Potentiometer
         setup_adc_ports(sAN0|sAN1);
         setup_adc(adc_clock_div_32);
-        delay_us(200);
-        
-     //-CONFIG--> Timer Potentiometer
+        delay_us(20);
+       
      //-CONFIG--> Process Intensity Potentiometer
 }
 

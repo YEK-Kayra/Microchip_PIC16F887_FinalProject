@@ -1,5 +1,5 @@
 ÀÄmain
-   ÃÄMAIN  1/586  Ram=2
+   ÃÄMAIN  1/330  Ram=2
    ³  ÃÄ@cinit1  (Inline)  Ram=0
    ³  ÃÄSubSystem_Init  0/111  Ram=0
    ³  ³  ÃÄlcd_init  (Inline)  Ram=6
@@ -200,42 +200,43 @@
    ³  ³  ÃÄ@MUL1616  0/23  Ram=5
    ³  ³  ÀÄ@delay_ms1  0/21  Ram=1
    ³  ÃÄ@delay_ms1  0/21  Ram=1
-   ³  ÃÄlcd_putc  0/58  Ram=1
-   ³  ³  ÀÄ*
-   ³  ÃÄlcd_gotoxy  0/20  Ram=4
-   ³  ³  ÀÄ*
-   ³  ÃÄ@PSTRINGC7_629  0/84  Ram=4
-   ³  ³  ÀÄ*
-   ³  ÃÄ@delay_ms1  0/21  Ram=1
-   ³  ÃÄlcd_putc  0/58  Ram=1
-   ³  ³  ÀÄ*
-   ³  ÃÄlcd_gotoxy  0/20  Ram=4
-   ³  ³  ÀÄ*
-   ³  ÃÄ@PSTRINGCN7_629  0/90  Ram=5
-   ³  ³  ÀÄ*
-   ³  ÃÄ@PRINTF_LD_629  0/132  Ram=9
-   ³  ³  ÀÄ*
-   ³  ÃÄlcd_gotoxy  0/20  Ram=4
-   ³  ³  ÀÄ*
-   ³  ÃÄ@PSTRINGCN7_629  0/90  Ram=5
-   ³  ³  ÀÄ*
-   ³  ÃÄ@PRINTF_LD_629  0/132  Ram=9
-   ³  ³  ÀÄ*
-   ³  ÃÄ@delay_ms1  0/21  Ram=1
-   ³  ÃÄlcd_putc  0/58  Ram=1
-   ³  ³  ÀÄ*
-   ³  ÃÄlcd_gotoxy  0/20  Ram=4
-   ³  ³  ÀÄ*
-   ³  ÃÄ@PSTRINGCN7_629  0/90  Ram=5
-   ³  ³  ÀÄ*
-   ³  ÃÄ@PRINTF_LD_629  0/132  Ram=9
-   ³  ³  ÀÄ*
-   ³  ÃÄlcd_gotoxy  0/20  Ram=4
-   ³  ³  ÀÄ*
-   ³  ÃÄ@PSTRINGCN7_629  0/90  Ram=5
-   ³  ³  ÀÄ*
-   ³  ÃÄ@PRINTF_LD_629  0/132  Ram=9
-   ³  ³  ÀÄ*
-   ³  ÀÄ@delay_ms1  0/21  Ram=1
+   ³  ÀÄDisplayRecordsSequentiallyOnLCD  1/260  Ram=2
+   ³     ÃÄlcd_putc  0/58  Ram=1
+   ³     ³  ÀÄ*
+   ³     ÃÄlcd_gotoxy  0/20  Ram=4
+   ³     ³  ÀÄ*
+   ³     ÃÄ@PSTRINGC7_629  0/84  Ram=4
+   ³     ³  ÀÄ*
+   ³     ÃÄ@delay_ms1  0/21  Ram=1
+   ³     ÃÄlcd_putc  0/58  Ram=1
+   ³     ³  ÀÄ*
+   ³     ÃÄlcd_gotoxy  0/20  Ram=4
+   ³     ³  ÀÄ*
+   ³     ÃÄ@PSTRINGCN7_629  0/90  Ram=5
+   ³     ³  ÀÄ*
+   ³     ÃÄ@PRINTF_LD_629  0/132  Ram=9
+   ³     ³  ÀÄ*
+   ³     ÃÄlcd_gotoxy  0/20  Ram=4
+   ³     ³  ÀÄ*
+   ³     ÃÄ@PSTRINGCN7_629  0/90  Ram=5
+   ³     ³  ÀÄ*
+   ³     ÃÄ@PRINTF_LD_629  0/132  Ram=9
+   ³     ³  ÀÄ*
+   ³     ÃÄ@delay_ms1  0/21  Ram=1
+   ³     ÃÄlcd_putc  0/58  Ram=1
+   ³     ³  ÀÄ*
+   ³     ÃÄlcd_gotoxy  0/20  Ram=4
+   ³     ³  ÀÄ*
+   ³     ÃÄ@PSTRINGCN7_629  0/90  Ram=5
+   ³     ³  ÀÄ*
+   ³     ÃÄ@PRINTF_LD_629  0/132  Ram=9
+   ³     ³  ÀÄ*
+   ³     ÃÄlcd_gotoxy  0/20  Ram=4
+   ³     ³  ÀÄ*
+   ³     ÃÄ@PSTRINGCN7_629  0/90  Ram=5
+   ³     ³  ÀÄ*
+   ³     ÃÄ@PRINTF_LD_629  0/132  Ram=9
+   ³     ³  ÀÄ*
+   ³     ÀÄ@delay_ms1  0/21  Ram=1
    ÃÄsystem_isr_OperationCANCEL  0/7  Ram=0
    ÀÄsystemTimer0_isr  0/19  Ram=0

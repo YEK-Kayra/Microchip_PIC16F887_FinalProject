@@ -8,7 +8,7 @@ ROM used:   1301/8192 (16%)
 RAM used:   62/368 (17%) at main() level
             81/368 (22%) worst case
 
-Stack used: 1 worst case (0 in main + 1 for interrupts)
+Stack used: 6 worst case (5 in main + 1 for interrupts)
 Stack size: 8
 
 Lines Stmts  %   Files
@@ -38,25 +38,25 @@ Page ROM  %  RAM    Vol Diff  Functions:
 0    391  30    2   2315 10.2  MAIN
 0     23   2    5             @MUL1616
 0     37   3    5             @DIV1616
-0      6   0    0             @const807
-0     87   7    5             @PSTRINGCN7_626
-0    101   8    9             @PRINTF_LU_626
-0      5   0    0             @const812
-0     21   2    3             @DIV88
+0      6   0    0     48  1.3  @const807
+0     87   7    5     17  0.8  @PSTRINGCN7_626
+0    101   8    9     92  2.5  @PRINTF_LU_626
+0      5   0    0     59  1.6  @const812
+0     21   2    3    423  1.9  @DIV88
 0     89   7    6             @PRINTF_D_626
  Inline         0             @cinit1
 
 Program metrics:
-    Functions               10
+    Functions               15
     Statements              421
     Comments                551
-    Volume (V)              7563
-    Difficulty (D)          49.0
-    Effort to implement (E) 370606
-    Time to implement (T)   5 hours, 43 minutes
+    Volume (V)              9011
+    Difficulty (D)          58.4
+    Effort to implement (E) 525972
+    Time to implement (T)   8 hours, 7 minutes
     Est Delivered Bugs (B)  2
     Cyclomatic Complexity   18
-    Maintainability (MI)    32
+    Maintainability (MI)    85
 
  Segment     Used  Free
 -----------  ----  ----
