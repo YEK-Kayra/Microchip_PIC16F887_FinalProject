@@ -42,7 +42,7 @@ int8 number_tensDigit=0;
 int8 number_hundredDigit =0;
 
 //Sayacý tarafýndan atacanak deðer
-int TimingNumber;
+unsigned long TimingNumber;
 
 //For döngüsü için 1 saniye ye saydýr
 int8 MyTimeTicker = 0;
@@ -107,6 +107,16 @@ void systemTimer0_isr(){
       timer0_isr_counter=0;   
    }
    
+   if((timer0_isr_counter%16) == 0){
+   
+      TimingNumber-=1;
+      
+      if(TimingNumber==0){
+         my_INTCON_REG &= 0xDF;
+      }
+      
+   }
+   
    
    // Clear timer0 overflow interrupt flag
    my_INTCON_REG &= 0xFB; 
@@ -149,7 +159,9 @@ void main(void)
        }
        
        }while(1);
-      
+       
+      TimingNumber =  time_arr[optionIndex_timer];
+       
        printf(lcd_putc, "\f");
        setup_adc(ADC_OFF);
        

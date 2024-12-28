@@ -11,24 +11,24 @@ Type=4
 1=3digitDisplayControl.c
 
 [defines]
-buildcount=23
+buildcount=37
 
 [Opened Files]
 1=3digitDisplayControl.c
-t1=101
+t1=1
 Count=1
 2=..\..\ConfigurableTimer&Potentiometer\Configurable timers & Potentiometer\ConfigurableTimerAndPotentiometer.c
 t2=1
 
 [ProjectLog]
-Days=5
+Days=7
 D1=08-12-2024
 D1_L=6
 D1_L1=[74600]Started Editing.
 D1_L2=[75485]Stopped Editing.
 D1_L3=[75964]Started Editing.
 D1_L4=[78250]Stopped Editing.
-TotalEdit=72
+TotalEdit=101
 TotalDebug=0
 D1_E=48
 D1_D=0
@@ -60,11 +60,26 @@ D4_E=12
 D4_D=0
 D4_L5=[2190]Project Closed.
 D5=26-12-2024
-D5_L=4
+D5_L=7
 D5_L1=[2929]Project Opened.
 D5_L2=[2938]Started Editing.
 D5_L3=[3671]Stopped Editing.
 D5_L4=[3672]Started Editing.
+D5_L5=[4211]Stopped Editing.
+D5_E=17
+D5_D=0
+D5_L6=[4211]Project Closed.
+D5_L7=[86182]Project Opened.
+D6=27-12-2024
+D6_L=3
+D6_L1=[94]Started Editing.
+D6_L2=[794]Stopped Editing.
+D6_E=12
+D6_D=0
+D6_L3=[794]Project Closed.
+D7=28-12-2024
+D7_L=1
+D7_L1=[51774]Project Opened.
 [Units]
 Count=1
 1=3digitDisplayControl (main)
