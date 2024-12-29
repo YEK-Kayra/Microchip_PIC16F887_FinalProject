@@ -30,7 +30,7 @@ unsigned long int mililitre_Polishing;       //Process number-4
 MikroleumClient_HandleTypeDef MikroClient[2]; //Each customer keeps their own records
                                               //MikroClient[0] Mr. Selcuk //ClientNumber=0
                                               //MikroClient[1] Mr. Emre   //ClientNumber=1
-int8 ClientNumber;                            // Will be used as given on the right --> MikroClient[ClientNumber]  
+int8 ClientNumber=0;                            // Will be used as given on the right --> MikroClient[ClientNumber]  
 
 
 //Will be implemented//
@@ -54,7 +54,7 @@ unsigned int8 Client0_last_address=0; //For Selçuk Bey's account
 unsigned int8 Client1_last_address=0; //For Emre Bey's account
 
 //hangi iþlem üzerinde duruyorsak onun numarasý iþlem-1, iþlem-2 ==> 1 ve 2 bunlarýn numarasý oluyor, 
-unsigned int8 IndexOfReadMemory=0;
+unsigned int8 IndexOfReadMemory=2;  //en az 1 olabilir
 
 //Will be implemented into //
 /* ======== LCD SCREEN FUNCTIONS PROTOTYPES  ======== */
@@ -73,13 +73,13 @@ void main(void)
       lcd_init(); // LCD ekranýmýzý baþlatacak
 
       //Baslangýç deðerlerini atalým
-      MikroClient[ClientNumber].time_Foaming        = 20;
-      MikroClient[ClientNumber].time_Washing        = 40;
-      MikroClient[ClientNumber].time_Ventilation    = 60;
-      MikroClient[ClientNumber].mililitre_Polishing = 2;
+      MikroClient[ClientNumber].time_Foaming        = 20;      //4tl(20)   |    12tl(60)
+      MikroClient[ClientNumber].time_Washing        = 40;      //8tl(40)   |    14tl(70)
+      MikroClient[ClientNumber].time_Ventilation    = 60;      //12tl(60)  |    16tl(80)
+      MikroClient[ClientNumber].mililitre_Polishing = 2;       //30tl(2)   |    15tl(1)
          
       //Son durumu kullanýcýya göster ve kaydedilen deðerleri eeproma yaz
-      displayOperationStatus_WriteVariables_to_EEPROM();
+      //displayOperationStatus_WriteVariables_to_EEPROM();
      
       
       //okunan eeprom deðerlerini lcd de göster
@@ -139,44 +139,38 @@ void display_SelectedOpsVal_EEPROM_OnLCD(){
       lcd_gotoxy(1,1);
       printf(lcd_putc, "F: %d TL",eeprom_foaming_read_cost); 
       lcd_gotoxy(8,1);
-      printf(lcd_putc, "W: %d TL",eeprom_washing_read_cost); 
+      printf(lcd_putc, " W: %d TL",eeprom_washing_read_cost); 
       lcd_gotoxy(1,2);
       printf(lcd_putc, "V: %d TL",eeprom_ventilating_read_cost); 
       lcd_gotoxy(8,8);
-      printf(lcd_putc, "P: %d TL",eeprom_polishing_read_cost); 
+      printf(lcd_putc, " P: %d TL",eeprom_polishing_read_cost); 
        
 }
 
 //!//will be implemented
 void Read_EEPROMVariables_from_EEPROMregs(){
     
-    
     // NE ZAMAN NEXT BUTONUNA BASILIR O ZAMAN SEÇÝM YAPILIR
     // IndexOfReadMemory butonun üzerinde bulunduðu yer(next demeden önce)
     
         if(ClientNumber == 0)
         {
-         
-             
-            eeprom_foaming_read_cost     = read_eeprom( eeprom_Client0_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+1) );  //diyelimki kayýt 2 yi okumak istio
-            eeprom_washing_read_cost     = read_eeprom( eeprom_Client0_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+2) );
-            eeprom_ventilating_read_cost = read_eeprom( eeprom_Client0_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+3) );
-            eeprom_polishing_read_cost   = read_eeprom( eeprom_Client0_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+4) );
-           
-           
-            
+                  
+            eeprom_foaming_read_cost     = read_eeprom( eeprom_Client0_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+4) );  
+            eeprom_washing_read_cost     = read_eeprom( eeprom_Client0_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+5) );
+            eeprom_ventilating_read_cost = read_eeprom( eeprom_Client0_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+6) );
+            eeprom_polishing_read_cost   = read_eeprom( eeprom_Client0_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+7) );
+     
         }
         
         if(ClientNumber == 1){
         
-            eeprom_foaming_read_cost     = read_eeprom( eeprom_Client1_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+1) );  //diyelimki kayýt 2 yi okumak istio
+            eeprom_foaming_read_cost     = read_eeprom( eeprom_Client1_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+1) );  
             eeprom_washing_read_cost     = read_eeprom( eeprom_Client1_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+2) );
             eeprom_ventilating_read_cost = read_eeprom( eeprom_Client1_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+3) );
             eeprom_polishing_read_cost   = read_eeprom( eeprom_Client1_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+4) );
         
         }
-
-
 
 }
 
@@ -218,10 +212,10 @@ void write_EEPROMVariables_to_EEPROMregs(){
       //The last cursor position address will always be written to the zero address, to ensure that new data does not overwrite previously written data
       Client0_last_address = read_eeprom(eeprom_Client0_systemStartAddress);
       
-      write_eeprom( (eeprom_Client0_systemStartAddress + Client0_last_address + 1), (eeprom_foaming_written_cost)     ); Client0_last_address++; //Save foaming cost
-      write_eeprom( (eeprom_Client0_systemStartAddress + Client0_last_address + 1), (eeprom_washing_written_cost)     ); Client0_last_address++; //Save washing cost
-      write_eeprom( (eeprom_Client0_systemStartAddress + Client0_last_address + 1), (eeprom_ventilating_written_cost) ); Client0_last_address++; //Save Ventilating cost
-      write_eeprom( (eeprom_Client0_systemStartAddress + Client0_last_address + 1), (eeprom_polishing_written_cost)   ); Client0_last_address++; //Save Polishing cost
+      write_eeprom( (eeprom_Client0_systemStartAddress + Client0_last_address + 5), (eeprom_foaming_written_cost)     ); Client0_last_address++; //Save foaming cost
+      write_eeprom( (eeprom_Client0_systemStartAddress + Client0_last_address + 5), (eeprom_washing_written_cost)     ); Client0_last_address++; //Save washing cost
+      write_eeprom( (eeprom_Client0_systemStartAddress + Client0_last_address + 5), (eeprom_ventilating_written_cost) ); Client0_last_address++; //Save Ventilating cost
+      write_eeprom( (eeprom_Client0_systemStartAddress + Client0_last_address + 5), (eeprom_polishing_written_cost)   ); Client0_last_address++; //Save Polishing cost
       write_eeprom( (eeprom_Client0_systemStartAddress                           ), ( Client0_last_address)           );                         //Save cursor location in the client0 start address
    }
    
