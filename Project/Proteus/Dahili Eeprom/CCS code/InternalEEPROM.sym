@@ -1,5 +1,5 @@
-004-005 @WRITE_PROGRAM_MEMORY8.P1
-004-005 @READ_PROGRAM_MEMORY8.P2
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
 008     lcd
 008     lcdlat
 015     CCP_1_LOW
@@ -20,48 +20,50 @@
 038     eeprom_polishing_read_cost
 039     Client0_last_address
 03A     Client1_last_address
-03B-03C @sprintf_string
-03D     lcd_init.i
-03D     @PRINTF_D_626.P1
-03D     MAIN.@SCRATCH1
-03D     display_Status_EEPROM_OnLCD.@SCRATCH1
-03D     @PSTRINGC7_626.@SCRATCH1
-03D     loadCostValuesToEEPROMVariables.@SCRATCH1
-03D     write_EEPROMVariables_to_EEPROMregs.@SCRATCH1
-03E-041 lcd_init.LCD_INIT_STRING
+03B     IndexOfReadMemory
+03C-03D @sprintf_string
 03E     @PRINTF_D_626.P1
-03E     MAIN.@SCRATCH2
-03E     @PSTRINGC7_626.@SCRATCH2
-03E     loadCostValuesToEEPROMVariables.@SCRATCH2
-03F-040 @MUL1616.P1
-03F-040 @DIV1616.P2
-03F     @PSTRINGC7_626.@SCRATCH3
-03F     @PRINTF_D_626.@SCRATCH1
-040     @PSTRINGC7_626.@SCRATCH4
-040     @PRINTF_D_626.@SCRATCH2
-041-042 @MUL1616.P1
-041-042 @DIV1616.P2
-041     @PRINTF_D_626.@SCRATCH3
-042     lcd_init.@SCRATCH1
-042     @PRINTF_D_626.@SCRATCH4
-043     lcd_putc.c
-043     @DIV88.P1
-043     @DIV1616.@SCRATCH1
-043     @MUL1616.@SCRATCH1
-044     @delay_ms1.P1
-044     @DIV88.P2
-044     lcd_gotoxy.x
-045     lcd_gotoxy.y
-045     @DIV88.@SCRATCH1
-046     lcd_gotoxy.address
-047     lcd_gotoxy.@SCRATCH1
-048     lcd_send_byte.address
-049     lcd_send_byte.n
-04A     lcd_read_byte.low
-04A     lcd_send_byte.@SCRATCH1
-04B     lcd_send_nibble.n
-04B     lcd_read_byte.high
-04C     lcd_read_byte.@SCRATCH1
+03E     lcd_init.i
+03E     MAIN.@SCRATCH1
+03E     displayOperationStatus_WriteVariables_to_EEPROM.@SCRATCH1
+03E     @PSTRINGC7_626.@SCRATCH1
+03E     Read_EEPROMVariables_from_EEPROMregs.@SCRATCH1
+03E     loadCostValuesToEEPROMVariables.@SCRATCH1
+03E     write_EEPROMVariables_to_EEPROMregs.@SCRATCH1
+03F-042 lcd_init.LCD_INIT_STRING
+03F     @PRINTF_D_626.P1
+03F     MAIN.@SCRATCH2
+03F     @PSTRINGC7_626.@SCRATCH2
+03F     loadCostValuesToEEPROMVariables.@SCRATCH2
+040-041 @MUL1616.P1
+040-041 @DIV1616.P2
+040     @PSTRINGC7_626.@SCRATCH3
+040     @PRINTF_D_626.@SCRATCH1
+041     @PSTRINGC7_626.@SCRATCH4
+041     @PRINTF_D_626.@SCRATCH2
+042-043 @DIV1616.P1
+042-043 @MUL1616.P2
+042     @PRINTF_D_626.@SCRATCH3
+043     lcd_init.@SCRATCH1
+043     @PRINTF_D_626.@SCRATCH4
+044     lcd_putc.c
+044     @DIV88.P1
+044     @DIV1616.@SCRATCH1
+044     @MUL1616.@SCRATCH1
+045     @DIV88.P1
+045     @delay_ms1.P2
+045     lcd_gotoxy.x
+046     lcd_gotoxy.y
+046     @DIV88.@SCRATCH1
+047     lcd_gotoxy.address
+048     lcd_gotoxy.@SCRATCH1
+049     lcd_send_byte.address
+04A     lcd_send_byte.n
+04B     lcd_read_byte.low
+04B     lcd_send_byte.@SCRATCH1
+04C     lcd_read_byte.high
+04C     lcd_send_nibble.n
+04D     lcd_read_byte.@SCRATCH1
 077     @SCRATCH
 078     @SCRATCH
 078     _RETURN_
@@ -70,17 +72,17 @@
 088     lcdtris
 107.6   C1OUT
 108.6   C2OUT
-10D-10E @WRITE_PROGRAM_MEMORY8.P1
-10D-10E @READ_PROGRAM_MEMORY8.P2
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
 
 ROM Allocation:
-000004  @const664.call
-00000C  @const670.call
-000013  @const671.call
-00001A  @const673.call
-00001F  @const674.call
-000025  @const676.call
-00002B  @const677.call
+000004  @const665.call
+00000C  @const671.call
+000013  @const672.call
+00001A  @const674.call
+00001F  @const675.call
+000025  @const677.call
+00002B  @const678.call
 000033  @delay_ms1
 000048  lcd_send_nibble
 000054  lcd_read_nibble
@@ -91,30 +93,30 @@ ROM Allocation:
 0000EA  lcd_putc
 000116  @PSTRINGC7_626
 00016C  @DIV1616
-000191  loadCostValuesToEEPROMVariables
-00020E  @MUL1616
-000224  write_EEPROMVariables_to_EEPROMregs
-00035A  display_Status_EEPROM_OnLCD
-0003D9  Read_EEPROMVariables_from_EEPROMregs
-0003E8  @DIV88
-0003FD  @PRINTF_D_626
-000454  display_SelectedOpsVal_EEPROM_OnLCD
-0004C8  @cinit1
-0004C8  MAIN
-0004E6  @cinit2
+000191  displayOperationStatus_WriteVariables_to_EEPROM
+0001BF  loadCostValuesToEEPROMVariables
+00023C  @MUL1616
+000252  write_EEPROMVariables_to_EEPROMregs
+0003D7  @DIV88
+0003EC  @PRINTF_D_626
+000443  display_SelectedOpsVal_EEPROM_OnLCD
+000443  Read_EEPROMVariables_from_EEPROMregs
+000560  @cinit1
+000560  MAIN
+00057F  @cinit2
 
 Project Directory:
     C:\Users\yunus\OneDrive\Masaüstü\Microchip_PIC16F887_FinalProject\Project\Proteus\Dahili Eeprom\CCS code\
 
 Project Files:
-    InternalEEPROM.c                                        [29-Ara-24 20:59  CRC=96AA6B7C]
+    InternalEEPROM.c                                        [29-Ara-24 22:28  CRC=41AD382A]
     ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f887.h [08-Eyl-15 15:15  CRC=E224733F]
     ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c [19-Eyl-13 16:38  CRC=D1A6378A]
 
-Source signature=1C1B4DCF
+Source signature=C71E1A7D
 Program memory checksum=0000
 Program memory CRC=0000
-Hex file CRC=31D7
+Hex file CRC=8538
 
 Units:
     InternalEEPROM (main)

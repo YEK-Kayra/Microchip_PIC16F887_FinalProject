@@ -1,18 +1,18 @@
-CCS PCM C Compiler, Version 5.049, 5967               29-Ara-24 20:59
+CCS PCM C Compiler, Version 5.049, 5967               29-Ara-24 22:28
 
                Filename:   C:\Users\yunus\OneDrive\Masaüstü\Microchip_PIC16F887_FinalProject\Project\Proteus\Dahili Eeprom\CCS code\InternalEEPROM.lst
 
-               ROM used:   1326 words (16%)
+               ROM used:   1477 words (18%)
                            Largest free fragment is 2048
-               RAM used:   36 (10%) at main() level
-                           50 (14%) worst case
+               RAM used:   37 (10%) at main() level
+                           51 (14%) worst case
                Stack used: 5 locations
                Stack size: 8
 
 *
-0000:  MOVLW  04
+0000:  MOVLW  05
 0001:  MOVWF  0A
-0002:  GOTO   4C8
+0002:  GOTO   560
 0003:  NOP
 .................... #include <16f887.h> 
 .................... //////////// Standard Header file for the PIC16F887 device //////////////// 
@@ -75,7 +75,7 @@ CCS PCM C Compiler, Version 5.049, 5967               29-Ara-24 20:59
 0032:  DATA 72,00
 *
 0116:  MOVF   0B,W
-0117:  MOVWF  3D
+0117:  MOVWF  3E
 0118:  BCF    0B.7
 0119:  BSF    03.5
 011A:  BSF    03.6
@@ -85,7 +85,7 @@ CCS PCM C Compiler, Version 5.049, 5967               29-Ara-24 20:59
 011E:  NOP
 011F:  BCF    03.5
 0120:  BCF    03.6
-0121:  BTFSC  3D.7
+0121:  BTFSC  3E.7
 0122:  BSF    0B.7
 0123:  BSF    03.6
 0124:  MOVF   0C,W
@@ -93,28 +93,28 @@ CCS PCM C Compiler, Version 5.049, 5967               29-Ara-24 20:59
 0126:  BTFSC  03.2
 0127:  GOTO   16A
 0128:  BCF    03.6
-0129:  MOVWF  3D
+0129:  MOVWF  3E
 012A:  BSF    03.6
 012B:  MOVF   0D,W
 012C:  BCF    03.6
-012D:  MOVWF  3E
+012D:  MOVWF  3F
 012E:  BSF    03.6
 012F:  MOVF   0F,W
 0130:  BCF    03.6
-0131:  MOVWF  3F
-0132:  MOVF   3D,W
-0133:  MOVWF  43
+0131:  MOVWF  40
+0132:  MOVF   3E,W
+0133:  MOVWF  44
 0134:  CALL   0EA
-0135:  MOVF   3E,W
+0135:  MOVF   3F,W
 0136:  BSF    03.6
 0137:  MOVWF  0D
 0138:  BCF    03.6
-0139:  MOVF   3F,W
+0139:  MOVF   40,W
 013A:  BSF    03.6
 013B:  MOVWF  0F
 013C:  BCF    03.6
 013D:  MOVF   0B,W
-013E:  MOVWF  40
+013E:  MOVWF  41
 013F:  BCF    0B.7
 0140:  BSF    03.5
 0141:  BSF    03.6
@@ -124,7 +124,7 @@ CCS PCM C Compiler, Version 5.049, 5967               29-Ara-24 20:59
 0145:  NOP
 0146:  BCF    03.5
 0147:  BCF    03.6
-0148:  BTFSC  40.7
+0148:  BTFSC  41.7
 0149:  BSF    0B.7
 014A:  BSF    03.6
 014B:  RLF    0C,W
@@ -133,23 +133,23 @@ CCS PCM C Compiler, Version 5.049, 5967               29-Ara-24 20:59
 014E:  BTFSC  03.2
 014F:  GOTO   16A
 0150:  BCF    03.6
-0151:  MOVWF  3D
+0151:  MOVWF  3E
 0152:  BSF    03.6
 0153:  MOVF   0D,W
 0154:  BCF    03.6
-0155:  MOVWF  3E
+0155:  MOVWF  3F
 0156:  BSF    03.6
 0157:  MOVF   0F,W
 0158:  BCF    03.6
-0159:  MOVWF  3F
-015A:  MOVF   3D,W
-015B:  MOVWF  43
+0159:  MOVWF  40
+015A:  MOVF   3E,W
+015B:  MOVWF  44
 015C:  CALL   0EA
-015D:  MOVF   3E,W
+015D:  MOVF   3F,W
 015E:  BSF    03.6
 015F:  MOVWF  0D
 0160:  BCF    03.6
-0161:  MOVF   3F,W
+0161:  MOVF   40,W
 0162:  BSF    03.6
 0163:  MOVWF  0F
 0164:  INCF   0D,F
@@ -164,169 +164,169 @@ CCS PCM C Compiler, Version 5.049, 5967               29-Ara-24 20:59
 016D:  CLRF   79
 016E:  CLRF   77
 016F:  CLRF   7A
-0170:  MOVF   42,W
+0170:  MOVF   43,W
 0171:  BTFSS  03.2
 0172:  GOTO   176
-0173:  MOVF   41,W
+0173:  MOVF   42,W
 0174:  BTFSC  03.2
 0175:  GOTO   190
 0176:  MOVLW  10
-0177:  MOVWF  43
+0177:  MOVWF  44
 0178:  BCF    03.0
-0179:  RLF    3F,F
-017A:  RLF    40,F
+0179:  RLF    40,F
+017A:  RLF    41,F
 017B:  RLF    77,F
 017C:  RLF    7A,F
-017D:  MOVF   42,W
+017D:  MOVF   43,W
 017E:  SUBWF  7A,W
 017F:  BTFSS  03.2
 0180:  GOTO   183
-0181:  MOVF   41,W
+0181:  MOVF   42,W
 0182:  SUBWF  77,W
 0183:  BTFSS  03.0
 0184:  GOTO   18C
-0185:  MOVF   41,W
+0185:  MOVF   42,W
 0186:  SUBWF  77,F
 0187:  BTFSS  03.0
 0188:  DECF   7A,F
-0189:  MOVF   42,W
+0189:  MOVF   43,W
 018A:  SUBWF  7A,F
 018B:  BSF    03.0
 018C:  RLF    78,F
 018D:  RLF    79,F
-018E:  DECFSZ 43,F
+018E:  DECFSZ 44,F
 018F:  GOTO   178
 0190:  RETURN
 *
-020E:  MOVLW  10
-020F:  MOVWF  43
-0210:  CLRF   77
-0211:  CLRF   7A
-0212:  RRF    40,F
-0213:  RRF    3F,F
-0214:  BTFSS  03.0
-0215:  GOTO   21C
-0216:  MOVF   41,W
-0217:  ADDWF  77,F
-0218:  BTFSC  03.0
-0219:  INCF   7A,F
-021A:  MOVF   42,W
-021B:  ADDWF  7A,F
-021C:  RRF    7A,F
-021D:  RRF    77,F
-021E:  RRF    79,F
-021F:  RRF    78,F
-0220:  DECFSZ 43,F
-0221:  GOTO   212
+023C:  MOVLW  10
+023D:  MOVWF  44
+023E:  CLRF   77
+023F:  CLRF   7A
+0240:  RRF    41,F
+0241:  RRF    40,F
+0242:  BTFSS  03.0
+0243:  GOTO   24A
+0244:  MOVF   42,W
+0245:  ADDWF  77,F
+0246:  BTFSC  03.0
+0247:  INCF   7A,F
+0248:  MOVF   43,W
+0249:  ADDWF  7A,F
+024A:  RRF    7A,F
+024B:  RRF    77,F
+024C:  RRF    79,F
+024D:  RRF    78,F
+024E:  DECFSZ 44,F
+024F:  GOTO   240
 *
-03E8:  MOVF   44,W
-03E9:  CLRF   78
-03EA:  SUBWF  43,W
-03EB:  BTFSC  03.0
-03EC:  GOTO   3F0
-03ED:  MOVF   43,W
-03EE:  MOVWF  77
-03EF:  GOTO   3FC
-03F0:  CLRF   77
-03F1:  MOVLW  08
-03F2:  MOVWF  45
-03F3:  RLF    43,F
-03F4:  RLF    77,F
-03F5:  MOVF   44,W
-03F6:  SUBWF  77,W
-03F7:  BTFSC  03.0
-03F8:  MOVWF  77
-03F9:  RLF    78,F
-03FA:  DECFSZ 45,F
-03FB:  GOTO   3F3
-03FC:  RETURN
-03FD:  MOVLW  20
-03FE:  BTFSS  3E.4
-03FF:  MOVLW  30
-0400:  MOVWF  3F
-0401:  MOVF   3D,W
-0402:  MOVWF  77
-0403:  BTFSS  3D.7
-0404:  GOTO   40D
-0405:  COMF   77,F
-0406:  INCF   77,F
-0407:  MOVF   77,W
-0408:  MOVWF  3D
-0409:  MOVLW  2D
-040A:  MOVWF  3F
-040B:  BSF    3E.7
-040C:  BSF    3E.0
-040D:  MOVF   3D,W
-040E:  MOVWF  43
-040F:  MOVLW  64
-0410:  MOVWF  44
-0411:  CALL   3E8
-0412:  MOVF   77,W
-0413:  MOVWF  3D
-0414:  MOVLW  30
-0415:  ADDWF  78,W
-0416:  MOVWF  40
-0417:  MOVF   3D,W
-0418:  MOVWF  43
-0419:  MOVLW  0A
-041A:  MOVWF  44
-041B:  CALL   3E8
-041C:  MOVLW  30
-041D:  ADDWF  77,W
-041E:  MOVWF  42
+03D7:  MOVF   45,W
+03D8:  CLRF   78
+03D9:  SUBWF  44,W
+03DA:  BTFSC  03.0
+03DB:  GOTO   3DF
+03DC:  MOVF   44,W
+03DD:  MOVWF  77
+03DE:  GOTO   3EB
+03DF:  CLRF   77
+03E0:  MOVLW  08
+03E1:  MOVWF  46
+03E2:  RLF    44,F
+03E3:  RLF    77,F
+03E4:  MOVF   45,W
+03E5:  SUBWF  77,W
+03E6:  BTFSC  03.0
+03E7:  MOVWF  77
+03E8:  RLF    78,F
+03E9:  DECFSZ 46,F
+03EA:  GOTO   3E2
+03EB:  RETURN
+03EC:  MOVLW  20
+03ED:  BTFSS  3F.4
+03EE:  MOVLW  30
+03EF:  MOVWF  40
+03F0:  MOVF   3E,W
+03F1:  MOVWF  77
+03F2:  BTFSS  3E.7
+03F3:  GOTO   3FC
+03F4:  COMF   77,F
+03F5:  INCF   77,F
+03F6:  MOVF   77,W
+03F7:  MOVWF  3E
+03F8:  MOVLW  2D
+03F9:  MOVWF  40
+03FA:  BSF    3F.7
+03FB:  BSF    3F.0
+03FC:  MOVF   3E,W
+03FD:  MOVWF  44
+03FE:  MOVLW  64
+03FF:  MOVWF  45
+0400:  CALL   3D7
+0401:  MOVF   77,W
+0402:  MOVWF  3E
+0403:  MOVLW  30
+0404:  ADDWF  78,W
+0405:  MOVWF  41
+0406:  MOVF   3E,W
+0407:  MOVWF  44
+0408:  MOVLW  0A
+0409:  MOVWF  45
+040A:  CALL   3D7
+040B:  MOVLW  30
+040C:  ADDWF  77,W
+040D:  MOVWF  43
+040E:  MOVLW  30
+040F:  ADDWF  78,W
+0410:  MOVWF  42
+0411:  MOVF   40,W
+0412:  MOVWF  77
+0413:  MOVLW  30
+0414:  SUBWF  41,W
+0415:  BTFSC  03.2
+0416:  GOTO   41B
+0417:  BSF    3F.1
+0418:  BTFSC  3F.7
+0419:  BSF    3F.2
+041A:  GOTO   42F
+041B:  MOVF   40,W
+041C:  MOVWF  41
+041D:  MOVLW  20
+041E:  MOVWF  40
 041F:  MOVLW  30
-0420:  ADDWF  78,W
-0421:  MOVWF  41
-0422:  MOVF   3F,W
-0423:  MOVWF  77
-0424:  MOVLW  30
-0425:  SUBWF  40,W
-0426:  BTFSC  03.2
-0427:  GOTO   42C
-0428:  BSF    3E.1
-0429:  BTFSC  3E.7
-042A:  BSF    3E.2
-042B:  GOTO   440
-042C:  MOVF   3F,W
-042D:  MOVWF  40
-042E:  MOVLW  20
-042F:  MOVWF  3F
-0430:  MOVLW  30
-0431:  SUBWF  41,W
-0432:  BTFSC  03.2
-0433:  GOTO   438
-0434:  BSF    3E.0
-0435:  BTFSC  3E.7
-0436:  BSF    3E.1
-0437:  GOTO   440
-0438:  BTFSS  03.2
-0439:  BSF    3E.0
-043A:  BTFSS  03.2
-043B:  GOTO   440
-043C:  MOVF   40,W
-043D:  MOVWF  41
-043E:  MOVLW  20
-043F:  MOVWF  40
-0440:  BTFSC  3E.2
-0441:  GOTO   447
-0442:  BTFSC  3E.1
-0443:  GOTO   44A
-0444:  BTFSC  3E.0
-0445:  GOTO   44D
-0446:  GOTO   450
-0447:  MOVF   3F,W
-0448:  MOVWF  43
-0449:  CALL   0EA
-044A:  MOVF   40,W
-044B:  MOVWF  43
-044C:  CALL   0EA
-044D:  MOVF   41,W
-044E:  MOVWF  43
-044F:  CALL   0EA
-0450:  MOVF   42,W
-0451:  MOVWF  43
-0452:  CALL   0EA
-0453:  RETURN
+0420:  SUBWF  42,W
+0421:  BTFSC  03.2
+0422:  GOTO   427
+0423:  BSF    3F.0
+0424:  BTFSC  3F.7
+0425:  BSF    3F.1
+0426:  GOTO   42F
+0427:  BTFSS  03.2
+0428:  BSF    3F.0
+0429:  BTFSS  03.2
+042A:  GOTO   42F
+042B:  MOVF   41,W
+042C:  MOVWF  42
+042D:  MOVLW  20
+042E:  MOVWF  41
+042F:  BTFSC  3F.2
+0430:  GOTO   436
+0431:  BTFSC  3F.1
+0432:  GOTO   439
+0433:  BTFSC  3F.0
+0434:  GOTO   43C
+0435:  GOTO   43F
+0436:  MOVF   40,W
+0437:  MOVWF  44
+0438:  CALL   0EA
+0439:  MOVF   41,W
+043A:  MOVWF  44
+043B:  CALL   0EA
+043C:  MOVF   42,W
+043D:  MOVWF  44
+043E:  CALL   0EA
+043F:  MOVF   43,W
+0440:  MOVWF  44
+0441:  CALL   0EA
+0442:  RETURN
 ....................  
 .................... #list 
 ....................  
@@ -337,7 +337,7 @@ CCS PCM C Compiler, Version 5.049, 5967               29-Ara-24 20:59
 .................... //--> USEs 
 .................... #use delay(clock=4M) 
 *
-0033:  MOVLW  44
+0033:  MOVLW  45
 0034:  MOVWF  04
 0035:  BCF    03.7
 0036:  MOVF   00,W
@@ -588,7 +588,7 @@ CCS PCM C Compiler, Version 5.049, 5967               29-Ara-24 20:59
 ....................    high = lcd_read_nibble(); 
 006A:  CALL   054
 006B:  MOVF   78,W
-006C:  MOVWF  4B
+006C:  MOVWF  4C
 ....................        
 ....................    lcd_output_enable(0); 
 006D:  BCF    08.0
@@ -601,7 +601,7 @@ CCS PCM C Compiler, Version 5.049, 5967               29-Ara-24 20:59
 ....................    low = lcd_read_nibble(); 
 0071:  CALL   054
 0072:  MOVF   78,W
-0073:  MOVWF  4A
+0073:  MOVWF  4B
 ....................        
 ....................    lcd_output_enable(0); 
 0074:  BCF    08.0
@@ -625,12 +625,12 @@ CCS PCM C Compiler, Version 5.049, 5967               29-Ara-24 20:59
 ....................  
 ....................    return( (high<<4) | low); 
 0079:  BCF    03.5
-007A:  SWAPF  4B,W
+007A:  SWAPF  4C,W
 007B:  MOVWF  77
 007C:  MOVLW  F0
 007D:  ANDWF  77,F
 007E:  MOVF   77,W
-007F:  IORWF  4A,W
+007F:  IORWF  4B,W
 0080:  MOVWF  78
 .................... } 
 ....................  
@@ -669,7 +669,7 @@ CCS PCM C Compiler, Version 5.049, 5967               29-Ara-24 20:59
 ....................   #else       
 ....................    lcdlat.data = n; 
 *
-0048:  SWAPF  4B,W
+0048:  SWAPF  4C,W
 0049:  ANDLW  F0
 004A:  MOVWF  77
 004B:  MOVLW  0F
@@ -710,13 +710,13 @@ CCS PCM C Compiler, Version 5.049, 5967               29-Ara-24 20:59
 ....................    while ( bit_test(lcd_read_byte(),7) ) ; 
 *
 0081:  MOVF   78,W
-0082:  MOVWF  4A
-0083:  BTFSC  4A.7
+0082:  MOVWF  4B
+0083:  BTFSC  4B.7
 0084:  GOTO   060
 ....................    lcd_output_rs(address); 
-0085:  BTFSS  48.0
+0085:  BTFSS  49.0
 0086:  BCF    08.1
-0087:  BTFSC  48.0
+0087:  BTFSC  49.0
 0088:  BSF    08.1
 ....................    delay_cycles(1); 
 0089:  NOP
@@ -727,18 +727,18 @@ CCS PCM C Compiler, Version 5.049, 5967               29-Ara-24 20:59
 ....................    lcd_output_enable(0); 
 008C:  BCF    08.0
 ....................    lcd_send_nibble(n >> 4); 
-008D:  SWAPF  49,W
-008E:  MOVWF  4A
+008D:  SWAPF  4A,W
+008E:  MOVWF  4B
 008F:  MOVLW  0F
-0090:  ANDWF  4A,F
-0091:  MOVF   4A,W
-0092:  MOVWF  4B
+0090:  ANDWF  4B,F
+0091:  MOVF   4B,W
+0092:  MOVWF  4C
 0093:  CALL   048
 ....................    lcd_send_nibble(n & 0xf); 
-0094:  MOVF   49,W
+0094:  MOVF   4A,W
 0095:  ANDLW  0F
-0096:  MOVWF  4A
-0097:  MOVWF  4B
+0096:  MOVWF  4B
+0097:  MOVWF  4C
 0098:  CALL   048
 0099:  RETURN
 .................... } 
@@ -752,13 +752,13 @@ CCS PCM C Compiler, Version 5.049, 5967               29-Ara-24 20:59
 ....................    unsigned int8 i; 
 ....................    unsigned int8 LCD_INIT_STRING[4] = {0x20 | (LCD_TYPE << 2), 0xc, 1, 6}; 
 009A:  MOVLW  28
-009B:  MOVWF  3E
+009B:  MOVWF  3F
 009C:  MOVLW  0C
-009D:  MOVWF  3F
+009D:  MOVWF  40
 009E:  MOVLW  01
-009F:  MOVWF  40
+009F:  MOVWF  41
 00A0:  MOVLW  06
-00A1:  MOVWF  41
+00A1:  MOVWF  42
 ....................                              // These bytes need to be sent to the LCD 
 ....................                              // to start it up. 
 ....................     
@@ -796,60 +796,60 @@ CCS PCM C Compiler, Version 5.049, 5967               29-Ara-24 20:59
 ....................    delay_ms(15); 
 00AC:  MOVLW  0F
 00AD:  BCF    03.5
-00AE:  MOVWF  44
+00AE:  MOVWF  45
 00AF:  CALL   033
 ....................    for(i=1;i<=3;++i) 
 00B0:  MOVLW  01
-00B1:  MOVWF  3D
-00B2:  MOVF   3D,W
+00B1:  MOVWF  3E
+00B2:  MOVF   3E,W
 00B3:  SUBLW  03
 00B4:  BTFSS  03.0
 00B5:  GOTO   0BE
 ....................    { 
 ....................        lcd_send_nibble(3); 
 00B6:  MOVLW  03
-00B7:  MOVWF  4B
+00B7:  MOVWF  4C
 00B8:  CALL   048
 ....................        delay_ms(5); 
 00B9:  MOVLW  05
-00BA:  MOVWF  44
+00BA:  MOVWF  45
 00BB:  CALL   033
-00BC:  INCF   3D,F
+00BC:  INCF   3E,F
 00BD:  GOTO   0B2
 ....................    } 
 ....................     
 ....................    lcd_send_nibble(2); 
 00BE:  MOVLW  02
-00BF:  MOVWF  4B
+00BF:  MOVWF  4C
 00C0:  CALL   048
 ....................    delay_ms(5); 
 00C1:  MOVLW  05
-00C2:  MOVWF  44
+00C2:  MOVWF  45
 00C3:  CALL   033
 ....................    for(i=0;i<=3;++i) 
-00C4:  CLRF   3D
-00C5:  MOVF   3D,W
+00C4:  CLRF   3E
+00C5:  MOVF   3E,W
 00C6:  SUBLW  03
 00C7:  BTFSS  03.0
 00C8:  GOTO   0D5
 ....................       lcd_send_byte(0,LCD_INIT_STRING[i]); 
-00C9:  MOVLW  3E
-00CA:  ADDWF  3D,W
+00C9:  MOVLW  3F
+00CA:  ADDWF  3E,W
 00CB:  MOVWF  04
 00CC:  BCF    03.7
 00CD:  MOVF   00,W
-00CE:  MOVWF  42
-00CF:  CLRF   48
-00D0:  MOVF   42,W
-00D1:  MOVWF  49
+00CE:  MOVWF  43
+00CF:  CLRF   49
+00D0:  MOVF   43,W
+00D1:  MOVWF  4A
 00D2:  CALL   05A
 ....................  
 ....................   #if defined(LCD_EXTENDED_NEWLINE) 
-00D3:  INCF   3D,F
+00D3:  INCF   3E,F
 00D4:  GOTO   0C5
 00D5:  BCF    0A.3
 00D6:  BCF    0A.4
-00D7:  GOTO   4E9 (RETURN)
+00D7:  GOTO   582 (RETURN)
 ....................    g_LcdX = 0; 
 ....................    g_LcdY = 0; 
 ....................   #endif 
@@ -860,28 +860,28 @@ CCS PCM C Compiler, Version 5.049, 5967               29-Ara-24 20:59
 ....................    unsigned int8 address; 
 ....................     
 ....................    if(y!=1) 
-00D8:  DECFSZ 45,W
+00D8:  DECFSZ 46,W
 00D9:  GOTO   0DB
 00DA:  GOTO   0DE
 ....................       address=LCD_LINE_TWO; 
 00DB:  MOVLW  40
-00DC:  MOVWF  46
+00DC:  MOVWF  47
 00DD:  GOTO   0DF
 ....................    else 
 ....................       address=0; 
-00DE:  CLRF   46
+00DE:  CLRF   47
 ....................       
 ....................    address+=x-1; 
 00DF:  MOVLW  01
-00E0:  SUBWF  44,W
-00E1:  ADDWF  46,F
+00E0:  SUBWF  45,W
+00E1:  ADDWF  47,F
 ....................    lcd_send_byte(0,0x80|address); 
-00E2:  MOVF   46,W
+00E2:  MOVF   47,W
 00E3:  IORLW  80
-00E4:  MOVWF  47
-00E5:  CLRF   48
-00E6:  MOVF   47,W
-00E7:  MOVWF  49
+00E4:  MOVWF  48
+00E5:  CLRF   49
+00E6:  MOVF   48,W
+00E7:  MOVWF  4A
 00E8:  CALL   05A
 ....................  
 ....................   #if defined(LCD_EXTENDED_NEWLINE) 
@@ -894,7 +894,7 @@ CCS PCM C Compiler, Version 5.049, 5967               29-Ara-24 20:59
 .................... void lcd_putc(char c) 
 .................... { 
 ....................    switch (c) 
-00EA:  MOVF   43,W
+00EA:  MOVF   44,W
 00EB:  XORLW  07
 00EC:  BTFSC  03.2
 00ED:  GOTO   0F8
@@ -911,19 +911,19 @@ CCS PCM C Compiler, Version 5.049, 5967               29-Ara-24 20:59
 ....................    { 
 ....................       case '\a'   :  lcd_gotoxy(1,1);     break; 
 00F8:  MOVLW  01
-00F9:  MOVWF  44
-00FA:  MOVWF  45
+00F9:  MOVWF  45
+00FA:  MOVWF  46
 00FB:  CALL   0D8
 00FC:  GOTO   115
 ....................  
 ....................       case '\f'   :  lcd_send_byte(0,1); 
-00FD:  CLRF   48
+00FD:  CLRF   49
 00FE:  MOVLW  01
-00FF:  MOVWF  49
+00FF:  MOVWF  4A
 0100:  CALL   05A
 ....................                      delay_ms(2); 
 0101:  MOVLW  02
-0102:  MOVWF  44
+0102:  MOVWF  45
 0103:  CALL   033
 ....................                     #if defined(LCD_EXTENDED_NEWLINE) 
 ....................                      g_LcdX = 0; 
@@ -944,17 +944,17 @@ CCS PCM C Compiler, Version 5.049, 5967               29-Ara-24 20:59
 ....................      #else 
 ....................       case '\n'   : lcd_gotoxy(1,2);        break; 
 0105:  MOVLW  01
-0106:  MOVWF  44
+0106:  MOVWF  45
 0107:  MOVLW  02
-0108:  MOVWF  45
+0108:  MOVWF  46
 0109:  CALL   0D8
 010A:  GOTO   115
 ....................      #endif 
 ....................       
 ....................       case '\b'   : lcd_send_byte(0,0x10);  break; 
-010B:  CLRF   48
+010B:  CLRF   49
 010C:  MOVLW  10
-010D:  MOVWF  49
+010D:  MOVWF  4A
 010E:  CALL   05A
 010F:  GOTO   115
 ....................       
@@ -969,9 +969,9 @@ CCS PCM C Compiler, Version 5.049, 5967               29-Ara-24 20:59
 ....................      #else 
 ....................       default     : lcd_send_byte(1,c);     break; 
 0110:  MOVLW  01
-0111:  MOVWF  48
-0112:  MOVF   43,W
-0113:  MOVWF  49
+0111:  MOVWF  49
+0112:  MOVF   44,W
+0113:  MOVWF  4A
 0114:  CALL   05A
 ....................      #endif 
 ....................    } 
@@ -1069,16 +1069,16 @@ CCS PCM C Compiler, Version 5.049, 5967               29-Ara-24 20:59
 .................... unsigned int8 eeprom_ventilating_read_cost = 0; 
 .................... unsigned int8 eeprom_polishing_read_cost   = 0; 
 ....................  
-....................  
-....................  
-....................  
 .................... //Keeps track of the last written address in EEPROM for each customer 
 .................... unsigned int8 Client0_last_address=0; //For Selçuk Bey's account 
 .................... unsigned int8 Client1_last_address=0; //For Emre Bey's account 
 ....................  
+.................... //hangi iþlem üzerinde duruyorsak onun numarasý iþlem-1, iþlem-2 ==> 1 ve 2 bunlarýn numarasý oluyor,  
+.................... unsigned int8 IndexOfReadMemory=0; 
+....................  
 .................... //Will be implemented into // 
 .................... /* ======== LCD SCREEN FUNCTIONS PROTOTYPES  ======== */ 
-.................... void display_Status_EEPROM_OnLCD(void); 
+.................... void displayOperationStatus_WriteVariables_to_EEPROM(void); 
 .................... void display_SelectedOpsVal_EEPROM_OnLCD(void); 
 ....................  
 .................... /* ======== EEPROM WRITE/READ FUNCTIONS PROTOTYPES  ======== */ 
@@ -1089,432 +1089,636 @@ CCS PCM C Compiler, Version 5.049, 5967               29-Ara-24 20:59
 ....................  
 .................... void main(void)  
 *
-04C8:  MOVF   03,W
-04C9:  ANDLW  1F
-04CA:  MOVWF  03
-04CB:  CLRF   31
-04CC:  CLRF   32
-04CD:  CLRF   33
-04CE:  CLRF   34
-04CF:  CLRF   35
-04D0:  CLRF   36
-04D1:  CLRF   37
-04D2:  CLRF   38
-04D3:  CLRF   39
-04D4:  CLRF   3A
-04D5:  CLRF   3C
-04D6:  CLRF   3B
-04D7:  BSF    03.5
-04D8:  BSF    03.6
-04D9:  MOVF   09,W
-04DA:  ANDLW  C0
-04DB:  MOVWF  09
-04DC:  BCF    03.6
-04DD:  BCF    1F.4
-04DE:  BCF    1F.5
-04DF:  MOVLW  00
-04E0:  BSF    03.6
-04E1:  MOVWF  08
-04E2:  BCF    03.5
-04E3:  CLRF   07
-04E4:  CLRF   08
-04E5:  CLRF   09
-04E6:  BCF    03.7
+0560:  MOVF   03,W
+0561:  ANDLW  1F
+0562:  MOVWF  03
+0563:  CLRF   31
+0564:  CLRF   32
+0565:  CLRF   33
+0566:  CLRF   34
+0567:  CLRF   35
+0568:  CLRF   36
+0569:  CLRF   37
+056A:  CLRF   38
+056B:  CLRF   39
+056C:  CLRF   3A
+056D:  CLRF   3B
+056E:  CLRF   3D
+056F:  CLRF   3C
+0570:  BSF    03.5
+0571:  BSF    03.6
+0572:  MOVF   09,W
+0573:  ANDLW  C0
+0574:  MOVWF  09
+0575:  BCF    03.6
+0576:  BCF    1F.4
+0577:  BCF    1F.5
+0578:  MOVLW  00
+0579:  BSF    03.6
+057A:  MOVWF  08
+057B:  BCF    03.5
+057C:  CLRF   07
+057D:  CLRF   08
+057E:  CLRF   09
+057F:  BCF    03.7
 .................... { 
 ....................  
 ....................       lcd_init(); // LCD ekranýmýzý baþlatacak 
-04E7:  BCF    03.6
-04E8:  GOTO   09A
+0580:  BCF    03.6
+0581:  GOTO   09A
 ....................  
 ....................       //Baslangýç deðerlerini atalým 
 ....................       MikroClient[ClientNumber].time_Foaming        = 20; 
-04E9:  RLF    30,W
-04EA:  MOVWF  77
-04EB:  RLF    77,F
-04EC:  RLF    77,F
-04ED:  MOVLW  F8
-04EE:  ANDWF  77,F
-04EF:  MOVF   77,W
-04F0:  ADDLW  20
-04F1:  MOVWF  04
-04F2:  BCF    03.7
-04F3:  INCF   04,F
-04F4:  CLRF   00
-04F5:  DECF   04,F
-04F6:  MOVLW  14
-04F7:  MOVWF  00
+0582:  RLF    30,W
+0583:  MOVWF  77
+0584:  RLF    77,F
+0585:  RLF    77,F
+0586:  MOVLW  F8
+0587:  ANDWF  77,F
+0588:  MOVF   77,W
+0589:  ADDLW  20
+058A:  MOVWF  04
+058B:  BCF    03.7
+058C:  INCF   04,F
+058D:  CLRF   00
+058E:  DECF   04,F
+058F:  MOVLW  14
+0590:  MOVWF  00
 ....................       MikroClient[ClientNumber].time_Washing        = 40; 
-04F8:  RLF    30,W
-04F9:  MOVWF  77
-04FA:  RLF    77,F
-04FB:  RLF    77,F
-04FC:  MOVLW  F8
-04FD:  ANDWF  77,F
-04FE:  MOVF   77,W
-04FF:  ADDLW  02
-0500:  ADDLW  20
-0501:  MOVWF  04
-0502:  BCF    03.7
-0503:  INCF   04,F
-0504:  CLRF   00
-0505:  DECF   04,F
-0506:  MOVLW  28
-0507:  MOVWF  00
+0591:  RLF    30,W
+0592:  MOVWF  77
+0593:  RLF    77,F
+0594:  RLF    77,F
+0595:  MOVLW  F8
+0596:  ANDWF  77,F
+0597:  MOVF   77,W
+0598:  ADDLW  02
+0599:  ADDLW  20
+059A:  MOVWF  04
+059B:  BCF    03.7
+059C:  INCF   04,F
+059D:  CLRF   00
+059E:  DECF   04,F
+059F:  MOVLW  28
+05A0:  MOVWF  00
 ....................       MikroClient[ClientNumber].time_Ventilation    = 60; 
-0508:  RLF    30,W
-0509:  MOVWF  77
-050A:  RLF    77,F
-050B:  RLF    77,F
-050C:  MOVLW  F8
-050D:  ANDWF  77,F
-050E:  MOVF   77,W
-050F:  ADDLW  04
-0510:  ADDLW  20
-0511:  MOVWF  04
-0512:  BCF    03.7
-0513:  INCF   04,F
-0514:  CLRF   00
-0515:  DECF   04,F
-0516:  MOVLW  3C
-0517:  MOVWF  00
+05A1:  RLF    30,W
+05A2:  MOVWF  77
+05A3:  RLF    77,F
+05A4:  RLF    77,F
+05A5:  MOVLW  F8
+05A6:  ANDWF  77,F
+05A7:  MOVF   77,W
+05A8:  ADDLW  04
+05A9:  ADDLW  20
+05AA:  MOVWF  04
+05AB:  BCF    03.7
+05AC:  INCF   04,F
+05AD:  CLRF   00
+05AE:  DECF   04,F
+05AF:  MOVLW  3C
+05B0:  MOVWF  00
 ....................       MikroClient[ClientNumber].mililitre_Polishing = 2; 
-0518:  RLF    30,W
-0519:  MOVWF  77
-051A:  RLF    77,F
-051B:  RLF    77,F
-051C:  MOVLW  F8
-051D:  ANDWF  77,F
-051E:  MOVF   77,W
-051F:  ADDLW  06
-0520:  ADDLW  20
-0521:  MOVWF  04
-0522:  BCF    03.7
-0523:  INCF   04,F
-0524:  CLRF   00
-0525:  DECF   04,F
-0526:  MOVLW  02
-0527:  MOVWF  00
+05B1:  RLF    30,W
+05B2:  MOVWF  77
+05B3:  RLF    77,F
+05B4:  RLF    77,F
+05B5:  MOVLW  F8
+05B6:  ANDWF  77,F
+05B7:  MOVF   77,W
+05B8:  ADDLW  06
+05B9:  ADDLW  20
+05BA:  MOVWF  04
+05BB:  BCF    03.7
+05BC:  INCF   04,F
+05BD:  CLRF   00
+05BE:  DECF   04,F
+05BF:  MOVLW  02
+05C0:  MOVWF  00
 ....................           
-....................       //Retrieve records and inform the customer 
-....................       display_Status_EEPROM_OnLCD(); 
-0528:  GOTO   35A
-....................        
-....................       //eeproma yazýlacak deðerleri eeprom deðiþkenlerine çek 
-....................       loadCostValuesToEEPROMVariables(); 
-0529:  CALL   191
-....................        
-....................       //Yazýlmýþ olan deðerleri eepromdan oku  
-....................       Read_EEPROMVariables_from_EEPROMregs(); 
-052A:  GOTO   3D9
+....................       //Son durumu kullanýcýya göster ve kaydedilen deðerleri eeproma yaz 
+....................       displayOperationStatus_WriteVariables_to_EEPROM(); 
+05C1:  GOTO   191
+....................       
 ....................        
 ....................       //okunan eeprom deðerlerini lcd de göster 
 ....................       display_SelectedOpsVal_EEPROM_OnLCD(); 
-052B:  GOTO   454
+05C2:  GOTO   443
 ....................        
 ....................        
 ....................  while(1) 
 ....................  { 
-052C:  GOTO   52C
+05C3:  GOTO   5C3
 ....................       
 ....................  } 
 .................... } 
 ....................  
-052D:  SLEEP
+05C4:  SLEEP
 .................... //Will be implemented// 
-.................... void display_Status_EEPROM_OnLCD(){ 
+.................... void displayOperationStatus_WriteVariables_to_EEPROM(){ 
 ....................  
 ....................       lcd_gotoxy(2,1); 
 *
-035A:  MOVLW  02
-035B:  MOVWF  44
-035C:  MOVLW  01
-035D:  MOVWF  45
-035E:  CALL   0D8
+0191:  MOVLW  02
+0192:  MOVWF  45
+0193:  MOVLW  01
+0194:  MOVWF  46
+0195:  CALL   0D8
 ....................       printf(lcd_putc, "Operasyon Sonu");    
-035F:  MOVLW  04
-0360:  BSF    03.6
-0361:  MOVWF  0D
-0362:  MOVLW  00
-0363:  MOVWF  0F
-0364:  BCF    03.6
-0365:  CALL   116
+0196:  MOVLW  04
+0197:  BSF    03.6
+0198:  MOVWF  0D
+0199:  MOVLW  00
+019A:  MOVWF  0F
+019B:  BCF    03.6
+019C:  CALL   116
 ....................       delay_ms(2000); 
-0366:  MOVLW  08
-0367:  MOVWF  3D
-0368:  MOVLW  FA
-0369:  MOVWF  44
-036A:  CALL   033
-036B:  DECFSZ 3D,F
-036C:  GOTO   368
+019D:  MOVLW  08
+019E:  MOVWF  3E
+019F:  MOVLW  FA
+01A0:  MOVWF  45
+01A1:  CALL   033
+01A2:  DECFSZ 3E,F
+01A3:  GOTO   19F
 ....................       printf(lcd_putc, "\f"); 
-036D:  MOVLW  0C
-036E:  MOVWF  43
-036F:  CALL   0EA
+01A4:  MOVLW  0C
+01A5:  MOVWF  44
+01A6:  CALL   0EA
 ....................       lcd_gotoxy(3,1); 
-0370:  MOVLW  03
-0371:  MOVWF  44
-0372:  MOVLW  01
-0373:  MOVWF  45
-0374:  CALL   0D8
+01A7:  MOVLW  03
+01A8:  MOVWF  45
+01A9:  MOVLW  01
+01AA:  MOVWF  46
+01AB:  CALL   0D8
 ....................       printf(lcd_putc, "Islemleriniz");   
-0375:  MOVLW  0C
-0376:  BSF    03.6
-0377:  MOVWF  0D
-0378:  MOVLW  00
-0379:  MOVWF  0F
-037A:  BCF    03.6
-037B:  CALL   116
+01AC:  MOVLW  0C
+01AD:  BSF    03.6
+01AE:  MOVWF  0D
+01AF:  MOVLW  00
+01B0:  MOVWF  0F
+01B1:  BCF    03.6
+01B2:  CALL   116
 ....................       lcd_gotoxy(3,2); 
-037C:  MOVLW  03
-037D:  MOVWF  44
-037E:  MOVLW  02
-037F:  MOVWF  45
-0380:  CALL   0D8
+01B3:  MOVLW  03
+01B4:  MOVWF  45
+01B5:  MOVLW  02
+01B6:  MOVWF  46
+01B7:  CALL   0D8
 ....................       printf(lcd_putc, "Kaydediliyor"); 
-0381:  MOVLW  13
-0382:  BSF    03.6
-0383:  MOVWF  0D
-0384:  MOVLW  00
-0385:  MOVWF  0F
-0386:  BCF    03.6
-0387:  CALL   116
+01B8:  MOVLW  13
+01B9:  BSF    03.6
+01BA:  MOVWF  0D
+01BB:  MOVLW  00
+01BC:  MOVWF  0F
+01BD:  BCF    03.6
+01BE:  CALL   116
 ....................        
 ....................       loadCostValuesToEEPROMVariables(); 
-0388:  CALL   191
 ....................           
 ....................       delay_ms(1000); 
-0389:  MOVLW  04
-038A:  MOVWF  3D
-038B:  MOVLW  FA
-038C:  MOVWF  44
-038D:  CALL   033
-038E:  DECFSZ 3D,F
-038F:  GOTO   38B
+*
+0387:  MOVLW  04
+0388:  MOVWF  3E
+0389:  MOVLW  FA
+038A:  MOVWF  45
+038B:  CALL   033
+038C:  DECFSZ 3E,F
+038D:  GOTO   389
 ....................        
 ....................       printf(lcd_putc, "\f"); 
-0390:  MOVLW  0C
-0391:  MOVWF  43
-0392:  CALL   0EA
+038E:  MOVLW  0C
+038F:  MOVWF  44
+0390:  CALL   0EA
 ....................       lcd_gotoxy(5,1); 
-0393:  MOVLW  05
-0394:  MOVWF  44
-0395:  MOVLW  01
-0396:  MOVWF  45
-0397:  CALL   0D8
+0391:  MOVLW  05
+0392:  MOVWF  45
+0393:  MOVLW  01
+0394:  MOVWF  46
+0395:  CALL   0D8
 ....................       printf(lcd_putc, "Kayitlar");   
-0398:  MOVLW  1A
-0399:  BSF    03.6
-039A:  MOVWF  0D
-039B:  MOVLW  00
-039C:  MOVWF  0F
-039D:  BCF    03.6
-039E:  CALL   116
+0396:  MOVLW  1A
+0397:  BSF    03.6
+0398:  MOVWF  0D
+0399:  MOVLW  00
+039A:  MOVWF  0F
+039B:  BCF    03.6
+039C:  CALL   116
 ....................       lcd_gotoxy(4,2); 
-039F:  MOVLW  04
-03A0:  MOVWF  44
-03A1:  MOVLW  02
-03A2:  MOVWF  45
-03A3:  CALL   0D8
+039D:  MOVLW  04
+039E:  MOVWF  45
+039F:  MOVLW  02
+03A0:  MOVWF  46
+03A1:  CALL   0D8
 ....................       printf(lcd_putc, "Tamamlandi"); 
-03A4:  MOVLW  1F
-03A5:  BSF    03.6
-03A6:  MOVWF  0D
-03A7:  MOVLW  00
-03A8:  MOVWF  0F
-03A9:  BCF    03.6
-03AA:  CALL   116
+03A2:  MOVLW  1F
+03A3:  BSF    03.6
+03A4:  MOVWF  0D
+03A5:  MOVLW  00
+03A6:  MOVWF  0F
+03A7:  BCF    03.6
+03A8:  CALL   116
 ....................        
 ....................       delay_ms(1000); 
-03AB:  MOVLW  04
-03AC:  MOVWF  3D
-03AD:  MOVLW  FA
-03AE:  MOVWF  44
-03AF:  CALL   033
-03B0:  DECFSZ 3D,F
-03B1:  GOTO   3AD
+03A9:  MOVLW  04
+03AA:  MOVWF  3E
+03AB:  MOVLW  FA
+03AC:  MOVWF  45
+03AD:  CALL   033
+03AE:  DECFSZ 3E,F
+03AF:  GOTO   3AB
 ....................        
 ....................       printf(lcd_putc, "\f"); 
-03B2:  MOVLW  0C
-03B3:  MOVWF  43
-03B4:  CALL   0EA
+03B0:  MOVLW  0C
+03B1:  MOVWF  44
+03B2:  CALL   0EA
 ....................       lcd_gotoxy(4,1); 
-03B5:  MOVLW  04
-03B6:  MOVWF  44
-03B7:  MOVLW  01
-03B8:  MOVWF  45
-03B9:  CALL   0D8
+03B3:  MOVLW  04
+03B4:  MOVWF  45
+03B5:  MOVLW  01
+03B6:  MOVWF  46
+03B7:  CALL   0D8
 ....................       printf(lcd_putc, "Ana Menuye");   
-03BA:  MOVLW  25
-03BB:  BSF    03.6
-03BC:  MOVWF  0D
-03BD:  MOVLW  00
-03BE:  MOVWF  0F
-03BF:  BCF    03.6
-03C0:  CALL   116
+03B8:  MOVLW  25
+03B9:  BSF    03.6
+03BA:  MOVWF  0D
+03BB:  MOVLW  00
+03BC:  MOVWF  0F
+03BD:  BCF    03.6
+03BE:  CALL   116
 ....................       lcd_gotoxy(2,2); 
-03C1:  MOVLW  02
-03C2:  MOVWF  44
-03C3:  MOVWF  45
-03C4:  CALL   0D8
+03BF:  MOVLW  02
+03C0:  MOVWF  45
+03C1:  MOVWF  46
+03C2:  CALL   0D8
 ....................       printf(lcd_putc, "Yonlendiriliyor"); 
-03C5:  MOVLW  2B
-03C6:  BSF    03.6
-03C7:  MOVWF  0D
-03C8:  MOVLW  00
-03C9:  MOVWF  0F
-03CA:  BCF    03.6
-03CB:  CALL   116
+03C3:  MOVLW  2B
+03C4:  BSF    03.6
+03C5:  MOVWF  0D
+03C6:  MOVLW  00
+03C7:  MOVWF  0F
+03C8:  BCF    03.6
+03C9:  CALL   116
 ....................        
 ....................       delay_ms(1000); 
-03CC:  MOVLW  04
-03CD:  MOVWF  3D
-03CE:  MOVLW  FA
-03CF:  MOVWF  44
-03D0:  CALL   033
-03D1:  DECFSZ 3D,F
-03D2:  GOTO   3CE
+03CA:  MOVLW  04
+03CB:  MOVWF  3E
+03CC:  MOVLW  FA
+03CD:  MOVWF  45
+03CE:  CALL   033
+03CF:  DECFSZ 3E,F
+03D0:  GOTO   3CC
 ....................       printf(lcd_putc, "\f"); 
-03D3:  MOVLW  0C
-03D4:  MOVWF  43
-03D5:  CALL   0EA
-03D6:  BCF    0A.3
-03D7:  BCF    0A.4
-03D8:  GOTO   529 (RETURN)
+03D1:  MOVLW  0C
+03D2:  MOVWF  44
+03D3:  CALL   0EA
+03D4:  BCF    0A.3
+03D5:  BCF    0A.4
+03D6:  GOTO   5C2 (RETURN)
 ....................        
 .................... } 
+....................  
+....................  
 ....................  
 .................... //Secilen islemin eeprom kayýtlarýný görüntüle 
 .................... void display_SelectedOpsVal_EEPROM_OnLCD(){ 
 ....................       
+....................      Read_EEPROMVariables_from_EEPROMregs(); 
+....................       
 ....................       printf(lcd_putc, "\f"); 
 *
-0454:  MOVLW  0C
-0455:  MOVWF  43
-0456:  CALL   0EA
+04EC:  MOVLW  0C
+04ED:  MOVWF  44
+04EE:  CALL   0EA
 ....................        
 ....................       lcd_gotoxy(1,1); 
-0457:  MOVLW  01
-0458:  MOVWF  44
-0459:  MOVWF  45
-045A:  CALL   0D8
+04EF:  MOVLW  01
+04F0:  MOVWF  45
+04F1:  MOVWF  46
+04F2:  CALL   0D8
 ....................       printf(lcd_putc, "F: %d TL",eeprom_foaming_read_cost);  
-045B:  MOVLW  46
-045C:  MOVWF  43
-045D:  CALL   0EA
-045E:  MOVLW  3A
-045F:  MOVWF  43
-0460:  CALL   0EA
-0461:  MOVLW  20
-0462:  MOVWF  43
-0463:  CALL   0EA
-0464:  MOVF   35,W
-0465:  MOVWF  3D
-0466:  MOVLW  18
-0467:  MOVWF  3E
-0468:  CALL   3FD
-0469:  MOVLW  20
-046A:  MOVWF  43
-046B:  CALL   0EA
-046C:  MOVLW  54
-046D:  MOVWF  43
-046E:  CALL   0EA
-046F:  MOVLW  4C
-0470:  MOVWF  43
-0471:  CALL   0EA
+04F3:  MOVLW  46
+04F4:  MOVWF  44
+04F5:  CALL   0EA
+04F6:  MOVLW  3A
+04F7:  MOVWF  44
+04F8:  CALL   0EA
+04F9:  MOVLW  20
+04FA:  MOVWF  44
+04FB:  CALL   0EA
+04FC:  MOVF   35,W
+04FD:  MOVWF  3E
+04FE:  MOVLW  18
+04FF:  MOVWF  3F
+0500:  CALL   3EC
+0501:  MOVLW  20
+0502:  MOVWF  44
+0503:  CALL   0EA
+0504:  MOVLW  54
+0505:  MOVWF  44
+0506:  CALL   0EA
+0507:  MOVLW  4C
+0508:  MOVWF  44
+0509:  CALL   0EA
 ....................       lcd_gotoxy(8,1); 
-0472:  MOVLW  08
-0473:  MOVWF  44
-0474:  MOVLW  01
-0475:  MOVWF  45
-0476:  CALL   0D8
+050A:  MOVLW  08
+050B:  MOVWF  45
+050C:  MOVLW  01
+050D:  MOVWF  46
+050E:  CALL   0D8
 ....................       printf(lcd_putc, "W: %d TL",eeprom_washing_read_cost);  
-0477:  MOVLW  57
-0478:  MOVWF  43
-0479:  CALL   0EA
-047A:  MOVLW  3A
-047B:  MOVWF  43
-047C:  CALL   0EA
-047D:  MOVLW  20
-047E:  MOVWF  43
-047F:  CALL   0EA
-0480:  MOVF   36,W
-0481:  MOVWF  3D
-0482:  MOVLW  18
-0483:  MOVWF  3E
-0484:  CALL   3FD
-0485:  MOVLW  20
-0486:  MOVWF  43
-0487:  CALL   0EA
-0488:  MOVLW  54
-0489:  MOVWF  43
-048A:  CALL   0EA
-048B:  MOVLW  4C
-048C:  MOVWF  43
-048D:  CALL   0EA
+050F:  MOVLW  57
+0510:  MOVWF  44
+0511:  CALL   0EA
+0512:  MOVLW  3A
+0513:  MOVWF  44
+0514:  CALL   0EA
+0515:  MOVLW  20
+0516:  MOVWF  44
+0517:  CALL   0EA
+0518:  MOVF   36,W
+0519:  MOVWF  3E
+051A:  MOVLW  18
+051B:  MOVWF  3F
+051C:  CALL   3EC
+051D:  MOVLW  20
+051E:  MOVWF  44
+051F:  CALL   0EA
+0520:  MOVLW  54
+0521:  MOVWF  44
+0522:  CALL   0EA
+0523:  MOVLW  4C
+0524:  MOVWF  44
+0525:  CALL   0EA
 ....................       lcd_gotoxy(1,2); 
-048E:  MOVLW  01
-048F:  MOVWF  44
-0490:  MOVLW  02
-0491:  MOVWF  45
-0492:  CALL   0D8
+0526:  MOVLW  01
+0527:  MOVWF  45
+0528:  MOVLW  02
+0529:  MOVWF  46
+052A:  CALL   0D8
 ....................       printf(lcd_putc, "V: %d TL",eeprom_ventilating_read_cost);  
-0493:  MOVLW  56
-0494:  MOVWF  43
-0495:  CALL   0EA
-0496:  MOVLW  3A
-0497:  MOVWF  43
-0498:  CALL   0EA
-0499:  MOVLW  20
-049A:  MOVWF  43
-049B:  CALL   0EA
-049C:  MOVF   37,W
-049D:  MOVWF  3D
-049E:  MOVLW  18
-049F:  MOVWF  3E
-04A0:  CALL   3FD
-04A1:  MOVLW  20
-04A2:  MOVWF  43
-04A3:  CALL   0EA
-04A4:  MOVLW  54
-04A5:  MOVWF  43
-04A6:  CALL   0EA
-04A7:  MOVLW  4C
-04A8:  MOVWF  43
-04A9:  CALL   0EA
+052B:  MOVLW  56
+052C:  MOVWF  44
+052D:  CALL   0EA
+052E:  MOVLW  3A
+052F:  MOVWF  44
+0530:  CALL   0EA
+0531:  MOVLW  20
+0532:  MOVWF  44
+0533:  CALL   0EA
+0534:  MOVF   37,W
+0535:  MOVWF  3E
+0536:  MOVLW  18
+0537:  MOVWF  3F
+0538:  CALL   3EC
+0539:  MOVLW  20
+053A:  MOVWF  44
+053B:  CALL   0EA
+053C:  MOVLW  54
+053D:  MOVWF  44
+053E:  CALL   0EA
+053F:  MOVLW  4C
+0540:  MOVWF  44
+0541:  CALL   0EA
 ....................       lcd_gotoxy(8,8); 
-04AA:  MOVLW  08
-04AB:  MOVWF  44
-04AC:  MOVWF  45
-04AD:  CALL   0D8
+0542:  MOVLW  08
+0543:  MOVWF  45
+0544:  MOVWF  46
+0545:  CALL   0D8
 ....................       printf(lcd_putc, "P: %d TL",eeprom_polishing_read_cost);  
-04AE:  MOVLW  50
-04AF:  MOVWF  43
-04B0:  CALL   0EA
-04B1:  MOVLW  3A
-04B2:  MOVWF  43
-04B3:  CALL   0EA
-04B4:  MOVLW  20
-04B5:  MOVWF  43
-04B6:  CALL   0EA
-04B7:  MOVF   38,W
-04B8:  MOVWF  3D
-04B9:  MOVLW  18
-04BA:  MOVWF  3E
-04BB:  CALL   3FD
-04BC:  MOVLW  20
-04BD:  MOVWF  43
-04BE:  CALL   0EA
-04BF:  MOVLW  54
-04C0:  MOVWF  43
-04C1:  CALL   0EA
-04C2:  MOVLW  4C
-04C3:  MOVWF  43
-04C4:  CALL   0EA
-04C5:  BCF    0A.3
-04C6:  BCF    0A.4
-04C7:  GOTO   52C (RETURN)
+0546:  MOVLW  50
+0547:  MOVWF  44
+0548:  CALL   0EA
+0549:  MOVLW  3A
+054A:  MOVWF  44
+054B:  CALL   0EA
+054C:  MOVLW  20
+054D:  MOVWF  44
+054E:  CALL   0EA
+054F:  MOVF   38,W
+0550:  MOVWF  3E
+0551:  MOVLW  18
+0552:  MOVWF  3F
+0553:  CALL   3EC
+0554:  MOVLW  20
+0555:  MOVWF  44
+0556:  CALL   0EA
+0557:  MOVLW  54
+0558:  MOVWF  44
+0559:  CALL   0EA
+055A:  MOVLW  4C
+055B:  MOVWF  44
+055C:  CALL   0EA
+055D:  BCF    0A.3
+055E:  BCF    0A.4
+055F:  GOTO   5C3 (RETURN)
 ....................         
 .................... } 
+....................  
+.................... //!//will be implemented 
+.................... void Read_EEPROMVariables_from_EEPROMregs(){ 
+....................      
+....................      
+....................     // NE ZAMAN NEXT BUTONUNA BASILIR O ZAMAN SEÇÝM YAPILIR 
+....................     // IndexOfReadMemory butonun üzerinde bulunduðu yer(next demeden önce) 
+....................      
+....................         if(ClientNumber == 0) 
+*
+0443:  MOVF   30,F
+0444:  BTFSS  03.2
+0445:  GOTO   496
+....................         { 
+....................           
+....................               
+....................             eeprom_foaming_read_cost     = read_eeprom( eeprom_Client0_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+1) );  //diyelimki kayýt 2 yi okumak istio 
+0446:  MOVLW  01
+0447:  SUBWF  3B,W
+0448:  MOVWF  77
+0449:  RLF    77,F
+044A:  RLF    77,F
+044B:  MOVLW  FC
+044C:  ANDWF  77,F
+044D:  MOVF   77,W
+044E:  ADDLW  01
+044F:  MOVWF  3E
+0450:  MOVF   3E,W
+0451:  BSF    03.6
+0452:  MOVWF  0D
+0453:  BSF    03.5
+0454:  BCF    0C.7
+0455:  BSF    0C.0
+0456:  BCF    03.5
+0457:  MOVF   0C,W
+0458:  BCF    03.6
+0459:  MOVWF  35
+....................             eeprom_washing_read_cost     = read_eeprom( eeprom_Client0_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+2) ); 
+045A:  MOVLW  01
+045B:  SUBWF  3B,W
+045C:  MOVWF  77
+045D:  RLF    77,F
+045E:  RLF    77,F
+045F:  MOVLW  FC
+0460:  ANDWF  77,F
+0461:  MOVF   77,W
+0462:  ADDLW  02
+0463:  MOVWF  3E
+0464:  MOVF   3E,W
+0465:  BSF    03.6
+0466:  MOVWF  0D
+0467:  BSF    03.5
+0468:  BCF    0C.7
+0469:  BSF    0C.0
+046A:  BCF    03.5
+046B:  MOVF   0C,W
+046C:  BCF    03.6
+046D:  MOVWF  36
+....................             eeprom_ventilating_read_cost = read_eeprom( eeprom_Client0_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+3) ); 
+046E:  MOVLW  01
+046F:  SUBWF  3B,W
+0470:  MOVWF  77
+0471:  RLF    77,F
+0472:  RLF    77,F
+0473:  MOVLW  FC
+0474:  ANDWF  77,F
+0475:  MOVF   77,W
+0476:  ADDLW  03
+0477:  MOVWF  3E
+0478:  MOVF   3E,W
+0479:  BSF    03.6
+047A:  MOVWF  0D
+047B:  BSF    03.5
+047C:  BCF    0C.7
+047D:  BSF    0C.0
+047E:  BCF    03.5
+047F:  MOVF   0C,W
+0480:  BCF    03.6
+0481:  MOVWF  37
+....................             eeprom_polishing_read_cost   = read_eeprom( eeprom_Client0_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+4) ); 
+0482:  MOVLW  01
+0483:  SUBWF  3B,W
+0484:  MOVWF  77
+0485:  RLF    77,F
+0486:  RLF    77,F
+0487:  MOVLW  FC
+0488:  ANDWF  77,F
+0489:  MOVF   77,W
+048A:  ADDLW  04
+048B:  MOVWF  3E
+048C:  MOVF   3E,W
+048D:  BSF    03.6
+048E:  MOVWF  0D
+048F:  BSF    03.5
+0490:  BCF    0C.7
+0491:  BSF    0C.0
+0492:  BCF    03.5
+0493:  MOVF   0C,W
+0494:  BCF    03.6
+0495:  MOVWF  38
+....................             
+....................             
+....................              
+....................         } 
+....................          
+....................         if(ClientNumber == 1){ 
+0496:  DECFSZ 30,W
+0497:  GOTO   4EC
+....................          
+....................             eeprom_foaming_read_cost     = read_eeprom( eeprom_Client1_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+1) );  //diyelimki kayýt 2 yi okumak istio 
+0498:  MOVLW  01
+0499:  SUBWF  3B,W
+049A:  MOVWF  77
+049B:  RLF    77,F
+049C:  RLF    77,F
+049D:  MOVLW  FC
+049E:  ANDWF  77,F
+049F:  MOVF   77,W
+04A0:  ADDLW  01
+04A1:  ADDLW  82
+04A2:  MOVWF  3E
+04A3:  MOVF   3E,W
+04A4:  BSF    03.6
+04A5:  MOVWF  0D
+04A6:  BSF    03.5
+04A7:  BCF    0C.7
+04A8:  BSF    0C.0
+04A9:  BCF    03.5
+04AA:  MOVF   0C,W
+04AB:  BCF    03.6
+04AC:  MOVWF  35
+....................             eeprom_washing_read_cost     = read_eeprom( eeprom_Client1_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+2) ); 
+04AD:  MOVLW  01
+04AE:  SUBWF  3B,W
+04AF:  MOVWF  77
+04B0:  RLF    77,F
+04B1:  RLF    77,F
+04B2:  MOVLW  FC
+04B3:  ANDWF  77,F
+04B4:  MOVF   77,W
+04B5:  ADDLW  02
+04B6:  ADDLW  82
+04B7:  MOVWF  3E
+04B8:  MOVF   3E,W
+04B9:  BSF    03.6
+04BA:  MOVWF  0D
+04BB:  BSF    03.5
+04BC:  BCF    0C.7
+04BD:  BSF    0C.0
+04BE:  BCF    03.5
+04BF:  MOVF   0C,W
+04C0:  BCF    03.6
+04C1:  MOVWF  36
+....................             eeprom_ventilating_read_cost = read_eeprom( eeprom_Client1_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+3) ); 
+04C2:  MOVLW  01
+04C3:  SUBWF  3B,W
+04C4:  MOVWF  77
+04C5:  RLF    77,F
+04C6:  RLF    77,F
+04C7:  MOVLW  FC
+04C8:  ANDWF  77,F
+04C9:  MOVF   77,W
+04CA:  ADDLW  03
+04CB:  ADDLW  82
+04CC:  MOVWF  3E
+04CD:  MOVF   3E,W
+04CE:  BSF    03.6
+04CF:  MOVWF  0D
+04D0:  BSF    03.5
+04D1:  BCF    0C.7
+04D2:  BSF    0C.0
+04D3:  BCF    03.5
+04D4:  MOVF   0C,W
+04D5:  BCF    03.6
+04D6:  MOVWF  37
+....................             eeprom_polishing_read_cost   = read_eeprom( eeprom_Client1_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+4) ); 
+04D7:  MOVLW  01
+04D8:  SUBWF  3B,W
+04D9:  MOVWF  77
+04DA:  RLF    77,F
+04DB:  RLF    77,F
+04DC:  MOVLW  FC
+04DD:  ANDWF  77,F
+04DE:  MOVF   77,W
+04DF:  ADDLW  04
+04E0:  ADDLW  82
+04E1:  MOVWF  3E
+04E2:  MOVF   3E,W
+04E3:  BSF    03.6
+04E4:  MOVWF  0D
+04E5:  BSF    03.5
+04E6:  BCF    0C.7
+04E7:  BSF    0C.0
+04E8:  BCF    03.5
+04E9:  MOVF   0C,W
+04EA:  BCF    03.6
+04EB:  MOVWF  38
+....................          
+....................         } 
+....................  
+....................  
+....................  
+.................... } 
+....................  
+....................  
+....................  
 ....................  
 ....................  
 .................... //will be implemented 
@@ -1523,142 +1727,140 @@ CCS PCM C Compiler, Version 5.049, 5967               29-Ara-24 20:59
 ....................       //Cost values to be written 
 ....................       eeprom_foaming_written_cost     = (unsigned int8)(((MikroClient[ClientNumber].time_Foaming)/10)*2); 
 *
-0191:  RLF    30,W
-0192:  MOVWF  77
-0193:  RLF    77,F
-0194:  RLF    77,F
-0195:  MOVLW  F8
-0196:  ANDWF  77,F
-0197:  MOVF   77,W
-0198:  ADDLW  20
-0199:  MOVWF  04
-019A:  BCF    03.7
-019B:  INCF   04,F
-019C:  MOVF   00,W
-019D:  MOVWF  3E
-019E:  DECF   04,F
-019F:  MOVF   00,W
-01A0:  MOVWF  3D
-01A1:  MOVF   3E,W
-01A2:  MOVWF  40
-01A3:  MOVF   3D,W
-01A4:  MOVWF  3F
-01A5:  CLRF   42
-01A6:  MOVLW  0A
-01A7:  MOVWF  41
-01A8:  CALL   16C
-01A9:  MOVF   79,W
-01AA:  MOVWF  3E
-01AB:  BCF    03.0
-01AC:  RLF    78,W
-01AD:  MOVWF  79
-01AE:  RLF    3E,W
-01AF:  MOVWF  7A
-01B0:  MOVF   79,W
-01B1:  MOVWF  31
+01BF:  RLF    30,W
+01C0:  MOVWF  77
+01C1:  RLF    77,F
+01C2:  RLF    77,F
+01C3:  MOVLW  F8
+01C4:  ANDWF  77,F
+01C5:  MOVF   77,W
+01C6:  ADDLW  20
+01C7:  MOVWF  04
+01C8:  BCF    03.7
+01C9:  INCF   04,F
+01CA:  MOVF   00,W
+01CB:  MOVWF  3F
+01CC:  DECF   04,F
+01CD:  MOVF   00,W
+01CE:  MOVWF  3E
+01CF:  MOVF   3F,W
+01D0:  MOVWF  41
+01D1:  MOVF   3E,W
+01D2:  MOVWF  40
+01D3:  CLRF   43
+01D4:  MOVLW  0A
+01D5:  MOVWF  42
+01D6:  CALL   16C
+01D7:  MOVF   79,W
+01D8:  MOVWF  3F
+01D9:  BCF    03.0
+01DA:  RLF    78,W
+01DB:  MOVWF  79
+01DC:  RLF    3F,W
+01DD:  MOVWF  7A
+01DE:  MOVF   79,W
+01DF:  MOVWF  31
 ....................       eeprom_washing_written_cost     = (unsigned int8)(((MikroClient[ClientNumber].time_Washing)/10)*2); 
-01B2:  RLF    30,W
-01B3:  MOVWF  77
-01B4:  RLF    77,F
-01B5:  RLF    77,F
-01B6:  MOVLW  F8
-01B7:  ANDWF  77,F
-01B8:  MOVF   77,W
-01B9:  ADDLW  02
-01BA:  ADDLW  20
-01BB:  MOVWF  04
-01BC:  BCF    03.7
-01BD:  INCF   04,F
-01BE:  MOVF   00,W
-01BF:  MOVWF  3E
-01C0:  DECF   04,F
-01C1:  MOVF   00,W
-01C2:  MOVWF  3D
-01C3:  MOVF   3E,W
-01C4:  MOVWF  40
-01C5:  MOVF   3D,W
-01C6:  MOVWF  3F
-01C7:  CLRF   42
-01C8:  MOVLW  0A
-01C9:  MOVWF  41
-01CA:  CALL   16C
-01CB:  MOVF   79,W
-01CC:  MOVWF  3E
-01CD:  BCF    03.0
-01CE:  RLF    78,W
-01CF:  MOVWF  79
-01D0:  RLF    3E,W
-01D1:  MOVWF  7A
-01D2:  MOVF   79,W
-01D3:  MOVWF  32
+01E0:  RLF    30,W
+01E1:  MOVWF  77
+01E2:  RLF    77,F
+01E3:  RLF    77,F
+01E4:  MOVLW  F8
+01E5:  ANDWF  77,F
+01E6:  MOVF   77,W
+01E7:  ADDLW  02
+01E8:  ADDLW  20
+01E9:  MOVWF  04
+01EA:  BCF    03.7
+01EB:  INCF   04,F
+01EC:  MOVF   00,W
+01ED:  MOVWF  3F
+01EE:  DECF   04,F
+01EF:  MOVF   00,W
+01F0:  MOVWF  3E
+01F1:  MOVF   3F,W
+01F2:  MOVWF  41
+01F3:  MOVF   3E,W
+01F4:  MOVWF  40
+01F5:  CLRF   43
+01F6:  MOVLW  0A
+01F7:  MOVWF  42
+01F8:  CALL   16C
+01F9:  MOVF   79,W
+01FA:  MOVWF  3F
+01FB:  BCF    03.0
+01FC:  RLF    78,W
+01FD:  MOVWF  79
+01FE:  RLF    3F,W
+01FF:  MOVWF  7A
+0200:  MOVF   79,W
+0201:  MOVWF  32
 ....................       eeprom_ventilating_written_cost = (unsigned int8)(((MikroClient[ClientNumber].time_Ventilation)/10)*2); 
-01D4:  RLF    30,W
-01D5:  MOVWF  77
-01D6:  RLF    77,F
-01D7:  RLF    77,F
-01D8:  MOVLW  F8
-01D9:  ANDWF  77,F
-01DA:  MOVF   77,W
-01DB:  ADDLW  04
-01DC:  ADDLW  20
-01DD:  MOVWF  04
-01DE:  BCF    03.7
-01DF:  INCF   04,F
-01E0:  MOVF   00,W
-01E1:  MOVWF  3E
-01E2:  DECF   04,F
-01E3:  MOVF   00,W
-01E4:  MOVWF  3D
-01E5:  MOVF   3E,W
-01E6:  MOVWF  40
-01E7:  MOVF   3D,W
-01E8:  MOVWF  3F
-01E9:  CLRF   42
-01EA:  MOVLW  0A
-01EB:  MOVWF  41
-01EC:  CALL   16C
-01ED:  MOVF   79,W
-01EE:  MOVWF  3E
-01EF:  BCF    03.0
-01F0:  RLF    78,W
-01F1:  MOVWF  79
-01F2:  RLF    3E,W
-01F3:  MOVWF  7A
-01F4:  MOVF   79,W
-01F5:  MOVWF  33
+0202:  RLF    30,W
+0203:  MOVWF  77
+0204:  RLF    77,F
+0205:  RLF    77,F
+0206:  MOVLW  F8
+0207:  ANDWF  77,F
+0208:  MOVF   77,W
+0209:  ADDLW  04
+020A:  ADDLW  20
+020B:  MOVWF  04
+020C:  BCF    03.7
+020D:  INCF   04,F
+020E:  MOVF   00,W
+020F:  MOVWF  3F
+0210:  DECF   04,F
+0211:  MOVF   00,W
+0212:  MOVWF  3E
+0213:  MOVF   3F,W
+0214:  MOVWF  41
+0215:  MOVF   3E,W
+0216:  MOVWF  40
+0217:  CLRF   43
+0218:  MOVLW  0A
+0219:  MOVWF  42
+021A:  CALL   16C
+021B:  MOVF   79,W
+021C:  MOVWF  3F
+021D:  BCF    03.0
+021E:  RLF    78,W
+021F:  MOVWF  79
+0220:  RLF    3F,W
+0221:  MOVWF  7A
+0222:  MOVF   79,W
+0223:  MOVWF  33
 ....................       eeprom_polishing_written_cost   = (unsigned int8)((MikroClient[ClientNumber].mililitre_Polishing)*15); 
-01F6:  RLF    30,W
-01F7:  MOVWF  77
-01F8:  RLF    77,F
-01F9:  RLF    77,F
-01FA:  MOVLW  F8
-01FB:  ANDWF  77,F
-01FC:  MOVF   77,W
-01FD:  ADDLW  06
-01FE:  ADDLW  20
-01FF:  MOVWF  04
-0200:  BCF    03.7
-0201:  INCF   04,F
-0202:  MOVF   00,W
-0203:  MOVWF  3E
-0204:  DECF   04,F
-0205:  MOVF   00,W
-0206:  MOVWF  3D
-0207:  MOVF   3E,W
-0208:  MOVWF  40
-0209:  MOVF   3D,W
-020A:  MOVWF  3F
-020B:  CLRF   42
-020C:  MOVLW  0F
-020D:  MOVWF  41
+0224:  RLF    30,W
+0225:  MOVWF  77
+0226:  RLF    77,F
+0227:  RLF    77,F
+0228:  MOVLW  F8
+0229:  ANDWF  77,F
+022A:  MOVF   77,W
+022B:  ADDLW  06
+022C:  ADDLW  20
+022D:  MOVWF  04
+022E:  BCF    03.7
+022F:  INCF   04,F
+0230:  MOVF   00,W
+0231:  MOVWF  3F
+0232:  DECF   04,F
+0233:  MOVF   00,W
+0234:  MOVWF  3E
+0235:  MOVF   3F,W
+0236:  MOVWF  41
+0237:  MOVF   3E,W
+0238:  MOVWF  40
+0239:  CLRF   43
+023A:  MOVLW  0F
+023B:  MOVWF  42
 *
-0222:  MOVF   78,W
-0223:  MOVWF  34
+0250:  MOVF   78,W
+0251:  MOVWF  34
 ....................       
 ....................       //Write data to the allocated space for the customer who is using it 
 ....................       write_EEPROMVariables_to_EEPROMregs(); 
-*
-0359:  RETURN
 .................... } 
 ....................  
 ....................  
@@ -1668,350 +1870,347 @@ CCS PCM C Compiler, Version 5.049, 5967               29-Ara-24 20:59
 .................... // Operations will be performed for the relevant customer 
 .................... // A new operation will be defined each time the system is activated 
 .................... // Example usage: 
-.................... // Main Menu -> Registration Process -> Operation 1 -> LCD display view: 
+.................... // Main Menu -> Registration Process ->NextButton -> Operation 1 -> LCD display view: 
 .................... //                                                                [F=32TL    W=12TL] F: foaming     , W: Water 
 .................... //                                                                [V=24TL    P=85TL] V: Ventilating , P: Polishing 
-.................... //                        -> Operation 2 -> LCD display view: 
+.................... //                                   ->NextButton -> Operation 2 -> LCD display view: 
 .................... //                                                                [F=32TL    W=12TL] F: foaming     , W: Water 
 .................... //                                                                [V=24TL    P=85TL] V: Ventilating , P: Polishing 
 ....................  
 ....................    //Selcuk Bey's ID 
 ....................    if(ClientNumber == 0){ 
-*
-0224:  MOVF   30,F
-0225:  BTFSS  03.2
-0226:  GOTO   2BC
-....................        
-....................       // The last cursor position address will always be written to the zero address 
+0252:  MOVF   30,F
+0253:  BTFSS  03.2
+0254:  GOTO   2EA
 ....................        
 ....................       //Pull the last address to keep going on 
+....................       //The last cursor position address will always be written to the zero address, to ensure that new data does not overwrite previously written data 
 ....................       Client0_last_address = read_eeprom(eeprom_Client0_systemStartAddress); 
-0227:  BSF    03.6
-0228:  CLRF   0D
-0229:  BSF    03.5
-022A:  BCF    0C.7
-022B:  BSF    0C.0
-022C:  BCF    03.5
-022D:  MOVF   0C,W
-022E:  BCF    03.6
-022F:  MOVWF  39
+0255:  BSF    03.6
+0256:  CLRF   0D
+0257:  BSF    03.5
+0258:  BCF    0C.7
+0259:  BSF    0C.0
+025A:  BCF    03.5
+025B:  MOVF   0C,W
+025C:  BCF    03.6
+025D:  MOVWF  39
 ....................        
 ....................       write_eeprom( (eeprom_Client0_systemStartAddress + Client0_last_address + 1), (eeprom_foaming_written_cost)     ); Client0_last_address++; //Save foaming cost 
-0230:  MOVLW  01
-0231:  ADDWF  39,W
-0232:  MOVWF  3D
-0233:  MOVF   0B,W
-0234:  MOVWF  77
-0235:  BCF    0B.7
-0236:  MOVF   3D,W
-0237:  BSF    03.6
-0238:  MOVWF  0D
-0239:  BCF    03.6
-023A:  MOVF   31,W
-023B:  BSF    03.6
-023C:  MOVWF  0C
-023D:  BSF    03.5
-023E:  BCF    0C.7
-023F:  BSF    0C.2
-0240:  MOVLW  55
-0241:  MOVWF  0D
-0242:  MOVLW  AA
-0243:  MOVWF  0D
-0244:  BSF    0C.1
-0245:  BTFSC  0C.1
-0246:  GOTO   245
-0247:  BCF    0C.2
-0248:  MOVF   77,W
-0249:  BCF    03.5
-024A:  BCF    03.6
-024B:  IORWF  0B,F
-024C:  INCF   39,F
-....................       write_eeprom( (eeprom_Client0_systemStartAddress + Client0_last_address + 1), (eeprom_washing_written_cost)     ); Client0_last_address++; //Save washing cost 
-024D:  MOVLW  01
-024E:  ADDWF  39,W
-024F:  MOVWF  3D
-0250:  MOVF   0B,W
-0251:  MOVWF  77
-0252:  BCF    0B.7
-0253:  MOVF   3D,W
-0254:  BSF    03.6
-0255:  MOVWF  0D
-0256:  BCF    03.6
-0257:  MOVF   32,W
-0258:  BSF    03.6
-0259:  MOVWF  0C
-025A:  BSF    03.5
-025B:  BCF    0C.7
-025C:  BSF    0C.2
-025D:  MOVLW  55
-025E:  MOVWF  0D
-025F:  MOVLW  AA
-0260:  MOVWF  0D
-0261:  BSF    0C.1
-0262:  BTFSC  0C.1
-0263:  GOTO   262
-0264:  BCF    0C.2
-0265:  MOVF   77,W
-0266:  BCF    03.5
+025E:  MOVLW  01
+025F:  ADDWF  39,W
+0260:  MOVWF  3E
+0261:  MOVF   0B,W
+0262:  MOVWF  77
+0263:  BCF    0B.7
+0264:  MOVF   3E,W
+0265:  BSF    03.6
+0266:  MOVWF  0D
 0267:  BCF    03.6
-0268:  IORWF  0B,F
-0269:  INCF   39,F
-....................       write_eeprom( (eeprom_Client0_systemStartAddress + Client0_last_address + 1), (eeprom_ventilating_written_cost) ); Client0_last_address++; //Save Ventilating cost 
-026A:  MOVLW  01
-026B:  ADDWF  39,W
-026C:  MOVWF  3D
-026D:  MOVF   0B,W
-026E:  MOVWF  77
-026F:  BCF    0B.7
-0270:  MOVF   3D,W
-0271:  BSF    03.6
-0272:  MOVWF  0D
-0273:  BCF    03.6
-0274:  MOVF   33,W
-0275:  BSF    03.6
-0276:  MOVWF  0C
-0277:  BSF    03.5
-0278:  BCF    0C.7
-0279:  BSF    0C.2
-027A:  MOVLW  55
-027B:  MOVWF  0D
-027C:  MOVLW  AA
-027D:  MOVWF  0D
-027E:  BSF    0C.1
-027F:  BTFSC  0C.1
-0280:  GOTO   27F
-0281:  BCF    0C.2
-0282:  MOVF   77,W
-0283:  BCF    03.5
+0268:  MOVF   31,W
+0269:  BSF    03.6
+026A:  MOVWF  0C
+026B:  BSF    03.5
+026C:  BCF    0C.7
+026D:  BSF    0C.2
+026E:  MOVLW  55
+026F:  MOVWF  0D
+0270:  MOVLW  AA
+0271:  MOVWF  0D
+0272:  BSF    0C.1
+0273:  BTFSC  0C.1
+0274:  GOTO   273
+0275:  BCF    0C.2
+0276:  MOVF   77,W
+0277:  BCF    03.5
+0278:  BCF    03.6
+0279:  IORWF  0B,F
+027A:  INCF   39,F
+....................       write_eeprom( (eeprom_Client0_systemStartAddress + Client0_last_address + 1), (eeprom_washing_written_cost)     ); Client0_last_address++; //Save washing cost 
+027B:  MOVLW  01
+027C:  ADDWF  39,W
+027D:  MOVWF  3E
+027E:  MOVF   0B,W
+027F:  MOVWF  77
+0280:  BCF    0B.7
+0281:  MOVF   3E,W
+0282:  BSF    03.6
+0283:  MOVWF  0D
 0284:  BCF    03.6
-0285:  IORWF  0B,F
-0286:  INCF   39,F
-....................       write_eeprom( (eeprom_Client0_systemStartAddress + Client0_last_address + 1), (eeprom_polishing_written_cost)   ); Client0_last_address++; //Save Polishing cost 
-0287:  MOVLW  01
-0288:  ADDWF  39,W
-0289:  MOVWF  3D
-028A:  MOVF   0B,W
-028B:  MOVWF  77
-028C:  BCF    0B.7
-028D:  MOVF   3D,W
-028E:  BSF    03.6
-028F:  MOVWF  0D
-0290:  BCF    03.6
-0291:  MOVF   34,W
-0292:  BSF    03.6
-0293:  MOVWF  0C
-0294:  BSF    03.5
-0295:  BCF    0C.7
-0296:  BSF    0C.2
-0297:  MOVLW  55
-0298:  MOVWF  0D
-0299:  MOVLW  AA
-029A:  MOVWF  0D
-029B:  BSF    0C.1
-029C:  BTFSC  0C.1
-029D:  GOTO   29C
-029E:  BCF    0C.2
-029F:  MOVF   77,W
-02A0:  BCF    03.5
+0285:  MOVF   32,W
+0286:  BSF    03.6
+0287:  MOVWF  0C
+0288:  BSF    03.5
+0289:  BCF    0C.7
+028A:  BSF    0C.2
+028B:  MOVLW  55
+028C:  MOVWF  0D
+028D:  MOVLW  AA
+028E:  MOVWF  0D
+028F:  BSF    0C.1
+0290:  BTFSC  0C.1
+0291:  GOTO   290
+0292:  BCF    0C.2
+0293:  MOVF   77,W
+0294:  BCF    03.5
+0295:  BCF    03.6
+0296:  IORWF  0B,F
+0297:  INCF   39,F
+....................       write_eeprom( (eeprom_Client0_systemStartAddress + Client0_last_address + 1), (eeprom_ventilating_written_cost) ); Client0_last_address++; //Save Ventilating cost 
+0298:  MOVLW  01
+0299:  ADDWF  39,W
+029A:  MOVWF  3E
+029B:  MOVF   0B,W
+029C:  MOVWF  77
+029D:  BCF    0B.7
+029E:  MOVF   3E,W
+029F:  BSF    03.6
+02A0:  MOVWF  0D
 02A1:  BCF    03.6
-02A2:  IORWF  0B,F
-02A3:  INCF   39,F
+02A2:  MOVF   33,W
+02A3:  BSF    03.6
+02A4:  MOVWF  0C
+02A5:  BSF    03.5
+02A6:  BCF    0C.7
+02A7:  BSF    0C.2
+02A8:  MOVLW  55
+02A9:  MOVWF  0D
+02AA:  MOVLW  AA
+02AB:  MOVWF  0D
+02AC:  BSF    0C.1
+02AD:  BTFSC  0C.1
+02AE:  GOTO   2AD
+02AF:  BCF    0C.2
+02B0:  MOVF   77,W
+02B1:  BCF    03.5
+02B2:  BCF    03.6
+02B3:  IORWF  0B,F
+02B4:  INCF   39,F
+....................       write_eeprom( (eeprom_Client0_systemStartAddress + Client0_last_address + 1), (eeprom_polishing_written_cost)   ); Client0_last_address++; //Save Polishing cost 
+02B5:  MOVLW  01
+02B6:  ADDWF  39,W
+02B7:  MOVWF  3E
+02B8:  MOVF   0B,W
+02B9:  MOVWF  77
+02BA:  BCF    0B.7
+02BB:  MOVF   3E,W
+02BC:  BSF    03.6
+02BD:  MOVWF  0D
+02BE:  BCF    03.6
+02BF:  MOVF   34,W
+02C0:  BSF    03.6
+02C1:  MOVWF  0C
+02C2:  BSF    03.5
+02C3:  BCF    0C.7
+02C4:  BSF    0C.2
+02C5:  MOVLW  55
+02C6:  MOVWF  0D
+02C7:  MOVLW  AA
+02C8:  MOVWF  0D
+02C9:  BSF    0C.1
+02CA:  BTFSC  0C.1
+02CB:  GOTO   2CA
+02CC:  BCF    0C.2
+02CD:  MOVF   77,W
+02CE:  BCF    03.5
+02CF:  BCF    03.6
+02D0:  IORWF  0B,F
+02D1:  INCF   39,F
 ....................       write_eeprom( (eeprom_Client0_systemStartAddress                           ), ( Client0_last_address)           );                         //Save cursor location in the client0 start address 
-02A4:  MOVF   0B,W
-02A5:  MOVWF  77
-02A6:  BCF    0B.7
-02A7:  BSF    03.6
-02A8:  CLRF   0D
-02A9:  BCF    03.6
-02AA:  MOVF   39,W
-02AB:  BSF    03.6
-02AC:  MOVWF  0C
-02AD:  BSF    03.5
-02AE:  BCF    0C.7
-02AF:  BSF    0C.2
-02B0:  MOVLW  55
-02B1:  MOVWF  0D
-02B2:  MOVLW  AA
-02B3:  MOVWF  0D
-02B4:  BSF    0C.1
-02B5:  BTFSC  0C.1
-02B6:  GOTO   2B5
-02B7:  BCF    0C.2
-02B8:  MOVF   77,W
-02B9:  BCF    03.5
-02BA:  BCF    03.6
-02BB:  IORWF  0B,F
+02D2:  MOVF   0B,W
+02D3:  MOVWF  77
+02D4:  BCF    0B.7
+02D5:  BSF    03.6
+02D6:  CLRF   0D
+02D7:  BCF    03.6
+02D8:  MOVF   39,W
+02D9:  BSF    03.6
+02DA:  MOVWF  0C
+02DB:  BSF    03.5
+02DC:  BCF    0C.7
+02DD:  BSF    0C.2
+02DE:  MOVLW  55
+02DF:  MOVWF  0D
+02E0:  MOVLW  AA
+02E1:  MOVWF  0D
+02E2:  BSF    0C.1
+02E3:  BTFSC  0C.1
+02E4:  GOTO   2E3
+02E5:  BCF    0C.2
+02E6:  MOVF   77,W
+02E7:  BCF    03.5
+02E8:  BCF    03.6
+02E9:  IORWF  0B,F
 ....................    } 
 ....................     
 ....................    if(ClientNumber == 1){ 
-02BC:  DECFSZ 30,W
-02BD:  GOTO   359
+02EA:  DECFSZ 30,W
+02EB:  GOTO   387
 ....................        
-....................       // The last cursor position address will always be written to the zero address 
-....................      
 ....................       //Pull the last address to keep going on 
+....................       //The last cursor position address will always be written to the zero address, to ensure that new data does not overwrite previously written data 
 ....................       Client1_last_address = read_eeprom(eeprom_Client1_systemStartAddress); 
-02BE:  MOVLW  82
-02BF:  BSF    03.6
-02C0:  MOVWF  0D
-02C1:  BSF    03.5
-02C2:  BCF    0C.7
-02C3:  BSF    0C.0
-02C4:  BCF    03.5
-02C5:  MOVF   0C,W
-02C6:  BCF    03.6
-02C7:  MOVWF  3A
+02EC:  MOVLW  82
+02ED:  BSF    03.6
+02EE:  MOVWF  0D
+02EF:  BSF    03.5
+02F0:  BCF    0C.7
+02F1:  BSF    0C.0
+02F2:  BCF    03.5
+02F3:  MOVF   0C,W
+02F4:  BCF    03.6
+02F5:  MOVWF  3A
 ....................        
 ....................       write_eeprom( (eeprom_Client1_systemStartAddress + Client1_last_address + 1), (eeprom_foaming_written_cost)     ); Client1_last_address++; //Save foaming cost 
-02C8:  MOVLW  82
-02C9:  ADDWF  3A,W
-02CA:  ADDLW  01
-02CB:  MOVWF  3D
-02CC:  MOVF   0B,W
-02CD:  MOVWF  77
-02CE:  BCF    0B.7
-02CF:  MOVF   3D,W
-02D0:  BSF    03.6
-02D1:  MOVWF  0D
-02D2:  BCF    03.6
-02D3:  MOVF   31,W
-02D4:  BSF    03.6
-02D5:  MOVWF  0C
-02D6:  BSF    03.5
-02D7:  BCF    0C.7
-02D8:  BSF    0C.2
-02D9:  MOVLW  55
-02DA:  MOVWF  0D
-02DB:  MOVLW  AA
-02DC:  MOVWF  0D
-02DD:  BSF    0C.1
-02DE:  BTFSC  0C.1
-02DF:  GOTO   2DE
-02E0:  BCF    0C.2
-02E1:  MOVF   77,W
-02E2:  BCF    03.5
-02E3:  BCF    03.6
-02E4:  IORWF  0B,F
-02E5:  INCF   3A,F
+02F6:  MOVLW  82
+02F7:  ADDWF  3A,W
+02F8:  ADDLW  01
+02F9:  MOVWF  3E
+02FA:  MOVF   0B,W
+02FB:  MOVWF  77
+02FC:  BCF    0B.7
+02FD:  MOVF   3E,W
+02FE:  BSF    03.6
+02FF:  MOVWF  0D
+0300:  BCF    03.6
+0301:  MOVF   31,W
+0302:  BSF    03.6
+0303:  MOVWF  0C
+0304:  BSF    03.5
+0305:  BCF    0C.7
+0306:  BSF    0C.2
+0307:  MOVLW  55
+0308:  MOVWF  0D
+0309:  MOVLW  AA
+030A:  MOVWF  0D
+030B:  BSF    0C.1
+030C:  BTFSC  0C.1
+030D:  GOTO   30C
+030E:  BCF    0C.2
+030F:  MOVF   77,W
+0310:  BCF    03.5
+0311:  BCF    03.6
+0312:  IORWF  0B,F
+0313:  INCF   3A,F
 ....................       write_eeprom( (eeprom_Client1_systemStartAddress + Client1_last_address + 1), (eeprom_washing_written_cost)     ); Client1_last_address++; //Save washing cost 
-02E6:  MOVLW  82
-02E7:  ADDWF  3A,W
-02E8:  ADDLW  01
-02E9:  MOVWF  3D
-02EA:  MOVF   0B,W
-02EB:  MOVWF  77
-02EC:  BCF    0B.7
-02ED:  MOVF   3D,W
-02EE:  BSF    03.6
-02EF:  MOVWF  0D
-02F0:  BCF    03.6
-02F1:  MOVF   32,W
-02F2:  BSF    03.6
-02F3:  MOVWF  0C
-02F4:  BSF    03.5
-02F5:  BCF    0C.7
-02F6:  BSF    0C.2
-02F7:  MOVLW  55
-02F8:  MOVWF  0D
-02F9:  MOVLW  AA
-02FA:  MOVWF  0D
-02FB:  BSF    0C.1
-02FC:  BTFSC  0C.1
-02FD:  GOTO   2FC
-02FE:  BCF    0C.2
-02FF:  MOVF   77,W
-0300:  BCF    03.5
-0301:  BCF    03.6
-0302:  IORWF  0B,F
-0303:  INCF   3A,F
+0314:  MOVLW  82
+0315:  ADDWF  3A,W
+0316:  ADDLW  01
+0317:  MOVWF  3E
+0318:  MOVF   0B,W
+0319:  MOVWF  77
+031A:  BCF    0B.7
+031B:  MOVF   3E,W
+031C:  BSF    03.6
+031D:  MOVWF  0D
+031E:  BCF    03.6
+031F:  MOVF   32,W
+0320:  BSF    03.6
+0321:  MOVWF  0C
+0322:  BSF    03.5
+0323:  BCF    0C.7
+0324:  BSF    0C.2
+0325:  MOVLW  55
+0326:  MOVWF  0D
+0327:  MOVLW  AA
+0328:  MOVWF  0D
+0329:  BSF    0C.1
+032A:  BTFSC  0C.1
+032B:  GOTO   32A
+032C:  BCF    0C.2
+032D:  MOVF   77,W
+032E:  BCF    03.5
+032F:  BCF    03.6
+0330:  IORWF  0B,F
+0331:  INCF   3A,F
 ....................       write_eeprom( (eeprom_Client1_systemStartAddress + Client1_last_address + 1), (eeprom_ventilating_written_cost) ); Client1_last_address++; //Save Ventilating cost 
-0304:  MOVLW  82
-0305:  ADDWF  3A,W
-0306:  ADDLW  01
-0307:  MOVWF  3D
-0308:  MOVF   0B,W
-0309:  MOVWF  77
-030A:  BCF    0B.7
-030B:  MOVF   3D,W
-030C:  BSF    03.6
-030D:  MOVWF  0D
-030E:  BCF    03.6
-030F:  MOVF   33,W
-0310:  BSF    03.6
-0311:  MOVWF  0C
-0312:  BSF    03.5
-0313:  BCF    0C.7
-0314:  BSF    0C.2
-0315:  MOVLW  55
-0316:  MOVWF  0D
-0317:  MOVLW  AA
-0318:  MOVWF  0D
-0319:  BSF    0C.1
-031A:  BTFSC  0C.1
-031B:  GOTO   31A
-031C:  BCF    0C.2
-031D:  MOVF   77,W
-031E:  BCF    03.5
-031F:  BCF    03.6
-0320:  IORWF  0B,F
-0321:  INCF   3A,F
+0332:  MOVLW  82
+0333:  ADDWF  3A,W
+0334:  ADDLW  01
+0335:  MOVWF  3E
+0336:  MOVF   0B,W
+0337:  MOVWF  77
+0338:  BCF    0B.7
+0339:  MOVF   3E,W
+033A:  BSF    03.6
+033B:  MOVWF  0D
+033C:  BCF    03.6
+033D:  MOVF   33,W
+033E:  BSF    03.6
+033F:  MOVWF  0C
+0340:  BSF    03.5
+0341:  BCF    0C.7
+0342:  BSF    0C.2
+0343:  MOVLW  55
+0344:  MOVWF  0D
+0345:  MOVLW  AA
+0346:  MOVWF  0D
+0347:  BSF    0C.1
+0348:  BTFSC  0C.1
+0349:  GOTO   348
+034A:  BCF    0C.2
+034B:  MOVF   77,W
+034C:  BCF    03.5
+034D:  BCF    03.6
+034E:  IORWF  0B,F
+034F:  INCF   3A,F
 ....................       write_eeprom( (eeprom_Client1_systemStartAddress + Client1_last_address + 1), (eeprom_polishing_written_cost)   ); Client1_last_address++; //Save Polishing cost 
-0322:  MOVLW  82
-0323:  ADDWF  3A,W
-0324:  ADDLW  01
-0325:  MOVWF  3D
-0326:  MOVF   0B,W
-0327:  MOVWF  77
-0328:  BCF    0B.7
-0329:  MOVF   3D,W
-032A:  BSF    03.6
-032B:  MOVWF  0D
-032C:  BCF    03.6
-032D:  MOVF   34,W
-032E:  BSF    03.6
-032F:  MOVWF  0C
-0330:  BSF    03.5
-0331:  BCF    0C.7
-0332:  BSF    0C.2
-0333:  MOVLW  55
-0334:  MOVWF  0D
-0335:  MOVLW  AA
-0336:  MOVWF  0D
-0337:  BSF    0C.1
-0338:  BTFSC  0C.1
-0339:  GOTO   338
-033A:  BCF    0C.2
-033B:  MOVF   77,W
-033C:  BCF    03.5
-033D:  BCF    03.6
-033E:  IORWF  0B,F
-033F:  INCF   3A,F
+0350:  MOVLW  82
+0351:  ADDWF  3A,W
+0352:  ADDLW  01
+0353:  MOVWF  3E
+0354:  MOVF   0B,W
+0355:  MOVWF  77
+0356:  BCF    0B.7
+0357:  MOVF   3E,W
+0358:  BSF    03.6
+0359:  MOVWF  0D
+035A:  BCF    03.6
+035B:  MOVF   34,W
+035C:  BSF    03.6
+035D:  MOVWF  0C
+035E:  BSF    03.5
+035F:  BCF    0C.7
+0360:  BSF    0C.2
+0361:  MOVLW  55
+0362:  MOVWF  0D
+0363:  MOVLW  AA
+0364:  MOVWF  0D
+0365:  BSF    0C.1
+0366:  BTFSC  0C.1
+0367:  GOTO   366
+0368:  BCF    0C.2
+0369:  MOVF   77,W
+036A:  BCF    03.5
+036B:  BCF    03.6
+036C:  IORWF  0B,F
+036D:  INCF   3A,F
 ....................       write_eeprom( (eeprom_Client1_systemStartAddress                           ), ( Client1_last_address)           );                         //Save cursor location in the client0 start address 
-0340:  MOVF   0B,W
-0341:  MOVWF  77
-0342:  BCF    0B.7
-0343:  MOVLW  82
-0344:  BSF    03.6
-0345:  MOVWF  0D
-0346:  BCF    03.6
-0347:  MOVF   3A,W
-0348:  BSF    03.6
-0349:  MOVWF  0C
-034A:  BSF    03.5
-034B:  BCF    0C.7
-034C:  BSF    0C.2
-034D:  MOVLW  55
-034E:  MOVWF  0D
-034F:  MOVLW  AA
-0350:  MOVWF  0D
-0351:  BSF    0C.1
-0352:  BTFSC  0C.1
-0353:  GOTO   352
-0354:  BCF    0C.2
-0355:  MOVF   77,W
-0356:  BCF    03.5
-0357:  BCF    03.6
-0358:  IORWF  0B,F
+036E:  MOVF   0B,W
+036F:  MOVWF  77
+0370:  BCF    0B.7
+0371:  MOVLW  82
+0372:  BSF    03.6
+0373:  MOVWF  0D
+0374:  BCF    03.6
+0375:  MOVF   3A,W
+0376:  BSF    03.6
+0377:  MOVWF  0C
+0378:  BSF    03.5
+0379:  BCF    0C.7
+037A:  BSF    0C.2
+037B:  MOVLW  55
+037C:  MOVWF  0D
+037D:  MOVLW  AA
+037E:  MOVWF  0D
+037F:  BSF    0C.1
+0380:  BTFSC  0C.1
+0381:  GOTO   380
+0382:  BCF    0C.2
+0383:  MOVF   77,W
+0384:  BCF    03.5
+0385:  BCF    03.6
+0386:  IORWF  0B,F
 ....................     
 ....................    } 
 ....................     
@@ -2022,42 +2221,6 @@ CCS PCM C Compiler, Version 5.049, 5967               29-Ara-24 20:59
 ....................  
 ....................  
 ....................  
-....................  
-....................  
-.................... //!//will be implemented 
-.................... void Read_EEPROMVariables_from_EEPROMregs(){ 
-....................      
-....................         if(ClientNumber == 0) 
-*
-03D9:  MOVF   30,F
-03DA:  BTFSS  03.2
-03DB:  GOTO   3E5
-....................         { 
-....................  
-....................  
-....................            //Pull the last address to keep going on 
-....................            Client0_last_address = read_eeprom(eeprom_Client0_systemStartAddress); 
-03DC:  BSF    03.6
-03DD:  CLRF   0D
-03DE:  BSF    03.5
-03DF:  BCF    0C.7
-03E0:  BSF    0C.0
-03E1:  BCF    03.5
-03E2:  MOVF   0C,W
-03E3:  BCF    03.6
-03E4:  MOVWF  39
-....................             
-....................             
-....................             
-....................              
-....................         } 
-03E5:  BCF    0A.3
-03E6:  BCF    0A.4
-03E7:  GOTO   52B (RETURN)
-....................  
-....................  
-....................  
-.................... } 
 
 Configuration Fuses:
    Word  1: 2CF2   HS NOWDT NOPUT MCLR NOPROTECT NOCPD NOBROWNOUT IESO FCMEN NOLVP NODEBUG

@@ -1,4 +1,4 @@
->>> Warning 203 "InternalEEPROM.c" Line 94(1,1): Condition always TRUE
-*** Error 79 "InternalEEPROM.c" Line 180(25,26): Expect }
-*** Error 79 "InternalEEPROM.c" Line 180(25,26): Expect }
-*** Error 79 "InternalEEPROM.c" Line 180(25,26): Expect }
+>>> Warning 203 "InternalEEPROM.c" Line 89(1,1): Condition always TRUE
+      Memory usage:   ROM=18%      RAM=10% - 14%
+      0 Errors,  1 Warnings.
+Build Successful.

@@ -1,10 +1,10 @@
-F N "write_EEPROMVariables_to_EEPROMregs" 0 168 ""
-D G "__PCM__" 0 189 ""5.049""
-D G "__DEVICE__" 0 189 "887"
-D G "__DATE__" 0 189 ""29-Ara-24""
-D G "__TIME__" 0 189 ""20:59:15""
-D G "_UNICODE" 0 189 ""?""
-D G "__EVAL" 0 189 ""?"" "Standard Header file for the PIC16F887 device ////////////////"
+F N "Read_EEPROMVariables_from_EEPROMregs" 0 151 ""
+D G "__PCM__" 0 162 ""5.049""
+D G "__DEVICE__" 0 162 "887"
+D G "__DATE__" 0 162 ""29-Ara-24""
+D G "__TIME__" 0 162 ""22:28:20""
+D G "_UNICODE" 0 162 ""?""
+D G "__EVAL" 0 162 ""?"" "Standard Header file for the PIC16F887 device ////////////////"
 c L "set_tris_a" 1 3 6 "FUNCTION"
 f N "set_tris_a" 1 39 ""
 v L "value" 1 39 "int8" `54 
@@ -1193,39 +1193,44 @@ V G "eeprom_foaming_read_cost" 0 47 "int8" `650
 V G "eeprom_washing_read_cost" 0 48 "int8" `651 
 V G "eeprom_ventilating_read_cost" 0 49 "int8" `652 
 V G "eeprom_polishing_read_cost" 0 50 "int8" `653 
-V G "Client0_last_address" 0 56 "int8" `654 
-V G "Client1_last_address" 0 57 "int8" `655 
-C L "display_Status_EEPROM_OnLCD" 0 13 3 "FUNCTION"
-F N "display_Status_EEPROM_OnLCD" 0 61 ""
-f G "display_Status_EEPROM_OnLCD" 0 61 "void()" `656 
+V G "Client0_last_address" 0 53 "int8" `654 
+V G "Client1_last_address" 0 54 "int8" `655 
+V G "IndexOfReadMemory" 0 57 "int8" `656 
+C L "displayOperationStatus_WriteVariables_to_EEPROM" 0 13 2 "FUNCTION"
+F N "displayOperationStatus_WriteVariables_to_EEPROM" 0 61 ""
+f G "displayOperationStatus_WriteVariables_to_EEPROM" 0 61 "void()" `657 
 F N "display_SelectedOpsVal_EEPROM_OnLCD" 0 62 ""
-f G "display_SelectedOpsVal_EEPROM_OnLCD" 0 62 "void()" `657  "======== EEPROM WRITE/READ FUNCTIONS PROTOTYPES  ======== *"
+f G "display_SelectedOpsVal_EEPROM_OnLCD" 0 62 "void()" `658  "======== EEPROM WRITE/READ FUNCTIONS PROTOTYPES  ======== *"
 F N "loadCostValuesToEEPROMVariables" 0 65 ""
-f G "loadCostValuesToEEPROMVariables" 0 65 "void()" `658 
+f G "loadCostValuesToEEPROMVariables" 0 65 "void()" `659 
 F N "write_EEPROMVariables_to_EEPROMregs" 0 66 ""
-f G "write_EEPROMVariables_to_EEPROMregs" 0 66 "void()" `659 
+f G "write_EEPROMVariables_to_EEPROMregs" 0 66 "void()" `660 
 F N "Read_EEPROMVariables_from_EEPROMregs" 0 67 ""
-f G "Read_EEPROMVariables_from_EEPROMregs" 0 67 "void()" `660 
+f G "Read_EEPROMVariables_from_EEPROMregs" 0 67 "void()" `661 
 F N "MAIN" 0 70 ""
-F G "MAIN" 0 71 "void()" `661 
+F G "MAIN" 0 71 "void()" `662 
 C L "MAIN" 0 13 2 "FUNCTION"
 C L "MAIN" 0 13 1 "FUNCTION"
 C L "MAIN" 0 13 1 "FUNCTION"
-C L "MAIN" 0 13 1 "FUNCTION"
-C L "MAIN" 0 13 1 "FUNCTION"
-C L "display_Status_EEPROM_OnLCD" 0 13 1 "FUNCTION"
-F N "display_Status_EEPROM_OnLCD" 0 101 ""
-F G "display_Status_EEPROM_OnLCD" 0 101 "void()" `656 
+C L "displayOperationStatus_WriteVariables_to_EEPROM" 0 13 1 "FUNCTION"
+F N "displayOperationStatus_WriteVariables_to_EEPROM" 0 96 ""
+F G "displayOperationStatus_WriteVariables_to_EEPROM" 0 96 "void()" `657 
 C L "display_SelectedOpsVal_EEPROM_OnLCD" 0 13 1 "FUNCTION"
-F N "display_SelectedOpsVal_EEPROM_OnLCD" 0 136 ""
-F G "display_SelectedOpsVal_EEPROM_OnLCD" 0 136 "void()" `657 
+F N "display_SelectedOpsVal_EEPROM_OnLCD" 0 133 ""
+F G "display_SelectedOpsVal_EEPROM_OnLCD" 0 133 "void()" `658 
+C L "Read_EEPROMVariables_from_EEPROMregs" 0 13 1 "FUNCTION"
+F N "Read_EEPROMVariables_from_EEPROMregs" 0 151 ""
+F G "Read_EEPROMVariables_from_EEPROMregs" 0 151 "void()" `661  "NE ZAMAN NEXT BUTONUNA BASILIR O ZAMAN SEÇÝM YAPILIR"
+C L "Read_EEPROMVariables_from_EEPROMregs" 0 13 1 "FUNCTION"
+C L "Read_EEPROMVariables_from_EEPROMregs" 0 13 1 "FUNCTION"
+C L "Read_EEPROMVariables_from_EEPROMregs" 0 13 1 "FUNCTION"
 C L "loadCostValuesToEEPROMVariables" 0 13 1 "FUNCTION"
-F N "loadCostValuesToEEPROMVariables" 0 153 ""
-F G "loadCostValuesToEEPROMVariables" 0 153 "void()" `658  "Cost values to be written"
+F N "loadCostValuesToEEPROMVariables" 0 188 ""
+F G "loadCostValuesToEEPROMVariables" 0 188 "void()" `659  "Cost values to be written"
 C L "loadCostValuesToEEPROMVariables" 0 13 1 "FUNCTION"
 C L "write_EEPROMVariables_to_EEPROMregs" 0 13 1 "FUNCTION"
-F N "write_EEPROMVariables_to_EEPROMregs" 0 167 ""
-F G "write_EEPROMVariables_to_EEPROMregs" 0 167 "void()" `659  "Operations will be performed for the relevant customer"
+F N "write_EEPROMVariables_to_EEPROMregs" 0 202 ""
+F G "write_EEPROMVariables_to_EEPROMregs" 0 202 "void()" `660  "Operations will be performed for the relevant customer"
 C L "write_EEPROMVariables_to_EEPROMregs" 0 13 9 "FUNCTION"
 C L "write_EEPROMVariables_to_EEPROMregs" 0 13 2 "FUNCTION"
 C L "write_EEPROMVariables_to_EEPROMregs" 0 13 1 "FUNCTION"
@@ -1238,11 +1243,6 @@ C L "write_EEPROMVariables_to_EEPROMregs" 0 13 1 "FUNCTION"
 C L "write_EEPROMVariables_to_EEPROMregs" 0 13 1 "FUNCTION"
 C L "write_EEPROMVariables_to_EEPROMregs" 0 13 1 "FUNCTION"
 C L "write_EEPROMVariables_to_EEPROMregs" 0 13 1 "FUNCTION"
-C L "write_EEPROMVariables_to_EEPROMregs" 0 13 1 "FUNCTION"
-C L "Read_EEPROMVariables_from_EEPROMregs" 0 13 1 "FUNCTION"
-F N "Read_EEPROMVariables_from_EEPROMregs" 0 219 ""
-F G "Read_EEPROMVariables_from_EEPROMregs" 0 219 "void()" `660 
-C L "Read_EEPROMVariables_from_EEPROMregs" 0 13 1 "FUNCTION"
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep_ulpwu" 1 0
