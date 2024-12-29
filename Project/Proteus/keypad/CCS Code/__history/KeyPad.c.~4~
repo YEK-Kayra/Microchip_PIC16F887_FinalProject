@@ -1,0 +1,81 @@
+#include <16f887.h>  
+
+#include <string.h>
+
+#use delay(clock=4M)
+#use fast_io(ALL)  
+#use rs232(baud=9600, parity=N, uart1, bits=8) 
+
+
+#fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT
+
+
+#define selcukID_button pin_D0
+#define emreID_button   pin_D1
+#define idleID_button   pin_D2
+
+char related_ID;
+char sifre[5];
+char selcukID[5] = "1234";
+char emreID[5] = "4321";
+int8 i=0;
+
+char keypad[4][3] = {
+    {'1', '2', '3'},
+    {'4', '5', '6'},
+    {'7', '8', '9'},
+    {'*', '0', '#'}
+};
+
+void main(void) 
+{
+   set_tris_d(0xF0); 
+   
+    while(1){
+      
+      for(int8 row = 0; row < 4; row++)
+      {
+         //Clear all D port pins
+         output_d(0x00);                  
+       
+         output_bit(PIN_D0 + row, 1);     // Aktif satýrý HIGH yap
+
+      
+         delay_ms(10);                    // Debounce için kýsa gecikme
+
+      
+         for(int8 col = 0; col < 3; col++)
+         {
+            
+            if(input(PIN_D4 + col)) {    // Sütun HIGH ise
+               
+            while(input(PIN_D4 + col)); // Tuþ býrakýlana kadar bekle
+               
+            sifre[i]=keypad[row][col]; 
+            i++;
+            }
+        
+         }
+   
+      }
+      
+      
+      if(i==4){
+         if(strcmp(sifre, selcukID) == 0){
+            related_ID = '+'; 
+            putc(related_ID);
+         }
+         else if(strcmp(sifre, emreID) == 0){
+            related_ID = '*'; 
+            putc(related_ID);
+         }
+         else{
+            related_ID = '.'; 
+            putc(related_ID);
+         }
+         i=0;
+      }
+
+      delay_ms(50); //50ms bekle.
+   }
+}

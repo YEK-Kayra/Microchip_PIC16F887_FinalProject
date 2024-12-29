@@ -50,14 +50,14 @@ ROM Allocation:
 0000D9  @cinit2
 
 Project Directory:
-    C:\Users\yunus\OneDrive\Masaüstü\Microchip_PIC16F887_FinalProject\Project\Final_CCS_Code_ForSlave\
+    C:\Users\yunus\OneDrive\Masaüstü\Microchip_PIC16F887_FinalProject\Project\Proteus\keypad\CCS Code\
 
 Project Files:
-    MainSlave.c                                             [29-Ara-24 16:35  CRC=6A6EEC7A]
-    ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f887.h [08-Eyl-15 15:15  CRC=E224733F]
-    ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\string.h [26-Mar-15 12:34  CRC=C4814297]
-    ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stddef.h [05-Eyl-14 11:47  CRC=897CEC6C]
-    ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h [03-Oca-08 14:55  CRC=2D1F019F]
+    KeyPad.c                                                [29-Ara-24 16:33  CRC=6A6EEC7A]
+    ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f887.h [08-Eyl-15 15:15  CRC=E224733F]
+    ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\string.h [26-Mar-15 12:34  CRC=C4814297]
+    ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stddef.h [05-Eyl-14 11:47  CRC=897CEC6C]
+    ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h [03-Oca-08 14:55  CRC=2D1F019F]
 
 Source signature=F4CF91FA
 Program memory checksum=0000
@@ -65,7 +65,7 @@ Program memory CRC=0000
 Hex file CRC=FD9C
 
 Units:
-    MainSlave (main)
+    KeyPad (main)
 
 Compiler Settings:
     Processor:      PIC16F887
@@ -77,13 +77,13 @@ Compiler Settings:
     Compile Mode:       CCS5
 
 Output Files:
-    XREF file:   MainSlave.xsym
-    Errors:      MainSlave.err
-    Ext Symbols: MainSlave.esym
-    INHX8:       MainSlave.hex
-    Symbols:     MainSlave.sym
-    List:        MainSlave.lst
-    Debug/COFF:  MainSlave.cof
-    Project:     MainSlave.ccspjt
-    Call Tree:   MainSlave.tre
-    Statistics:  MainSlave.STA
+    XREF file:   KeyPad.xsym
+    Errors:      KeyPad.err
+    Ext Symbols: KeyPad.esym
+    INHX8:       KeyPad.hex
+    Symbols:     KeyPad.sym
+    List:        KeyPad.lst
+    Debug/COFF:  KeyPad.cof
+    Project:     KeyPad.ccspjt
+    Call Tree:   KeyPad.tre
+    Statistics:  KeyPad.STA

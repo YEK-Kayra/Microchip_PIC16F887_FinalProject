@@ -1,0 +1,41 @@
+[PROJECT]
+Target=KeyPad.hex
+Processor_Text=PIC16F887
+CCSVersion=5.049
+Compiler=PCM
+[Target Data]
+FileList=KeyPad.c
+[KeyPad.c]
+Type=4
+[mru-list]
+1=KeyPad.c
+
+[defines]
+buildcount=4
+
+[ProjectLog]
+Days=1
+D1=29-12-2024
+D1_L=10
+D1_L1=[55884]Stopped Editing.
+D1_L2=[56363]Started Editing.
+D1_L3=[56712]Stopped Editing.
+D1_L4=[56986]Started Editing.
+D1_L5=[57286]Stopped Editing.
+D1_L6=[57629]Started Editing.
+D1_L7=[58837]Stopped Editing.
+D1_L8=[58858]Started Editing.
+D1_L9=[59740]Stopped Editing.
+TotalEdit=31
+TotalDebug=0
+D1_E=31
+D1_D=0
+D1_L10=[59740]Project Closed.
+
+[Opened Files]
+1=KeyPad.c
+t1=1
+Count=1
+[Units]
+Count=1
+1=KeyPad (main)

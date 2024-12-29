@@ -13,7 +13,7 @@
 char related_ID;              // Stores the character to be sent via UART
 char password[5];             // Collects the entered number characters, 5 characters including the null terminator '\0'
 char selcukID[5] = "1234";    // Selcuk's password
-char emreID[5]   = "4321";    // Emre's password
+char emreID[5] = "4321";      // Emre's password
 int8 password_counter = 0;    // Counter for entered characters, query statements are triggered when it reaches 4
 
 

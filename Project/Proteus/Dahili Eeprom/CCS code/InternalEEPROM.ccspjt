@@ -1,0 +1,30 @@
+[PROJECT]
+Target=InternalEEPROM.hex
+Processor_Text=PIC16F887
+CCSVersion=5.049
+Compiler=PCM
+[Target Data]
+FileList=InternalEEPROM.c
+[InternalEEPROM.c]
+Type=4
+[mru-list]
+1=InternalEEPROM.c
+[Units]
+Count=1
+1=InternalEEPROM (main)
+
+[defines]
+buildcount=1
+
+[ProjectLog]
+Days=1
+D1=29-12-2024
+D1_L=4
+D1_L1=[54374]Stopped Editing.
+D1_L2=[55566]Started Editing.
+D1_L3=[55570]Stopped Editing.
+TotalEdit=1
+TotalDebug=0
+D1_E=1
+D1_D=0
+D1_L4=[55570]Project Closed.

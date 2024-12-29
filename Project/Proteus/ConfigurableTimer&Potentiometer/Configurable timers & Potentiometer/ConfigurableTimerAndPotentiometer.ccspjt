@@ -14,7 +14,7 @@ Type=4
 buildcount=31
 
 [ProjectLog]
-Days=3
+Days=4
 D1=16-12-2024
 D1_L=11
 D1_L1=[70911]Started Editing.
@@ -51,6 +51,11 @@ D3_L7=[2766]Stopped Editing.
 D3_L8=[2766]Started Editing.
 D3_L9=[2929]Stopped Editing.
 D3_L10=[2929]Project Closed.
+D4=29-12-2024
+D4_L=3
+D4_L1=[53869]Project Opened.
+D4_L2=[53875]Started Editing.
+D4_L3=[54049]Project Closed.
 
 [Opened Files]
 1=..\..\GraduationProject_3DigitDisplay\ccs_code\3digitDisplayControl.c
