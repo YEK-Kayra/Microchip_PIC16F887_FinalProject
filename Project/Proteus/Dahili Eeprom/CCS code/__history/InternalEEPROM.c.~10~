@@ -1,0 +1,36 @@
+#include <16f887.h>
+
+//--> FUSES
+#fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT
+
+//--> USEs
+#use delay(clock=4M)
+
+
+//--> INCLUDES
+#include <lcd.c>   
+
+unsigned long data;
+
+void main(void) 
+{
+
+      lcd_init(); // LCD ekranýmýzý baþlatacak
+
+      lcd_gotoxy(2,1);
+      printf(lcd_putc, "Operasyon Sonu");   
+      lcd_gotoxy(1,2);
+      printf(lcd_putc, "Kaydediliyor");
+      delay_ms(2000);
+      printf(lcd_putc, "\f");
+      
+      
+
+
+         
+ while(1)
+ {
+     
+ }
+}
+

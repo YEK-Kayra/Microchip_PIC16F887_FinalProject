@@ -1,43 +1,43 @@
-004-005 @READ_PROGRAM_MEMORY8.P1
-004-005 @WRITE_PROGRAM_MEMORY8.P2
-008     lcd
+004-005 @WRITE_PROGRAM_MEMORY8.P1
+004-005 @READ_PROGRAM_MEMORY8.P2
 008     lcdlat
-015     CCP_1
+008     lcd
 015     CCP_1_LOW
+015     CCP_1
 016     CCP_1_HIGH
-01B     CCP_2_LOW
 01B     CCP_2
+01B     CCP_2_LOW
 01C     CCP_2_HIGH
-020-021 data
-022-023 @PRINTF_LU_626.P1
-022     @PSTRINGCN7_626.P2
-022     lcd_init.i
-023-026 lcd_init.LCD_INIT_STRING
-023     @PSTRINGCN7_626.@SCRATCH1
-024     @PSTRINGCN7_626.@SCRATCH2
-024     @PRINTF_LU_626.@SCRATCH1
-025     @PSTRINGCN7_626.@SCRATCH3
-025     @PRINTF_LU_626.@SCRATCH2
-026     @PSTRINGCN7_626.@SCRATCH4
-026     @PRINTF_LU_626.@SCRATCH3
-027     lcd_init.@SCRATCH1
-027     @PRINTF_LU_626.@SCRATCH4
-028     @PRINTF_LU_626.@SCRATCH5
-029     @PRINTF_LU_626.@SCRATCH6
-02A     @PRINTF_LU_626.@SCRATCH7
-02B     lcd_putc.c
-02C     @delay_ms1.P1
-02C     lcd_gotoxy.x
-02D     lcd_gotoxy.y
-02E     lcd_gotoxy.address
-02F     lcd_gotoxy.@SCRATCH1
-030     lcd_send_byte.address
-031     lcd_send_byte.n
-032     lcd_read_byte.low
-032     lcd_send_byte.@SCRATCH1
-033     lcd_send_nibble.n
-033     lcd_read_byte.high
-034     lcd_read_byte.@SCRATCH1
+020-02F MikroClient
+030     ClientNumber
+031     eeprom_foaming
+032     eeprom_washing
+033     eeprom_ventilating
+034     eeprom_Polishing
+035     eeprom_Client0_last_written_address
+036     eeprom_Client1_last_written_address
+037-038 @sprintf_string
+039     lcd_init.i
+039     displayEEPROMDataOnLCD.@SCRATCH1
+039     @PSTRINGC7_626.@SCRATCH1
+03A-03D lcd_init.LCD_INIT_STRING
+03A     @PSTRINGC7_626.@SCRATCH2
+03B     @PSTRINGC7_626.@SCRATCH3
+03C     lcd_putc.c
+03C     @PSTRINGC7_626.@SCRATCH4
+03D     lcd_gotoxy.x
+03E     @delay_ms1.P1
+03E     lcd_gotoxy.y
+03E     lcd_init.@SCRATCH1
+03F     lcd_gotoxy.address
+040     lcd_gotoxy.@SCRATCH1
+041     lcd_send_byte.address
+042     lcd_send_byte.n
+043     lcd_read_byte.low
+043     lcd_send_byte.@SCRATCH1
+044     lcd_send_nibble.n
+044     lcd_read_byte.high
+045     lcd_read_byte.@SCRATCH1
 077     @SCRATCH
 078     @SCRATCH
 078     _RETURN_
@@ -46,37 +46,43 @@
 088     lcdtris
 107.6   C1OUT
 108.6   C2OUT
-10D-10E @READ_PROGRAM_MEMORY8.P1
-10D-10E @WRITE_PROGRAM_MEMORY8.P2
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
 
 ROM Allocation:
-000004  @const642.call
-00000A  @delay_ms1
-00001F  lcd_send_nibble
-00002B  lcd_read_nibble
-000031  lcd_send_byte
-000037  lcd_read_byte
-000071  lcd_init
-0000AF  lcd_gotoxy
-0000C1  lcd_putc
-0000ED  @PSTRINGCN7_626
-000146  @PRINTF_LU_626
-0001AB  @cinit1
-0001AB  MAIN
-0001BD  @cinit2
+000004  @const656.call
+00000C  @const662.call
+000013  @const663.call
+00001A  @const665.call
+00001F  @const666.call
+000025  @const668.call
+00002B  @const669.call
+000033  @delay_ms1
+000048  lcd_send_nibble
+000054  lcd_read_nibble
+00005A  lcd_send_byte
+000060  lcd_read_byte
+00009A  lcd_init
+0000D8  lcd_gotoxy
+0000EA  lcd_putc
+000116  @PSTRINGC7_626
+00016C  displayEEPROMDataOnLCD
+00021D  @cinit1
+00021D  MAIN
+000235  @cinit2
 
 Project Directory:
     C:\Users\yunus\OneDrive\Masaüstü\Microchip_PIC16F887_FinalProject\Project\Proteus\Dahili Eeprom\CCS code\
 
 Project Files:
-    InternalEEPROM.c                                        [29-Ara-24 15:01  CRC=C48CD908]
+    InternalEEPROM.c                                        [29-Ara-24 18:34  CRC=FBFE1184]
     ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f887.h [08-Eyl-15 15:15  CRC=E224733F]
     ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c [19-Eyl-13 16:38  CRC=D1A6378A]
 
-Source signature=49FDBB5B
+Source signature=816EF3D7
 Program memory checksum=0000
 Program memory CRC=0000
-Hex file CRC=8F83
+Hex file CRC=350F
 
 Units:
     InternalEEPROM (main)

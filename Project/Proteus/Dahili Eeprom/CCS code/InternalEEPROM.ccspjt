@@ -9,17 +9,14 @@ FileList=InternalEEPROM.c
 Type=4
 [mru-list]
 1=InternalEEPROM.c
-[Units]
-Count=1
-1=InternalEEPROM (main)
 
 [defines]
-buildcount=1
+buildcount=16
 
 [ProjectLog]
 Days=1
 D1=29-12-2024
-D1_L=4
+D1_L=8
 D1_L1=[54374]Stopped Editing.
 D1_L2=[55566]Started Editing.
 D1_L3=[55570]Stopped Editing.
@@ -28,3 +25,15 @@ TotalDebug=0
 D1_E=1
 D1_D=0
 D1_L4=[55570]Project Closed.
+D1_L5=[60171]Project Opened.
+D1_L6=[64910]Started Editing.
+D1_L7=[67717]Stopped Editing.
+D1_L8=[68151]Started Editing.
+
+[Opened Files]
+1=InternalEEPROM.c
+t1=65
+Count=1
+[Units]
+Count=1
+1=InternalEEPROM (main)

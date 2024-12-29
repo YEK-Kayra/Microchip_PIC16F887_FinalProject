@@ -1,9 +1,9 @@
-D G "__PCM__" 0 36 ""5.049""
-D G "__DEVICE__" 0 36 "887"
-D G "__DATE__" 0 36 ""29-Ara-24""
-D G "__TIME__" 0 36 ""15:01:15""
-D G "_UNICODE" 0 36 ""?""
-D G "__EVAL" 0 36 ""?"" "Standard Header file for the PIC16F887 device ////////////////"
+D G "__PCM__" 0 104 ""5.049""
+D G "__DEVICE__" 0 104 "887"
+D G "__DATE__" 0 104 ""29-Ara-24""
+D G "__TIME__" 0 104 ""18:34:34""
+D G "_UNICODE" 0 104 ""?""
+D G "__EVAL" 0 104 ""?"" "Standard Header file for the PIC16F887 device ////////////////"
 c L "set_tris_a" 1 3 6 "FUNCTION"
 f N "set_tris_a" 1 39 ""
 v L "value" 1 39 "int8" `54 
@@ -1179,10 +1179,24 @@ V L "on" 2 443 "int8" `637
 F G "lcd_cursor_on" 2 444 "void(int8 on)" `636 
 C L "lcd_cursor_on" 2 2 1 "FUNCTION"
 C L "lcd_cursor_on" 2 2 1 "FUNCTION"
-V G "data" 0 13 "int16" `638 
-F N "MAIN" 0 15 ""
-F G "MAIN" 0 16 "void()" `639 
-C L "MAIN" 0 21 1 "FUNCTION"
+T G "MikroleumClient_HandleTypeDef" 0 21 "{int16 time_Foaming,int16 time_Washing,int16 time_Ventilation,int16 mililitre_Polishing}" `643 
+V G "MikroClient" 0 24 "MikroleumClient_HandleTypeDef[2]" `644  "Each customer keeps their own records"
+V G "ClientNumber" 0 27 "int8" `645  "Will be used as given on the right --> MikroClient[ClientNumber]"
+V G "eeprom_foaming" 0 34 "int8" `646 
+V G "eeprom_washing" 0 35 "int8" `647 
+V G "eeprom_ventilating" 0 36 "int8" `648 
+V G "eeprom_Polishing" 0 37 "int8" `649 
+V G "eeprom_Client0_last_written_address" 0 40 "int8" `650  "For Selçuk Bey's account"
+V G "eeprom_Client1_last_written_address" 0 41 "int8" `651  "For Emre Bey's account"
+C L "displayEEPROMDataOnLCD" 0 16 2 "FUNCTION"
+F N "displayEEPROMDataOnLCD" 0 45 ""
+f G "displayEEPROMDataOnLCD" 0 45 "void()" `652 
+F N "MAIN" 0 47 ""
+F G "MAIN" 0 48 "void()" `653 
+C L "MAIN" 0 16 2 "FUNCTION"
+C L "displayEEPROMDataOnLCD" 0 16 1 "FUNCTION"
+F N "displayEEPROMDataOnLCD" 0 66 ""
+F G "displayEEPROMDataOnLCD" 0 66 "void()" `652 
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep_ulpwu" 1 0

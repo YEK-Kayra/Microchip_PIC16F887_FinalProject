@@ -61,11 +61,6 @@ void main(void)
       //Retrieve records and inform the customer
       displayEEPROMDataOnLCD();
       
-      //
-      
-      
-      
-      
       
       
 
@@ -92,11 +87,10 @@ void displayEEPROMDataOnLCD(){
       lcd_gotoxy(3,2);
       printf(lcd_putc, "Kaydediliyor");
       
-      //Fiyatlar yazýlacak sadece
-      eeprom_foaming_written     = MikroClient[ClientNumber].time_Foaming;
-      eeprom_washing_written     = MikroClient[ClientNumber].time_Washing;
-      eeprom_ventilating_read    = MikroClient[ClientNumber].time_Ventilation;
-      eeprom_polishing_written   = MikroClient[ClientNumber].mililitre_Polishing;
+      eeprom_foaming     = MikroClient[ClientNumber].time_Foaming;
+      eeprom_washing     = MikroClient[ClientNumber].time_Washing;
+      eeprom_ventilating = MikroClient[ClientNumber].time_Ventilation;
+      eeprom_Polishing   = MikroClient[ClientNumber].mililitre_Polishing;
       
       delay_ms(1000);
       
