@@ -78,11 +78,9 @@ int8 ClientNumber;                            // Will be used as given on the ri
 int Index_OptionMenu;
 int Index_TimeMoneyPreference;
 int Index_PolishMililitre;
-int Index_PastProcesses;
 unsigned long int val_ADC_Pot_Surf;
 unsigned long int val_ADC_Pot_Timer;
 unsigned long int val_ADC_Pot_Polish;
-unsigned long int val_ADC_Pot_PastProcesses;
 
 //------------ VAR --> TIMER & ARRAYS <-- VAR ------------//
 unsigned long int time_arr[12] = {20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240};//Seconds
@@ -116,27 +114,6 @@ int8 allProcessComplate_flag=0;    /**
                                      * 0: Processes are still ongoing.
                                      * 1: All processes are complete.
                                      */
-                                     
-//------------ VAR --> INTERNAL EEPROM <-- VAR ------------//
-//EEPROM variables to store the values selected by the user
-// Variables for storing "written" values
-unsigned int8 eeprom_foaming_written_cost     = 0;
-unsigned int8 eeprom_washing_written_cost     = 0;
-unsigned int8 eeprom_ventilating_written_cost = 0;
-unsigned int8 eeprom_polishing_written_cost   = 0;
-
-// Variables for storing "read" values
-unsigned int8 eeprom_foaming_read_cost     = 0;
-unsigned int8 eeprom_washing_read_cost     = 0;
-unsigned int8 eeprom_ventilating_read_cost = 0;
-unsigned int8 eeprom_polishing_read_cost   = 0;
-
-//Keeps track of the last written address in EEPROM for each customer
-unsigned int8 Client0_last_address=0; //For Selçuk Bey's account
-unsigned int8 Client1_last_address=0; //For Emre Bey's account
-
-//hangi iþlem üzerinde duruyorsak onun numarasý iþlem-1, iþlem-2 ==> 1 ve 2 bunlarýn numarasý oluyor, 
-unsigned int8 IndexOfReadMemory=2;  //en az 1 olabilir                                     
 
 
 /*******************************************************************************************************************/  
@@ -166,11 +143,6 @@ unsigned int8 IndexOfReadMemory=2;  //en az 1 olabilir
 #define pin_TensDigit_switch    pin_E0 
 #define pin_UnitDigit_switch    pin_E1 
 
-//-MEMORY------> Internal EEPROM memory client base addresses
-//They will share the EEPROM memory evenly
-#define eeprom_Client0_systemStartAddress 0
-#define eeprom_Client1_systemStartAddress 130
-
 
 
 /*******************************************************************************************************************/  
@@ -189,7 +161,6 @@ void NavigateOperationMenu(void);
 void NavigateTimeMoneyPreferenceMenu(void);
 void NavigatePolishingMenu(void);
 void DisplayRecordsSequentiallyOnLCD(void);
-void NavigatePastProcessesMenu(void);
 
 /* ======== UART SERIAL COM. FUNCTIONS PROTOTYPES  ======== */
 void SubSystem_uart_CheckTheMessage(void);
@@ -219,20 +190,12 @@ void loadZeroValue_2_DisplaySegment(void);
           }                                                           \
    }while(0)
    
-#define ADC_TO_INDEXofPolish(val_ADC_Pot_Polish)                  \
-   do{                                                            \
+#define ADC_TO_INDEXofPolish(val_ADC_Pot_Polish)        \
+   do{                                        \
           Index_PolishMililitre = ((val_ADC_Pot_Polish*5)/1020);  \
-          if(Index_PolishMililitre >= 5){                         \
-            Index_PolishMililitre = 4;                            \
-          }                                                       \
-   }while(0)
-   
-#define ADC_TO_INDEXofPastProcesses(val_ADC_Pot_PastProcesses)         \
-   do{                                                                 \
-          Index_PastProcesses = ((val_ADC_Pot_PastProcesses*5)/1020);  \
-          if(Index_PastProcesses >= 5){                                \
-            Index_PastProcesses = 4;                                   \
-          }                                                            \
+          if(Index_PolishMililitre >= 5){                       \
+            Index_PolishMililitre = 4;                          \
+          }                                                \
    }while(0)
    
 /* ======== -END- SYSTEM POTENTIOMETER INDEXER -END- ======== */   
@@ -400,6 +363,7 @@ void main(void)
                               set_adc_channel(1);
                               
                               //Get Timer_Pot ADC value(0-1024)
+                              
                               val_ADC_Pot_Polish = read_adc(); 
                               
                               //Convert Timer_Pot ADC value into the option menu index
@@ -420,43 +384,12 @@ void main(void)
                 //In this section, the client can see all of his past processes
                 if((input(button_NEXT) == 1) && (Index_OptionMenu == 4)){
                 
-                        do{
-                              //Start Of Conversation for ADC_Timer
-                              set_adc_channel(1);
-                              
-                              //Get Timer_Pot ADC value(0-1024)
-                              val_ADC_Pot_PastProcesses = read_adc(); 
-                              
-                              //Convert Timer_Pot ADC value into the option menu index
-                              ADC_TO_INDEXofPastProcesses(val_ADC_Pot_PastProcesses);
-                              
-                              //Use index value to show selected past processes
-                               NavigatePastProcessesMenu();
-                               delay_ms(250);
-                                     //Enter the selected past-procesess
-                                     if((input(button_NEXT) == 1)){      
-                                        printf(lcd_putc, "\f");
-                                        
-                                       do{
-                                          //Show me the selected past-processes cost detail                                     
-                                            lcd_gotoxy(1, 1);
-                                            printf(lcd_putc, "F:30TL  W:20TL");
-                                            lcd_gotoxy(1, 2);
-                                            printf(lcd_putc, "V:10TL  P:32TL");  
-                                            delay_ms(20);
-                                            
-                                       }while(input(button_BACK) != 1); //Wait until press back button
-                                     
-                                     delay_ms(250);
-                                     }
-                               
-                               
+                
+                
                               //Break the while condation
                               if(input(button_BACK) == 1){
                                  break;
                               }
-                              
-                         }while(OPS_Status!=55); 
                 }
                 
       /****************************************************************************************************/  
@@ -820,51 +753,6 @@ void NavigatePolishingMenu(){
    }
    
    delay_ms(80);
-}
-
-
-void NavigatePastProcessesMenu(){
-   printf(lcd_putc, "\f");
-   
-   // 1-Islem
-   if (Index_PastProcesses == 0) {
-        lcd_gotoxy(1, 1);
-        printf(lcd_putc, "Islem - 1 <-");
-        lcd_gotoxy(1, 2);
-        printf(lcd_putc, "Islem - 2");   
-    } 
-
-    // 2-Islem
-   if (Index_PastProcesses == 1) {
-        lcd_gotoxy(1, 1);
-        printf(lcd_putc, "Islem - 2 <-");
-        lcd_gotoxy(1, 2);
-        printf(lcd_putc, "Islem - 3");   
-    } 
-       // 3-Islem
-   if (Index_PastProcesses == 2) {
-        lcd_gotoxy(1, 1);
-        printf(lcd_putc, "Islem - 3 <-");
-        lcd_gotoxy(1, 2);
-        printf(lcd_putc, "Islem - 4");   
-    } 
-
-    // 4-Islem
-   if (Index_PastProcesses == 3) {
-        lcd_gotoxy(1, 1);
-        printf(lcd_putc, "Islem - 4 <-");
-        lcd_gotoxy(1, 2);
-        printf(lcd_putc, "Islem - 5");  
-    } 
-    
-   // 5-Islem
-   if (Index_PastProcesses == 4) {
-        lcd_gotoxy(1, 1);
-        printf(lcd_putc, "Islem - 5 <-");
-    } 
-  
-   delay_ms(80);
-
 }
 
 //Function-5

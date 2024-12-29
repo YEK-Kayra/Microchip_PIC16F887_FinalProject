@@ -116,27 +116,6 @@ int8 allProcessComplate_flag=0;    /**
                                      * 0: Processes are still ongoing.
                                      * 1: All processes are complete.
                                      */
-                                     
-//------------ VAR --> INTERNAL EEPROM <-- VAR ------------//
-//EEPROM variables to store the values selected by the user
-// Variables for storing "written" values
-unsigned int8 eeprom_foaming_written_cost     = 0;
-unsigned int8 eeprom_washing_written_cost     = 0;
-unsigned int8 eeprom_ventilating_written_cost = 0;
-unsigned int8 eeprom_polishing_written_cost   = 0;
-
-// Variables for storing "read" values
-unsigned int8 eeprom_foaming_read_cost     = 0;
-unsigned int8 eeprom_washing_read_cost     = 0;
-unsigned int8 eeprom_ventilating_read_cost = 0;
-unsigned int8 eeprom_polishing_read_cost   = 0;
-
-//Keeps track of the last written address in EEPROM for each customer
-unsigned int8 Client0_last_address=0; //For Selçuk Bey's account
-unsigned int8 Client1_last_address=0; //For Emre Bey's account
-
-//hangi iþlem üzerinde duruyorsak onun numarasý iþlem-1, iþlem-2 ==> 1 ve 2 bunlarýn numarasý oluyor, 
-unsigned int8 IndexOfReadMemory=2;  //en az 1 olabilir                                     
 
 
 /*******************************************************************************************************************/  

@@ -1,24 +1,24 @@
 
-ROM used:   3516/8192 (43%)
-            3581/8192 (44%) including unused fragments
+ROM used:   3945/8192 (48%)
+            3949/8192 (48%) including unused fragments
 
-            0.8 Average locations per line
-            5.5 Average locations per statement
+            0.9 Average locations per line
+            5.6 Average locations per statement
 
-RAM used:   117/368 (32%) at main() level
-            138/368 (38%) worst case
+RAM used:   131/368 (36%) at main() level
+            152/368 (41%) worst case
 
 Stack used: 6 worst case (5 in main + 1 for interrupts)
 Stack size: 8
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  844   303  47  main.c
+  990   361  51  main.c
   773     0   0  ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f887.h
-  456    84  13  ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c
- 2227   257  40  ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\math.h
+  456    84  12  ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c
+ 2227   257  37  ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\math.h
 ----- -----
- 4300   644 Total
+ 4446   702 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
@@ -29,82 +29,94 @@ Page ROM  %  RAM    Vol Diff  Functions:
 0     80   2    3    460  4.7  lcd_send_byte
  Inline         6    814  7.2  lcd_init
 0     20   1    4    208  6.3  lcd_gotoxy
-0     58   2    1    354  4.7  lcd_putc
+0     58   1    1    354  4.7  lcd_putc
 0     33   1    4             @SFTOI
 0     31   1    2             @ITOF
 0    119   3   13             @MULFF
 0      7   0    0     35  1.7  system_isr_OperationCANCEL
 0     46   1    2    226  4.5  systemTimer0_isr
-1    766  22    2   4284 10.8  MAIN
+1    931  24    2   5507 10.8  MAIN
 0     23   1    5             @MUL1616
 0     39   1    5             @DIV1616
-0      5   0    0     67  1.2  @const844
-0    116   3    4     59  1.6  @PSTRINGC7_629
-0      6   0    0     78  1.6  @const849
+0      8   0    0             @const857
+0    116   3    4             @PSTRINGC7_629
+0      8   0    0             @const862
+0      5   0    0     67  1.2  @const865
+0      6   0    0     72  2.4  @const866
 0    123   3    0     60  1.3  SubSystem_Init
  Inline         0     67  1.2  trisSetting_Init
  Inline         0     72  2.4  interruptSetting_Init
  Inline         0     59  1.6  adcSetting_Init
  Inline         0     78  1.6  displaySetting_Init
-0     91   3    1    423  1.9  SubSystem_lcd_IdleStatus
-0      6   0    0             @const851
-0      6   0    0             @const852
-0      8   0    0    921  2.9  @const854
-0      6   0    0             @const855
-0    146   4    0    921  2.9  NavigateOperationMenu
-0      9   0    0             @const858
-0      6   0    0             @const859
-0      7   0    0             @const860
-0      7   0    0             @const861
-0      8   0    0             @const862
-0      7   0    0             @const863
-0      8   0    0    935  5.7  @const864
-0      7   0    0             @const865
-0      9   0    0             @const866
-0    382  11    4    935  5.7  NavigateTimeMoneyPreferenceMenu
+0     91   2    1    423  1.9  SubSystem_lcd_IdleStatus
 0      6   0    0             @const868
+0      6   0    0             @const869
+0      8   0    0    921  2.9  @const871
+0      6   0    0             @const872
+0    146   4    0    921  2.9  NavigateOperationMenu
+0      9   0    0             @const875
+0      6   0    0             @const876
+0      7   0    0             @const877
+0      7   0    0             @const878
+0      8   0    0             @const879
+0      7   0    0             @const880
+0      8   0    0    935  5.7  @const881
+0      7   0    0             @const882
+0      9   0    0             @const883
+0    382  10    4    935  5.7  NavigateTimeMoneyPreferenceMenu
+0      6   0    0             @const885
 0    122   3    5             @PSTRINGCN7_629
 0     23   1    3             @DIV88
  Inline         6             @PRINTF_D_629
-0      5   0    0             @const877
-0    132   4    9    754  4.8  @PRINTF_LD_629
-0      3   0    0             @const880
-1    300   9    4    813  4.8  NavigatePolishingMenu
-0      7   0    0             @const883
-0      3   0    0             @const885
-1    286   8    2    701  2.9  DisplayRecordsSequentiallyOnLCD
-0      4   0    0             @const888
-0      5   0    0             @const890
-0      4   0    0             @const891
-0      5   0    0             @const893
 0      5   0    0             @const894
+0    132   3    9    813  4.8  @PRINTF_LD_629
+0      3   0    0             @const897
+1    302   8    4    813  4.8  NavigatePolishingMenu
+0      7   0    0             @const900
+0      3   0    0             @const902
+1    191   5    0    943  2.9  NavigatePastProcessesMenu
+0      7   0    0             @const905
+0      5   0    0             @const906
+0      7   0    0             @const907
+0      5   0    0             @const908
+0      7   0    0             @const909
+0      5   0    0             @const910
+0      7   0    0    701  2.9  @const911
+0      5   0    0             @const912
+0      7   0    0             @const913
+1    286   7    2    701  2.9  DisplayRecordsSequentiallyOnLCD
+0      4   0    0             @const915
+0      5   0    0             @const917
+0      4   0    0             @const918
+0      5   0    0             @const920
+0      5   0    0             @const921
 0     80   2    0    519  3.7  SubSystem_uart_CheckTheMessage
-0      6   0    0             @const895
-0      6   0    0    544  3.3  @const896
-0      6   0    0             @const897
-0      5   0    0             @const898
+0      6   0    0             @const922
+0      6   0    0    729  4.8  @const923
+0      6   0    0     78  1.6  @const924
+0      5   0    0             @const925
 1    181   5    2    729  4.8  sequentialDisplayScan
-0     10   0    0     78  1.6  loadZeroValue_2_DisplaySegment
+1     10   0    0     78  1.6  loadZeroValue_2_DisplaySegment
  Inline         0             @cinit1
 
 Program metrics:
-    Functions               30
-    Statements              644
-    Comments                755
-    Volume (V)              27221
-    Difficulty (D)          107.4
-    Effort to implement (E) 2922297
-    Time to implement (T)   45 hours, 6 minutes
-    Est Delivered Bugs (B)  7
-    Cyclomatic Complexity   70
-    Maintainability (MI)    135
+    Functions               32
+    Statements              702
+    Comments                788
+    Volume (V)              32395
+    Difficulty (D)          115.0
+    Effort to implement (E) 3724953
+    Time to implement (T)   57 hours, 29 minutes
+    Est Delivered Bugs (B)  8
+    Cyclomatic Complexity   83
+    Maintainability (MI)    134
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00003     4  0  
 00004-00055    82  0  
-00056-007FF  1897  65  
-00800-00FFF  1533  515  
+00056-007FF  1958  4  
+00800-00FFF  1901  147  
 01000-017FF     0  2048  
 01800-01FFF     0  2048  
 

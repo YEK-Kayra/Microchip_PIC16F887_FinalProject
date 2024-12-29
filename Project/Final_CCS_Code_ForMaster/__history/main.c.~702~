@@ -117,7 +117,7 @@ int8 allProcessComplate_flag=0;    /**
                                      * 1: All processes are complete.
                                      */
                                      
-//------------ VAR --> INTERNAL EEPROM <-- VAR ------------//
+/------------ VAR --> INTERNAL EEPROM <-- VAR ------------//
 //EEPROM variables to store the values selected by the user
 // Variables for storing "written" values
 unsigned int8 eeprom_foaming_written_cost     = 0;
