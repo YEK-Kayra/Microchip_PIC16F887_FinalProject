@@ -210,28 +210,21 @@ void write_EEPROMVariables_to_EEPROMregs(){
 
 
 
+
+
+
 //!//will be implemented
 void Read_EEPROMVariables_from_EEPROMregs(){
     
-    
-    // NE ZAMAN NEXT BUTONUNA BASILIR O ZAMAN SEÇÝM YAPILIR
         if(ClientNumber == 0)
         {
            //base adresten ne kadar ileri gideceðim önemli benin için
             
             //musteri hangi secimi okumak istiyor ? Secim 0 ise 1.adresten itibaren 4 okuma 
-                                                   //Secim 1 ise 5.adresten itibaren 4 okuma ...
-                                                   
-            //secimlere de select butona kaç defa týkladý, son deðere gelince 0 lasýn basa sarsýn 
-            
-            //diyelim 2 defa týkladý
+                                                   //Secim 1 ise 5.adresten itibaren 4 okuma 
            
            
             
-        }
-        
-        if(ClientNumber == 1){
-        
         }
 
 

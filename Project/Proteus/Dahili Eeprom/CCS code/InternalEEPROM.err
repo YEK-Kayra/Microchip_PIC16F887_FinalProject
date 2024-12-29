@@ -1,1 +1,4 @@
->>> Warning 203 "InternalEEPROM.c" Line 77(1,1): Condition always TRUE
+>>> Warning 203 "InternalEEPROM.c" Line 94(1,1): Condition always TRUE
+*** Error 79 "InternalEEPROM.c" Line 180(25,26): Expect }
+*** Error 79 "InternalEEPROM.c" Line 180(25,26): Expect }
+*** Error 79 "InternalEEPROM.c" Line 180(25,26): Expect }

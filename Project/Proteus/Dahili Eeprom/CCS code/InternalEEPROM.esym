@@ -1,9 +1,10 @@
-D G "__PCM__" 0 104 ""5.049""
-D G "__DEVICE__" 0 104 "887"
-D G "__DATE__" 0 104 ""29-Ara-24""
-D G "__TIME__" 0 104 ""18:34:34""
-D G "_UNICODE" 0 104 ""?""
-D G "__EVAL" 0 104 ""?"" "Standard Header file for the PIC16F887 device ////////////////"
+F N "write_EEPROMVariables_to_EEPROMregs" 0 168 ""
+D G "__PCM__" 0 189 ""5.049""
+D G "__DEVICE__" 0 189 "887"
+D G "__DATE__" 0 189 ""29-Ara-24""
+D G "__TIME__" 0 189 ""20:59:15""
+D G "_UNICODE" 0 189 ""?""
+D G "__EVAL" 0 189 ""?"" "Standard Header file for the PIC16F887 device ////////////////"
 c L "set_tris_a" 1 3 6 "FUNCTION"
 f N "set_tris_a" 1 39 ""
 v L "value" 1 39 "int8" `54 
@@ -1179,24 +1180,69 @@ V L "on" 2 443 "int8" `637
 F G "lcd_cursor_on" 2 444 "void(int8 on)" `636 
 C L "lcd_cursor_on" 2 2 1 "FUNCTION"
 C L "lcd_cursor_on" 2 2 1 "FUNCTION"
-T G "MikroleumClient_HandleTypeDef" 0 21 "{int16 time_Foaming,int16 time_Washing,int16 time_Ventilation,int16 mililitre_Polishing}" `643 
-V G "MikroClient" 0 24 "MikroleumClient_HandleTypeDef[2]" `644  "Each customer keeps their own records"
-V G "ClientNumber" 0 27 "int8" `645  "Will be used as given on the right --> MikroClient[ClientNumber]"
-V G "eeprom_foaming" 0 34 "int8" `646 
-V G "eeprom_washing" 0 35 "int8" `647 
-V G "eeprom_ventilating" 0 36 "int8" `648 
-V G "eeprom_Polishing" 0 37 "int8" `649 
-V G "eeprom_Client0_last_written_address" 0 40 "int8" `650  "For Selçuk Bey's account"
-V G "eeprom_Client1_last_written_address" 0 41 "int8" `651  "For Emre Bey's account"
-C L "displayEEPROMDataOnLCD" 0 16 2 "FUNCTION"
-F N "displayEEPROMDataOnLCD" 0 45 ""
-f G "displayEEPROMDataOnLCD" 0 45 "void()" `652 
-F N "MAIN" 0 47 ""
-F G "MAIN" 0 48 "void()" `653 
-C L "MAIN" 0 16 2 "FUNCTION"
-C L "displayEEPROMDataOnLCD" 0 16 1 "FUNCTION"
-F N "displayEEPROMDataOnLCD" 0 66 ""
-F G "displayEEPROMDataOnLCD" 0 66 "void()" `652 
+D G "eeprom_Client0_systemStartAddress" 0 16 "0"
+D G "eeprom_Client1_systemStartAddress" 0 17 "130"
+T G "MikroleumClient_HandleTypeDef" 0 27 "{int16 time_Foaming,int16 time_Washing,int16 time_Ventilation,int16 mililitre_Polishing}" `643 
+V G "MikroClient" 0 30 "MikroleumClient_HandleTypeDef[2]" `644  "Each customer keeps their own records"
+V G "ClientNumber" 0 33 "int8" `645  "Will be used as given on the right --> MikroClient[ClientNumber]"
+V G "eeprom_foaming_written_cost" 0 41 "int8" `646 
+V G "eeprom_washing_written_cost" 0 42 "int8" `647 
+V G "eeprom_ventilating_written_cost" 0 43 "int8" `648 
+V G "eeprom_polishing_written_cost" 0 44 "int8" `649 
+V G "eeprom_foaming_read_cost" 0 47 "int8" `650 
+V G "eeprom_washing_read_cost" 0 48 "int8" `651 
+V G "eeprom_ventilating_read_cost" 0 49 "int8" `652 
+V G "eeprom_polishing_read_cost" 0 50 "int8" `653 
+V G "Client0_last_address" 0 56 "int8" `654 
+V G "Client1_last_address" 0 57 "int8" `655 
+C L "display_Status_EEPROM_OnLCD" 0 13 3 "FUNCTION"
+F N "display_Status_EEPROM_OnLCD" 0 61 ""
+f G "display_Status_EEPROM_OnLCD" 0 61 "void()" `656 
+F N "display_SelectedOpsVal_EEPROM_OnLCD" 0 62 ""
+f G "display_SelectedOpsVal_EEPROM_OnLCD" 0 62 "void()" `657  "======== EEPROM WRITE/READ FUNCTIONS PROTOTYPES  ======== *"
+F N "loadCostValuesToEEPROMVariables" 0 65 ""
+f G "loadCostValuesToEEPROMVariables" 0 65 "void()" `658 
+F N "write_EEPROMVariables_to_EEPROMregs" 0 66 ""
+f G "write_EEPROMVariables_to_EEPROMregs" 0 66 "void()" `659 
+F N "Read_EEPROMVariables_from_EEPROMregs" 0 67 ""
+f G "Read_EEPROMVariables_from_EEPROMregs" 0 67 "void()" `660 
+F N "MAIN" 0 70 ""
+F G "MAIN" 0 71 "void()" `661 
+C L "MAIN" 0 13 2 "FUNCTION"
+C L "MAIN" 0 13 1 "FUNCTION"
+C L "MAIN" 0 13 1 "FUNCTION"
+C L "MAIN" 0 13 1 "FUNCTION"
+C L "MAIN" 0 13 1 "FUNCTION"
+C L "display_Status_EEPROM_OnLCD" 0 13 1 "FUNCTION"
+F N "display_Status_EEPROM_OnLCD" 0 101 ""
+F G "display_Status_EEPROM_OnLCD" 0 101 "void()" `656 
+C L "display_SelectedOpsVal_EEPROM_OnLCD" 0 13 1 "FUNCTION"
+F N "display_SelectedOpsVal_EEPROM_OnLCD" 0 136 ""
+F G "display_SelectedOpsVal_EEPROM_OnLCD" 0 136 "void()" `657 
+C L "loadCostValuesToEEPROMVariables" 0 13 1 "FUNCTION"
+F N "loadCostValuesToEEPROMVariables" 0 153 ""
+F G "loadCostValuesToEEPROMVariables" 0 153 "void()" `658  "Cost values to be written"
+C L "loadCostValuesToEEPROMVariables" 0 13 1 "FUNCTION"
+C L "write_EEPROMVariables_to_EEPROMregs" 0 13 1 "FUNCTION"
+F N "write_EEPROMVariables_to_EEPROMregs" 0 167 ""
+F G "write_EEPROMVariables_to_EEPROMregs" 0 167 "void()" `659  "Operations will be performed for the relevant customer"
+C L "write_EEPROMVariables_to_EEPROMregs" 0 13 9 "FUNCTION"
+C L "write_EEPROMVariables_to_EEPROMregs" 0 13 2 "FUNCTION"
+C L "write_EEPROMVariables_to_EEPROMregs" 0 13 1 "FUNCTION"
+C L "write_EEPROMVariables_to_EEPROMregs" 0 13 1 "FUNCTION"
+C L "write_EEPROMVariables_to_EEPROMregs" 0 13 1 "FUNCTION"
+C L "write_EEPROMVariables_to_EEPROMregs" 0 13 1 "FUNCTION"
+C L "write_EEPROMVariables_to_EEPROMregs" 0 13 1 "FUNCTION"
+C L "write_EEPROMVariables_to_EEPROMregs" 0 13 2 "FUNCTION"
+C L "write_EEPROMVariables_to_EEPROMregs" 0 13 1 "FUNCTION"
+C L "write_EEPROMVariables_to_EEPROMregs" 0 13 1 "FUNCTION"
+C L "write_EEPROMVariables_to_EEPROMregs" 0 13 1 "FUNCTION"
+C L "write_EEPROMVariables_to_EEPROMregs" 0 13 1 "FUNCTION"
+C L "write_EEPROMVariables_to_EEPROMregs" 0 13 1 "FUNCTION"
+C L "Read_EEPROMVariables_from_EEPROMregs" 0 13 1 "FUNCTION"
+F N "Read_EEPROMVariables_from_EEPROMregs" 0 219 ""
+F G "Read_EEPROMVariables_from_EEPROMregs" 0 219 "void()" `660 
+C L "Read_EEPROMVariables_from_EEPROMregs" 0 13 1 "FUNCTION"
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep_ulpwu" 1 0

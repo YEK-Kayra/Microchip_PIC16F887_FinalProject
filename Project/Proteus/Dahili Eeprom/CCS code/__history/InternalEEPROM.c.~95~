@@ -62,35 +62,32 @@ void display_Status_EEPROM_OnLCD(void);
 void display_SelectedOpsVal_EEPROM_OnLCD(void);
 
 /* ======== EEPROM WRITE/READ FUNCTIONS PROTOTYPES  ======== */
-void loadCostValuesToEEPROMVariables(void);
+void loadValuesToEEPROMVariables(void);
 void write_EEPROMVariables_to_EEPROMregs(void);
-void Read_EEPROMVariables_from_EEPROMregs(void);
-
+void Read_EEPROMVariables_to_EEPROMregs(void);
 
 void main(void) 
 {
 
       lcd_init(); // LCD ekranýmýzý baþlatacak
 
-      //Baslangýç deðerlerini atalým
-      MikroClient[ClientNumber].time_Foaming        = 20;
-      MikroClient[ClientNumber].time_Washing        = 40;
-      MikroClient[ClientNumber].time_Ventilation    = 60;
-      MikroClient[ClientNumber].mililitre_Polishing = 2;
-         
       //Retrieve records and inform the customer
       display_Status_EEPROM_OnLCD();
       
       //eeproma yazýlacak deðerleri eeprom deðiþkenlerine çek
-      loadCostValuesToEEPROMVariables();
       
-      //Yazýlmýþ olan deðerleri eepromdan oku 
-      Read_EEPROMVariables_from_EEPROMregs();
-      
-      //okunan eeprom deðerlerini lcd de göster
-      display_SelectedOpsVal_EEPROM_OnLCD();
+      loadValuesToEEPROMVariables();
       
       
+      
+      
+      
+
+      
+      
+      
+      
+            
  while(1)
  {
      
@@ -109,8 +106,10 @@ void display_Status_EEPROM_OnLCD(){
       lcd_gotoxy(3,2);
       printf(lcd_putc, "Kaydediliyor");
       
-      loadCostValuesToEEPROMVariables();
-         
+      loadValuesToEEPROMVariables();
+      write_EEPROMVariables_to_EEPROMregs();
+      
+      
       delay_ms(1000);
       
       printf(lcd_putc, "\f");
@@ -132,25 +131,13 @@ void display_Status_EEPROM_OnLCD(){
       
 }
 
-//Secilen islemin eeprom kayýtlarýný görüntüle
 void display_SelectedOpsVal_EEPROM_OnLCD(){
-     
-      printf(lcd_putc, "\f");
-      
-      lcd_gotoxy(1,1);
-      printf(lcd_putc, "F: %d TL",eeprom_foaming_read_cost); 
-      lcd_gotoxy(8,1);
-      printf(lcd_putc, "W: %d TL",eeprom_washing_read_cost); 
-      lcd_gotoxy(1,2);
-      printf(lcd_putc, "V: %d TL",eeprom_ventilating_read_cost); 
-      lcd_gotoxy(8,8);
-      printf(lcd_putc, "P: %d TL",eeprom_polishing_read_cost); 
-       
+
 }
 
 
 //will be implemented
-void loadCostValuesToEEPROMVariables(){
+void loadValuesToEEPROMVariables(){
 
       //Cost values to be written
       eeprom_foaming_written_cost     = (unsigned int8)(((MikroClient[ClientNumber].time_Foaming)/10)*2);
@@ -158,8 +145,7 @@ void loadCostValuesToEEPROMVariables(){
       eeprom_ventilating_written_cost = (unsigned int8)(((MikroClient[ClientNumber].time_Ventilation)/10)*2);
       eeprom_polishing_written_cost   = (unsigned int8)((MikroClient[ClientNumber].mililitre_Polishing)*15);
      
-      //Write data to the allocated space for the customer who is using it
-      write_EEPROMVariables_to_EEPROMregs();
+     write_EEPROMVariables_to_EEPROMregs();
 }
 
 
@@ -179,8 +165,9 @@ void write_EEPROMVariables_to_EEPROMregs(){
    //Selcuk Bey's ID
    if(ClientNumber == 0){
       
+      // The last cursor position address will always be written to the zero address
+      
       //Pull the last address to keep going on
-      //The last cursor position address will always be written to the zero address, to ensure that new data does not overwrite previously written data
       Client0_last_address = read_eeprom(eeprom_Client0_systemStartAddress);
       
       write_eeprom( (eeprom_Client0_systemStartAddress + Client0_last_address + 1), (eeprom_foaming_written_cost)     ); Client0_last_address++; //Save foaming cost
@@ -192,8 +179,9 @@ void write_EEPROMVariables_to_EEPROMregs(){
    
    if(ClientNumber == 1){
       
+      // The last cursor position address will always be written to the zero address
+    
       //Pull the last address to keep going on
-      //The last cursor position address will always be written to the zero address, to ensure that new data does not overwrite previously written data
       Client1_last_address = read_eeprom(eeprom_Client1_systemStartAddress);
       
       write_eeprom( (eeprom_Client1_systemStartAddress + Client1_last_address + 1), (eeprom_foaming_written_cost)     ); Client1_last_address++; //Save foaming cost
@@ -207,33 +195,27 @@ void write_EEPROMVariables_to_EEPROMregs(){
 }
 
 
-
-
-
-//!//will be implemented
-void Read_EEPROMVariables_from_EEPROMregs(){
+//will be implemented
+void Read_EEPROMVariables_to_EEPROMregs(){
     
-    
-    // NE ZAMAN NEXT BUTONUNA BASILIR O ZAMAN SEÇÝM YAPILIR
         if(ClientNumber == 0)
         {
-           //base adresten ne kadar ileri gideceðim önemli benin için
+        
+            do{
             
-            //musteri hangi secimi okumak istiyor ? Secim 0 ise 1.adresten itibaren 4 okuma 
-                                                   //Secim 1 ise 5.adresten itibaren 4 okuma ...
-                                                   
-            //secimlere de select butona kaç defa týkladý, son deðere gelince 0 lasýn basa sarsýn 
             
-            //diyelim 2 defa týkladý
+            while(1);
+           //Pull the last address to keep going on
+           Client0_last_address = read_eeprom(eeprom_Client0_systemStartAddress);
+           
            
            
             
         }
-        
-        if(ClientNumber == 1){
-        
+
+        if(ClientNumber == 1)
+        {
+         
         }
-
-
 
 }

@@ -66,7 +66,6 @@ void loadCostValuesToEEPROMVariables(void);
 void write_EEPROMVariables_to_EEPROMregs(void);
 void Read_EEPROMVariables_from_EEPROMregs(void);
 
-
 void main(void) 
 {
 
@@ -85,7 +84,8 @@ void main(void)
       loadCostValuesToEEPROMVariables();
       
       //Yazýlmýþ olan deðerleri eepromdan oku 
-      Read_EEPROMVariables_from_EEPROMregs();
+      
+      
       
       //okunan eeprom deðerlerini lcd de göster
       display_SelectedOpsVal_EEPROM_OnLCD();
@@ -179,8 +179,9 @@ void write_EEPROMVariables_to_EEPROMregs(){
    //Selcuk Bey's ID
    if(ClientNumber == 0){
       
+      // The last cursor position address will always be written to the zero address
+      
       //Pull the last address to keep going on
-      //The last cursor position address will always be written to the zero address, to ensure that new data does not overwrite previously written data
       Client0_last_address = read_eeprom(eeprom_Client0_systemStartAddress);
       
       write_eeprom( (eeprom_Client0_systemStartAddress + Client0_last_address + 1), (eeprom_foaming_written_cost)     ); Client0_last_address++; //Save foaming cost
@@ -192,8 +193,9 @@ void write_EEPROMVariables_to_EEPROMregs(){
    
    if(ClientNumber == 1){
       
+      // The last cursor position address will always be written to the zero address
+    
       //Pull the last address to keep going on
-      //The last cursor position address will always be written to the zero address, to ensure that new data does not overwrite previously written data
       Client1_last_address = read_eeprom(eeprom_Client1_systemStartAddress);
       
       write_eeprom( (eeprom_Client1_systemStartAddress + Client1_last_address + 1), (eeprom_foaming_written_cost)     ); Client1_last_address++; //Save foaming cost
@@ -210,28 +212,22 @@ void write_EEPROMVariables_to_EEPROMregs(){
 
 
 
+
+
+
 //!//will be implemented
 void Read_EEPROMVariables_from_EEPROMregs(){
     
-    
-    // NE ZAMAN NEXT BUTONUNA BASILIR O ZAMAN SEÇÝM YAPILIR
         if(ClientNumber == 0)
         {
-           //base adresten ne kadar ileri gideceðim önemli benin için
-            
-            //musteri hangi secimi okumak istiyor ? Secim 0 ise 1.adresten itibaren 4 okuma 
-                                                   //Secim 1 ise 5.adresten itibaren 4 okuma ...
-                                                   
-            //secimlere de select butona kaç defa týkladý, son deðere gelince 0 lasýn basa sarsýn 
-            
-            //diyelim 2 defa týkladý
+
+
+           //Pull the last address to keep going on
+           Client0_last_address = read_eeprom(eeprom_Client0_systemStartAddress);
+           
            
            
             
-        }
-        
-        if(ClientNumber == 1){
-        
         }
 
 
