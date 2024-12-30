@@ -187,6 +187,7 @@ void trisSetting_Init(void);
 void displaySetting_Init(void);
 void interruptSetting_Init(void);
 void adcSetting_Init(void);
+void SystemInit_RESET_Critical_Variable(void);
 
 /* ======== LCD SCREEN FUNCTIONS PROTOTYPES  ======== */
 void SubSystem_lcd_IdleStatus(void);
@@ -335,6 +336,12 @@ while(1){//--------------------- BEGIN---MAIN WHILE(1)---BEGIN------------------
    OPS_Status = 56;    //Disable 
    counter_StartOpsButtonTick=0;  //En son manalý deðiþiklik
    allProcessComplate_flag = 0;
+   
+   //To prevent old values from being written to the system EEPROM.
+   eeprom_foaming_written_cost     = 0;
+   eeprom_washing_written_cost     = 0;
+   eeprom_ventilating_written_cost = 0;
+   eeprom_polishing_written_cost   = 0;
   
    //Wait until unlock the system
    do{
@@ -557,7 +564,7 @@ while(1){//--------------------- BEGIN---MAIN WHILE(1)---BEGIN------------------
                                     LockingMechanism = 0;
                                                                                 
                               }
-                              
+                                                        
                               //Loads the Ventilation time
                               if((counter_StartOpsButtonTick == 3) && (LockingMechanism == 1)){       
                                    
@@ -1156,11 +1163,23 @@ void write_EEPROMVariables_to_EEPROMregs(){
 //will be implemented
 void loadCostValuesToEEPROMVariables(){
 
-      //Cost values to be written
-      eeprom_foaming_written_cost     = (unsigned int8)(((MikroClient[ClientNumber].time_Foaming)/10)*2);
-      eeprom_washing_written_cost     = (unsigned int8)(((MikroClient[ClientNumber].time_Washing)/10)*2);
-      eeprom_ventilating_written_cost = (unsigned int8)(((MikroClient[ClientNumber].time_Ventilation)/10)*2);
-      eeprom_polishing_written_cost   = (unsigned int8)(((MikroClient[ClientNumber].mililitre_Polishing)/100)*15);
+      if(counter_StartOpsButtonTick >= 1){
+         //Cost values to be written
+         eeprom_foaming_written_cost     = (unsigned int8)(((MikroClient[ClientNumber].time_Foaming)/10)*2);
+         eeprom_washing_written_cost     = (unsigned int8)(((MikroClient[ClientNumber].time_Washing)/10)*2);
+         eeprom_ventilating_written_cost = (unsigned int8)(((MikroClient[ClientNumber].time_Ventilation)/10)*2);
+         eeprom_polishing_written_cost   = (unsigned int8)(((MikroClient[ClientNumber].mililitre_Polishing)/100)*15);
+      }
+      else{
+      
+         eeprom_foaming_written_cost     = 0;
+         eeprom_washing_written_cost     = 0;
+         eeprom_ventilating_written_cost = 0;
+         eeprom_polishing_written_cost   = 0;
+      
+      }
+      
+     
      
       //Write data to the allocated space for the customer who is using it
       write_EEPROMVariables_to_EEPROMregs();

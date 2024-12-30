@@ -7,8 +7,8 @@
 015     CCP_1_LOW
 015     CCP_1
 016     CCP_1_HIGH
-01B     CCP_2
 01B     CCP_2_LOW
+01B     CCP_2
 01C     CCP_2_HIGH
 020     @INTERRUPT_AREA
 021     @INTERRUPT_AREA
@@ -70,10 +70,10 @@
 0BD     IndexOfReadMemory
 0BE     @TRIS_C
 0BF-0C0 @sprintf_string
+0C1-0C4 @SFTOI.P1
 0C1-0C4 atan2.y
-0C1-0C2 @ITOF.P1
-0C1-0C4 @SFTOI.P2
-0C1-0C4 @MULFF.P3
+0C1-0C4 @MULFF.P1
+0C1-0C2 @ITOF.P2
 0C1     lcd_init.i
 0C1     MAIN.@SCRATCH1
 0C1     @PSTRINGC7_629.@SCRATCH1
@@ -93,9 +93,9 @@
 0C2     NavigatePolishingMenu.@SCRATCH2
 0C2     sequentialDisplayScan.@SCRATCH2
 0C2     loadCostValuesToEEPROMVariables.@SCRATCH2
-0C3     @PSTRINGCN7_629.P1
-0C3-0C4 @DIV1616.P2
-0C3     @PRINTF_D_629.P3
+0C3-0C4 @DIV1616.P1
+0C3     @PRINTF_D_629.P2
+0C3     @PSTRINGCN7_629.P3
 0C3-0C4 @PRINTF_LD_629.P4
 0C3     @PSTRINGC7_629.@SCRATCH3
 0C3     NavigateTimeMoneyPreferenceMenu.@SCRATCH3
@@ -106,9 +106,9 @@
 0C4     @PRINTF_D_629.@SCRATCH1
 0C4     NavigatePolishingMenu.@SCRATCH4
 0C5-0C6 @MUL1616.P1
-0C5-0C8 @MULFF.P2
 0C5-0C8 atan2.x
 0C5-0C6 @DIV1616.P1
+0C5-0C8 @MULFF.P2
 0C5     @PSTRINGCN7_629.@SCRATCH2
 0C5     @PRINTF_D_629.@SCRATCH2
 0C5     @PRINTF_LD_629.@SCRATCH1
@@ -155,8 +155,8 @@
 0FF     @INTERRUPT_AREA
 107.6   C1OUT
 108.6   C2OUT
-10D-10E @READ_PROGRAM_MEMORY8.P1
-10D-10E @WRITE_PROGRAM_MEMORY8.P2
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
 17F     @INTERRUPT_AREA
 1FF     @INTERRUPT_AREA
 27F     @INTERRUPT_AREA
@@ -191,53 +191,53 @@ FFF     @INTERRUPT_AREA
 ROM Allocation:
 000056  system_isr_OperationCANCEL
 00005D  systemTimer0_isr
-00008B  @const865.call
-000090  @const870.call
-000096  @const872.call
-00009C  @const873.call
-0000A2  @const875.call
-0000AB  @const876.call
-0000AF  @const879.call
-0000B8  @const880.call
-0000BE  @const881.call
-0000C5  @const882.call
-0000CC  @const883.call
-0000D4  @const884.call
-0000DB  @const885.call
-0000E3  @const886.call
-0000EA  @const887.call
-0000F3  @const889.call
-0000F9  @const898.call
-0000FE  @const901.call
-000101  @const904.call
-000108  @const906.call
-00010B  @const909.call
-000112  @const910.call
-000117  @const911.call
-00011E  @const912.call
-000123  @const913.call
-00012A  @const914.call
-00012F  @const915.call
-000136  @const916.call
-00013B  @const917.call
-000142  @const919.call
-000146  @const921.call
-00014B  @const922.call
-00014F  @const924.call
-000154  @const925.call
-000159  @const926.call
-00015F  @const927.call
-000165  @const928.call
-00016B  @const929.call
-000170  @const932.call
-000175  @const934.call
-00017A  @const936.call
-000182  @const938.call
-000189  @const939.call
-000190  @const941.call
-000195  @const942.call
-00019B  @const944.call
-0001A1  @const945.call
+00008B  @const866.call
+000090  @const871.call
+000096  @const873.call
+00009C  @const874.call
+0000A2  @const876.call
+0000AB  @const877.call
+0000AF  @const880.call
+0000B8  @const881.call
+0000BE  @const882.call
+0000C5  @const883.call
+0000CC  @const884.call
+0000D4  @const885.call
+0000DB  @const886.call
+0000E3  @const887.call
+0000EA  @const888.call
+0000F3  @const890.call
+0000F9  @const899.call
+0000FE  @const902.call
+000101  @const905.call
+000108  @const907.call
+00010B  @const910.call
+000112  @const911.call
+000117  @const912.call
+00011E  @const913.call
+000123  @const914.call
+00012A  @const915.call
+00012F  @const916.call
+000136  @const917.call
+00013B  @const918.call
+000142  @const920.call
+000146  @const922.call
+00014B  @const923.call
+00014F  @const925.call
+000154  @const926.call
+000159  @const927.call
+00015F  @const928.call
+000165  @const929.call
+00016B  @const930.call
+000170  @const933.call
+000175  @const935.call
+00017A  @const937.call
+000182  @const939.call
+000189  @const940.call
+000190  @const942.call
+000195  @const943.call
+00019B  @const945.call
+0001A1  @const946.call
 0001A5  @delay_ms1
 0001BA  lcd_send_nibble
 0001C8  lcd_read_nibble
@@ -274,7 +274,7 @@ ROM Allocation:
 000C12  sequentialDisplayScan
 000CC7  displayProcessCompletionStatus
 000D16  loadCostValuesToEEPROMVariables
-000DC3  write_EEPROMVariables_to_EEPROMregs
+000DCE  write_EEPROMVariables_to_EEPROMregs
 001000  MAIN
 001000  @cinit1
 001038  @cinit2
@@ -283,15 +283,15 @@ Project Directory:
     C:\Users\yunus\OneDrive\Masaüstü\Microchip_PIC16F887_FinalProject\Project\Final_CCS_Code_ForMaster\
 
 Project Files:
-    main.c                                                  [30-Ara-24 23:25  CRC=63EF776B]
+    main.c                                                  [31-Ara-24 00:23  CRC=04F59728]
     ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f887.h [08-Eyl-15 15:15  CRC=E224733F]
     ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c [19-Eyl-13 16:38  CRC=D1A6378A]
     ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\math.h [16-Oca-15 10:40  CRC=6A8358B0]
 
-Source signature=ECC0D394
+Source signature=8DC6F351
 Program memory checksum=0000
 Program memory CRC=0000
-Hex file CRC=8C43
+Hex file CRC=36DB
 
 Units:
     main (main)
