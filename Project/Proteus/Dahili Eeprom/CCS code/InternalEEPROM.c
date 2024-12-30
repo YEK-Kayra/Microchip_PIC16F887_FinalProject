@@ -58,7 +58,7 @@ unsigned int8 IndexOfReadMemory=2;  //en az 1 olabilir
 
 //Will be implemented into //
 /* ======== LCD SCREEN FUNCTIONS PROTOTYPES  ======== */
-void displayOperationStatus_WriteVariables_to_EEPROM(void);
+void displayProcessCompletionStatus(void);
 void display_SelectedOpsVal_EEPROM_OnLCD(void);
 
 /* ======== EEPROM WRITE/READ FUNCTIONS PROTOTYPES  ======== */
@@ -73,17 +73,15 @@ void main(void)
       lcd_init(); // LCD ekranýmýzý baþlatacak
 
       //Baslangýç deðerlerini atalým
-      MikroClient[ClientNumber].time_Foaming        = 20;      //4tl(20)   |    12tl(60)
-      MikroClient[ClientNumber].time_Washing        = 40;      //8tl(40)   |    14tl(70)
-      MikroClient[ClientNumber].time_Ventilation    = 60;      //12tl(60)  |    16tl(80)
-      MikroClient[ClientNumber].mililitre_Polishing = 2;       //30tl(2)   |    15tl(1)
-         
-      //Son durumu kullanýcýya göster ve kaydedilen deðerleri eeproma yaz
-      //displayOperationStatus_WriteVariables_to_EEPROM();
-     
+      MikroClient[ClientNumber].time_Foaming        = 60;      //4tl(20)   |    12tl(60)
+      MikroClient[ClientNumber].time_Washing        = 70;      //8tl(40)   |    14tl(70)
+      MikroClient[ClientNumber].time_Ventilation    = 80;      //12tl(60)  |    16tl(80)
+      MikroClient[ClientNumber].mililitre_Polishing = 1;       //30tl(2)   |    15tl(1)
+        
+      displayProcessCompletionStatus();  
       
-      //okunan eeprom deðerlerini lcd de göster
       display_SelectedOpsVal_EEPROM_OnLCD();
+
       
       
  while(1)
@@ -93,39 +91,7 @@ void main(void)
 }
 
 //Will be implemented//
-void displayOperationStatus_WriteVariables_to_EEPROM(){
 
-      lcd_gotoxy(2,1);
-      printf(lcd_putc, "Operasyon Sonu");   
-      delay_ms(2000);
-      printf(lcd_putc, "\f");
-      lcd_gotoxy(3,1);
-      printf(lcd_putc, "Islemleriniz");  
-      lcd_gotoxy(3,2);
-      printf(lcd_putc, "Kaydediliyor");
-      
-      loadCostValuesToEEPROMVariables();
-         
-      delay_ms(1000);
-      
-      printf(lcd_putc, "\f");
-      lcd_gotoxy(5,1);
-      printf(lcd_putc, "Kayitlar");  
-      lcd_gotoxy(4,2);
-      printf(lcd_putc, "Tamamlandi");
-      
-      delay_ms(1000);
-      
-      printf(lcd_putc, "\f");
-      lcd_gotoxy(4,1);
-      printf(lcd_putc, "Ana Menuye");  
-      lcd_gotoxy(2,2);
-      printf(lcd_putc, "Yonlendiriliyor");
-      
-      delay_ms(1000);
-      printf(lcd_putc, "\f");
-      
-}
 
 
 
@@ -175,6 +141,43 @@ void Read_EEPROMVariables_from_EEPROMregs(){
 }
 
 
+
+
+
+
+void displayProcessCompletionStatus(){
+
+      lcd_gotoxy(2,1);
+      printf(lcd_putc, "Operasyon Sonu");   
+      delay_ms(2000);
+      printf(lcd_putc, "\f");
+      lcd_gotoxy(3,1);
+      printf(lcd_putc, "Islemleriniz");  
+      lcd_gotoxy(3,2);
+      printf(lcd_putc, "Kaydediliyor");
+      
+      loadCostValuesToEEPROMVariables();
+         
+      delay_ms(1000);
+      
+      printf(lcd_putc, "\f");
+      lcd_gotoxy(5,1);
+      printf(lcd_putc, "Kayitlar");  
+      lcd_gotoxy(4,2);
+      printf(lcd_putc, "Tamamlandi");
+      
+      delay_ms(1000);
+      
+      printf(lcd_putc, "\f");
+      lcd_gotoxy(4,1);
+      printf(lcd_putc, "Ana Menuye");  
+      lcd_gotoxy(2,2);
+      printf(lcd_putc, "Yonlendiriliyor");
+      
+      delay_ms(1000);
+      printf(lcd_putc, "\f");
+      
+}
 
 
 
@@ -234,9 +237,3 @@ void write_EEPROMVariables_to_EEPROMregs(){
    }
    
 }
-
-
-
-
-
-

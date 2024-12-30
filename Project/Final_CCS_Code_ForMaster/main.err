@@ -1,24 +1,13 @@
->>> Warning 204 "main.c" Line 358(1,1): Condition always FALSE
->>> Warning 204 "main.c" Line 381(1,1): Condition always FALSE
->>> Warning 204 "main.c" Line 406(1,1): Condition always FALSE
->>> Warning 204 "main.c" Line 431(1,1): Condition always FALSE
->>> Warning 204 "main.c" Line 498(1,1): Condition always FALSE
->>> Warning 204 "main.c" Line 519(1,1): Condition always FALSE
->>> Warning 204 "main.c" Line 540(1,1): Condition always FALSE
->>> Warning 205 "main.c" Line 562(1,1): Unsigned variable is never less than zero
->>> Warning 204 "main.c" Line 562(1,1): Condition always FALSE
->>> Warning 203 "main.c" Line 617(1,1): Condition always TRUE
->>> Warning 202 "main.c" Line 123(15,42): Variable never used:   eeprom_foaming_written_cost
->>> Warning 202 "main.c" Line 124(15,42): Variable never used:   eeprom_washing_written_cost
->>> Warning 202 "main.c" Line 125(15,46): Variable never used:   eeprom_ventilating_written_cost
->>> Warning 202 "main.c" Line 126(15,44): Variable never used:   eeprom_polishing_written_cost
->>> Warning 202 "main.c" Line 129(15,39): Variable never used:   eeprom_foaming_read_cost
->>> Warning 202 "main.c" Line 130(15,39): Variable never used:   eeprom_washing_read_cost
->>> Warning 202 "main.c" Line 131(15,43): Variable never used:   eeprom_ventilating_read_cost
->>> Warning 202 "main.c" Line 132(15,41): Variable never used:   eeprom_polishing_read_cost
->>> Warning 202 "main.c" Line 135(15,35): Variable never used:   Client0_last_address
->>> Warning 202 "main.c" Line 136(15,35): Variable never used:   Client1_last_address
->>> Warning 202 "main.c" Line 139(15,32): Variable never used:   IndexOfReadMemory
-      Memory usage:   ROM=48%      RAM=36% - 41%
-      0 Errors,  21 Warnings.
+>>> Warning 203 "main.c" Line 330(1,1): Condition always TRUE
+>>> Warning 204 "main.c" Line 380(1,1): Condition always FALSE
+>>> Warning 204 "main.c" Line 403(1,1): Condition always FALSE
+>>> Warning 204 "main.c" Line 428(1,1): Condition always FALSE
+>>> Warning 204 "main.c" Line 453(1,1): Condition always FALSE
+>>> Warning 204 "main.c" Line 523(1,1): Condition always FALSE
+>>> Warning 204 "main.c" Line 544(1,1): Condition always FALSE
+>>> Warning 204 "main.c" Line 565(1,1): Condition always FALSE
+>>> Warning 205 "main.c" Line 587(1,1): Unsigned variable is never less than zero
+>>> Warning 204 "main.c" Line 587(1,1): Condition always FALSE
+      Memory usage:   ROM=60%      RAM=36% - 41%
+      0 Errors,  10 Warnings.
 Build Successful.

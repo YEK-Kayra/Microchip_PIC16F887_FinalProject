@@ -22,25 +22,39 @@
 03A     Client1_last_address
 03B     IndexOfReadMemory
 03C-03D @sprintf_string
-03E     @PSTRINGCN7_626.P1
-03E     @PRINTF_D_626.P2
+03E     @PRINTF_D_626.P1
+03E     @PSTRINGCN7_626.P2
 03E     lcd_init.i
 03E     MAIN.@SCRATCH1
 03E     Read_EEPROMVariables_from_EEPROMregs.@SCRATCH1
-03F     @PRINTF_D_626.P1
+03E     displayProcessCompletionStatus.@SCRATCH1
+03E     @PSTRINGC7_626.@SCRATCH1
+03E     loadCostValuesToEEPROMVariables.@SCRATCH1
+03E     write_EEPROMVariables_to_EEPROMregs.@SCRATCH1
 03F-042 lcd_init.LCD_INIT_STRING
+03F     @PRINTF_D_626.P1
 03F     MAIN.@SCRATCH2
 03F     @PSTRINGCN7_626.@SCRATCH1
+03F     @PSTRINGC7_626.@SCRATCH2
+03F     loadCostValuesToEEPROMVariables.@SCRATCH2
+040-041 @DIV1616.P1
+040-041 @MUL1616.P2
 040     @PRINTF_D_626.@SCRATCH1
 040     @PSTRINGCN7_626.@SCRATCH2
+040     @PSTRINGC7_626.@SCRATCH3
 041     @PRINTF_D_626.@SCRATCH2
 041     @PSTRINGCN7_626.@SCRATCH3
+041     @PSTRINGC7_626.@SCRATCH4
+042-043 @DIV1616.P1
+042-043 @MUL1616.P2
 042     @PRINTF_D_626.@SCRATCH3
 042     @PSTRINGCN7_626.@SCRATCH4
 043     lcd_init.@SCRATCH1
 043     @PRINTF_D_626.@SCRATCH4
-044     @DIV88.P1
 044     lcd_putc.c
+044     @DIV88.P1
+044     @DIV1616.@SCRATCH1
+044     @MUL1616.@SCRATCH1
 045     lcd_gotoxy.x
 045     @delay_ms1.P1
 045     @DIV88.P2
@@ -67,15 +81,15 @@
 10D-10E @READ_PROGRAM_MEMORY8.P2
 
 ROM Allocation:
-000004  @const665.call
-00000C  @const671.call
-000013  @const672.call
-00001A  @const674.call
-00001F  @const675.call
-000025  @const677.call
-00002B  @const678.call
-000033  @const688.call
-000038  @const692.call
+000004  @const673.call
+000009  @const677.call
+00000E  @const678.call
+000016  @const684.call
+00001D  @const685.call
+000024  @const687.call
+000029  @const688.call
+00002F  @const690.call
+000035  @const691.call
 00003D  @delay_ms1
 000052  lcd_send_nibble
 00005E  lcd_read_nibble
@@ -84,27 +98,33 @@ ROM Allocation:
 0000A4  lcd_init
 0000E2  lcd_gotoxy
 0000F4  lcd_putc
-000120  @DIV88
-000135  @PRINTF_D_626
-00018C  @PSTRINGCN7_626
-0001E3  display_SelectedOpsVal_EEPROM_OnLCD
-0001E3  Read_EEPROMVariables_from_EEPROMregs
-000302  @cinit1
-000302  MAIN
-000323  @cinit2
+000120  @PSTRINGC7_626
+000176  @DIV1616
+00019B  displayProcessCompletionStatus
+0001C9  loadCostValuesToEEPROMVariables
+000246  @MUL1616
+00025C  write_EEPROMVariables_to_EEPROMregs
+0003E1  @DIV88
+0003F6  @PRINTF_D_626
+00044D  @PSTRINGCN7_626
+0004A4  display_SelectedOpsVal_EEPROM_OnLCD
+0004A4  Read_EEPROMVariables_from_EEPROMregs
+0005C3  MAIN
+0005C3  @cinit1
+0005E4  @cinit2
 
 Project Directory:
     C:\Users\yunus\OneDrive\Masaüstü\Microchip_PIC16F887_FinalProject\Project\Proteus\Dahili Eeprom\CCS code\
 
 Project Files:
-    InternalEEPROM.c                                        [29-Ara-24 23:13  CRC=B2507F58]
+    InternalEEPROM.c                                        [30-Ara-24 19:04  CRC=08006CB5]
     ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f887.h [08-Eyl-15 15:15  CRC=E224733F]
     ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c [19-Eyl-13 16:38  CRC=D1A6378A]
 
-Source signature=37C161AB
+Source signature=8D714F08
 Program memory checksum=0000
 Program memory CRC=0000
-Hex file CRC=E529
+Hex file CRC=B1ED
 
 Units:
     InternalEEPROM (main)
