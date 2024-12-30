@@ -274,7 +274,7 @@ ROM Allocation:
 000C12  sequentialDisplayScan
 000CC7  displayProcessCompletionStatus
 000D16  loadCostValuesToEEPROMVariables
-000DB3  write_EEPROMVariables_to_EEPROMregs
+000DC3  write_EEPROMVariables_to_EEPROMregs
 001000  MAIN
 001000  @cinit1
 001038  @cinit2
@@ -283,15 +283,15 @@ Project Directory:
     C:\Users\yunus\OneDrive\Masaüstü\Microchip_PIC16F887_FinalProject\Project\Final_CCS_Code_ForMaster\
 
 Project Files:
-    main.c                                                  [30-Ara-24 20:27  CRC=A09E2175]
+    main.c                                                  [30-Ara-24 22:02  CRC=3CE71186]
     ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f887.h [08-Eyl-15 15:15  CRC=E224733F]
     ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c [19-Eyl-13 16:38  CRC=D1A6378A]
     ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\math.h [16-Oca-15 10:40  CRC=6A8358B0]
 
-Source signature=296F7D9E
+Source signature=C5B86DAF
 Program memory checksum=0000
 Program memory CRC=0000
-Hex file CRC=04F7
+Hex file CRC=9306
 
 Units:
     main (main)

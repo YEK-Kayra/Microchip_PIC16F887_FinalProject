@@ -135,8 +135,13 @@ unsigned int8 eeprom_polishing_read_cost   = 0;
 unsigned int8 Client0_last_address=0; //For Selçuk Bey's account
 unsigned int8 Client1_last_address=0; //For Emre Bey's account
 
-//hangi iþlem üzerinde duruyorsak onun numarasý iþlem-1, iþlem-2 ==> 1 ve 2 bunlarýn iþlem numarasý oluyor, 
-unsigned int8 IndexOfReadMemory=2;  //en az 1 olabilir                                     
+unsigned int8 IndexOfReadMemory=2; /**
+                                     * The operation number corresponds to the specific operation we are focusing on, 
+                                     * e.g., operation-1, operation-2 ==> 1 and 2 are their operation numbers, 
+                                     * with operation-1 being the minimum.
+                                     */
+
+
 
 
 /*******************************************************************************************************************/  
@@ -199,10 +204,14 @@ void sequentialDisplayScan(void);
 void loadZeroValue_2_DisplaySegment(void);
 
 /* ======== EEPROM WRITE/READ FUNCTIONS PROTOTYPES  ======== */
-void display_Selected_EEPROM_OpsVal_OnLCD(void);
+
 void Read_EEPROM_OpsVal_from_EEPROMregs(void);
+void display_Selected_EEPROM_OpsVal_OnLCD(void);
+void showSelectedPastProcessesOps(void);
 
-
+void loadCostValuesToEEPROMVariables(void);
+void Write_EEPROM_OpsVal_to_EEPROMregs(void);
+void displayProcessCompletionStatus(void);
 
 /*******************************************************************************************************************/  
 /*                                                  SYSTEM MACROS                                                 */  
@@ -317,7 +326,14 @@ void main(void)
   
    //System parameters and peripherals will be initialized
    SubSystem_Init();
-      
+  
+while(1){//--------------------- BEGIN---MAIN WHILE(1)---BEGIN----------------------------//
+  
+  
+   readed_ID  = '.';   //Clear Id symbol
+   systemLock = 0;
+   OPS_Status = 56;    //Disable 
+  
    //Wait until unlock the system
    do{
            SubSystem_lcd_IdleStatus();   //Greeting the customer
@@ -447,15 +463,12 @@ void main(void)
                                         
                                        do{
                                        
-                                          //Seçilen geçmiþ iþlemi lcd üzerinde düzenli bir þekilde görüntüle
-                                          //showSelectedPastProcessesOps();
+                                          //This way, the location to be read in the EEPROM is determined.
+                                          IndexOfReadMemory = Index_PastProcesses;
                                           
-                                          //Show me the selected past-processes cost detail                                     
-                                            lcd_gotoxy(1, 1);
-                                            printf(lcd_putc, "F:30TL  W:20TL");
-                                            lcd_gotoxy(1, 2);
-                                            printf(lcd_putc, "V:10TL  P:32TL");  
-                                            delay_ms(20);
+                                          //Display the selected past processes ops. on the LCD in an organized manner
+                                          showSelectedPastProcessesOps();
+                                          
                                             
                                        }while(input(button_BACK) != 1); //Wait until press back button
                                      
@@ -614,22 +627,24 @@ void main(void)
                
             //Load the initial value(0) into the segments.
             loadZeroValue_2_DisplaySegment();
-  
-      }while(OPS_Status!=55);  
+         
+         
+       //If the cancel operation button hasn't been pressed, it will return to the main menu again
+      }while(OPS_Status!=55);
       
-   //Display the record sequentially on the LCD
-   DisplayRecordsSequentiallyOnLCD(); 
+  displayProcessCompletionStatus();//buraya koyarsan ana menüye gitmez ki
+  
+      
+      
+}//--------------------- END---MAIN WHILE(1)---END----------------------------//
+
+
+  
       
 /*-----------------------------------------------------------------------------------------------------------------*/  
 /*                             >>> END - SEQUENTIAL STEPS OF THE OPERATION - END <<<                               */  
 /*-----------------------------------------------------------------------------------------------------------------*/  
    
-      
-            
-    while(1)
-    {
-
-    }
  
 }
 
@@ -711,14 +726,14 @@ void SubSystem_lcd_IdleStatus(void){
       printf(lcd_putc,"Mikroleum'a");
       lcd_gotoxy(4,2);
       printf(lcd_putc,"Hosgeldiniz");
-      delay_ms(500);
+      delay_ms(800);
       printf(lcd_putc,"\f");
       
       lcd_gotoxy(1,1);
-      printf(lcd_putc,"Lutfen ID Karti");
-      lcd_gotoxy(4,2);
-      printf(lcd_putc,"Gosteriniz");
-      delay_ms(500);
+      printf(lcd_putc,"Lutfen Sifrenizi");
+      lcd_gotoxy(6,2);
+      printf(lcd_putc,"Giriniz");
+      delay_ms(800);
       printf(lcd_putc,"\f");
 }
 
@@ -772,7 +787,7 @@ void NavigateTimeMoneyPreferenceMenu(void){
    
    printf(lcd_putc, "\f"); 
    lcd_gotoxy(1,1);
-   printf(lcd_putc, "Ucret:%d tl",Index_TimeMoneyPreference*2+2);
+   printf(lcd_putc, "Ucret:%d tl",(unsigned int)((time_arr[Index_TimeMoneyPreference]/10)*2));
    lcd_gotoxy(1,2);
    printf(lcd_putc, "Sure:%ld",time_arr[Index_TimeMoneyPreference]);
    lcd_gotoxy(10,2);
@@ -807,7 +822,7 @@ void NavigateTimeMoneyPreferenceMenu(void){
 void NavigatePolishingMenu(){
    printf(lcd_putc, "\f"); 
    lcd_gotoxy(1,1);
-   printf(lcd_putc, "Ucret:%ld tl",(35*mililitrePolish[Index_PolishMililitre]));
+   printf(lcd_putc, "Ucret:%ld tl",(15*mililitrePolish[Index_PolishMililitre]));
    lcd_gotoxy(1,2);
    printf(lcd_putc, "Ml:%ld",(unsigned long int)(100*mililitrePolish[Index_PolishMililitre]));
    lcd_gotoxy(10,2);
@@ -998,10 +1013,16 @@ void loadZeroValue_2_DisplaySegment(){
 
 /* ===================== -BEGIN- EEPROM WRITE/READ -BEGIN- ===================== */
 
+void showSelectedPastProcessesOps(void){
+
+   Read_EEPROM_OpsVal_from_EEPROMregs();
+   
+   display_Selected_EEPROM_OpsVal_OnLCD();
+
+}
+
 void display_Selected_EEPROM_OpsVal_OnLCD(){
-     
-      Read_EEPROM_OpsVal_from_EEPROMregs();
-     
+          
       printf(lcd_putc, "\f");
       
       lcd_gotoxy(1,1);
@@ -1012,6 +1033,7 @@ void display_Selected_EEPROM_OpsVal_OnLCD(){
       printf(lcd_putc, "V: %d TL",eeprom_ventilating_read_cost); 
       lcd_gotoxy(8,8);
       printf(lcd_putc, " P: %d TL",eeprom_polishing_read_cost); 
+      delay_ms(100);
        
 }
 
@@ -1043,12 +1065,99 @@ void Read_EEPROM_OpsVal_from_EEPROMregs(){
 
 
 
+void displayProcessCompletionStatus(){
+
+      printf(lcd_putc, "\f");
+      
+      lcd_gotoxy(2,1);
+      printf(lcd_putc, "Operasyon Sonu");   
+      delay_ms(2000);
+      printf(lcd_putc, "\f");
+      lcd_gotoxy(3,1);
+      printf(lcd_putc, "Islemleriniz");  
+      lcd_gotoxy(3,2);
+      printf(lcd_putc, "Kaydediliyor");
+      
+      loadCostValuesToEEPROMVariables();
+         
+      delay_ms(1000);
+      
+      printf(lcd_putc, "\f");
+      lcd_gotoxy(5,1);
+      printf(lcd_putc, "Kayitlar");  
+      lcd_gotoxy(4,2);
+      printf(lcd_putc, "Tamamlandi");
+      
+      delay_ms(1000);
+      
+      printf(lcd_putc, "\f");
+      lcd_gotoxy(4,1);
+      printf(lcd_putc, "Saglicakla");  
+      lcd_gotoxy(4,2);
+      printf(lcd_putc, "Kaliniz");
+      
+      delay_ms(1000);
+      printf(lcd_putc, "\f");
+      
+}
 
 
 
 
+void write_EEPROMVariables_to_EEPROMregs(){
 
+// Operations will be performed for the relevant customer
+// A new operation will be defined each time the system is activated
+// Example usage:
+// Main Menu -> Registration Process ->NextButton -> Operation 1 -> LCD display view:
+//                                                                [F=32TL    W=12TL] F: foaming     , W: Water
+//                                                                [V=24TL    P=85TL] V: Ventilating , P: Polishing
+//                                   ->NextButton -> Operation 2 -> LCD display view:
+//                                                                [F=32TL    W=12TL] F: foaming     , W: Water
+//                                                                [V=24TL    P=85TL] V: Ventilating , P: Polishing
 
+   //Selcuk Bey's ID
+   if(ClientNumber == 0){
+      
+      //Pull the last address to keep going on
+      //The last cursor position address will always be written to the zero address, to ensure that new data does not overwrite previously written data
+      Client0_last_address = read_eeprom(eeprom_Client0_systemStartAddress);
+      
+      write_eeprom( (eeprom_Client0_systemStartAddress + Client0_last_address + 5), (eeprom_foaming_written_cost)     ); Client0_last_address++; //Save foaming cost
+      write_eeprom( (eeprom_Client0_systemStartAddress + Client0_last_address + 5), (eeprom_washing_written_cost)     ); Client0_last_address++; //Save washing cost
+      write_eeprom( (eeprom_Client0_systemStartAddress + Client0_last_address + 5), (eeprom_ventilating_written_cost) ); Client0_last_address++; //Save Ventilating cost
+      write_eeprom( (eeprom_Client0_systemStartAddress + Client0_last_address + 5), (eeprom_polishing_written_cost)   ); Client0_last_address++; //Save Polishing cost
+      write_eeprom( (eeprom_Client0_systemStartAddress                           ), ( Client0_last_address)           );                         //Save cursor location in the client0 start address
+   }
+   
+   if(ClientNumber == 1){
+      
+      //Pull the last address to keep going on
+      //The last cursor position address will always be written to the zero address, to ensure that new data does not overwrite previously written data
+      Client1_last_address = read_eeprom(eeprom_Client1_systemStartAddress);
+      
+      write_eeprom( (eeprom_Client1_systemStartAddress + Client1_last_address + 1), (eeprom_foaming_written_cost)     ); Client1_last_address++; //Save foaming cost
+      write_eeprom( (eeprom_Client1_systemStartAddress + Client1_last_address + 1), (eeprom_washing_written_cost)     ); Client1_last_address++; //Save washing cost
+      write_eeprom( (eeprom_Client1_systemStartAddress + Client1_last_address + 1), (eeprom_ventilating_written_cost) ); Client1_last_address++; //Save Ventilating cost
+      write_eeprom( (eeprom_Client1_systemStartAddress + Client1_last_address + 1), (eeprom_polishing_written_cost)   ); Client1_last_address++; //Save Polishing cost
+      write_eeprom( (eeprom_Client1_systemStartAddress                           ), ( Client1_last_address)           );                         //Save cursor location in the client0 start address
+   
+   }
+   
+}
+
+//will be implemented
+void loadCostValuesToEEPROMVariables(){
+
+      //Cost values to be written
+      eeprom_foaming_written_cost     = (unsigned int8)(((MikroClient[ClientNumber].time_Foaming)/10)*2);
+      eeprom_washing_written_cost     = (unsigned int8)(((MikroClient[ClientNumber].time_Washing)/10)*2);
+      eeprom_ventilating_written_cost = (unsigned int8)(((MikroClient[ClientNumber].time_Ventilation)/10)*2);
+      eeprom_polishing_written_cost   = (unsigned int8)(((MikroClient[ClientNumber].mililitre_Polishing)/100)*15);
+     
+      //Write data to the allocated space for the customer who is using it
+      write_EEPROMVariables_to_EEPROMregs();
+}
 
 
 

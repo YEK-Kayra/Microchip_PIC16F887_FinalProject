@@ -1,5 +1,5 @@
 ÀÄmain
-   ÃÄMAIN  2/931  Ram=2
+   ÃÄMAIN  2/932  Ram=2
    ³  ÃÄ@cinit1  (Inline)  Ram=0
    ³  ÃÄSubSystem_Init  0/123  Ram=0
    ³  ³  ÃÄlcd_init  (Inline)  Ram=6
@@ -346,7 +346,7 @@
    ³  ³  ÀÄ*
    ³  ÃÄ@delay_ms1  0/21  Ram=1
    ³  ÃÄloadZeroValue_2_DisplaySegment  0/10  Ram=0
-   ³  ÀÄdisplayProcessCompletionStatus  1/731  Ram=1
+   ³  ÀÄdisplayProcessCompletionStatus  1/747  Ram=1
    ³     ÃÄlcd_putc  0/58  Ram=1
    ³     ³  ÀÄ*
    ³     ÃÄlcd_gotoxy  0/20  Ram=4
@@ -365,6 +365,7 @@
    ³     ÃÄ@PSTRINGC7_629  0/116  Ram=4
    ³     ³  ÀÄ*
    ³     ÃÄloadCostValuesToEEPROMVariables  (Inline)  Ram=2
+   ³     ³  ÃÄ@DIV1616  0/39  Ram=5
    ³     ³  ÃÄ@DIV1616  0/39  Ram=5
    ³     ³  ÃÄ@DIV1616  0/39  Ram=5
    ³     ³  ÃÄ@DIV1616  0/39  Ram=5

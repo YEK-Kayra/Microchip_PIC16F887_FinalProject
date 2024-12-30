@@ -464,7 +464,7 @@ while(1){//--------------------- BEGIN---MAIN WHILE(1)---BEGIN------------------
                                        do{
                                        
                                           //This way, the location to be read in the EEPROM is determined.
-                                          IndexOfReadMemory = Index_PastProcesses;
+                                          IndexOfReadMemory = (Index_PastProcesses + 1);
                                           
                                           //Display the selected past processes ops. on the LCD in an organized manner
                                           showSelectedPastProcessesOps();
@@ -1153,7 +1153,7 @@ void loadCostValuesToEEPROMVariables(){
       eeprom_foaming_written_cost     = (unsigned int8)(((MikroClient[ClientNumber].time_Foaming)/10)*2);
       eeprom_washing_written_cost     = (unsigned int8)(((MikroClient[ClientNumber].time_Washing)/10)*2);
       eeprom_ventilating_written_cost = (unsigned int8)(((MikroClient[ClientNumber].time_Ventilation)/10)*2);
-      eeprom_polishing_written_cost   = (unsigned int8)((MikroClient[ClientNumber].mililitre_Polishing)*15);
+      eeprom_polishing_written_cost   = (unsigned int8)(((MikroClient[ClientNumber].mililitre_Polishing)/100)*15);
      
       //Write data to the allocated space for the customer who is using it
       write_EEPROMVariables_to_EEPROMregs();
