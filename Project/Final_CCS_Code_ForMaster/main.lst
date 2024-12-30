@@ -1,8 +1,8 @@
-CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
+CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 23:27
 
                Filename:   C:\Users\yunus\OneDrive\Masaüstü\Microchip_PIC16F887_FinalProject\Project\Final_CCS_Code_ForMaster\main.lst
 
-               ROM used:   4905 words (60%)
+               ROM used:   4913 words (60%)
                            Largest free fragment is 2048
                RAM used:   131 (36%) at main() level
                            152 (41%) worst case
@@ -4633,46 +4633,55 @@ CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
 ....................    OPS_Status = 56;    //Disable  
 108F:  MOVLW  38
 1090:  MOVWF  2D
+....................    counter_StartOpsButtonTick=0;  //En son manalý deðiþiklik 
+1091:  CLRF   76
+....................    allProcessComplate_flag = 0; 
+1092:  BSF    03.5
+1093:  CLRF   32
 ....................    
 ....................    //Wait until unlock the system 
 ....................    do{ 
 ....................            SubSystem_lcd_IdleStatus();   //Greeting the customer 
-1091:  BCF    0A.4
-1092:  GOTO   35B
-1093:  BSF    0A.4
+1094:  BCF    0A.4
+1095:  BCF    03.5
+1096:  GOTO   35B
+1097:  BSF    0A.4
 ....................             
 ....................            if(kbhit()) 
-1094:  BTFSS  0C.5
-1095:  GOTO   09D
+1098:  BTFSS  0C.5
+1099:  GOTO   0A1
 ....................            { 
 ....................               readed_ID = getc(); 
-1096:  BTFSS  0C.5
-1097:  GOTO   096
-1098:  MOVF   1A,W
-1099:  MOVWF  2B
+109A:  BTFSS  0C.5
+109B:  GOTO   09A
+109C:  MOVF   1A,W
+109D:  MOVWF  2B
 ....................               SubSystem_uart_CheckTheMessage(); 
-109A:  BCF    0A.4
-109B:  GOTO   3B6
-109C:  BSF    0A.4
+109E:  BCF    0A.4
+109F:  GOTO   3B6
+10A0:  BSF    0A.4
 ....................            }       
 ....................          
 ....................     }while(systemLock!=1); 
-109D:  DECFSZ 2C,W
-109E:  GOTO   091
+10A1:  DECFSZ 2C,W
+10A2:  GOTO   0A4
+10A3:  GOTO   0A6
+10A4:  BSF    03.5
+10A5:  GOTO   094
 ....................   
 ....................     delay_ms(1000); 
-109F:  MOVLW  04
-10A0:  BSF    03.5
-10A1:  MOVWF  41
-10A2:  MOVLW  FA
-10A3:  MOVWF  4D
-10A4:  BCF    0A.4
-10A5:  BCF    03.5
-10A6:  CALL   1A5
-10A7:  BSF    0A.4
-10A8:  BSF    03.5
-10A9:  DECFSZ 41,F
-10AA:  GOTO   0A2
+10A6:  MOVLW  04
+10A7:  BSF    03.5
+10A8:  MOVWF  41
+10A9:  MOVLW  FA
+10AA:  MOVWF  4D
+10AB:  BCF    0A.4
+10AC:  BCF    03.5
+10AD:  CALL   1A5
+10AE:  BSF    0A.4
+10AF:  BSF    03.5
+10B0:  DECFSZ 41,F
+10B1:  GOTO   0A9
 ....................      
 ....................      
 ....................      
@@ -4696,454 +4705,458 @@ CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
 ....................       do{ 
 ....................              //Start Of Conversation for ADC_Surf 
 ....................              set_adc_channel(0); 
-10AB:  MOVLW  00
-10AC:  MOVWF  78
-10AD:  BCF    03.5
-10AE:  MOVF   1F,W
-10AF:  ANDLW  C3
-10B0:  IORWF  78,W
-10B1:  MOVWF  1F
+10B2:  MOVLW  00
+10B3:  MOVWF  78
+10B4:  BCF    03.5
+10B5:  MOVF   1F,W
+10B6:  ANDLW  C3
+10B7:  IORWF  78,W
+10B8:  MOVWF  1F
 ....................              //Provide sufficient acquisition time. 
 ....................              delay_us(20); 
-10B2:  MOVLW  06
-10B3:  MOVWF  77
-10B4:  DECFSZ 77,F
-10B5:  GOTO   0B4
-10B6:  NOP
+10B9:  MOVLW  06
+10BA:  MOVWF  77
+10BB:  DECFSZ 77,F
+10BC:  GOTO   0BB
+10BD:  NOP
 ....................               
 ....................              //Get Surf_Pot ADC value(0-1024) 
 ....................              val_ADC_Pot_Surf = read_adc();   
-10B7:  BSF    1F.1
-10B8:  BTFSC  1F.1
-10B9:  GOTO   0B8
-10BA:  BSF    03.5
-10BB:  MOVF   1E,W
-10BC:  BCF    03.5
-10BD:  MOVWF  45
-10BE:  MOVF   1E,W
-10BF:  MOVWF  46
+10BE:  BSF    1F.1
+10BF:  BTFSC  1F.1
+10C0:  GOTO   0BF
+10C1:  BSF    03.5
+10C2:  MOVF   1E,W
+10C3:  BCF    03.5
+10C4:  MOVWF  45
+10C5:  MOVF   1E,W
+10C6:  MOVWF  46
 ....................               
 ....................              //Convert Surf_Pot ADC value into the option menu index 
 ....................              ADC_TO_INDEXofOPTION_MENU(val_ADC_Pot_Surf); 
-10C0:  MOVF   46,W
-10C1:  BSF    03.5
-10C2:  MOVWF  46
-10C3:  BCF    03.5
-10C4:  MOVF   45,W
-10C5:  BSF    03.5
-10C6:  MOVWF  45
-10C7:  CLRF   48
-10C8:  MOVLW  05
-10C9:  MOVWF  47
-10CA:  BCF    0A.4
-10CB:  BCF    03.5
-10CC:  CALL   406
-10CD:  BSF    0A.4
-10CE:  MOVF   79,W
-10CF:  BSF    03.5
-10D0:  MOVWF  42
-10D1:  MOVF   78,W
-10D2:  MOVWF  41
-10D3:  MOVF   42,W
-10D4:  MOVWF  44
-10D5:  MOVF   41,W
-10D6:  MOVWF  43
-10D7:  MOVLW  03
-10D8:  MOVWF  46
-10D9:  MOVLW  FC
-10DA:  MOVWF  45
-10DB:  BCF    0A.4
-10DC:  BCF    03.5
-10DD:  CALL   41D
-10DE:  BSF    0A.4
-10DF:  MOVF   78,W
-10E0:  MOVWF  41
-10E1:  SUBLW  04
-10E2:  BTFSC  03.0
-10E3:  GOTO   0E6
-10E4:  MOVLW  04
-10E5:  MOVWF  41
+10C7:  MOVF   46,W
+10C8:  BSF    03.5
+10C9:  MOVWF  46
+10CA:  BCF    03.5
+10CB:  MOVF   45,W
+10CC:  BSF    03.5
+10CD:  MOVWF  45
+10CE:  CLRF   48
+10CF:  MOVLW  05
+10D0:  MOVWF  47
+10D1:  BCF    0A.4
+10D2:  BCF    03.5
+10D3:  CALL   406
+10D4:  BSF    0A.4
+10D5:  MOVF   79,W
+10D6:  BSF    03.5
+10D7:  MOVWF  42
+10D8:  MOVF   78,W
+10D9:  MOVWF  41
+10DA:  MOVF   42,W
+10DB:  MOVWF  44
+10DC:  MOVF   41,W
+10DD:  MOVWF  43
+10DE:  MOVLW  03
+10DF:  MOVWF  46
+10E0:  MOVLW  FC
+10E1:  MOVWF  45
+10E2:  BCF    0A.4
+10E3:  BCF    03.5
+10E4:  CALL   41D
+10E5:  BSF    0A.4
+10E6:  MOVF   78,W
+10E7:  MOVWF  41
+10E8:  SUBLW  04
+10E9:  BTFSC  03.0
+10EA:  GOTO   0ED
+10EB:  MOVLW  04
+10EC:  MOVWF  41
 ....................              
 ....................              //Use index value to show selected option and other one 
 ....................              NavigateOperationMenu(); 
-10E6:  BCF    0A.4
-10E7:  GOTO   444
-10E8:  BSF    0A.4
+10ED:  BCF    0A.4
+10EE:  GOTO   444
+10EF:  BSF    0A.4
 ....................               
 ....................              //Clear selection 
 ....................              SelectionState = ' '; 
-10E9:  MOVLW  20
-10EA:  MOVWF  2E
+10F0:  MOVLW  20
+10F1:  MOVWF  2E
+....................               
+....................              //Reset the flag, becauese there will be a new process 
+....................              allProcessComplate_flag = 0; 
+10F2:  BSF    03.5
+10F3:  CLRF   32
 ....................               
 ....................                 //The client wants to see the next section based on the selected option 
 ....................                 //Selections will be made for foaming, washing, and ventilation processes in this section 
 ....................                 if((input(button_NEXT) == 1) && (Index_OptionMenu <= 2)) 
-10EB:  BSF    03.5
-10EC:  BSF    05.3
-10ED:  BCF    03.5
-10EE:  BTFSS  05.3
-10EF:  GOTO   13A
-10F0:  MOVF   41,W
-10F1:  SUBLW  02
-10F2:  BTFSS  03.0
-10F3:  GOTO   13A
+10F4:  BSF    05.3
+10F5:  BCF    03.5
+10F6:  BTFSS  05.3
+10F7:  GOTO   142
+10F8:  MOVF   41,W
+10F9:  SUBLW  02
+10FA:  BTFSS  03.0
+10FB:  GOTO   142
 ....................                 { 
 ....................        
 ....................                         do{ 
 ....................                               //Start Of Conversation for ADC_Timer 
 ....................                               set_adc_channel(1); 
-10F4:  MOVLW  04
-10F5:  MOVWF  78
-10F6:  MOVF   1F,W
-10F7:  ANDLW  C3
-10F8:  IORWF  78,W
-10F9:  MOVWF  1F
+10FC:  MOVLW  04
+10FD:  MOVWF  78
+10FE:  MOVF   1F,W
+10FF:  ANDLW  C3
+1100:  IORWF  78,W
+1101:  MOVWF  1F
 ....................                               //Provide sufficient acquisition time. 
 ....................                               delay_us(20); 
-10FA:  MOVLW  06
-10FB:  MOVWF  77
-10FC:  DECFSZ 77,F
-10FD:  GOTO   0FC
-10FE:  NOP
+1102:  MOVLW  06
+1103:  MOVWF  77
+1104:  DECFSZ 77,F
+1105:  GOTO   104
+1106:  NOP
 ....................                                
 ....................                               //Get Timer_Pot ADC value(0-1024) 
 ....................                               val_ADC_Pot_Timer = read_adc();  
-10FF:  BSF    1F.1
-1100:  BTFSC  1F.1
-1101:  GOTO   100
-1102:  BSF    03.5
-1103:  MOVF   1E,W
-1104:  BCF    03.5
-1105:  MOVWF  47
-1106:  MOVF   1E,W
-1107:  MOVWF  48
+1107:  BSF    1F.1
+1108:  BTFSC  1F.1
+1109:  GOTO   108
+110A:  BSF    03.5
+110B:  MOVF   1E,W
+110C:  BCF    03.5
+110D:  MOVWF  47
+110E:  MOVF   1E,W
+110F:  MOVWF  48
 ....................                                
 ....................                               //Convert Timer_Pot ADC value into the option menu index 
 ....................                               ADC_TO_INDEXofTIME_MONEY_MENU(val_ADC_Pot_Timer); 
-1108:  MOVF   48,W
-1109:  BSF    03.5
-110A:  MOVWF  46
-110B:  BCF    03.5
-110C:  MOVF   47,W
-110D:  BSF    03.5
-110E:  MOVWF  45
-110F:  CLRF   48
-1110:  MOVLW  0C
-1111:  MOVWF  47
-1112:  BCF    0A.4
+1110:  MOVF   48,W
+1111:  BSF    03.5
+1112:  MOVWF  46
 1113:  BCF    03.5
-1114:  CALL   406
-1115:  BSF    0A.4
-1116:  MOVF   79,W
-1117:  BSF    03.5
-1118:  MOVWF  42
-1119:  MOVF   78,W
-111A:  MOVWF  41
-111B:  MOVF   42,W
-111C:  MOVWF  44
-111D:  MOVF   41,W
-111E:  MOVWF  43
-111F:  MOVLW  03
-1120:  MOVWF  46
-1121:  MOVLW  FC
-1122:  MOVWF  45
-1123:  BCF    0A.4
-1124:  BCF    03.5
-1125:  CALL   41D
-1126:  BSF    0A.4
-1127:  MOVF   78,W
-1128:  MOVWF  42
-1129:  SUBLW  0B
-112A:  BTFSC  03.0
-112B:  GOTO   12E
-112C:  MOVLW  0B
-112D:  MOVWF  42
+1114:  MOVF   47,W
+1115:  BSF    03.5
+1116:  MOVWF  45
+1117:  CLRF   48
+1118:  MOVLW  0C
+1119:  MOVWF  47
+111A:  BCF    0A.4
+111B:  BCF    03.5
+111C:  CALL   406
+111D:  BSF    0A.4
+111E:  MOVF   79,W
+111F:  BSF    03.5
+1120:  MOVWF  42
+1121:  MOVF   78,W
+1122:  MOVWF  41
+1123:  MOVF   42,W
+1124:  MOVWF  44
+1125:  MOVF   41,W
+1126:  MOVWF  43
+1127:  MOVLW  03
+1128:  MOVWF  46
+1129:  MOVLW  FC
+112A:  MOVWF  45
+112B:  BCF    0A.4
+112C:  BCF    03.5
+112D:  CALL   41D
+112E:  BSF    0A.4
+112F:  MOVF   78,W
+1130:  MOVWF  42
+1131:  SUBLW  0B
+1132:  BTFSC  03.0
+1133:  GOTO   136
+1134:  MOVLW  0B
+1135:  MOVWF  42
 ....................                                
 ....................                               //Use index value to show time & money & preference 
 ....................                               NavigateTimeMoneyPreferenceMenu(); 
-112E:  BCF    0A.4
-112F:  GOTO   64E
-1130:  BSF    0A.4
+1136:  BCF    0A.4
+1137:  GOTO   64E
+1138:  BSF    0A.4
 ....................                                
 ....................                               //Break the while condation 
 ....................                               if(input(button_BACK) == 1){ 
-1131:  BSF    03.5
-1132:  BSF    05.4
-1133:  BCF    03.5
-1134:  BTFSC  05.4
+1139:  BSF    03.5
+113A:  BSF    05.4
+113B:  BCF    03.5
+113C:  BTFSC  05.4
 ....................                                  break; 
-1135:  GOTO   13A
+113D:  GOTO   142
 ....................                               } 
 ....................                          
 ....................                         }while(OPS_Status!=55);  
-1136:  MOVF   2D,W
-1137:  SUBLW  37
-1138:  BTFSS  03.2
-1139:  GOTO   0F4
+113E:  MOVF   2D,W
+113F:  SUBLW  37
+1140:  BTFSS  03.2
+1141:  GOTO   0FC
 ....................                 } 
 ....................                  
 ....................                  
 ....................                 //In this section, only milliliter selection will be made for the polishing process 
 ....................                 if((input(button_NEXT) == 1) && (Index_OptionMenu == 3)){ 
-113A:  BSF    03.5
-113B:  BSF    05.3
-113C:  BCF    03.5
-113D:  BTFSS  05.3
-113E:  GOTO   186
-113F:  MOVF   41,W
-1140:  SUBLW  03
-1141:  BTFSS  03.2
-1142:  GOTO   186
+1142:  BSF    03.5
+1143:  BSF    05.3
+1144:  BCF    03.5
+1145:  BTFSS  05.3
+1146:  GOTO   18E
+1147:  MOVF   41,W
+1148:  SUBLW  03
+1149:  BTFSS  03.2
+114A:  GOTO   18E
 ....................     
 ....................                         do{ 
 ....................                               //Start Of Conversation for ADC_Timer 
 ....................                               set_adc_channel(1); 
-1143:  MOVLW  04
-1144:  MOVWF  78
-1145:  MOVF   1F,W
-1146:  ANDLW  C3
-1147:  IORWF  78,W
-1148:  MOVWF  1F
+114B:  MOVLW  04
+114C:  MOVWF  78
+114D:  MOVF   1F,W
+114E:  ANDLW  C3
+114F:  IORWF  78,W
+1150:  MOVWF  1F
 ....................                                
 ....................                               //Get Timer_Pot ADC value(0-1024) 
 ....................                               val_ADC_Pot_Polish = read_adc();  
-1149:  BSF    1F.1
-114A:  BTFSC  1F.1
-114B:  GOTO   14A
-114C:  BSF    03.5
-114D:  MOVF   1E,W
-114E:  BCF    03.5
-114F:  MOVWF  49
-1150:  MOVF   1E,W
-1151:  MOVWF  4A
+1151:  BSF    1F.1
+1152:  BTFSC  1F.1
+1153:  GOTO   152
+1154:  BSF    03.5
+1155:  MOVF   1E,W
+1156:  BCF    03.5
+1157:  MOVWF  49
+1158:  MOVF   1E,W
+1159:  MOVWF  4A
 ....................                                
 ....................                               //Convert Timer_Pot ADC value into the option menu index 
 ....................                               ADC_TO_INDEXofPolish(val_ADC_Pot_Polish); 
-1152:  MOVF   4A,W
-1153:  BSF    03.5
-1154:  MOVWF  46
-1155:  BCF    03.5
-1156:  MOVF   49,W
-1157:  BSF    03.5
-1158:  MOVWF  45
-1159:  CLRF   48
-115A:  MOVLW  05
-115B:  MOVWF  47
-115C:  BCF    0A.4
+115A:  MOVF   4A,W
+115B:  BSF    03.5
+115C:  MOVWF  46
 115D:  BCF    03.5
-115E:  CALL   406
-115F:  BSF    0A.4
-1160:  MOVF   79,W
-1161:  BSF    03.5
-1162:  MOVWF  42
-1163:  MOVF   78,W
-1164:  MOVWF  41
-1165:  MOVF   42,W
-1166:  MOVWF  44
-1167:  MOVF   41,W
-1168:  MOVWF  43
-1169:  MOVLW  03
-116A:  MOVWF  46
-116B:  MOVLW  FC
-116C:  MOVWF  45
-116D:  BCF    0A.4
-116E:  BCF    03.5
-116F:  CALL   41D
-1170:  BSF    0A.4
-1171:  MOVF   78,W
-1172:  MOVWF  43
-1173:  SUBLW  04
-1174:  BTFSC  03.0
-1175:  GOTO   178
-1176:  MOVLW  04
-1177:  MOVWF  43
+115E:  MOVF   49,W
+115F:  BSF    03.5
+1160:  MOVWF  45
+1161:  CLRF   48
+1162:  MOVLW  05
+1163:  MOVWF  47
+1164:  BCF    0A.4
+1165:  BCF    03.5
+1166:  CALL   406
+1167:  BSF    0A.4
+1168:  MOVF   79,W
+1169:  BSF    03.5
+116A:  MOVWF  42
+116B:  MOVF   78,W
+116C:  MOVWF  41
+116D:  MOVF   42,W
+116E:  MOVWF  44
+116F:  MOVF   41,W
+1170:  MOVWF  43
+1171:  MOVLW  03
+1172:  MOVWF  46
+1173:  MOVLW  FC
+1174:  MOVWF  45
+1175:  BCF    0A.4
+1176:  BCF    03.5
+1177:  CALL   41D
+1178:  BSF    0A.4
+1179:  MOVF   78,W
+117A:  MOVWF  43
+117B:  SUBLW  04
+117C:  BTFSC  03.0
+117D:  GOTO   180
+117E:  MOVLW  04
+117F:  MOVWF  43
 ....................                                
 ....................                               //Use index value to show time & money & preference 
 ....................                               NavigatePolishingMenu(); 
-1178:  BCF    0A.4
-1179:  BSF    0A.3
-117A:  GOTO   000
-117B:  BSF    0A.4
-117C:  BCF    0A.3
+1180:  BCF    0A.4
+1181:  BSF    0A.3
+1182:  GOTO   000
+1183:  BSF    0A.4
+1184:  BCF    0A.3
 ....................                                
 ....................                               //Break the while condation 
 ....................                               if(input(button_BACK) == 1){ 
-117D:  BSF    03.5
-117E:  BSF    05.4
-117F:  BCF    03.5
-1180:  BTFSC  05.4
+1185:  BSF    03.5
+1186:  BSF    05.4
+1187:  BCF    03.5
+1188:  BTFSC  05.4
 ....................                                  break; 
-1181:  GOTO   186
+1189:  GOTO   18E
 ....................                               } 
 ....................                          
 ....................                         }while(OPS_Status!=55);  
-1182:  MOVF   2D,W
-1183:  SUBLW  37
-1184:  BTFSS  03.2
-1185:  GOTO   143
+118A:  MOVF   2D,W
+118B:  SUBLW  37
+118C:  BTFSS  03.2
+118D:  GOTO   14B
 ....................                  
 ....................                 } 
 ....................                  
 ....................                 //In this section, the client can see all of his past processes 
 ....................                 if((input(button_NEXT) == 1) && (Index_OptionMenu == 4)){ 
-1186:  BSF    03.5
-1187:  BSF    05.3
-1188:  BCF    03.5
-1189:  BTFSS  05.3
-118A:  GOTO   1FB
-118B:  MOVF   41,W
-118C:  SUBLW  04
-118D:  BTFSS  03.2
-118E:  GOTO   1FB
+118E:  BSF    03.5
+118F:  BSF    05.3
+1190:  BCF    03.5
+1191:  BTFSS  05.3
+1192:  GOTO   203
+1193:  MOVF   41,W
+1194:  SUBLW  04
+1195:  BTFSS  03.2
+1196:  GOTO   203
 ....................                  
 ....................                         do{ 
 ....................                               //Start Of Conversation for ADC_Timer 
 ....................                               set_adc_channel(1); 
-118F:  MOVLW  04
-1190:  MOVWF  78
-1191:  MOVF   1F,W
-1192:  ANDLW  C3
-1193:  IORWF  78,W
-1194:  MOVWF  1F
+1197:  MOVLW  04
+1198:  MOVWF  78
+1199:  MOVF   1F,W
+119A:  ANDLW  C3
+119B:  IORWF  78,W
+119C:  MOVWF  1F
 ....................                                
 ....................                               //Get Timer_Pot ADC value(0-1024) 
 ....................                               val_ADC_Pot_PastProcesses = read_adc();  
-1195:  BSF    1F.1
-1196:  BTFSC  1F.1
-1197:  GOTO   196
-1198:  BSF    03.5
-1199:  MOVF   1E,W
-119A:  BCF    03.5
-119B:  MOVWF  4B
-119C:  MOVF   1E,W
-119D:  MOVWF  4C
+119D:  BSF    1F.1
+119E:  BTFSC  1F.1
+119F:  GOTO   19E
+11A0:  BSF    03.5
+11A1:  MOVF   1E,W
+11A2:  BCF    03.5
+11A3:  MOVWF  4B
+11A4:  MOVF   1E,W
+11A5:  MOVWF  4C
 ....................                                
 ....................                               //Convert Timer_Pot ADC value into the past processes index 
 ....................                               ADC_TO_INDEXofPastProcesses(val_ADC_Pot_PastProcesses); 
-119E:  MOVF   4C,W
-119F:  BSF    03.5
-11A0:  MOVWF  46
-11A1:  BCF    03.5
-11A2:  MOVF   4B,W
-11A3:  BSF    03.5
-11A4:  MOVWF  45
-11A5:  CLRF   48
-11A6:  MOVLW  05
-11A7:  MOVWF  47
-11A8:  BCF    0A.4
+11A6:  MOVF   4C,W
+11A7:  BSF    03.5
+11A8:  MOVWF  46
 11A9:  BCF    03.5
-11AA:  CALL   406
-11AB:  BSF    0A.4
-11AC:  MOVF   79,W
-11AD:  BSF    03.5
-11AE:  MOVWF  42
-11AF:  MOVF   78,W
-11B0:  MOVWF  41
-11B1:  MOVF   42,W
-11B2:  MOVWF  44
-11B3:  MOVF   41,W
-11B4:  MOVWF  43
-11B5:  MOVLW  03
-11B6:  MOVWF  46
-11B7:  MOVLW  FC
-11B8:  MOVWF  45
-11B9:  BCF    0A.4
-11BA:  BCF    03.5
-11BB:  CALL   41D
-11BC:  BSF    0A.4
-11BD:  MOVF   78,W
-11BE:  MOVWF  44
-11BF:  SUBLW  04
-11C0:  BTFSC  03.0
-11C1:  GOTO   1C4
-11C2:  MOVLW  04
-11C3:  MOVWF  44
+11AA:  MOVF   4B,W
+11AB:  BSF    03.5
+11AC:  MOVWF  45
+11AD:  CLRF   48
+11AE:  MOVLW  05
+11AF:  MOVWF  47
+11B0:  BCF    0A.4
+11B1:  BCF    03.5
+11B2:  CALL   406
+11B3:  BSF    0A.4
+11B4:  MOVF   79,W
+11B5:  BSF    03.5
+11B6:  MOVWF  42
+11B7:  MOVF   78,W
+11B8:  MOVWF  41
+11B9:  MOVF   42,W
+11BA:  MOVWF  44
+11BB:  MOVF   41,W
+11BC:  MOVWF  43
+11BD:  MOVLW  03
+11BE:  MOVWF  46
+11BF:  MOVLW  FC
+11C0:  MOVWF  45
+11C1:  BCF    0A.4
+11C2:  BCF    03.5
+11C3:  CALL   41D
+11C4:  BSF    0A.4
+11C5:  MOVF   78,W
+11C6:  MOVWF  44
+11C7:  SUBLW  04
+11C8:  BTFSC  03.0
+11C9:  GOTO   1CC
+11CA:  MOVLW  04
+11CB:  MOVWF  44
 ....................                                
 ....................                               //Use past processes index value to show selected past processes 
 ....................                                NavigatePastProcessesMenu(); 
-11C4:  BCF    0A.4
-11C5:  BSF    0A.3
-11C6:  GOTO   12E
-11C7:  BSF    0A.4
-11C8:  BCF    0A.3
+11CC:  BCF    0A.4
+11CD:  BSF    0A.3
+11CE:  GOTO   12E
+11CF:  BSF    0A.4
+11D0:  BCF    0A.3
 ....................                                 
 ....................                                delay_ms(250); 
-11C9:  MOVLW  FA
-11CA:  BSF    03.5
-11CB:  MOVWF  4D
-11CC:  BCF    0A.4
-11CD:  BCF    03.5
-11CE:  CALL   1A5
-11CF:  BSF    0A.4
+11D1:  MOVLW  FA
+11D2:  BSF    03.5
+11D3:  MOVWF  4D
+11D4:  BCF    0A.4
+11D5:  BCF    03.5
+11D6:  CALL   1A5
+11D7:  BSF    0A.4
 ....................                                 
 ....................                                      //Enter the selected past-procesess 
 ....................                                      if((input(button_NEXT) == 1)){       
-11D0:  BSF    03.5
-11D1:  BSF    05.3
-11D2:  BCF    03.5
-11D3:  BTFSS  05.3
-11D4:  GOTO   1F2
+11D8:  BSF    03.5
+11D9:  BSF    05.3
+11DA:  BCF    03.5
+11DB:  BTFSS  05.3
+11DC:  GOTO   1FA
 ....................                                         printf(lcd_putc, "\f"); 
-11D5:  MOVLW  0C
-11D6:  BSF    03.5
-11D7:  MOVWF  4C
-11D8:  BCF    0A.4
-11D9:  BCF    03.5
-11DA:  CALL   2AD
-11DB:  BSF    0A.4
+11DD:  MOVLW  0C
+11DE:  BSF    03.5
+11DF:  MOVWF  4C
+11E0:  BCF    0A.4
+11E1:  BCF    03.5
+11E2:  CALL   2AD
+11E3:  BSF    0A.4
 ....................                                          
 ....................                                        do{ 
 ....................                                         
 ....................                                           //This way, the location to be read in the EEPROM is determined. 
 ....................                                           IndexOfReadMemory = (Index_PastProcesses + 1); 
-11DC:  MOVLW  01
-11DD:  ADDWF  44,W
-11DE:  BSF    03.5
-11DF:  MOVWF  3D
+11E4:  MOVLW  01
+11E5:  ADDWF  44,W
+11E6:  BSF    03.5
+11E7:  MOVWF  3D
 ....................                                            
 ....................                                           //Display the selected past processes ops. on the LCD in an organized manner 
 ....................                                           showSelectedPastProcessesOps(); 
-11E0:  BCF    0A.4
-11E1:  BSF    0A.3
-11E2:  BCF    03.5
-11E3:  GOTO   1ED
-11E4:  BSF    0A.4
-11E5:  BCF    0A.3
+11E8:  BCF    0A.4
+11E9:  BSF    0A.3
+11EA:  BCF    03.5
+11EB:  GOTO   1ED
+11EC:  BSF    0A.4
+11ED:  BCF    0A.3
 ....................                                            
 ....................                                              
 ....................                                        }while(input(button_BACK) != 1); //Wait until press back button 
-11E6:  BSF    03.5
-11E7:  BSF    05.4
-11E8:  BCF    03.5
-11E9:  BTFSS  05.4
-11EA:  GOTO   1DC
+11EE:  BSF    03.5
+11EF:  BSF    05.4
+11F0:  BCF    03.5
+11F1:  BTFSS  05.4
+11F2:  GOTO   1E4
 ....................                                       
 ....................                                      delay_ms(250); 
-11EB:  MOVLW  FA
-11EC:  BSF    03.5
-11ED:  MOVWF  4D
-11EE:  BCF    0A.4
-11EF:  BCF    03.5
-11F0:  CALL   1A5
-11F1:  BSF    0A.4
+11F3:  MOVLW  FA
+11F4:  BSF    03.5
+11F5:  MOVWF  4D
+11F6:  BCF    0A.4
+11F7:  BCF    03.5
+11F8:  CALL   1A5
+11F9:  BSF    0A.4
 ....................                                      } 
 ....................                                 
 ....................                                 
 ....................                               //Break the while condation 
 ....................                               if(input(button_BACK) == 1){ 
-11F2:  BSF    03.5
-11F3:  BSF    05.4
-11F4:  BCF    03.5
-11F5:  BTFSC  05.4
+11FA:  BSF    03.5
+11FB:  BSF    05.4
+11FC:  BCF    03.5
+11FD:  BTFSC  05.4
 ....................                                  break; 
-11F6:  GOTO   1FB
+11FE:  GOTO   203
 ....................                               } 
 ....................                                
 ....................                          }while(OPS_Status!=55);  
-11F7:  MOVF   2D,W
-11F8:  SUBLW  37
-11F9:  BTFSS  03.2
-11FA:  GOTO   18F
+11FF:  MOVF   2D,W
+1200:  SUBLW  37
+1201:  BTFSS  03.2
+1202:  GOTO   197
 ....................                 } 
 ....................                  
 ....................       /****************************************************************************************************/   
@@ -5155,447 +5168,448 @@ CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
 ....................                  * In this section, a countdown will start for the selected times. 
 ....................                  * Each time the button_OPS_START is pressed, a new countdown for the process will begin. 
 ....................                 */ 
+....................                  
 ....................                 if(input(button_OPS_START) == 1){ 
-11FB:  BSF    03.5
-11FC:  BSF    3E.1
-11FD:  MOVF   3E,W
-11FE:  MOVWF  07
-11FF:  BCF    03.5
-1200:  BTFSS  07.1
-1201:  GOTO   38D
+1203:  BSF    03.5
+1204:  BSF    3E.1
+1205:  MOVF   3E,W
+1206:  MOVWF  07
+1207:  BCF    03.5
+1208:  BTFSS  07.1
+1209:  GOTO   395
 ....................                  
 ....................                         printf(lcd_putc,"\f"); 
-1202:  MOVLW  0C
-1203:  BSF    03.5
-1204:  MOVWF  4C
-1205:  BCF    0A.4
-1206:  BCF    03.5
-1207:  CALL   2AD
-1208:  BSF    0A.4
+120A:  MOVLW  0C
+120B:  BSF    03.5
+120C:  MOVWF  4C
+120D:  BCF    0A.4
+120E:  BCF    03.5
+120F:  CALL   2AD
+1210:  BSF    0A.4
 ....................                         lcd_gotoxy(4,1); 
-1209:  MOVLW  04
-120A:  BSF    03.5
-120B:  MOVWF  4D
-120C:  MOVLW  01
-120D:  MOVWF  4E
-120E:  BCF    0A.4
-120F:  BCF    03.5
-1210:  CALL   299
-1211:  BSF    0A.4
+1211:  MOVLW  04
+1212:  BSF    03.5
+1213:  MOVWF  4D
+1214:  MOVLW  01
+1215:  MOVWF  4E
+1216:  BCF    0A.4
+1217:  BCF    03.5
+1218:  CALL   299
+1219:  BSF    0A.4
 ....................                         printf(lcd_putc,"Operasyon"); 
-1212:  MOVLW  8B
-1213:  BSF    03.6
-1214:  MOVWF  0D
-1215:  MOVLW  00
-1216:  MOVWF  0F
-1217:  BCF    0A.4
-1218:  BCF    03.6
-1219:  CALL   2E7
-121A:  BSF    0A.4
+121A:  MOVLW  8B
+121B:  BSF    03.6
+121C:  MOVWF  0D
+121D:  MOVLW  00
+121E:  MOVWF  0F
+121F:  BCF    0A.4
+1220:  BCF    03.6
+1221:  CALL   2E7
+1222:  BSF    0A.4
 ....................                         lcd_gotoxy(4,2); 
-121B:  MOVLW  04
-121C:  BSF    03.5
-121D:  MOVWF  4D
-121E:  MOVLW  02
-121F:  MOVWF  4E
-1220:  BCF    0A.4
-1221:  BCF    03.5
-1222:  CALL   299
-1223:  BSF    0A.4
+1223:  MOVLW  04
+1224:  BSF    03.5
+1225:  MOVWF  4D
+1226:  MOVLW  02
+1227:  MOVWF  4E
+1228:  BCF    0A.4
+1229:  BCF    03.5
+122A:  CALL   299
+122B:  BSF    0A.4
 ....................                         printf(lcd_putc,"Baslatildi"); 
-1224:  MOVLW  90
-1225:  BSF    03.6
-1226:  MOVWF  0D
-1227:  MOVLW  00
-1228:  MOVWF  0F
-1229:  BCF    0A.4
-122A:  BCF    03.6
-122B:  CALL   2E7
-122C:  BSF    0A.4
+122C:  MOVLW  90
+122D:  BSF    03.6
+122E:  MOVWF  0D
+122F:  MOVLW  00
+1230:  MOVWF  0F
+1231:  BCF    0A.4
+1232:  BCF    03.6
+1233:  CALL   2E7
+1234:  BSF    0A.4
 ....................                          
 ....................                         //Wait 100 milliseconds to allow for button interference 
 ....................                         delay_ms(100);  
-122D:  MOVLW  64
-122E:  BSF    03.5
-122F:  MOVWF  4D
-1230:  BCF    0A.4
-1231:  BCF    03.5
-1232:  CALL   1A5
-1233:  BSF    0A.4
+1235:  MOVLW  64
+1236:  BSF    03.5
+1237:  MOVWF  4D
+1238:  BCF    0A.4
+1239:  BCF    03.5
+123A:  CALL   1A5
+123B:  BSF    0A.4
 ....................                          
 ....................                         //Increase the value by one, if clicked during each recheck 
 ....................                         counter_StartOpsButtonTick+=1; 
-1234:  MOVLW  01
-1235:  ADDWF  76,F
+123C:  MOVLW  01
+123D:  ADDWF  76,F
 ....................                         LockingMechanism = 1; 
-1236:  MOVWF  2F
+123E:  MOVWF  2F
 ....................                          
 ....................                         do{ 
 ....................                                
 ....................                               //Loads the foaming time 
 ....................                               if((counter_StartOpsButtonTick == 1) && (LockingMechanism == 1)){        
-1237:  DECFSZ 76,W
-1238:  GOTO   28D
-1239:  DECFSZ 2F,W
-123A:  GOTO   28D
+123F:  DECFSZ 76,W
+1240:  GOTO   295
+1241:  DECFSZ 2F,W
+1242:  GOTO   295
 ....................                                     
 ....................                                     //The SelectedTime variable will be sent to the macro to configure the desired_value variable 
 ....................                                     SelectedTime = MikroClient[ClientNumber].time_Foaming; 
-123B:  RLF    40,W
-123C:  MOVWF  77
-123D:  RLF    77,F
-123E:  RLF    77,F
-123F:  MOVLW  F8
-1240:  ANDWF  77,F
-1241:  MOVF   77,W
-1242:  ADDLW  30
-1243:  MOVWF  04
-1244:  BCF    03.7
-1245:  INCF   04,F
-1246:  MOVF   00,W
-1247:  MOVWF  7E
-1248:  DECF   04,F
-1249:  MOVF   00,W
-124A:  MOVWF  7D
+1243:  RLF    40,W
+1244:  MOVWF  77
+1245:  RLF    77,F
+1246:  RLF    77,F
+1247:  MOVLW  F8
+1248:  ANDWF  77,F
+1249:  MOVF   77,W
+124A:  ADDLW  30
+124B:  MOVWF  04
+124C:  BCF    03.7
+124D:  INCF   04,F
+124E:  MOVF   00,W
+124F:  MOVWF  7E
+1250:  DECF   04,F
+1251:  MOVF   00,W
+1252:  MOVWF  7D
 ....................                                      
 ....................                                     //The CurrentTime variable will hold the current number  to be displayed 
 ....................                                     CurrentTime = MikroClient[ClientNumber].time_Foaming; 
-124B:  RLF    40,W
-124C:  MOVWF  77
-124D:  RLF    77,F
-124E:  RLF    77,F
-124F:  MOVLW  F8
-1250:  ANDWF  77,F
-1251:  MOVF   77,W
-1252:  ADDLW  30
-1253:  MOVWF  04
-1254:  BCF    03.7
-1255:  INCF   04,F
-1256:  MOVF   00,W
-1257:  MOVWF  7C
-1258:  DECF   04,F
-1259:  MOVF   00,W
-125A:  MOVWF  7B
+1253:  RLF    40,W
+1254:  MOVWF  77
+1255:  RLF    77,F
+1256:  RLF    77,F
+1257:  MOVLW  F8
+1258:  ANDWF  77,F
+1259:  MOVF   77,W
+125A:  ADDLW  30
+125B:  MOVWF  04
+125C:  BCF    03.7
+125D:  INCF   04,F
+125E:  MOVF   00,W
+125F:  MOVWF  7C
+1260:  DECF   04,F
+1261:  MOVF   00,W
+1262:  MOVWF  7B
 ....................                                      
 ....................                                     //Determine the value that the desired_value variable will take. 
 ....................                                     SECOND_TO_ISR_COUNT(SelectedTime);   
-125B:  MOVF   7E,W
-125C:  BSF    03.5
-125D:  MOVWF  42
-125E:  MOVF   7D,W
-125F:  MOVWF  41
-1260:  BCF    0A.4
-1261:  BCF    03.5
-1262:  CALL   789
-1263:  BSF    0A.4
-1264:  MOVF   7A,W
-1265:  BSF    03.5
-1266:  MOVWF  44
-1267:  MOVF   79,W
-1268:  MOVWF  43
-1269:  MOVF   78,W
-126A:  MOVWF  42
-126B:  MOVF   77,W
-126C:  MOVWF  41
-126D:  CLRF   48
-126E:  CLRF   47
-126F:  MOVLW  7A
-1270:  MOVWF  46
-1271:  MOVLW  82
-1272:  MOVWF  45
-1273:  BCF    0A.4
-1274:  BSF    0A.3
-1275:  BCF    03.5
-1276:  CALL   39B
-1277:  BSF    0A.4
-1278:  BCF    0A.3
-1279:  MOVF   7A,W
-127A:  BSF    03.5
-127B:  MOVWF  44
-127C:  MOVF   79,W
-127D:  MOVWF  43
-127E:  MOVF   78,W
-127F:  MOVWF  42
-1280:  MOVF   77,W
-1281:  MOVWF  41
-1282:  BCF    0A.4
-1283:  BCF    03.5
-1284:  CALL   7A8
-1285:  BSF    0A.4
-1286:  MOVF   79,W
-1287:  MOVWF  68
-1288:  MOVF   78,W
-1289:  MOVWF  67
+1263:  MOVF   7E,W
+1264:  BSF    03.5
+1265:  MOVWF  42
+1266:  MOVF   7D,W
+1267:  MOVWF  41
+1268:  BCF    0A.4
+1269:  BCF    03.5
+126A:  CALL   789
+126B:  BSF    0A.4
+126C:  MOVF   7A,W
+126D:  BSF    03.5
+126E:  MOVWF  44
+126F:  MOVF   79,W
+1270:  MOVWF  43
+1271:  MOVF   78,W
+1272:  MOVWF  42
+1273:  MOVF   77,W
+1274:  MOVWF  41
+1275:  CLRF   48
+1276:  CLRF   47
+1277:  MOVLW  7A
+1278:  MOVWF  46
+1279:  MOVLW  82
+127A:  MOVWF  45
+127B:  BCF    0A.4
+127C:  BSF    0A.3
+127D:  BCF    03.5
+127E:  CALL   39B
+127F:  BSF    0A.4
+1280:  BCF    0A.3
+1281:  MOVF   7A,W
+1282:  BSF    03.5
+1283:  MOVWF  44
+1284:  MOVF   79,W
+1285:  MOVWF  43
+1286:  MOVF   78,W
+1287:  MOVWF  42
+1288:  MOVF   77,W
+1289:  MOVWF  41
+128A:  BCF    0A.4
+128B:  BCF    03.5
+128C:  CALL   7A8
+128D:  BSF    0A.4
+128E:  MOVF   79,W
+128F:  MOVWF  68
+1290:  MOVF   78,W
+1291:  MOVWF  67
 ....................                                      
 ....................                                     // Enable interrupts by setting GIE (Global Interrupt Enable) 
 ....................                                     // and TOIE (Timer0 Overflow Interrupt Enable) bits in INTCON register 
 ....................                                     my_INTCON_REG |= 0xA0; 
-128A:  MOVLW  A0
-128B:  IORWF  0B,F
+1292:  MOVLW  A0
+1293:  IORWF  0B,F
 ....................                                                                       
 ....................                                     //The lock mechanism was broken to prevent re-evaluation 
 ....................                                     LockingMechanism = 0; 
-128C:  CLRF   2F
+1294:  CLRF   2F
 ....................                                                                                  
 ....................                               } 
 ....................                                
 ....................                                //Loads the washing time 
 ....................                               if((counter_StartOpsButtonTick == 2) && (LockingMechanism == 1)){        
-128D:  MOVF   76,W
-128E:  SUBLW  02
-128F:  BTFSS  03.2
-1290:  GOTO   2E7
-1291:  DECFSZ 2F,W
-1292:  GOTO   2E7
+1295:  MOVF   76,W
+1296:  SUBLW  02
+1297:  BTFSS  03.2
+1298:  GOTO   2EF
+1299:  DECFSZ 2F,W
+129A:  GOTO   2EF
 ....................                                     
 ....................                                     //The SelectedTime variable will be sent to the macro to configure the desired_value variable 
 ....................                                     SelectedTime = MikroClient[ClientNumber].time_Washing; 
-1293:  RLF    40,W
-1294:  MOVWF  77
-1295:  RLF    77,F
-1296:  RLF    77,F
-1297:  MOVLW  F8
-1298:  ANDWF  77,F
-1299:  MOVF   77,W
-129A:  ADDLW  02
-129B:  ADDLW  30
-129C:  MOVWF  04
-129D:  BCF    03.7
-129E:  INCF   04,F
-129F:  MOVF   00,W
-12A0:  MOVWF  7E
-12A1:  DECF   04,F
-12A2:  MOVF   00,W
-12A3:  MOVWF  7D
+129B:  RLF    40,W
+129C:  MOVWF  77
+129D:  RLF    77,F
+129E:  RLF    77,F
+129F:  MOVLW  F8
+12A0:  ANDWF  77,F
+12A1:  MOVF   77,W
+12A2:  ADDLW  02
+12A3:  ADDLW  30
+12A4:  MOVWF  04
+12A5:  BCF    03.7
+12A6:  INCF   04,F
+12A7:  MOVF   00,W
+12A8:  MOVWF  7E
+12A9:  DECF   04,F
+12AA:  MOVF   00,W
+12AB:  MOVWF  7D
 ....................                                      
 ....................                                     //The CurrentTime variable will hold the current number  to be displayed 
 ....................                                     CurrentTime = MikroClient[ClientNumber].time_Washing; 
-12A4:  RLF    40,W
-12A5:  MOVWF  77
-12A6:  RLF    77,F
-12A7:  RLF    77,F
-12A8:  MOVLW  F8
-12A9:  ANDWF  77,F
-12AA:  MOVF   77,W
-12AB:  ADDLW  02
-12AC:  ADDLW  30
-12AD:  MOVWF  04
-12AE:  BCF    03.7
-12AF:  INCF   04,F
-12B0:  MOVF   00,W
-12B1:  MOVWF  7C
-12B2:  DECF   04,F
-12B3:  MOVF   00,W
-12B4:  MOVWF  7B
+12AC:  RLF    40,W
+12AD:  MOVWF  77
+12AE:  RLF    77,F
+12AF:  RLF    77,F
+12B0:  MOVLW  F8
+12B1:  ANDWF  77,F
+12B2:  MOVF   77,W
+12B3:  ADDLW  02
+12B4:  ADDLW  30
+12B5:  MOVWF  04
+12B6:  BCF    03.7
+12B7:  INCF   04,F
+12B8:  MOVF   00,W
+12B9:  MOVWF  7C
+12BA:  DECF   04,F
+12BB:  MOVF   00,W
+12BC:  MOVWF  7B
 ....................                                      
 ....................                                     //Determine the value that the desired_value variable will take. 
 ....................                                     SECOND_TO_ISR_COUNT(SelectedTime);   
-12B5:  MOVF   7E,W
-12B6:  BSF    03.5
-12B7:  MOVWF  42
-12B8:  MOVF   7D,W
-12B9:  MOVWF  41
-12BA:  BCF    0A.4
-12BB:  BCF    03.5
-12BC:  CALL   789
-12BD:  BSF    0A.4
-12BE:  MOVF   7A,W
-12BF:  BSF    03.5
-12C0:  MOVWF  44
-12C1:  MOVF   79,W
-12C2:  MOVWF  43
-12C3:  MOVF   78,W
-12C4:  MOVWF  42
-12C5:  MOVF   77,W
-12C6:  MOVWF  41
-12C7:  CLRF   48
-12C8:  CLRF   47
-12C9:  MOVLW  7A
-12CA:  MOVWF  46
-12CB:  MOVLW  82
-12CC:  MOVWF  45
-12CD:  BCF    0A.4
-12CE:  BSF    0A.3
-12CF:  BCF    03.5
-12D0:  CALL   39B
-12D1:  BSF    0A.4
-12D2:  BCF    0A.3
-12D3:  MOVF   7A,W
-12D4:  BSF    03.5
-12D5:  MOVWF  44
-12D6:  MOVF   79,W
-12D7:  MOVWF  43
-12D8:  MOVF   78,W
-12D9:  MOVWF  42
-12DA:  MOVF   77,W
-12DB:  MOVWF  41
-12DC:  BCF    0A.4
-12DD:  BCF    03.5
-12DE:  CALL   7A8
-12DF:  BSF    0A.4
-12E0:  MOVF   79,W
-12E1:  MOVWF  68
-12E2:  MOVF   78,W
-12E3:  MOVWF  67
+12BD:  MOVF   7E,W
+12BE:  BSF    03.5
+12BF:  MOVWF  42
+12C0:  MOVF   7D,W
+12C1:  MOVWF  41
+12C2:  BCF    0A.4
+12C3:  BCF    03.5
+12C4:  CALL   789
+12C5:  BSF    0A.4
+12C6:  MOVF   7A,W
+12C7:  BSF    03.5
+12C8:  MOVWF  44
+12C9:  MOVF   79,W
+12CA:  MOVWF  43
+12CB:  MOVF   78,W
+12CC:  MOVWF  42
+12CD:  MOVF   77,W
+12CE:  MOVWF  41
+12CF:  CLRF   48
+12D0:  CLRF   47
+12D1:  MOVLW  7A
+12D2:  MOVWF  46
+12D3:  MOVLW  82
+12D4:  MOVWF  45
+12D5:  BCF    0A.4
+12D6:  BSF    0A.3
+12D7:  BCF    03.5
+12D8:  CALL   39B
+12D9:  BSF    0A.4
+12DA:  BCF    0A.3
+12DB:  MOVF   7A,W
+12DC:  BSF    03.5
+12DD:  MOVWF  44
+12DE:  MOVF   79,W
+12DF:  MOVWF  43
+12E0:  MOVF   78,W
+12E1:  MOVWF  42
+12E2:  MOVF   77,W
+12E3:  MOVWF  41
+12E4:  BCF    0A.4
+12E5:  BCF    03.5
+12E6:  CALL   7A8
+12E7:  BSF    0A.4
+12E8:  MOVF   79,W
+12E9:  MOVWF  68
+12EA:  MOVF   78,W
+12EB:  MOVWF  67
 ....................                                      
 ....................                                     // Enable interrupts by setting GIE (Global Interrupt Enable) 
 ....................                                     // and TOIE (Timer0 Overflow Interrupt Enable) bits in INTCON register 
 ....................                                     my_INTCON_REG |= 0xA0; 
-12E4:  MOVLW  A0
-12E5:  IORWF  0B,F
+12EC:  MOVLW  A0
+12ED:  IORWF  0B,F
 ....................                                                                       
 ....................                                     //The lock mechanism was broken to prevent re-evaluation 
 ....................                                     LockingMechanism = 0; 
-12E6:  CLRF   2F
+12EE:  CLRF   2F
 ....................                                                                                  
 ....................                               } 
 ....................                                
 ....................                               //Loads the Ventilation time 
 ....................                               if((counter_StartOpsButtonTick == 3) && (LockingMechanism == 1)){        
-12E7:  MOVF   76,W
-12E8:  SUBLW  03
-12E9:  BTFSS  03.2
-12EA:  GOTO   341
-12EB:  DECFSZ 2F,W
-12EC:  GOTO   341
+12EF:  MOVF   76,W
+12F0:  SUBLW  03
+12F1:  BTFSS  03.2
+12F2:  GOTO   349
+12F3:  DECFSZ 2F,W
+12F4:  GOTO   349
 ....................                                     
 ....................                                     //The SelectedTime variable will be sent to the macro to configure the desired_value variable 
 ....................                                     SelectedTime = MikroClient[ClientNumber].time_Ventilation; 
-12ED:  RLF    40,W
-12EE:  MOVWF  77
-12EF:  RLF    77,F
-12F0:  RLF    77,F
-12F1:  MOVLW  F8
-12F2:  ANDWF  77,F
-12F3:  MOVF   77,W
-12F4:  ADDLW  04
-12F5:  ADDLW  30
-12F6:  MOVWF  04
-12F7:  BCF    03.7
-12F8:  INCF   04,F
-12F9:  MOVF   00,W
-12FA:  MOVWF  7E
-12FB:  DECF   04,F
-12FC:  MOVF   00,W
-12FD:  MOVWF  7D
+12F5:  RLF    40,W
+12F6:  MOVWF  77
+12F7:  RLF    77,F
+12F8:  RLF    77,F
+12F9:  MOVLW  F8
+12FA:  ANDWF  77,F
+12FB:  MOVF   77,W
+12FC:  ADDLW  04
+12FD:  ADDLW  30
+12FE:  MOVWF  04
+12FF:  BCF    03.7
+1300:  INCF   04,F
+1301:  MOVF   00,W
+1302:  MOVWF  7E
+1303:  DECF   04,F
+1304:  MOVF   00,W
+1305:  MOVWF  7D
 ....................                                      
 ....................                                     //The CurrentTime variable will hold the current number  to be displayed 
 ....................                                     CurrentTime = MikroClient[ClientNumber].time_Ventilation; 
-12FE:  RLF    40,W
-12FF:  MOVWF  77
-1300:  RLF    77,F
-1301:  RLF    77,F
-1302:  MOVLW  F8
-1303:  ANDWF  77,F
-1304:  MOVF   77,W
-1305:  ADDLW  04
-1306:  ADDLW  30
-1307:  MOVWF  04
-1308:  BCF    03.7
-1309:  INCF   04,F
-130A:  MOVF   00,W
-130B:  MOVWF  7C
-130C:  DECF   04,F
-130D:  MOVF   00,W
-130E:  MOVWF  7B
+1306:  RLF    40,W
+1307:  MOVWF  77
+1308:  RLF    77,F
+1309:  RLF    77,F
+130A:  MOVLW  F8
+130B:  ANDWF  77,F
+130C:  MOVF   77,W
+130D:  ADDLW  04
+130E:  ADDLW  30
+130F:  MOVWF  04
+1310:  BCF    03.7
+1311:  INCF   04,F
+1312:  MOVF   00,W
+1313:  MOVWF  7C
+1314:  DECF   04,F
+1315:  MOVF   00,W
+1316:  MOVWF  7B
 ....................                                      
 ....................                                     //Determine the value that the desired_value variable will take. 
 ....................                                     SECOND_TO_ISR_COUNT(SelectedTime);   
-130F:  MOVF   7E,W
-1310:  BSF    03.5
-1311:  MOVWF  42
-1312:  MOVF   7D,W
-1313:  MOVWF  41
-1314:  BCF    0A.4
-1315:  BCF    03.5
-1316:  CALL   789
-1317:  BSF    0A.4
-1318:  MOVF   7A,W
-1319:  BSF    03.5
-131A:  MOVWF  44
-131B:  MOVF   79,W
-131C:  MOVWF  43
-131D:  MOVF   78,W
-131E:  MOVWF  42
-131F:  MOVF   77,W
-1320:  MOVWF  41
-1321:  CLRF   48
-1322:  CLRF   47
-1323:  MOVLW  7A
-1324:  MOVWF  46
-1325:  MOVLW  82
-1326:  MOVWF  45
-1327:  BCF    0A.4
-1328:  BSF    0A.3
-1329:  BCF    03.5
-132A:  CALL   39B
-132B:  BSF    0A.4
-132C:  BCF    0A.3
-132D:  MOVF   7A,W
-132E:  BSF    03.5
-132F:  MOVWF  44
-1330:  MOVF   79,W
-1331:  MOVWF  43
-1332:  MOVF   78,W
-1333:  MOVWF  42
-1334:  MOVF   77,W
-1335:  MOVWF  41
-1336:  BCF    0A.4
-1337:  BCF    03.5
-1338:  CALL   7A8
-1339:  BSF    0A.4
-133A:  MOVF   79,W
-133B:  MOVWF  68
-133C:  MOVF   78,W
-133D:  MOVWF  67
+1317:  MOVF   7E,W
+1318:  BSF    03.5
+1319:  MOVWF  42
+131A:  MOVF   7D,W
+131B:  MOVWF  41
+131C:  BCF    0A.4
+131D:  BCF    03.5
+131E:  CALL   789
+131F:  BSF    0A.4
+1320:  MOVF   7A,W
+1321:  BSF    03.5
+1322:  MOVWF  44
+1323:  MOVF   79,W
+1324:  MOVWF  43
+1325:  MOVF   78,W
+1326:  MOVWF  42
+1327:  MOVF   77,W
+1328:  MOVWF  41
+1329:  CLRF   48
+132A:  CLRF   47
+132B:  MOVLW  7A
+132C:  MOVWF  46
+132D:  MOVLW  82
+132E:  MOVWF  45
+132F:  BCF    0A.4
+1330:  BSF    0A.3
+1331:  BCF    03.5
+1332:  CALL   39B
+1333:  BSF    0A.4
+1334:  BCF    0A.3
+1335:  MOVF   7A,W
+1336:  BSF    03.5
+1337:  MOVWF  44
+1338:  MOVF   79,W
+1339:  MOVWF  43
+133A:  MOVF   78,W
+133B:  MOVWF  42
+133C:  MOVF   77,W
+133D:  MOVWF  41
+133E:  BCF    0A.4
+133F:  BCF    03.5
+1340:  CALL   7A8
+1341:  BSF    0A.4
+1342:  MOVF   79,W
+1343:  MOVWF  68
+1344:  MOVF   78,W
+1345:  MOVWF  67
 ....................                                      
 ....................                                     // Enable interrupts by setting GIE (Global Interrupt Enable) 
 ....................                                     // and TOIE (Timer0 Overflow Interrupt Enable) bits in INTCON register 
 ....................                                     my_INTCON_REG |= 0xA0; 
-133E:  MOVLW  A0
-133F:  IORWF  0B,F
+1346:  MOVLW  A0
+1347:  IORWF  0B,F
 ....................                                                                       
 ....................                                     //The lock mechanism was broken to prevent re-evaluation 
 ....................                                     LockingMechanism = 0; 
-1340:  CLRF   2F
+1348:  CLRF   2F
 ....................                                                                                  
 ....................                               } 
 ....................                                
 ....................                               //Load the selected amount of polish 
 ....................                               if((counter_StartOpsButtonTick == 4) && (LockingMechanism == 1)){ 
-1341:  MOVF   76,W
-1342:  SUBLW  04
-1343:  BTFSS  03.2
-1344:  GOTO   36D
-1345:  DECFSZ 2F,W
-1346:  GOTO   36D
+1349:  MOVF   76,W
+134A:  SUBLW  04
+134B:  BTFSS  03.2
+134C:  GOTO   375
+134D:  DECFSZ 2F,W
+134E:  GOTO   375
 ....................                                
 ....................                                     //The loop will exit when the polish is finished or if the process is canceled 
 ....................                                     do{ 
 ....................                                      
 ....................                                        if(input(button_DrainPolishing) == 1){ 
-1347:  BSF    03.5
-1348:  BSF    3E.2
-1349:  MOVF   3E,W
-134A:  MOVWF  07
-134B:  BCF    03.5
-134C:  BTFSS  07.2
-134D:  GOTO   35B
-....................                                           currentPolishAmount-=4; 
-134E:  MOVLW  04
 134F:  BSF    03.5
-1350:  SUBWF  30,F
-1351:  MOVLW  00
-1352:  BTFSS  03.0
-1353:  MOVLW  01
-1354:  SUBWF  31,F
+1350:  BSF    3E.2
+1351:  MOVF   3E,W
+1352:  MOVWF  07
+1353:  BCF    03.5
+1354:  BTFSS  07.2
+1355:  GOTO   363
+....................                                           currentPolishAmount-=4; 
+1356:  MOVLW  04
+1357:  BSF    03.5
+1358:  SUBWF  30,F
+1359:  MOVLW  00
+135A:  BTFSS  03.0
+135B:  MOVLW  01
+135C:  SUBWF  31,F
 ....................                                           delay_ms(100); 
-1355:  MOVLW  64
-1356:  MOVWF  4D
-1357:  BCF    0A.4
-1358:  BCF    03.5
-1359:  CALL   1A5
-135A:  BSF    0A.4
+135D:  MOVLW  64
+135E:  MOVWF  4D
+135F:  BCF    0A.4
+1360:  BCF    03.5
+1361:  CALL   1A5
+1362:  BSF    0A.4
 ....................                                           } 
 ....................                                            
 ....................                                           if(currentPolishAmount<0){ 
@@ -5603,38 +5617,38 @@ CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
 ....................                                           } 
 ....................                                        //Display/scroll the CurrentTime value on the displays 
 ....................                                        sequentialDisplayScan(); 
-135B:  BCF    0A.4
-135C:  BSF    0A.3
-135D:  CALL   412
-135E:  BSF    0A.4
-135F:  BCF    0A.3
+1363:  BCF    0A.4
+1364:  BSF    0A.3
+1365:  CALL   412
+1366:  BSF    0A.4
+1367:  BCF    0A.3
 ....................                                         
 ....................                                     }while(currentPolishAmount != 0); 
-1360:  BSF    03.5
-1361:  MOVF   30,F
-1362:  BTFSS  03.2
-1363:  GOTO   348
-1364:  MOVF   31,F
-1365:  BTFSS  03.2
-1366:  GOTO   348
+1368:  BSF    03.5
+1369:  MOVF   30,F
+136A:  BTFSS  03.2
+136B:  GOTO   350
+136C:  MOVF   31,F
+136D:  BTFSS  03.2
+136E:  GOTO   350
 ....................                                         
 ....................                                     LockingMechanism=0; 
-1367:  BCF    03.5
-1368:  CLRF   2F
+136F:  BCF    03.5
+1370:  CLRF   2F
 ....................                                     allProcessComplate_flag = 1; 
-1369:  MOVLW  01
-136A:  BSF    03.5
-136B:  MOVWF  32
-136C:  BCF    03.5
+1371:  MOVLW  01
+1372:  BSF    03.5
+1373:  MOVWF  32
+1374:  BCF    03.5
 ....................                               } 
 ....................                                                      
 ....................                              //Display/scroll the CurrentTime value on the displays 
 ....................                              sequentialDisplayScan(); 
-136D:  BCF    0A.4
-136E:  BSF    0A.3
-136F:  CALL   412
-1370:  BSF    0A.4
-1371:  BCF    0A.3
+1375:  BCF    0A.4
+1376:  BSF    0A.3
+1377:  CALL   412
+1378:  BSF    0A.4
+1379:  BCF    0A.3
 ....................                               
 ....................                               
 ....................                              /**  
@@ -5645,40 +5659,41 @@ CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
 ....................                                * - If CurrentTime equals 1 and SelectedTime equals 60, the loop will also exit. 
 ....................                                */ 
 ....................                                 if(allProcessComplate_flag == 1){ 
-1372:  BSF    03.5
-1373:  DECFSZ 32,W
-1374:  GOTO   376
+137A:  BSF    03.5
+137B:  DECFSZ 32,W
+137C:  GOTO   37E
 ....................                                     break;     
-1375:  GOTO   38C
+137D:  GOTO   394
 ....................                                 }                                     
 ....................                                 if((CurrentTime==1) && (SelectedTime==60)){ 
-1376:  DECFSZ 7B,W
-1377:  GOTO   382
-1378:  MOVF   7C,F
-1379:  BTFSS  03.2
-137A:  GOTO   382
-137B:  MOVF   7D,W
-137C:  SUBLW  3C
-137D:  BTFSS  03.2
-137E:  GOTO   382
-137F:  MOVF   7E,F
-1380:  BTFSC  03.2
+137E:  DECFSZ 7B,W
+137F:  GOTO   38A
+1380:  MOVF   7C,F
+1381:  BTFSS  03.2
+1382:  GOTO   38A
+1383:  MOVF   7D,W
+1384:  SUBLW  3C
+1385:  BTFSS  03.2
+1386:  GOTO   38A
+1387:  MOVF   7E,F
+1388:  BTFSC  03.2
 ....................                                   break; 
-1381:  GOTO   38C
+1389:  GOTO   394
 ....................                                 } 
 ....................              
 ....................                         }while( (CurrentTime!=0) ); 
-1382:  MOVF   7B,F
-1383:  BTFSC  03.2
-1384:  GOTO   387
-1385:  BCF    03.5
-1386:  GOTO   237
-1387:  MOVF   7C,F
-1388:  BTFSC  03.2
-1389:  GOTO   38C
-138A:  BCF    03.5
-138B:  GOTO   237
-138C:  BCF    03.5
+138A:  MOVF   7B,F
+138B:  BTFSC  03.2
+138C:  GOTO   38F
+138D:  BCF    03.5
+138E:  GOTO   23F
+138F:  MOVF   7C,F
+1390:  BTFSC  03.2
+1391:  GOTO   394
+1392:  BCF    03.5
+1393:  GOTO   23F
+1394:  BCF    03.5
+....................                          
 ....................                          
 ....................                 } 
 ....................                             
@@ -5688,37 +5703,37 @@ CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
 ....................        
 ....................        
 ....................                delay_ms(100); 
-138D:  MOVLW  64
-138E:  BSF    03.5
-138F:  MOVWF  4D
-1390:  BCF    0A.4
-1391:  BCF    03.5
-1392:  CALL   1A5
-1393:  BSF    0A.4
+1395:  MOVLW  64
+1396:  BSF    03.5
+1397:  MOVWF  4D
+1398:  BCF    0A.4
+1399:  BCF    03.5
+139A:  CALL   1A5
+139B:  BSF    0A.4
 ....................                 
 ....................             //Load the initial value(0) into the segments. 
 ....................             loadZeroValue_2_DisplaySegment(); 
-1394:  BCF    0A.4
-1395:  GOTO   7C9
-1396:  BSF    0A.4
+139C:  BCF    0A.4
+139D:  GOTO   7C9
+139E:  BSF    0A.4
 ....................           
 ....................           
 ....................        //If the cancel operation button hasn't been pressed, it will return to the main menu again 
 ....................       }while(OPS_Status!=55); 
-1397:  MOVF   2D,W
-1398:  SUBLW  37
-1399:  BTFSC  03.2
-139A:  GOTO   39D
-139B:  BSF    03.5
-139C:  GOTO   0AB
+139F:  MOVF   2D,W
+13A0:  SUBLW  37
+13A1:  BTFSC  03.2
+13A2:  GOTO   3A5
+13A3:  BSF    03.5
+13A4:  GOTO   0B2
 ....................        
 ....................   displayProcessCompletionStatus();//buraya koyarsan ana menüye gitmez ki 
-139D:  BCF    0A.4
-139E:  BSF    0A.3
-139F:  GOTO   4C7
-13A0:  BSF    0A.4
-13A1:  BCF    0A.3
-13A2:  GOTO   08C
+13A5:  BCF    0A.4
+13A6:  BSF    0A.3
+13A7:  GOTO   4C7
+13A8:  BSF    0A.4
+13A9:  BCF    0A.3
+13AA:  GOTO   08C
 ....................    
 ....................        
 ....................        
@@ -5734,7 +5749,7 @@ CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
 ....................   
 .................... } 
 ....................  
-13A3:  SLEEP
+13AB:  SLEEP
 ....................  
 .................... /* ======== -BEGIN- SYSTEM CONFIGURATION FUNCTIONS -BEGIN- ======== */ 
 .................... //Function-1 
@@ -5968,7 +5983,7 @@ CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
 03B2:  CALL   2AD
 03B3:  BCF    0A.3
 03B4:  BSF    0A.4
-03B5:  GOTO   093 (RETURN)
+03B5:  GOTO   097 (RETURN)
 .................... } 
 ....................  
 .................... //Function-2 
@@ -6158,7 +6173,7 @@ CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
 ....................     } 
 04D3:  BCF    0A.3
 04D4:  BSF    0A.4
-04D5:  GOTO   0E8 (RETURN)
+04D5:  GOTO   0EF (RETURN)
 ....................  
 ....................  
 .................... } 
@@ -6512,7 +6527,7 @@ CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
 0785:  CALL   1A5
 0786:  BCF    0A.3
 0787:  BSF    0A.4
-0788:  GOTO   130 (RETURN)
+0788:  GOTO   138 (RETURN)
 .................... } 
 ....................  
 .................... //Function-4 
@@ -6846,7 +6861,7 @@ CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
 092A:  BSF    0A.3
 092B:  BCF    0A.3
 092C:  BSF    0A.4
-092D:  GOTO   17B (RETURN)
+092D:  GOTO   183 (RETURN)
 .................... } 
 ....................  
 ....................  
@@ -7081,7 +7096,7 @@ CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
 09E9:  BSF    0A.3
 09EA:  BCF    0A.3
 09EB:  BSF    0A.4
-09EC:  GOTO   1C7 (RETURN)
+09EC:  GOTO   1CF (RETURN)
 ....................  
 .................... } 
 ....................  
@@ -7217,7 +7232,7 @@ CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
 ....................    } 
 0403:  BCF    0A.3
 0404:  BSF    0A.4
-0405:  GOTO   09C (RETURN)
+0405:  GOTO   0A0 (RETURN)
 ....................  
 .................... } 
 .................... /* ======== -END- UART PROTOCOL FUNCTIONS -END- ======== */ 
@@ -7470,7 +7485,7 @@ CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
 07CF:  MOVWF  06
 07D0:  BCF    0A.3
 07D1:  BSF    0A.4
-07D2:  GOTO   396 (RETURN)
+07D2:  GOTO   39E (RETURN)
 .................... } 
 ....................  
 .................... /* ======== -END- 7-SEGMENT DISPLAY -END- ======== */ 
@@ -7486,7 +7501,7 @@ CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
 *
 0B98:  BCF    0A.3
 0B99:  BSF    0A.4
-0B9A:  GOTO   1E4 (RETURN)
+0B9A:  GOTO   1EC (RETURN)
 ....................  
 .................... } 
 ....................  
@@ -7858,7 +7873,7 @@ CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
 0A4A:  DECFSZ 40,W
 0A4B:  GOTO   2AA
 ....................          
-....................             eeprom_foaming_read_cost     = read_eeprom( eeprom_Client1_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+1) );   
+....................             eeprom_foaming_read_cost     = read_eeprom( eeprom_Client1_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+4) );   
 0A4C:  MOVLW  01
 0A4D:  BSF    03.5
 0A4E:  SUBWF  3D,W
@@ -7868,7 +7883,7 @@ CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
 0A52:  MOVLW  FC
 0A53:  ANDWF  77,F
 0A54:  MOVF   77,W
-0A55:  ADDLW  01
+0A55:  ADDLW  04
 0A56:  ADDLW  82
 0A57:  MOVWF  41
 0A58:  MOVF   41,W
@@ -7883,7 +7898,7 @@ CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
 0A61:  BSF    03.5
 0A62:  BCF    03.6
 0A63:  MOVWF  37
-....................             eeprom_washing_read_cost     = read_eeprom( eeprom_Client1_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+2) ); 
+....................             eeprom_washing_read_cost     = read_eeprom( eeprom_Client1_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+5) ); 
 0A64:  MOVLW  01
 0A65:  SUBWF  3D,W
 0A66:  MOVWF  77
@@ -7892,7 +7907,7 @@ CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
 0A69:  MOVLW  FC
 0A6A:  ANDWF  77,F
 0A6B:  MOVF   77,W
-0A6C:  ADDLW  02
+0A6C:  ADDLW  05
 0A6D:  ADDLW  82
 0A6E:  MOVWF  41
 0A6F:  MOVF   41,W
@@ -7907,7 +7922,7 @@ CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
 0A78:  BSF    03.5
 0A79:  BCF    03.6
 0A7A:  MOVWF  38
-....................             eeprom_ventilating_read_cost = read_eeprom( eeprom_Client1_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+3) ); 
+....................             eeprom_ventilating_read_cost = read_eeprom( eeprom_Client1_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+6) ); 
 0A7B:  MOVLW  01
 0A7C:  SUBWF  3D,W
 0A7D:  MOVWF  77
@@ -7916,7 +7931,7 @@ CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
 0A80:  MOVLW  FC
 0A81:  ANDWF  77,F
 0A82:  MOVF   77,W
-0A83:  ADDLW  03
+0A83:  ADDLW  06
 0A84:  ADDLW  82
 0A85:  MOVWF  41
 0A86:  MOVF   41,W
@@ -7931,7 +7946,7 @@ CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
 0A8F:  BSF    03.5
 0A90:  BCF    03.6
 0A91:  MOVWF  39
-....................             eeprom_polishing_read_cost   = read_eeprom( eeprom_Client1_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+4) ); 
+....................             eeprom_polishing_read_cost   = read_eeprom( eeprom_Client1_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+7) ); 
 0A92:  MOVLW  01
 0A93:  SUBWF  3D,W
 0A94:  MOVWF  77
@@ -7940,7 +7955,7 @@ CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
 0A97:  MOVLW  FC
 0A98:  ANDWF  77,F
 0A99:  MOVF   77,W
-0A9A:  ADDLW  04
+0A9A:  ADDLW  07
 0A9B:  ADDLW  82
 0A9C:  MOVWF  41
 0A9D:  MOVF   41,W
@@ -8205,7 +8220,7 @@ CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
 0FAE:  BSF    0A.3
 0FAF:  BCF    0A.3
 0FB0:  BSF    0A.4
-0FB1:  GOTO   3A0 (RETURN)
+0FB1:  GOTO   3A8 (RETURN)
 ....................        
 .................... } 
 ....................  
@@ -8439,10 +8454,10 @@ CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
 0E83:  BCF    03.6
 0E84:  MOVWF  3C
 ....................        
-....................       write_eeprom( (eeprom_Client1_systemStartAddress + Client1_last_address + 1), (eeprom_foaming_written_cost)     ); Client1_last_address++; //Save foaming cost 
+....................       write_eeprom( (eeprom_Client1_systemStartAddress + Client1_last_address + 5), (eeprom_foaming_written_cost)     ); Client1_last_address++; //Save foaming cost 
 0E85:  MOVLW  82
 0E86:  ADDWF  3C,W
-0E87:  ADDLW  01
+0E87:  ADDLW  05
 0E88:  MOVWF  41
 0E89:  BCF    03.5
 0E8A:  MOVF   0B,W
@@ -8476,10 +8491,10 @@ CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
 0EA6:  IORWF  0B,F
 0EA7:  BSF    03.5
 0EA8:  INCF   3C,F
-....................       write_eeprom( (eeprom_Client1_systemStartAddress + Client1_last_address + 1), (eeprom_washing_written_cost)     ); Client1_last_address++; //Save washing cost 
+....................       write_eeprom( (eeprom_Client1_systemStartAddress + Client1_last_address + 5), (eeprom_washing_written_cost)     ); Client1_last_address++; //Save washing cost 
 0EA9:  MOVLW  82
 0EAA:  ADDWF  3C,W
-0EAB:  ADDLW  01
+0EAB:  ADDLW  05
 0EAC:  MOVWF  41
 0EAD:  BCF    03.5
 0EAE:  MOVF   0B,W
@@ -8513,10 +8528,10 @@ CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
 0ECA:  IORWF  0B,F
 0ECB:  BSF    03.5
 0ECC:  INCF   3C,F
-....................       write_eeprom( (eeprom_Client1_systemStartAddress + Client1_last_address + 1), (eeprom_ventilating_written_cost) ); Client1_last_address++; //Save Ventilating cost 
+....................       write_eeprom( (eeprom_Client1_systemStartAddress + Client1_last_address + 5), (eeprom_ventilating_written_cost) ); Client1_last_address++; //Save Ventilating cost 
 0ECD:  MOVLW  82
 0ECE:  ADDWF  3C,W
-0ECF:  ADDLW  01
+0ECF:  ADDLW  05
 0ED0:  MOVWF  41
 0ED1:  BCF    03.5
 0ED2:  MOVF   0B,W
@@ -8550,10 +8565,10 @@ CCS PCM C Compiler, Version 5.049, 5967               30-Ara-24 22:02
 0EEE:  IORWF  0B,F
 0EEF:  BSF    03.5
 0EF0:  INCF   3C,F
-....................       write_eeprom( (eeprom_Client1_systemStartAddress + Client1_last_address + 1), (eeprom_polishing_written_cost)   ); Client1_last_address++; //Save Polishing cost 
+....................       write_eeprom( (eeprom_Client1_systemStartAddress + Client1_last_address + 5), (eeprom_polishing_written_cost)   ); Client1_last_address++; //Save Polishing cost 
 0EF1:  MOVLW  82
 0EF2:  ADDWF  3C,W
-0EF3:  ADDLW  01
+0EF3:  ADDLW  05
 0EF4:  MOVWF  41
 0EF5:  BCF    03.5
 0EF6:  MOVF   0B,W

@@ -333,6 +333,8 @@ while(1){//--------------------- BEGIN---MAIN WHILE(1)---BEGIN------------------
    readed_ID  = '.';   //Clear Id symbol
    systemLock = 0;
    OPS_Status = 56;    //Disable 
+   counter_StartOpsButtonTick=0;  //En son manalý deðiþiklik
+   allProcessComplate_flag = 0;
   
    //Wait until unlock the system
    do{
@@ -384,6 +386,9 @@ while(1){//--------------------- BEGIN---MAIN WHILE(1)---BEGIN------------------
              
              //Clear selection
              SelectionState = ' ';
+             
+             //Reset the flag, becauese there will be a new process
+             allProcessComplate_flag = 0;
              
                 //The client wants to see the next section based on the selected option
                 //Selections will be made for foaming, washing, and ventilation processes in this section
@@ -493,6 +498,7 @@ while(1){//--------------------- BEGIN---MAIN WHILE(1)---BEGIN------------------
                  * In this section, a countdown will start for the selected times.
                  * Each time the button_OPS_START is pressed, a new countdown for the process will begin.
                 */
+                
                 if(input(button_OPS_START) == 1){
                 
                         printf(lcd_putc,"\f");
@@ -615,6 +621,7 @@ while(1){//--------------------- BEGIN---MAIN WHILE(1)---BEGIN------------------
                                 }
             
                         }while( (CurrentTime!=0) );
+                        
                         
                 }
                            
@@ -1054,10 +1061,10 @@ void Read_EEPROM_OpsVal_from_EEPROMregs(){
         
         if(ClientNumber == 1){
         
-            eeprom_foaming_read_cost     = read_eeprom( eeprom_Client1_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+1) );  
-            eeprom_washing_read_cost     = read_eeprom( eeprom_Client1_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+2) );
-            eeprom_ventilating_read_cost = read_eeprom( eeprom_Client1_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+3) );
-            eeprom_polishing_read_cost   = read_eeprom( eeprom_Client1_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+4) );
+            eeprom_foaming_read_cost     = read_eeprom( eeprom_Client1_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+4) );  
+            eeprom_washing_read_cost     = read_eeprom( eeprom_Client1_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+5) );
+            eeprom_ventilating_read_cost = read_eeprom( eeprom_Client1_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+6) );
+            eeprom_polishing_read_cost   = read_eeprom( eeprom_Client1_systemStartAddress + (((IndexOfReadMemory - 1)*4 )+7) );
         
         }
 
@@ -1136,10 +1143,10 @@ void write_EEPROMVariables_to_EEPROMregs(){
       //The last cursor position address will always be written to the zero address, to ensure that new data does not overwrite previously written data
       Client1_last_address = read_eeprom(eeprom_Client1_systemStartAddress);
       
-      write_eeprom( (eeprom_Client1_systemStartAddress + Client1_last_address + 1), (eeprom_foaming_written_cost)     ); Client1_last_address++; //Save foaming cost
-      write_eeprom( (eeprom_Client1_systemStartAddress + Client1_last_address + 1), (eeprom_washing_written_cost)     ); Client1_last_address++; //Save washing cost
-      write_eeprom( (eeprom_Client1_systemStartAddress + Client1_last_address + 1), (eeprom_ventilating_written_cost) ); Client1_last_address++; //Save Ventilating cost
-      write_eeprom( (eeprom_Client1_systemStartAddress + Client1_last_address + 1), (eeprom_polishing_written_cost)   ); Client1_last_address++; //Save Polishing cost
+      write_eeprom( (eeprom_Client1_systemStartAddress + Client1_last_address + 5), (eeprom_foaming_written_cost)     ); Client1_last_address++; //Save foaming cost
+      write_eeprom( (eeprom_Client1_systemStartAddress + Client1_last_address + 5), (eeprom_washing_written_cost)     ); Client1_last_address++; //Save washing cost
+      write_eeprom( (eeprom_Client1_systemStartAddress + Client1_last_address + 5), (eeprom_ventilating_written_cost) ); Client1_last_address++; //Save Ventilating cost
+      write_eeprom( (eeprom_Client1_systemStartAddress + Client1_last_address + 5), (eeprom_polishing_written_cost)   ); Client1_last_address++; //Save Polishing cost
       write_eeprom( (eeprom_Client1_systemStartAddress                           ), ( Client1_last_address)           );                         //Save cursor location in the client0 start address
    
    }

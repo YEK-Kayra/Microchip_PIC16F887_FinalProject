@@ -1,6 +1,6 @@
 
-ROM used:   4905/8192 (60%)
-            5028/8192 (61%) including unused fragments
+ROM used:   4913/8192 (60%)
+            5036/8192 (61%) including unused fragments
 
             1.1 Average locations per line
             6.3 Average locations per statement
@@ -13,12 +13,12 @@ Stack size: 8
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
- 1175   438  56  main.c
+ 1182   441  56  main.c
   773     0   0  ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f887.h
   456    84  11  ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c
  2227   257  33  ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\math.h
 ----- -----
- 4631   779 Total
+ 4638   782 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
@@ -35,7 +35,7 @@ Page ROM  %  RAM    Vol Diff  Functions:
 1    119   2   13             @MULFF
 0      7   0    0     35  1.7  system_isr_OperationCANCEL
 0     46   1    2    226  4.5  systemTimer0_isr
-2    932  19    2   5448 11.3  MAIN
+2    940  19    2   5566 11.3  MAIN
 0     23   0    5             @MUL1616
 0     39   1    5             @DIV1616
 0      5   0    0             @const865
@@ -113,15 +113,15 @@ Page ROM  %  RAM    Vol Diff  Functions:
 
 Program metrics:
     Functions               29
-    Statements              779
-    Comments                829
-    Volume (V)              29516
+    Statements              782
+    Comments                831
+    Volume (V)              29659
     Difficulty (D)          102.7
-    Effort to implement (E) 3029870
-    Time to implement (T)   46 hours, 45 minutes
+    Effort to implement (E) 3045463
+    Time to implement (T)   47 hours, 0 minutes
     Est Delivered Bugs (B)  7
     Cyclomatic Complexity   73
-    Maintainability (MI)    127
+    Maintainability (MI)    126
 
  Segment     Used  Free
 -----------  ----  ----
@@ -129,7 +129,7 @@ Program metrics:
 00004-00055    82  0  
 00056-007FF  1917  45  
 00800-00FFF  1970  78  
-01000-017FF   932  1116  
+01000-017FF   940  1108  
 01800-01FFF     0  2048  
 
 
