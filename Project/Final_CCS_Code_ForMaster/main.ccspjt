@@ -11,14 +11,14 @@ Type=4
 1=main.c
 
 [defines]
-buildcount=219
+buildcount=227
 
 [Opened Files]
 1=main.c
-t1=1157
+t1=1
 Count=1
-2=2408.c
-t2=33
+2=..\Final_CCS_Code_ForSlave\MainSlave.c
+t2=1
 
 [ProjectLog]
 Days=9
@@ -27,7 +27,7 @@ D1_L=24
 D1_L1=[69479]Stopped Editing.
 D1_L2=[69635]Started Editing.
 D1_L3=[69697]Stopped Editing.
-TotalEdit=906
+TotalEdit=928
 TotalDebug=0
 D1_E=64
 D1_D=0
@@ -217,9 +217,28 @@ D8_L39=[84531]Stopped Editing.
 D8_L40=[85334]Started Editing.
 D8_L41=[85838]Stopped Editing.
 D9=31-12-2024
-D9_L=2
+D9_L=19
 D9_L1=[1317]Started Editing.
 D9_L2=[1704]Stopped Editing.
+D9_L3=[1832]Started Editing.
+D9_L4=[2132]Stopped Editing.
+D9_E=22
+D9_D=0
+D9_L5=[5947]Project Closed.
+D9_L6=[48536]Project Opened.
+D9_L7=[50808]Started Editing.
+D9_L8=[50827]Stopped Editing.
+D9_L9=[50827]Project Closed.
+D9_L10=[51060]Project Opened.
+D9_L11=[54463]Started Editing.
+D9_L12=[54769]Stopped Editing.
+D9_L13=[57805]Project Closed.
+D9_L14=[60820]Project Opened.
+D9_L15=[60988]Started Editing.
+D9_L16=[61230]Stopped Editing.
+D9_L17=[61230]Project Closed.
+D9_L18=[74939]Project Opened.
+D9_L19=[78318]Project Closed.
 [Units]
 Count=1
 1=main (main)

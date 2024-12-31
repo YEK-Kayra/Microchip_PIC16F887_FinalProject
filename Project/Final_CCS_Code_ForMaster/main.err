@@ -1,13 +1,13 @@
->>> Warning 203 "main.c" Line 331(1,1): Condition always TRUE
->>> Warning 204 "main.c" Line 389(1,1): Condition always FALSE
->>> Warning 204 "main.c" Line 415(1,1): Condition always FALSE
->>> Warning 204 "main.c" Line 440(1,1): Condition always FALSE
->>> Warning 204 "main.c" Line 465(1,1): Condition always FALSE
->>> Warning 204 "main.c" Line 536(1,1): Condition always FALSE
->>> Warning 204 "main.c" Line 557(1,1): Condition always FALSE
->>> Warning 204 "main.c" Line 578(1,1): Condition always FALSE
->>> Warning 205 "main.c" Line 600(1,1): Unsigned variable is never less than zero
->>> Warning 204 "main.c" Line 600(1,1): Condition always FALSE
-      Memory usage:   ROM=60%      RAM=36% - 41%
+>>> Warning 203 "main.c" Line 340(1,1): Condition always TRUE
+>>> Warning 204 "main.c" Line 398(1,1): Condition always FALSE
+>>> Warning 204 "main.c" Line 424(1,1): Condition always FALSE
+>>> Warning 204 "main.c" Line 449(1,1): Condition always FALSE
+>>> Warning 204 "main.c" Line 474(1,1): Condition always FALSE
+>>> Warning 204 "main.c" Line 545(1,1): Condition always FALSE
+>>> Warning 204 "main.c" Line 566(1,1): Condition always FALSE
+>>> Warning 204 "main.c" Line 587(1,1): Condition always FALSE
+>>> Warning 205 "main.c" Line 609(1,1): Unsigned variable is never less than zero
+>>> Warning 204 "main.c" Line 609(1,1): Condition always FALSE
+      Memory usage:   ROM=62%      RAM=36% - 42%
       0 Errors,  10 Warnings.
 Build Successful.

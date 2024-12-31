@@ -1,10 +1,9 @@
-F N "ldexp" 3 2207 ""
-D G "__PCM__" 0 76 ""5.049""
-D G "__DEVICE__" 0 76 "887"
-D G "__DATE__" 0 76 ""31-Ara-24""
-D G "__TIME__" 0 76 ""00:23:32""
-D G "_UNICODE" 0 76 ""?""
-D G "__EVAL" 0 76 ""?"" "Ister bisiklet ol ister tir, ne olursan ol yine gel"
+D G "__PCM__" 0 1211 ""5.049""
+D G "__DEVICE__" 0 1211 "887"
+D G "__DATE__" 0 1211 ""31-Ara-24""
+D G "__TIME__" 0 1211 ""16:58:40""
+D G "_UNICODE" 0 1211 ""?""
+D G "__EVAL" 0 1211 ""?"" "Ister bisiklet ol ister tir, ne olursan ol yine gel"
 c L "set_tris_a" 1 1 6 "FUNCTION"
 f N "set_tris_a" 1 39 ""
 v L "value" 1 39 "int8" `54 
@@ -1111,7 +1110,14 @@ d G "INT_RB4" 1 767 "0x1100B08"
 d G "INT_RB5" 1 768 "0x1200B08"
 d G "INT_RB6" 1 769 "0x1400B08"
 d G "INT_RB7" 1 770 "0x1800B08"
-C L "jump_to_isr" 0 6 3 "FUNCTION"
+D G "LCD_ENABLE_PIN" 0 23 "PIN_D0"
+D G "LCD_RS_PIN" 0 24 "PIN_D1"
+D G "LCD_RW_PIN" 0 25 "PIN_D2"
+D G "LCD_DATA4" 0 26 "PIN_D4"
+D G "LCD_DATA5" 0 27 "PIN_D5"
+D G "LCD_DATA6" 0 28 "PIN_D6"
+D G "LCD_DATA7" 0 29 "PIN_D7"
+C L "jump_to_isr" 0 6 1 "FUNCTION"
 D G "__LCD_C__" 2 76 ""
 C L "jump_to_isr" 2 2 2 "FUNCTION"
 C L "jump_to_isr" 2 2 1 "FUNCTION"
@@ -1121,63 +1127,62 @@ C L "jump_to_isr" 2 2 1 "FUNCTION"
 C L "jump_to_isr" 2 2 1 "FUNCTION"
 C L "jump_to_isr" 2 2 2 "FUNCTION"
 T G "LCD_PIN_MAP" 2 90 "{int1 enable,int1 rs,int1 rw,int1 unused,int4 data}" `609  "this is to improve compatability with previous LCD drivers that accepted"
-D G "lcd_output_enable" 2 109 "(x) lcdlat.enable=x"
-D G "lcd_enable_tris" 2 110 "()   lcdtris.enable=0"
-D G "lcd_output_rs" 2 117 "(x) lcdlat.rs=x"
-D G "lcd_rs_tris" 2 118 "()   lcdtris.rs=0"
-D G "lcd_output_rw" 2 125 "(x) lcdlat.rw=x"
-D G "lcd_rw_tris" 2 126 "()   lcdtris.rw=0"
-D G "LCD_DATA_PORT" 2 149 "getenv("SFR:PORTD")" "portd"
-V G "lcd" 2 161 "LCD_PIN_MAP" `610 
-V G "lcdlat" 2 161 "LCD_PIN_MAP" `611 
-V G "lcdtris" 2 161 "LCD_PIN_MAP" `612 
+D G "lcd_output_enable" 2 112 "(x) output_bit(LCD_ENABLE_PIN, x)"
+D G "lcd_enable_tris" 2 113 "()  output_drive(LCD_ENABLE_PIN)"
+D G "lcd_output_rs" 2 120 "(x) output_bit(LCD_RS_PIN, x)"
+D G "lcd_rs_tris" 2 121 "()  output_drive(LCD_RS_PIN)"
+D G "lcd_output_rw" 2 128 "(x) output_bit(LCD_RW_PIN, x)"
+D G "lcd_rw_tris" 2 129 "()  output_drive(LCD_RW_PIN)"
 D G "LCD_TYPE" 2 179 "2" "0=5x7, 1=5x10, 2=2 lines"
 D G "LCD_LINE_TWO" 2 183 "0x40" "LCD RAM address for the second line"
 D G "LCD_LINE_LENGTH" 2 187 "20"
 F N "lcd_read_nibble" 2 190 ""
-f G "lcd_read_nibble" 2 190 "int8()" `613 
+f G "lcd_read_nibble" 2 190 "int8()" `610 
 F N "lcd_read_byte" 2 192 ""
-F G "lcd_read_byte" 2 193 "int8()" `614 
-V L "low" 2 194 "int8" `615 
-V L "high" 2 194 "int8" `616 
+F G "lcd_read_byte" 2 193 "int8()" `611 
+V L "low" 2 194 "int8" `612 
+V L "high" 2 194 "int8" `613 
 F N "lcd_read_nibble" 2 239 ""
-F G "lcd_read_nibble" 2 240 "int8()" `613 
+F G "lcd_read_nibble" 2 240 "int8()" `610 
+V L "n" 2 242 "int8" `614 
+C L "lcd_read_nibble" 2 2 1 "FUNCTION"
 F N "lcd_send_nibble" 2 256 ""
-V L "n" 2 256 "int8" `618 
-F G "lcd_send_nibble" 2 257 "void(int8 n)" `617 
+V L "n" 2 256 "int8" `616 
+F G "lcd_send_nibble" 2 257 "void(int8 n)" `615 
+C L "lcd_send_nibble" 2 2 1 "FUNCTION"
 F N "lcd_send_byte" 2 274 ""
-V L "address" 2 274 "int8" `620 
-V L "n" 2 274 "int8" `621 
-F G "lcd_send_byte" 2 275 "void(int8 address,int8 n)" `619 
+V L "address" 2 274 "int8" `618 
+V L "n" 2 274 "int8" `619 
+F G "lcd_send_byte" 2 275 "void(int8 address,int8 n)" `617 
 F N "lcd_init" 2 299 ""
-F G "lcd_init" 2 300 "void()" `622 
-V L "i" 2 301 "int8" `623 
-V L "LCD_INIT_STRING" 2 302 "int8[4]" `624 
+F G "lcd_init" 2 300 "void()" `620 
+V L "i" 2 301 "int8" `621 
+V L "LCD_INIT_STRING" 2 302 "int8[4]" `622 
 C L "lcd_init" 2 2 2 "FUNCTION"
 F N "lcd_gotoxy" 2 345 ""
-V L "x" 2 345 "int8" `626 
-V L "y" 2 345 "int8" `627 
-F G "lcd_gotoxy" 2 346 "void(int8 x,int8 y)" `625 
-V L "address" 2 347 "int8" `628 
+V L "x" 2 345 "int8" `624 
+V L "y" 2 345 "int8" `625 
+F G "lcd_gotoxy" 2 346 "void(int8 x,int8 y)" `623 
+V L "address" 2 347 "int8" `626 
 F N "lcd_putc" 2 363 ""
-V L "c" 2 363 "int8" `630 
-F G "lcd_putc" 2 364 "void(int8 c)" `629 
+V L "c" 2 363 "int8" `628 
+F G "lcd_putc" 2 364 "void(int8 c)" `627 
 F N "lcd_getc" 2 406 ""
-V L "x" 2 406 "int8" `632 
-V L "y" 2 406 "int8" `633 
-F G "lcd_getc" 2 407 "int8(int8 x,int8 y)" `631 
-V L "value" 2 408 "int8" `634 
+V L "x" 2 406 "int8" `630 
+V L "y" 2 406 "int8" `631 
+F G "lcd_getc" 2 407 "int8(int8 x,int8 y)" `629 
+V L "value" 2 408 "int8" `632 
 C L "lcd_getc" 2 2 1 "FUNCTION"
 C L "lcd_set_cgram_char" 2 2 5 "FUNCTION"
 F N "lcd_set_cgram_char" 2 424 ""
-V L "which" 2 424 "int8" `636 
-V L "ptr" 2 424 "*int8" `637 
-F G "lcd_set_cgram_char" 2 425 "void(int8 which,*int8 ptr)" `635 
-V L "i" 2 426 "int8" `638 
+V L "which" 2 424 "int8" `634 
+V L "ptr" 2 424 "*int8" `635 
+F G "lcd_set_cgram_char" 2 425 "void(int8 which,*int8 ptr)" `633 
+V L "i" 2 426 "int8" `636 
 C L "lcd_set_cgram_char" 2 2 1 "FUNCTION"
 F N "lcd_cursor_on" 2 443 ""
-V L "on" 2 443 "int8" `640 
-F G "lcd_cursor_on" 2 444 "void(int8 on)" `639 
+V L "on" 2 443 "int8" `638 
+F G "lcd_cursor_on" 2 444 "void(int8 on)" `637 
 C L "lcd_cursor_on" 2 2 1 "FUNCTION"
 C L "lcd_cursor_on" 2 2 1 "FUNCTION"
 D G "MATH_H" 3 30 ""
@@ -1185,95 +1190,95 @@ D G "PI" 3 35 "3.1415926535897932"
 D G "SQRT2" 3 38 "1.4142135623730950"
 C L "CEIL_FLOOR" 3 2 3 "FUNCTION"
 F N "CEIL_FLOOR" 3 45 ""
-V L "x" 3 45 "float" `642 
-V L "n" 3 45 "int8" `643 
-F G "CEIL_FLOOR" 3 46 "float(float x,int8 n)" `641 
-V L "y" 3 47 "float" `644 
-V L "res" 3 47 "float" `645 
-V L "l" 3 48 "int16" `646 
-V L "s" 3 49 "int1" `647 
+V L "x" 3 45 "float" `640 
+V L "n" 3 45 "int8" `641 
+F G "CEIL_FLOOR" 3 46 "float(float x,int8 n)" `639 
+V L "y" 3 47 "float" `642 
+V L "res" 3 47 "float" `643 
+V L "l" 3 48 "int16" `644 
+V L "s" 3 49 "int1" `645 
 C L "floor" 3 2 5 "FUNCTION"
 F N "floor" 3 207 ""
-V L "x" 3 207 "float" `662 
-F G "floor" 3 208 "float(float x)" `661 
+V L "x" 3 207 "float" `660 
+F G "floor" 3 208 "float(float x)" `659 
 C L "ceil" 3 2 5 "FUNCTION"
 F N "ceil" 3 233 ""
-V L "x" 3 233 "float" `664 
-F G "ceil" 3 234 "float(float x)" `663 
+V L "x" 3 233 "float" `662 
+F G "ceil" 3 234 "float(float x)" `661 
 D G "fabs" 3 259 "abs"
 C L "fmod" 3 2 6 "FUNCTION"
 F N "fmod" 3 271 ""
-V L "x" 3 271 "float" `666 
-V L "y" 3 271 "float" `667 
-F G "fmod" 3 272 "float(float x,float y)" `665 
-V L "i" 3 273 "float" `668 
+V L "x" 3 271 "float" `664 
+V L "y" 3 271 "float" `665 
+F G "fmod" 3 272 "float(float x,float y)" `663 
+V L "i" 3 273 "float" `666 
 D G "LN2" 3 334 "0.6931471805599453"
 D G "LN2_INV" 3 335 "1.4426950408889634073"
-V G "pe" 3 337 "[6]" `673 
+V G "pe" 3 337 "[6]" `671 
 F N "exp" 3 341 ""
-V L "x" 3 341 "float" `676 
-F G "exp" 3 342 "float(float x)" `675 
-V L "y" 3 343 "float" `677 
-V L "res" 3 343 "float" `678 
-V L "r" 3 343 "float" `679 
-V L "n" 3 347 "sint8" `680 
-V L "s" 3 348 "int1" `681 
+V L "x" 3 341 "float" `674 
+F G "exp" 3 342 "float(float x)" `673 
+V L "y" 3 343 "float" `675 
+V L "res" 3 343 "float" `676 
+V L "r" 3 343 "float" `677 
+V L "n" 3 347 "sint8" `678 
+V L "s" 3 348 "int1" `679 
 C L "exp" 3 2 1 "FUNCTION"
-V G "pl" 3 525 "[4]" `685 
-V G "ql" 3 526 "[4]" `688 
+V G "pl" 3 525 "[4]" `683 
+V G "ql" 3 526 "[4]" `686 
 C L "log" 3 2 3 "FUNCTION"
 F N "log" 3 534 ""
-V L "x" 3 534 "float" `691 
-F G "log" 3 535 "float(float x)" `690 
-V L "y" 3 536 "float" `692 
-V L "res" 3 536 "float" `693 
-V L "r" 3 536 "float" `694 
-V L "y2" 3 536 "float" `695 
-V L "n" 3 540 "sint8" `696 
+V L "x" 3 534 "float" `689 
+F G "log" 3 535 "float(float x)" `688 
+V L "y" 3 536 "float" `690 
+V L "res" 3 536 "float" `691 
+V L "r" 3 536 "float" `692 
+V L "y2" 3 536 "float" `693 
+V L "n" 3 540 "sint8" `694 
 C L "log" 3 2 1 "FUNCTION"
 D G "LN10" 3 758 "2.3025850929940456"
 D G "LN10_INV" 3 759 "0.4342944819032518276"
 C L "log10" 3 2 3 "FUNCTION"
 F N "log10" 3 767 ""
-V L "x" 3 767 "float" `698 
-F G "log10" 3 768 "float(float x)" `697 
-V L "r" 3 769 "float" `699 
+V L "x" 3 767 "float" `696 
+F G "log10" 3 768 "float(float x)" `695 
+V L "r" 3 769 "float" `697 
 C L "modf" 3 2 8 "FUNCTION"
 F N "modf" 3 808 ""
-V L "value" 3 808 "float" `701 
-V L "iptr" 3 808 "*float" `702 
-F G "modf" 3 809 "float(float value,*float iptr)" `700 
+V L "value" 3 808 "float" `699 
+V L "iptr" 3 808 "*float" `700 
+F G "modf" 3 809 "float(float value,*float iptr)" `698 
 C L "pwr" 3 2 6 "FUNCTION"
 F N "pwr" 3 836 ""
-V L "x" 3 836 "float" `704 
-V L "y" 3 836 "float" `705 
-F G "pwr" 3 837 "float(float x,float y)" `703 
+V L "x" 3 836 "float" `702 
+V L "y" 3 836 "float" `703 
+F G "pwr" 3 837 "float(float x,float y)" `701 
 C L "pow" 3 2 7 "FUNCTION"
 F N "pow" 3 899 ""
-V L "x" 3 899 "float" `707 
-V L "y" 3 899 "float" `708 
-F G "pow" 3 900 "float(float x,float y)" `706 
+V L "x" 3 899 "float" `705 
+V L "y" 3 899 "float" `706 
+F G "pow" 3 900 "float(float x,float y)" `704 
 C L "sqrt" 3 2 5 "FUNCTION"
 F N "sqrt" 3 960 ""
-V L "x" 3 960 "float" `710 
-F G "sqrt" 3 961 "float(float x)" `709 
-V L "y" 3 962 "float" `711 
-V L "res" 3 962 "float" `712 
-V L "p" 3 966 "*int8" `713 
+V L "x" 3 960 "float" `708 
+F G "sqrt" 3 961 "float(float x)" `707 
+V L "y" 3 962 "float" `709 
+V L "res" 3 962 "float" `710 
+V L "p" 3 966 "*int8" `711 
 D G "PI_DIV_BY_TWO_INV" 3 1155 "0.63661977236758134"
 D G "PI_DIV_BY_TWO" 3 1159 "1.5707963267948966"
 D G "TWOBYPI" 3 1163 "0.6366197723675813"
 C L "cos" 3 2 3 "FUNCTION"
 F N "cos" 3 1171 ""
-V L "x" 3 1171 "float" `715 
-F G "cos" 3 1172 "float(float x)" `714 
-V L "y" 3 1173 "float" `716 
-V L "t" 3 1173 "float" `717 
-V L "t2" 3 1173 "float" `718 
-V L "quad" 3 1174 "int8" `719 
-V L "i" 3 1174 "int8" `720 
-V L "frac" 3 1175 "float" `721 
-V L "p" 3 1176 "float[5]" `722  "by the series definition for cosine"
+V L "x" 3 1171 "float" `713 
+F G "cos" 3 1172 "float(float x)" `712 
+V L "y" 3 1173 "float" `714 
+V L "t" 3 1173 "float" `715 
+V L "t2" 3 1173 "float" `716 
+V L "quad" 3 1174 "int8" `717 
+V L "i" 3 1174 "int8" `718 
+V L "frac" 3 1175 "float" `719 
+V L "p" 3 1176 "float[5]" `720  "by the series definition for cosine"
 C L "cos" 3 2 1 "FUNCTION"
 C L "cos" 3 2 2 "FUNCTION"
 C L "cos" 3 2 1 "FUNCTION"
@@ -1284,400 +1289,400 @@ C L "cos" 3 2 1 "FUNCTION"
 C L "cos" 3 2 1 "FUNCTION"
 C L "sin" 3 2 5 "FUNCTION"
 F N "sin" 3 1310 ""
-V L "x" 3 1310 "float" `724 
-F G "sin" 3 1311 "float(float x)" `723 
+V L "x" 3 1310 "float" `722 
+F G "sin" 3 1311 "float(float x)" `721 
 C L "tan" 3 2 5 "FUNCTION"
 F N "tan" 3 1336 ""
-V L "x" 3 1336 "float" `726 
-F G "tan" 3 1337 "float(float x)" `725 
-V L "c" 3 1338 "float" `727 
-V L "s" 3 1338 "float" `728 
-V G "pas" 3 1376 "[3]" `730 
-V G "qas" 3 1377 "[3]" `733 
+V L "x" 3 1336 "float" `724 
+F G "tan" 3 1337 "float(float x)" `723 
+V L "c" 3 1338 "float" `725 
+V L "s" 3 1338 "float" `726 
+V G "pas" 3 1376 "[3]" `728 
+V G "qas" 3 1377 "[3]" `731 
 F N "ASIN_COS" 3 1379 ""
-V L "x" 3 1379 "float" `736 
-V L "n" 3 1379 "int8" `737 
-F G "ASIN_COS" 3 1380 "float(float x,int8 n)" `735 
-V L "y" 3 1381 "float" `738 
-V L "res" 3 1381 "float" `739 
-V L "r" 3 1381 "float" `740 
-V L "y2" 3 1381 "float" `741 
-V L "s" 3 1382 "int1" `742 
+V L "x" 3 1379 "float" `734 
+V L "n" 3 1379 "int8" `735 
+F G "ASIN_COS" 3 1380 "float(float x,int8 n)" `733 
+V L "y" 3 1381 "float" `736 
+V L "res" 3 1381 "float" `737 
+V L "r" 3 1381 "float" `738 
+V L "y2" 3 1381 "float" `739 
+V L "s" 3 1382 "int1" `740 
 C L "ASIN_COS" 3 2 1 "FUNCTION"
 C L "ASIN_COS" 3 2 1 "FUNCTION"
 C L "asin" 3 2 5 "FUNCTION"
 F N "asin" 3 1537 ""
-V L "x" 3 1537 "float" `744 
-F G "asin" 3 1538 "float(float x)" `743 
-V L "r" 3 1539 "float" `745 
+V L "x" 3 1537 "float" `742 
+F G "asin" 3 1538 "float(float x)" `741 
+V L "r" 3 1539 "float" `743 
 C L "acos" 3 2 5 "FUNCTION"
 F N "acos" 3 1571 ""
-V L "x" 3 1571 "float" `747 
-F G "acos" 3 1572 "float(float x)" `746 
-V L "r" 3 1573 "float" `748 
-V G "pat" 3 1599 "[4]" `750 
-V G "qat" 3 1600 "[4]" `753 
+V L "x" 3 1571 "float" `745 
+F G "acos" 3 1572 "float(float x)" `744 
+V L "r" 3 1573 "float" `746 
+V G "pat" 3 1599 "[4]" `748 
+V G "qat" 3 1600 "[4]" `751 
 C L "atan" 3 2 3 "FUNCTION"
 F N "atan" 3 1608 ""
-V L "x" 3 1608 "float" `756 
-F G "atan" 3 1609 "float(float x)" `755 
-V L "y" 3 1610 "float" `757 
-V L "res" 3 1610 "float" `758 
-V L "r" 3 1610 "float" `759 
-V L "s" 3 1611 "int1" `760 
-V L "flag" 3 1611 "int1" `761 
+V L "x" 3 1608 "float" `754 
+F G "atan" 3 1609 "float(float x)" `753 
+V L "y" 3 1610 "float" `755 
+V L "res" 3 1610 "float" `756 
+V L "r" 3 1610 "float" `757 
+V L "s" 3 1611 "int1" `758 
+V L "flag" 3 1611 "int1" `759 
 C L "atan" 3 2 1 "FUNCTION"
 C L "atan2" 3 2 7 "FUNCTION"
 F N "atan2" 3 1751 ""
-V L "y" 3 1751 "float" `763 
-V L "x" 3 1751 "float" `764 
-F G "atan2" 3 1752 "float(float y,float x)" `762 
-V L "z" 3 1753 "float" `765 
-V L "sign" 3 1754 "int1" `766 
-V L "quad" 3 1755 "int8" `767 
+V L "y" 3 1751 "float" `761 
+V L "x" 3 1751 "float" `762 
+F G "atan2" 3 1752 "float(float y,float x)" `760 
+V L "z" 3 1753 "float" `763 
+V L "sign" 3 1754 "int1" `764 
+V L "quad" 3 1755 "int8" `765 
 C L "atan2" 3 2 1 "FUNCTION"
 C L "atan2" 3 2 1 "FUNCTION"
 C L "cosh" 3 2 7 "FUNCTION"
 F N "cosh" 3 1973 ""
-V L "x" 3 1973 "float" `770 
-F G "cosh" 3 1974 "float(float x)" `769 
+V L "x" 3 1973 "float" `768 
+F G "cosh" 3 1974 "float(float x)" `767 
 C L "sinh" 3 2 6 "FUNCTION"
 F N "sinh" 3 2000 ""
-V L "x" 3 2000 "float" `772 
-F G "sinh" 3 2001 "float(float x)" `771 
+V L "x" 3 2000 "float" `770 
+F G "sinh" 3 2001 "float(float x)" `769 
 C L "tanh" 3 2 6 "FUNCTION"
 F N "tanh" 3 2030 ""
-V L "x" 3 2030 "float" `774 
-F G "tanh" 3 2031 "float(float x)" `773 
+V L "x" 3 2030 "float" `772 
+F G "tanh" 3 2031 "float(float x)" `771 
 D G "LOG2" 3 2060 ".30102999566398119521"
 D G "LOG2_INV" 3 2061 "3.32192809488736234787"
 F N "frexp" 3 2062 ""
-V L "x" 3 2062 "float" `776 
-V L "exp" 3 2062 "*sint8" `777 
-F G "frexp" 3 2063 "float(float x,*sint8 exp)" `775 
-V L "res" 3 2064 "float" `778 
-V L "sign" 3 2065 "int1" `779 
+V L "x" 3 2062 "float" `774 
+V L "exp" 3 2062 "*sint8" `775 
+F G "frexp" 3 2063 "float(float x,*sint8 exp)" `773 
+V L "res" 3 2064 "float" `776 
+V L "sign" 3 2065 "int1" `777 
 C L "ldexp" 3 2 6 "FUNCTION"
 F N "ldexp" 3 2207 ""
-V L "value" 3 2207 "float" `781 
-V L "exp" 3 2207 "sint8" `782 
-F G "ldexp" 3 2208 "float(float value,sint8 exp)" `780 
-T G "MikroleumClient_HandleTypeDef" 0 55 "{int16 time_Foaming,int16 time_Washing,int16 time_Ventilation,int16 mililitre_Polishing}" `791  "SYSTEM VARIABLES                                                *"
-V G "readed_ID" 0 65 "int8" `792  "Coming data will be When came from slave PIC"
-V G "systemLock" 0 66 "int8" `793  "If the ID is valid, system open. Otherwise it will remain locked"
-V G "OPS_Status" 0 67 "int8" `794  "55 means ops will be canceled, otherwise ops will be going on"
-V G "SelectionState" 0 68 "int8" `795  "Put 'X' if button_Select is HIGH, put empty character if button_RemoveSelect is HIGH"
-V G "LockingMechanism" 0 69 "int8" `796 
-V G "MikroClient" 0 72 "MikroleumClient_HandleTypeDef[2]" `797  "Each customer keeps their own records"
-V G "ClientNumber" 0 75 "int8" `798  "Will be used as given on the right --> MikroClient[ClientNumber]"
-V G "Index_OptionMenu" 0 78 "int8" `799 
-V G "Index_TimeMoneyPreference" 0 79 "int8" `800 
-V G "Index_PolishMililitre" 0 80 "int8" `801 
-V G "Index_PastProcesses" 0 81 "int8" `802 
-V G "val_ADC_Pot_Surf" 0 82 "int16" `803 
-V G "val_ADC_Pot_Timer" 0 83 "int16" `804 
-V G "val_ADC_Pot_Polish" 0 84 "int16" `805 
-V G "val_ADC_Pot_PastProcesses" 0 85 "int16" `806  "------------ VAR --> TIMER & ARRAYS <-- VAR ------------//"
-V G "time_arr" 0 88 "int16[12]" `807 
-V G "timer0_isr_counter" 0 89 "int16" `808 
-V G "desired_value" 0 90 "int16" `809 
-V G "mililitrePolish" 0 91 "int16[5]" `810 
-V G "segmentTable" 0 94 "int8[16]" `811 
-V G "number_unitDigit" 0 100 "int8" `812 
-V G "number_tensDigit" 0 101 "int8" `813 
-V G "number_hundredDigit" 0 102 "int8" `814 
-V G "CurrentTime" 0 104 "int16" `815  "Current countdown value"
-V G "counter_StartOpsButtonTick" 0 106 "int8" `816 
-C G "" 0 106 1 "*"
-C G "" 0 106 1 "*"
-C G "" 0 106 1 "*"
-C G "" 0 106 1 "*"
-V G "SelectedTime" 0 112 "int16" `817  "The SelectedTime variable will be sent to the macro to configure the desired_value variable"
-V G "currentPolishAmount" 0 113 "int16" `818 
-V G "allProcessComplate_flag" 0 114 "int8" `819 
-C G "" 0 114 1 "*"
-C G "" 0 114 1 "*"
-C G "" 0 114 4 "*"
-V G "eeprom_foaming_written_cost" 0 123 "int8" `820 
-V G "eeprom_washing_written_cost" 0 124 "int8" `821 
-V G "eeprom_ventilating_written_cost" 0 125 "int8" `822 
-V G "eeprom_polishing_written_cost" 0 126 "int8" `823 
-V G "eeprom_foaming_read_cost" 0 129 "int8" `824 
-V G "eeprom_washing_read_cost" 0 130 "int8" `825 
-V G "eeprom_ventilating_read_cost" 0 131 "int8" `826 
-V G "eeprom_polishing_read_cost" 0 132 "int8" `827 
-V G "Client0_last_address" 0 135 "int8" `828 
-V G "Client1_last_address" 0 136 "int8" `829 
-V G "IndexOfReadMemory" 0 138 "int8" `830 
-C G "" 0 138 1 "*"
-C G "" 0 138 1 "*"
-D G "button_NEXT" 0 153 "pin_A3" "Proceed to the next operation."
-D G "button_BACK" 0 154 "pin_A4" "Go back to the previous operation."
-D G "button_Select" 0 155 "pin_A5" "Select the desired option."
-D G "button_RemoveSelect" 0 156 "pin_C0" "Remove the option I canceled."
-D G "button_OPS_START" 0 158 "pin_C1" "button_OPS_START :  
+V L "value" 3 2207 "float" `779 
+V L "exp" 3 2207 "sint8" `780 
+F G "ldexp" 3 2208 "float(float value,sint8 exp)" `778 
+T G "MikroleumClient_HandleTypeDef" 0 64 "{int16 time_Foaming,int16 time_Washing,int16 time_Ventilation,int16 mililitre_Polishing}" `789  "SYSTEM VARIABLES                                                *"
+V G "readed_ID" 0 74 "int8" `790  "Coming data will be When came from slave PIC"
+V G "systemLock" 0 75 "int8" `791  "If the ID is valid, system open. Otherwise it will remain locked"
+V G "OPS_Status" 0 76 "int8" `792  "55 means ops will be canceled, otherwise ops will be going on"
+V G "SelectionState" 0 77 "int8" `793  "Put 'X' if button_Select is HIGH, put empty character if button_RemoveSelect is HIGH"
+V G "LockingMechanism" 0 78 "int8" `794 
+V G "MikroClient" 0 81 "MikroleumClient_HandleTypeDef[2]" `795  "Each customer keeps their own records"
+V G "ClientNumber" 0 84 "int8" `796  "Will be used as given on the right --> MikroClient[ClientNumber]"
+V G "Index_OptionMenu" 0 87 "int8" `797 
+V G "Index_TimeMoneyPreference" 0 88 "int8" `798 
+V G "Index_PolishMililitre" 0 89 "int8" `799 
+V G "Index_PastProcesses" 0 90 "int8" `800 
+V G "val_ADC_Pot_Surf" 0 91 "int16" `801 
+V G "val_ADC_Pot_Timer" 0 92 "int16" `802 
+V G "val_ADC_Pot_Polish" 0 93 "int16" `803 
+V G "val_ADC_Pot_PastProcesses" 0 94 "int16" `804  "------------ VAR --> TIMER & ARRAYS <-- VAR ------------//"
+V G "time_arr" 0 97 "int16[12]" `805 
+V G "timer0_isr_counter" 0 98 "int16" `806 
+V G "desired_value" 0 99 "int16" `807 
+V G "mililitrePolish" 0 100 "int16[5]" `808 
+V G "segmentTable" 0 103 "int8[16]" `809 
+V G "number_unitDigit" 0 109 "int8" `810 
+V G "number_tensDigit" 0 110 "int8" `811 
+V G "number_hundredDigit" 0 111 "int8" `812 
+V G "CurrentTime" 0 113 "int16" `813  "Current countdown value"
+V G "counter_StartOpsButtonTick" 0 115 "int8" `814 
+C G "" 0 115 1 "*"
+C G "" 0 115 1 "*"
+C G "" 0 115 1 "*"
+C G "" 0 115 1 "*"
+V G "SelectedTime" 0 121 "int16" `815  "The SelectedTime variable will be sent to the macro to configure the desired_value variable"
+V G "currentPolishAmount" 0 122 "int16" `816 
+V G "allProcessComplate_flag" 0 123 "int8" `817 
+C G "" 0 123 1 "*"
+C G "" 0 123 1 "*"
+C G "" 0 123 4 "*"
+V G "eeprom_foaming_written_cost" 0 132 "int8" `818 
+V G "eeprom_washing_written_cost" 0 133 "int8" `819 
+V G "eeprom_ventilating_written_cost" 0 134 "int8" `820 
+V G "eeprom_polishing_written_cost" 0 135 "int8" `821 
+V G "eeprom_foaming_read_cost" 0 138 "int8" `822 
+V G "eeprom_washing_read_cost" 0 139 "int8" `823 
+V G "eeprom_ventilating_read_cost" 0 140 "int8" `824 
+V G "eeprom_polishing_read_cost" 0 141 "int8" `825 
+V G "Client0_last_address" 0 144 "int8" `826 
+V G "Client1_last_address" 0 145 "int8" `827 
+V G "IndexOfReadMemory" 0 147 "int8" `828 
+C G "" 0 147 1 "*"
+C G "" 0 147 1 "*"
+D G "button_NEXT" 0 162 "pin_A3" "Proceed to the next operation."
+D G "button_BACK" 0 163 "pin_A4" "Go back to the previous operation."
+D G "button_Select" 0 164 "pin_A5" "Select the desired option."
+D G "button_RemoveSelect" 0 165 "pin_C0" "Remove the option I canceled."
+D G "button_OPS_START" 0 167 "pin_C1" "button_OPS_START :  
                                         * This button performs the following functions: 
                                         * - Starts the foaming, washing, ventilation, and polishing processes. 
                                         * - Triggers the countdown for foaming, washing, and ventilation. 
                                         * - Loads percentage progress into the system for polishing."
-D G "button_OPS_CANCEL" 0 165 "pin_B0" "Cancel all operations and close the system for the user."
-D G "button_DrainPolishing" 0 166 "pin_C2" "It adds polish to the container while the button is pressed"
-D G "pin_HundredDigit_switch" 0 170 "pin_E2"
-D G "pin_TensDigit_switch" 0 171 "pin_E0"
-D G "pin_UnitDigit_switch" 0 172 "pin_E1"
-D G "eeprom_Client0_systemStartAddress" 0 176 "0"
-D G "eeprom_Client1_systemStartAddress" 0 177 "130"
-C L "SubSystem_Init" 0 138 2 "FUNCTION"
-F N "SubSystem_Init" 0 185 ""
-f G "SubSystem_Init" 0 185 "void()" `831 
-F N "trisSetting_Init" 0 186 ""
-f G "trisSetting_Init" 0 186 "void()" `832 
-F N "displaySetting_Init" 0 187 ""
-f G "displaySetting_Init" 0 187 "void()" `833 
-F N "interruptSetting_Init" 0 188 ""
-f G "interruptSetting_Init" 0 188 "void()" `834 
-F N "adcSetting_Init" 0 189 ""
-f G "adcSetting_Init" 0 189 "void()" `835 
-F N "SystemInit_RESET_Critical_Variable" 0 190 ""
-f G "SystemInit_RESET_Critical_Variable" 0 190 "void()" `836  "======== LCD SCREEN FUNCTIONS PROTOTYPES  ======== *"
-F N "SubSystem_lcd_IdleStatus" 0 193 ""
-f G "SubSystem_lcd_IdleStatus" 0 193 "void()" `837 
-F N "NavigateOperationMenu" 0 194 ""
-f G "NavigateOperationMenu" 0 194 "void()" `838 
-F N "NavigateTimeMoneyPreferenceMenu" 0 195 ""
-f G "NavigateTimeMoneyPreferenceMenu" 0 195 "void()" `839 
-F N "NavigatePolishingMenu" 0 196 ""
-f G "NavigatePolishingMenu" 0 196 "void()" `840 
-F N "DisplayRecordsSequentiallyOnLCD" 0 197 ""
-f G "DisplayRecordsSequentiallyOnLCD" 0 197 "void()" `841 
-F N "NavigatePastProcessesMenu" 0 198 ""
-f G "NavigatePastProcessesMenu" 0 198 "void()" `842  "======== UART SERIAL COM. FUNCTIONS PROTOTYPES  ======== *"
-F N "SubSystem_uart_CheckTheMessage" 0 201 ""
-f G "SubSystem_uart_CheckTheMessage" 0 201 "void()" `843  "======== 7-SEGMENT DISPLAY FUNCTIONS PROTOTYPES  ======== *"
-F N "sequentialDisplayScan" 0 204 ""
-f G "sequentialDisplayScan" 0 204 "void()" `844 
-F N "loadZeroValue_2_DisplaySegment" 0 205 ""
-f G "loadZeroValue_2_DisplaySegment" 0 205 "void()" `845  "======== EEPROM WRITE/READ FUNCTIONS PROTOTYPES  ======== *"
-F N "Read_EEPROM_OpsVal_from_EEPROMregs" 0 209 ""
-f G "Read_EEPROM_OpsVal_from_EEPROMregs" 0 209 "void()" `846 
-F N "display_Selected_EEPROM_OpsVal_OnLCD" 0 210 ""
-f G "display_Selected_EEPROM_OpsVal_OnLCD" 0 210 "void()" `847 
-F N "showSelectedPastProcessesOps" 0 211 ""
-f G "showSelectedPastProcessesOps" 0 211 "void()" `848 
-F N "loadCostValuesToEEPROMVariables" 0 213 ""
-f G "loadCostValuesToEEPROMVariables" 0 213 "void()" `849 
-F N "Write_EEPROM_OpsVal_to_EEPROMregs" 0 214 ""
-f G "Write_EEPROM_OpsVal_to_EEPROMregs" 0 214 "void()" `850 
-F N "displayProcessCompletionStatus" 0 215 ""
-f G "displayProcessCompletionStatus" 0 215 "void()" `851  "SYSTEM MACROS                                                 *"
-D G "ADC_TO_INDEXofOPTION_MENU" 0 222 "(val_ADC_Pot_Surf)        Š   do{                                        Š          Index_OptionMenu = ((val_ADC_Pot_Surf*5)/1020);  Š          if(Index_OptionMenu >= 5){                       Š            Index_OptionMenu = 4;                          Š          }                                                Š   }while(0)"
-D G "ADC_TO_INDEXofTIME_MONEY_MENU" 0 230 "(val_ADC_Pot_Timer)              Š   do{                                                                Š          Index_TimeMoneyPreference = ((val_ADC_Pot_Timer*12)/1020);  Š          if(Index_TimeMoneyPreference >= 12){                        Š             Index_TimeMoneyPreference = 11;                          Š          }                                                           Š   }while(0)"
-D G "ADC_TO_INDEXofPolish" 0 238 "(val_ADC_Pot_Polish)                  Š   do{                                                            Š          Index_PolishMililitre = ((val_ADC_Pot_Polish*5)/1020);  Š          if(Index_PolishMililitre >= 5){                         Š            Index_PolishMililitre = 4;                            Š          }                                                       Š   }while(0)"
-D G "ADC_TO_INDEXofPastProcesses" 0 246 "(val_ADC_Pot_PastProcesses)         Š   do{                                                                 Š          Index_PastProcesses = ((val_ADC_Pot_PastProcesses*5)/1020);  Š          if(Index_PastProcesses >= 5){                                Š            Index_PastProcesses = 4;                                   Š          }                                                            Š   }while(0)"
-D G "TimerScalingFactor" 0 258 " ((1000.0) / 64.0)"
-D G "SECOND_TO_ISR_COUNT" 0 259 "(SelectedTime)                     Š   do{                                                        Š         desired_value = (SelectedTime * TimerScalingFactor); Š   }while(0)"
-C L "displayProcessCompletionStatus" 0 138 3 "FUNCTION"
-F N "system_isr_OperationCANCEL" 0 274 ""
-F G "system_isr_OperationCANCEL" 0 274 "void()" `852 
-C L "system_isr_OperationCANCEL" 0 138 1 "FUNCTION"
-C L "system_isr_OperationCANCEL" 0 138 1 "FUNCTION"
-C L "systemTimer0_isr" 0 138 2 "FUNCTION"
-F N "systemTimer0_isr" 0 282 ""
-F G "systemTimer0_isr" 0 282 "void()" `853 
-C L "systemTimer0_isr" 0 286 1 "*"
-C L "systemTimer0_isr" 0 286 1 "*"
-C L "systemTimer0_isr" 0 286 1 "*"
-C L "systemTimer0_isr" 0 286 1 "*"
-C L "systemTimer0_isr" 0 286 1 "FUNCTION"
-C L "systemTimer0_isr" 0 286 1 "FUNCTION"
-C L "systemTimer0_isr" 0 286 1 "FUNCTION"
-C L "systemTimer0_isr" 0 286 1 "FUNCTION"
-C L "systemTimer0_isr" 0 286 1 "FUNCTION"
-C L "systemTimer0_isr" 0 286 1 "FUNCTION"
-C L "MAIN" 0 286 2 "FUNCTION"
-F N "MAIN" 0 325 ""
-F G "MAIN" 0 326 "void()" `854  "System parameters and peripherals will be initialized"
-C L "MAIN" 0 286 1 "FUNCTION"
-C L "MAIN" 0 286 1 "FUNCTION"
-C L "MAIN" 0 286 1 "FUNCTION"
-C L "MAIN" 0 286 1 "FUNCTION"
-C L "MAIN" 0 286 1 "FUNCTION"
-C L "MAIN" 0 286 1 "FUNCTION"
-C L "MAIN" 0 286 1 "FUNCTION"
-C L "MAIN" 0 364 1 "*"
-C L "MAIN" 0 364 1 "*"
-C L "MAIN" 0 364 1 "*"
-C L "MAIN" 0 364 1 "*"
-C L "MAIN" 0 364 4 "*"
-C L "MAIN" 0 364 1 "*"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 364 2 "FUNCTION"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 364 1 "FUNCTION"
-C L "MAIN" 0 504 1 "*"
-C L "MAIN" 0 504 1 "*"
-C L "MAIN" 0 504 1 "FUNCTION"
-C L "MAIN" 0 504 1 "FUNCTION"
-C L "MAIN" 0 504 1 "FUNCTION"
-C L "MAIN" 0 504 1 "FUNCTION"
-C L "MAIN" 0 504 1 "FUNCTION"
-C L "MAIN" 0 504 1 "FUNCTION"
-C L "MAIN" 0 504 2 "FUNCTION"
-C L "MAIN" 0 504 1 "FUNCTION"
-C L "MAIN" 0 504 1 "FUNCTION"
-C L "MAIN" 0 504 1 "FUNCTION"
-C L "MAIN" 0 504 1 "FUNCTION"
-C L "MAIN" 0 504 1 "FUNCTION"
-C L "MAIN" 0 504 2 "FUNCTION"
-C L "MAIN" 0 504 1 "FUNCTION"
-C L "MAIN" 0 504 1 "FUNCTION"
-C L "MAIN" 0 504 1 "FUNCTION"
-C L "MAIN" 0 504 1 "FUNCTION"
-C L "MAIN" 0 504 1 "FUNCTION"
-C L "MAIN" 0 504 2 "FUNCTION"
-C L "MAIN" 0 504 1 "FUNCTION"
-C L "MAIN" 0 504 1 "FUNCTION"
-C L "MAIN" 0 504 1 "FUNCTION"
-C L "MAIN" 0 504 1 "FUNCTION"
-C L "MAIN" 0 504 1 "FUNCTION"
-C L "MAIN" 0 616 1 "*"
-C L "MAIN" 0 616 1 "*"
-C L "MAIN" 0 616 1 "*"
-C L "MAIN" 0 616 1 "*"
-C L "MAIN" 0 616 1 "FUNCTION"
-C L "MAIN" 0 616 1 "FUNCTION"
-C L "MAIN" 0 616 1 "FUNCTION"
-C L "MAIN" 0 616 1 "FUNCTION"
-C L "MAIN" 0 616 4 "FUNCTION"
-C L "SubSystem_Init" 0 616 2 "FUNCTION"
-F N "SubSystem_Init" 0 668 ""
-F G "SubSystem_Init" 0 668 "void()" `831 
-C L "trisSetting_Init" 0 616 1 "FUNCTION"
-F N "trisSetting_Init" 0 677 ""
-F G "trisSetting_Init" 0 677 "void()" `832 
-C L "trisSetting_Init" 0 616 3 "FUNCTION"
-C L "interruptSetting_Init" 0 616 1 "FUNCTION"
-F N "interruptSetting_Init" 0 689 ""
-F G "interruptSetting_Init" 0 689 "void()" `834  "---> OPERATION CANCEL BUTTON CONFIGURATION  <---//"
-C L "interruptSetting_Init" 0 616 1 "FUNCTION"
-C L "interruptSetting_Init" 0 616 1 "FUNCTION"
-C L "interruptSetting_Init" 0 616 3 "FUNCTION"
-C L "adcSetting_Init" 0 616 1 "FUNCTION"
-F N "adcSetting_Init" 0 707 ""
-F G "adcSetting_Init" 0 707 "void()" `835  "-CONFIG--> Surfing Potentiometer & Timer Potentiometer"
-C L "adcSetting_Init" 0 616 1 "FUNCTION"
-C L "displaySetting_Init" 0 616 1 "FUNCTION"
-F N "displaySetting_Init" 0 717 ""
-F G "displaySetting_Init" 0 717 "void()" `833  "Apply voltage to display the digits"
-C L "displaySetting_Init" 0 616 1 "FUNCTION"
-C L "SubSystem_lcd_IdleStatus" 0 616 2 "FUNCTION"
-C L "SubSystem_lcd_IdleStatus" 0 733 1 "*"
-C L "SubSystem_lcd_IdleStatus" 0 733 1 "*"
-F N "SubSystem_lcd_IdleStatus" 0 737 ""
-F G "SubSystem_lcd_IdleStatus" 0 737 "void()" `837 
-C L "NavigateOperationMenu" 0 733 1 "FUNCTION"
-F N "NavigateOperationMenu" 0 755 ""
-F G "NavigateOperationMenu" 0 755 "void()" `838 
-C L "NavigateOperationMenu" 0 733 2 "FUNCTION"
-C L "NavigateOperationMenu" 0 733 1 "FUNCTION"
-C L "NavigateOperationMenu" 0 733 1 "FUNCTION"
-C L "NavigateOperationMenu" 0 733 1 "FUNCTION"
-C L "NavigateOperationMenu" 0 733 1 "FUNCTION"
-C L "NavigateTimeMoneyPreferenceMenu" 0 733 1 "FUNCTION"
-F N "NavigateTimeMoneyPreferenceMenu" 0 800 ""
-F G "NavigateTimeMoneyPreferenceMenu" 0 800 "void()" `839 
-C L "NavigateTimeMoneyPreferenceMenu" 0 733 1 "FUNCTION"
-C L "NavigatePolishingMenu" 0 733 1 "FUNCTION"
-F N "NavigatePolishingMenu" 0 836 ""
-F G "NavigatePolishingMenu" 0 836 "void()" `840 
-C L "NavigatePolishingMenu" 0 733 1 "FUNCTION"
-F N "NavigatePastProcessesMenu" 0 867 ""
-F G "NavigatePastProcessesMenu" 0 867 "void()" `842 
-C L "NavigatePastProcessesMenu" 0 733 1 "FUNCTION"
-C L "NavigatePastProcessesMenu" 0 733 1 "FUNCTION"
-C L "NavigatePastProcessesMenu" 0 733 1 "FUNCTION"
-C L "NavigatePastProcessesMenu" 0 733 1 "FUNCTION"
-C L "NavigatePastProcessesMenu" 0 733 1 "FUNCTION"
-C L "DisplayRecordsSequentiallyOnLCD" 0 733 1 "FUNCTION"
-F N "DisplayRecordsSequentiallyOnLCD" 0 912 ""
-F G "DisplayRecordsSequentiallyOnLCD" 0 912 "void()" `841 
-C L "SubSystem_uart_CheckTheMessage" 0 733 2 "FUNCTION"
-C L "SubSystem_uart_CheckTheMessage" 0 937 1 "*"
-C L "SubSystem_uart_CheckTheMessage" 0 937 1 "*"
-C L "SubSystem_uart_CheckTheMessage" 0 937 1 "*"
-F N "SubSystem_uart_CheckTheMessage" 0 942 ""
-F G "SubSystem_uart_CheckTheMessage" 0 942 "void()" `843 
-C L "SubSystem_uart_CheckTheMessage" 0 937 1 "FUNCTION"
-C L "SubSystem_uart_CheckTheMessage" 0 937 1 "FUNCTION"
-C L "SubSystem_uart_CheckTheMessage" 0 937 1 "FUNCTION"
-C L "SubSystem_uart_CheckTheMessage" 0 937 1 "FUNCTION"
-C L "SubSystem_uart_CheckTheMessage" 0 937 1 "FUNCTION"
-C L "sequentialDisplayScan" 0 937 2 "FUNCTION"
-F N "sequentialDisplayScan" 0 969 ""
-F G "sequentialDisplayScan" 0 969 "void()" `844  "It indicates that the polishing process has now started"
-C L "sequentialDisplayScan" 0 937 1 "FUNCTION"
-C L "sequentialDisplayScan" 0 989 1 "*"
-C L "sequentialDisplayScan" 0 989 1 "*"
-C L "sequentialDisplayScan" 0 989 1 "*"
-F N "loadZeroValue_2_DisplaySegment" 0 1014 ""
-F G "loadZeroValue_2_DisplaySegment" 0 1014 "void()" `845  "Apply voltage to display the digits"
-C L "loadZeroValue_2_DisplaySegment" 0 989 1 "FUNCTION"
-C L "showSelectedPastProcessesOps" 0 989 2 "FUNCTION"
-F N "showSelectedPastProcessesOps" 0 1030 ""
-F G "showSelectedPastProcessesOps" 0 1030 "void()" `848 
-F N "display_Selected_EEPROM_OpsVal_OnLCD" 0 1038 ""
-F G "display_Selected_EEPROM_OpsVal_OnLCD" 0 1038 "void()" `847 
-F N "Read_EEPROM_OpsVal_from_EEPROMregs" 0 1054 ""
-F G "Read_EEPROM_OpsVal_from_EEPROMregs" 0 1054 "void()" `846  "NE ZAMAN NEXT BUTONUNA BASILIR O ZAMAN SEÇÝM YAPILIR"
-C L "Read_EEPROM_OpsVal_from_EEPROMregs" 0 989 1 "FUNCTION"
-F N "displayProcessCompletionStatus" 0 1082 ""
-F G "displayProcessCompletionStatus" 0 1082 "void()" `851 
-F N "write_EEPROMVariables_to_EEPROMregs" 0 1121 ""
-F G "write_EEPROMVariables_to_EEPROMregs" 0 1121 "void()" `948  "Operations will be performed for the relevant customer"
-C L "write_EEPROMVariables_to_EEPROMregs" 0 989 9 "FUNCTION"
-C L "write_EEPROMVariables_to_EEPROMregs" 0 989 2 "FUNCTION"
-C L "write_EEPROMVariables_to_EEPROMregs" 0 989 1 "FUNCTION"
-C L "write_EEPROMVariables_to_EEPROMregs" 0 989 1 "FUNCTION"
-C L "write_EEPROMVariables_to_EEPROMregs" 0 989 1 "FUNCTION"
-C L "write_EEPROMVariables_to_EEPROMregs" 0 989 1 "FUNCTION"
-C L "write_EEPROMVariables_to_EEPROMregs" 0 989 1 "FUNCTION"
-C L "write_EEPROMVariables_to_EEPROMregs" 0 989 2 "FUNCTION"
-C L "write_EEPROMVariables_to_EEPROMregs" 0 989 1 "FUNCTION"
-C L "write_EEPROMVariables_to_EEPROMregs" 0 989 1 "FUNCTION"
-C L "write_EEPROMVariables_to_EEPROMregs" 0 989 1 "FUNCTION"
-C L "write_EEPROMVariables_to_EEPROMregs" 0 989 1 "FUNCTION"
-C L "write_EEPROMVariables_to_EEPROMregs" 0 989 1 "FUNCTION"
-C L "loadCostValuesToEEPROMVariables" 0 989 1 "FUNCTION"
-F N "loadCostValuesToEEPROMVariables" 0 1164 ""
-F G "loadCostValuesToEEPROMVariables" 0 1164 "void()" `849 
-C L "loadCostValuesToEEPROMVariables" 0 989 1 "FUNCTION"
-C L "loadCostValuesToEEPROMVariables" 0 989 1 "FUNCTION"
+D G "button_OPS_CANCEL" 0 174 "pin_B0" "Cancel all operations and close the system for the user."
+D G "button_DrainPolishing" 0 175 "pin_C2" "It adds polish to the container while the button is pressed"
+D G "pin_HundredDigit_switch" 0 179 "pin_E2"
+D G "pin_TensDigit_switch" 0 180 "pin_E0"
+D G "pin_UnitDigit_switch" 0 181 "pin_E1"
+D G "eeprom_Client0_systemStartAddress" 0 185 "0"
+D G "eeprom_Client1_systemStartAddress" 0 186 "130"
+C L "SubSystem_Init" 0 147 2 "FUNCTION"
+F N "SubSystem_Init" 0 194 ""
+f G "SubSystem_Init" 0 194 "void()" `829 
+F N "trisSetting_Init" 0 195 ""
+f G "trisSetting_Init" 0 195 "void()" `830 
+F N "displaySetting_Init" 0 196 ""
+f G "displaySetting_Init" 0 196 "void()" `831 
+F N "interruptSetting_Init" 0 197 ""
+f G "interruptSetting_Init" 0 197 "void()" `832 
+F N "adcSetting_Init" 0 198 ""
+f G "adcSetting_Init" 0 198 "void()" `833 
+F N "SystemInit_RESET_Critical_Variable" 0 199 ""
+f G "SystemInit_RESET_Critical_Variable" 0 199 "void()" `834  "======== LCD SCREEN FUNCTIONS PROTOTYPES  ======== *"
+F N "SubSystem_lcd_IdleStatus" 0 202 ""
+f G "SubSystem_lcd_IdleStatus" 0 202 "void()" `835 
+F N "NavigateOperationMenu" 0 203 ""
+f G "NavigateOperationMenu" 0 203 "void()" `836 
+F N "NavigateTimeMoneyPreferenceMenu" 0 204 ""
+f G "NavigateTimeMoneyPreferenceMenu" 0 204 "void()" `837 
+F N "NavigatePolishingMenu" 0 205 ""
+f G "NavigatePolishingMenu" 0 205 "void()" `838 
+F N "DisplayRecordsSequentiallyOnLCD" 0 206 ""
+f G "DisplayRecordsSequentiallyOnLCD" 0 206 "void()" `839 
+F N "NavigatePastProcessesMenu" 0 207 ""
+f G "NavigatePastProcessesMenu" 0 207 "void()" `840  "======== UART SERIAL COM. FUNCTIONS PROTOTYPES  ======== *"
+F N "SubSystem_uart_CheckTheMessage" 0 210 ""
+f G "SubSystem_uart_CheckTheMessage" 0 210 "void()" `841  "======== 7-SEGMENT DISPLAY FUNCTIONS PROTOTYPES  ======== *"
+F N "sequentialDisplayScan" 0 213 ""
+f G "sequentialDisplayScan" 0 213 "void()" `842 
+F N "loadZeroValue_2_DisplaySegment" 0 214 ""
+f G "loadZeroValue_2_DisplaySegment" 0 214 "void()" `843  "======== EEPROM WRITE/READ FUNCTIONS PROTOTYPES  ======== *"
+F N "Read_EEPROM_OpsVal_from_EEPROMregs" 0 218 ""
+f G "Read_EEPROM_OpsVal_from_EEPROMregs" 0 218 "void()" `844 
+F N "display_Selected_EEPROM_OpsVal_OnLCD" 0 219 ""
+f G "display_Selected_EEPROM_OpsVal_OnLCD" 0 219 "void()" `845 
+F N "showSelectedPastProcessesOps" 0 220 ""
+f G "showSelectedPastProcessesOps" 0 220 "void()" `846 
+F N "loadCostValuesToEEPROMVariables" 0 222 ""
+f G "loadCostValuesToEEPROMVariables" 0 222 "void()" `847 
+F N "Write_EEPROM_OpsVal_to_EEPROMregs" 0 223 ""
+f G "Write_EEPROM_OpsVal_to_EEPROMregs" 0 223 "void()" `848 
+F N "displayProcessCompletionStatus" 0 224 ""
+f G "displayProcessCompletionStatus" 0 224 "void()" `849  "SYSTEM MACROS                                                 *"
+D G "ADC_TO_INDEXofOPTION_MENU" 0 231 "(val_ADC_Pot_Surf)        Š   do{                                        Š          Index_OptionMenu = ((val_ADC_Pot_Surf*5)/1020);  Š          if(Index_OptionMenu >= 5){                       Š            Index_OptionMenu = 4;                          Š          }                                                Š   }while(0)"
+D G "ADC_TO_INDEXofTIME_MONEY_MENU" 0 239 "(val_ADC_Pot_Timer)              Š   do{                                                                Š          Index_TimeMoneyPreference = ((val_ADC_Pot_Timer*12)/1020);  Š          if(Index_TimeMoneyPreference >= 12){                        Š             Index_TimeMoneyPreference = 11;                          Š          }                                                           Š   }while(0)"
+D G "ADC_TO_INDEXofPolish" 0 247 "(val_ADC_Pot_Polish)                  Š   do{                                                            Š          Index_PolishMililitre = ((val_ADC_Pot_Polish*5)/1020);  Š          if(Index_PolishMililitre >= 5){                         Š            Index_PolishMililitre = 4;                            Š          }                                                       Š   }while(0)"
+D G "ADC_TO_INDEXofPastProcesses" 0 255 "(val_ADC_Pot_PastProcesses)         Š   do{                                                                 Š          Index_PastProcesses = ((val_ADC_Pot_PastProcesses*5)/1020);  Š          if(Index_PastProcesses >= 5){                                Š            Index_PastProcesses = 4;                                   Š          }                                                            Š   }while(0)"
+D G "TimerScalingFactor" 0 267 " ((1000.0) / 64.0)"
+D G "SECOND_TO_ISR_COUNT" 0 268 "(SelectedTime)                     Š   do{                                                        Š         desired_value = (SelectedTime * TimerScalingFactor); Š   }while(0)"
+C L "displayProcessCompletionStatus" 0 147 3 "FUNCTION"
+F N "system_isr_OperationCANCEL" 0 283 ""
+F G "system_isr_OperationCANCEL" 0 283 "void()" `850 
+C L "system_isr_OperationCANCEL" 0 147 1 "FUNCTION"
+C L "system_isr_OperationCANCEL" 0 147 1 "FUNCTION"
+C L "systemTimer0_isr" 0 147 2 "FUNCTION"
+F N "systemTimer0_isr" 0 291 ""
+F G "systemTimer0_isr" 0 291 "void()" `851 
+C L "systemTimer0_isr" 0 295 1 "*"
+C L "systemTimer0_isr" 0 295 1 "*"
+C L "systemTimer0_isr" 0 295 1 "*"
+C L "systemTimer0_isr" 0 295 1 "*"
+C L "systemTimer0_isr" 0 295 1 "FUNCTION"
+C L "systemTimer0_isr" 0 295 1 "FUNCTION"
+C L "systemTimer0_isr" 0 295 1 "FUNCTION"
+C L "systemTimer0_isr" 0 295 1 "FUNCTION"
+C L "systemTimer0_isr" 0 295 1 "FUNCTION"
+C L "systemTimer0_isr" 0 295 1 "FUNCTION"
+C L "MAIN" 0 295 2 "FUNCTION"
+F N "MAIN" 0 334 ""
+F G "MAIN" 0 335 "void()" `852  "System parameters and peripherals will be initialized"
+C L "MAIN" 0 295 1 "FUNCTION"
+C L "MAIN" 0 295 1 "FUNCTION"
+C L "MAIN" 0 295 1 "FUNCTION"
+C L "MAIN" 0 295 1 "FUNCTION"
+C L "MAIN" 0 295 1 "FUNCTION"
+C L "MAIN" 0 295 1 "FUNCTION"
+C L "MAIN" 0 295 1 "FUNCTION"
+C L "MAIN" 0 373 1 "*"
+C L "MAIN" 0 373 1 "*"
+C L "MAIN" 0 373 1 "*"
+C L "MAIN" 0 373 1 "*"
+C L "MAIN" 0 373 4 "*"
+C L "MAIN" 0 373 1 "*"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 373 2 "FUNCTION"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 373 1 "FUNCTION"
+C L "MAIN" 0 513 1 "*"
+C L "MAIN" 0 513 1 "*"
+C L "MAIN" 0 513 1 "FUNCTION"
+C L "MAIN" 0 513 1 "FUNCTION"
+C L "MAIN" 0 513 1 "FUNCTION"
+C L "MAIN" 0 513 1 "FUNCTION"
+C L "MAIN" 0 513 1 "FUNCTION"
+C L "MAIN" 0 513 1 "FUNCTION"
+C L "MAIN" 0 513 2 "FUNCTION"
+C L "MAIN" 0 513 1 "FUNCTION"
+C L "MAIN" 0 513 1 "FUNCTION"
+C L "MAIN" 0 513 1 "FUNCTION"
+C L "MAIN" 0 513 1 "FUNCTION"
+C L "MAIN" 0 513 1 "FUNCTION"
+C L "MAIN" 0 513 2 "FUNCTION"
+C L "MAIN" 0 513 1 "FUNCTION"
+C L "MAIN" 0 513 1 "FUNCTION"
+C L "MAIN" 0 513 1 "FUNCTION"
+C L "MAIN" 0 513 1 "FUNCTION"
+C L "MAIN" 0 513 1 "FUNCTION"
+C L "MAIN" 0 513 2 "FUNCTION"
+C L "MAIN" 0 513 1 "FUNCTION"
+C L "MAIN" 0 513 1 "FUNCTION"
+C L "MAIN" 0 513 1 "FUNCTION"
+C L "MAIN" 0 513 1 "FUNCTION"
+C L "MAIN" 0 513 1 "FUNCTION"
+C L "MAIN" 0 625 1 "*"
+C L "MAIN" 0 625 1 "*"
+C L "MAIN" 0 625 1 "*"
+C L "MAIN" 0 625 1 "*"
+C L "MAIN" 0 625 1 "FUNCTION"
+C L "MAIN" 0 625 1 "FUNCTION"
+C L "MAIN" 0 625 1 "FUNCTION"
+C L "MAIN" 0 625 1 "FUNCTION"
+C L "MAIN" 0 625 4 "FUNCTION"
+C L "SubSystem_Init" 0 625 2 "FUNCTION"
+F N "SubSystem_Init" 0 677 ""
+F G "SubSystem_Init" 0 677 "void()" `829 
+C L "trisSetting_Init" 0 625 1 "FUNCTION"
+F N "trisSetting_Init" 0 686 ""
+F G "trisSetting_Init" 0 686 "void()" `830 
+C L "trisSetting_Init" 0 625 3 "FUNCTION"
+C L "interruptSetting_Init" 0 625 1 "FUNCTION"
+F N "interruptSetting_Init" 0 698 ""
+F G "interruptSetting_Init" 0 698 "void()" `832  "---> OPERATION CANCEL BUTTON CONFIGURATION  <---//"
+C L "interruptSetting_Init" 0 625 1 "FUNCTION"
+C L "interruptSetting_Init" 0 625 1 "FUNCTION"
+C L "interruptSetting_Init" 0 625 3 "FUNCTION"
+C L "adcSetting_Init" 0 625 1 "FUNCTION"
+F N "adcSetting_Init" 0 716 ""
+F G "adcSetting_Init" 0 716 "void()" `833  "-CONFIG--> Surfing Potentiometer & Timer Potentiometer"
+C L "adcSetting_Init" 0 625 1 "FUNCTION"
+C L "displaySetting_Init" 0 625 1 "FUNCTION"
+F N "displaySetting_Init" 0 726 ""
+F G "displaySetting_Init" 0 726 "void()" `831  "Apply voltage to display the digits"
+C L "displaySetting_Init" 0 625 1 "FUNCTION"
+C L "SubSystem_lcd_IdleStatus" 0 625 2 "FUNCTION"
+C L "SubSystem_lcd_IdleStatus" 0 742 1 "*"
+C L "SubSystem_lcd_IdleStatus" 0 742 1 "*"
+F N "SubSystem_lcd_IdleStatus" 0 746 ""
+F G "SubSystem_lcd_IdleStatus" 0 746 "void()" `835 
+C L "NavigateOperationMenu" 0 742 1 "FUNCTION"
+F N "NavigateOperationMenu" 0 764 ""
+F G "NavigateOperationMenu" 0 764 "void()" `836 
+C L "NavigateOperationMenu" 0 742 2 "FUNCTION"
+C L "NavigateOperationMenu" 0 742 1 "FUNCTION"
+C L "NavigateOperationMenu" 0 742 1 "FUNCTION"
+C L "NavigateOperationMenu" 0 742 1 "FUNCTION"
+C L "NavigateOperationMenu" 0 742 1 "FUNCTION"
+C L "NavigateTimeMoneyPreferenceMenu" 0 742 1 "FUNCTION"
+F N "NavigateTimeMoneyPreferenceMenu" 0 809 ""
+F G "NavigateTimeMoneyPreferenceMenu" 0 809 "void()" `837 
+C L "NavigateTimeMoneyPreferenceMenu" 0 742 1 "FUNCTION"
+C L "NavigatePolishingMenu" 0 742 1 "FUNCTION"
+F N "NavigatePolishingMenu" 0 845 ""
+F G "NavigatePolishingMenu" 0 845 "void()" `838 
+C L "NavigatePolishingMenu" 0 742 1 "FUNCTION"
+F N "NavigatePastProcessesMenu" 0 876 ""
+F G "NavigatePastProcessesMenu" 0 876 "void()" `840 
+C L "NavigatePastProcessesMenu" 0 742 1 "FUNCTION"
+C L "NavigatePastProcessesMenu" 0 742 1 "FUNCTION"
+C L "NavigatePastProcessesMenu" 0 742 1 "FUNCTION"
+C L "NavigatePastProcessesMenu" 0 742 1 "FUNCTION"
+C L "NavigatePastProcessesMenu" 0 742 1 "FUNCTION"
+C L "DisplayRecordsSequentiallyOnLCD" 0 742 1 "FUNCTION"
+F N "DisplayRecordsSequentiallyOnLCD" 0 921 ""
+F G "DisplayRecordsSequentiallyOnLCD" 0 921 "void()" `839 
+C L "SubSystem_uart_CheckTheMessage" 0 742 2 "FUNCTION"
+C L "SubSystem_uart_CheckTheMessage" 0 946 1 "*"
+C L "SubSystem_uart_CheckTheMessage" 0 946 1 "*"
+C L "SubSystem_uart_CheckTheMessage" 0 946 1 "*"
+F N "SubSystem_uart_CheckTheMessage" 0 951 ""
+F G "SubSystem_uart_CheckTheMessage" 0 951 "void()" `841 
+C L "SubSystem_uart_CheckTheMessage" 0 946 1 "FUNCTION"
+C L "SubSystem_uart_CheckTheMessage" 0 946 1 "FUNCTION"
+C L "SubSystem_uart_CheckTheMessage" 0 946 1 "FUNCTION"
+C L "SubSystem_uart_CheckTheMessage" 0 946 1 "FUNCTION"
+C L "SubSystem_uart_CheckTheMessage" 0 946 1 "FUNCTION"
+C L "sequentialDisplayScan" 0 946 2 "FUNCTION"
+F N "sequentialDisplayScan" 0 978 ""
+F G "sequentialDisplayScan" 0 978 "void()" `842  "It indicates that the polishing process has now started"
+C L "sequentialDisplayScan" 0 946 1 "FUNCTION"
+C L "sequentialDisplayScan" 0 998 1 "*"
+C L "sequentialDisplayScan" 0 998 1 "*"
+C L "sequentialDisplayScan" 0 998 1 "*"
+F N "loadZeroValue_2_DisplaySegment" 0 1023 ""
+F G "loadZeroValue_2_DisplaySegment" 0 1023 "void()" `843  "Apply voltage to display the digits"
+C L "loadZeroValue_2_DisplaySegment" 0 998 1 "FUNCTION"
+C L "showSelectedPastProcessesOps" 0 998 2 "FUNCTION"
+F N "showSelectedPastProcessesOps" 0 1039 ""
+F G "showSelectedPastProcessesOps" 0 1039 "void()" `846 
+F N "display_Selected_EEPROM_OpsVal_OnLCD" 0 1047 ""
+F G "display_Selected_EEPROM_OpsVal_OnLCD" 0 1047 "void()" `845 
+F N "Read_EEPROM_OpsVal_from_EEPROMregs" 0 1063 ""
+F G "Read_EEPROM_OpsVal_from_EEPROMregs" 0 1063 "void()" `844  "NE ZAMAN NEXT BUTONUNA BASILIR O ZAMAN SEÇÝM YAPILIR"
+C L "Read_EEPROM_OpsVal_from_EEPROMregs" 0 998 1 "FUNCTION"
+F N "displayProcessCompletionStatus" 0 1091 ""
+F G "displayProcessCompletionStatus" 0 1091 "void()" `849 
+F N "write_EEPROMVariables_to_EEPROMregs" 0 1130 ""
+F G "write_EEPROMVariables_to_EEPROMregs" 0 1130 "void()" `946  "Operations will be performed for the relevant customer"
+C L "write_EEPROMVariables_to_EEPROMregs" 0 998 9 "FUNCTION"
+C L "write_EEPROMVariables_to_EEPROMregs" 0 998 2 "FUNCTION"
+C L "write_EEPROMVariables_to_EEPROMregs" 0 998 1 "FUNCTION"
+C L "write_EEPROMVariables_to_EEPROMregs" 0 998 1 "FUNCTION"
+C L "write_EEPROMVariables_to_EEPROMregs" 0 998 1 "FUNCTION"
+C L "write_EEPROMVariables_to_EEPROMregs" 0 998 1 "FUNCTION"
+C L "write_EEPROMVariables_to_EEPROMregs" 0 998 1 "FUNCTION"
+C L "write_EEPROMVariables_to_EEPROMregs" 0 998 2 "FUNCTION"
+C L "write_EEPROMVariables_to_EEPROMregs" 0 998 1 "FUNCTION"
+C L "write_EEPROMVariables_to_EEPROMregs" 0 998 1 "FUNCTION"
+C L "write_EEPROMVariables_to_EEPROMregs" 0 998 1 "FUNCTION"
+C L "write_EEPROMVariables_to_EEPROMregs" 0 998 1 "FUNCTION"
+C L "write_EEPROMVariables_to_EEPROMregs" 0 998 1 "FUNCTION"
+C L "loadCostValuesToEEPROMVariables" 0 998 1 "FUNCTION"
+F N "loadCostValuesToEEPROMVariables" 0 1173 ""
+F G "loadCostValuesToEEPROMVariables" 0 1173 "void()" `847 
+C L "loadCostValuesToEEPROMVariables" 0 998 1 "FUNCTION"
+C L "loadCostValuesToEEPROMVariables" 0 998 1 "FUNCTION"
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep_ulpwu" 1 0
