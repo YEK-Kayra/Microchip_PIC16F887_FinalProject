@@ -353,17 +353,18 @@ while(1){//--------------------- BEGIN---MAIN WHILE(1)---BEGIN------------------
    eeprom_polishing_written_cost   = 0;
   
    //Wait until unlock the system
-   do{
-           SubSystem_lcd_IdleStatus();   //Greeting the customer
-           
-           if(kbhit())
-           {
-              readed_ID = getc();
-              SubSystem_uart_CheckTheMessage();
-           }      
-        
-    }while(systemLock!=1);
+//!   do{
+//!           SubSystem_lcd_IdleStatus();   //Greeting the customer
+//!           
+//!           if(kbhit())
+//!           {
+//!              readed_ID = getc();
+//!              SubSystem_uart_CheckTheMessage();
+//!           }      
+//!        
+//!    }while(systemLock!=1);
  
+    readed_ID = '+';
     delay_ms(1000);
     
     

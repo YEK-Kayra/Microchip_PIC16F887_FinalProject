@@ -105,11 +105,9 @@ void main(void)
 //!               password_counter=0;
 //!         }
       putc(related_ID);
-      delay_ms(100); //50ms bekle.
+      delay_ms(1000); //50ms bekle.
    }
 }
-
-
 //!
 //!
 //!void clear_EnteredPassword(void){

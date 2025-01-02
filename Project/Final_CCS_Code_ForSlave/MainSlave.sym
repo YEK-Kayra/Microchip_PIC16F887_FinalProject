@@ -1,10 +1,10 @@
-004-005 @READ_PROGRAM_MEMORY8.P1
-004-005 @WRITE_PROGRAM_MEMORY8.P2
-015     CCP_1_LOW
+004-005 @WRITE_PROGRAM_MEMORY8.P1
+004-005 @READ_PROGRAM_MEMORY8.P2
 015     CCP_1
+015     CCP_1_LOW
 016     CCP_1_HIGH
-01B     CCP_2
 01B     CCP_2_LOW
+01B     CCP_2
 01C     CCP_2_HIGH
 020-021 strtok.save
 022     related_ID
@@ -13,22 +13,7 @@
 02D-031 emreID
 032     password_counter
 033-03E keypad
-03F     MAIN.row
-040     MAIN.col
-041-042 strcmp.s1
-041     @delay_ms1.P1
-041     MAIN.@SCRATCH1
-042     @WRITEBITA.P1
-042     @READBITA.P2
-042     MAIN.@SCRATCH2
-043-044 @READBITA.P1
-043     @MUL88.P2
-043-044 strcmp.s2
-043     @WRITEBITA.P1
-043     MAIN.@SCRATCH3
-044     @MUL88.P1
-044-045 @WRITEBITA.P2
-045     strcmp.@SCRATCH1
+03F     @delay_ms1.P1
 077     @SCRATCH
 078     @SCRATCH
 078     _RETURN_
@@ -36,33 +21,29 @@
 07A     @SCRATCH
 107.6   C1OUT
 108.6   C2OUT
-10D-10E @WRITE_PROGRAM_MEMORY8.P1
-10D-10E @READ_PROGRAM_MEMORY8.P2
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
 
 ROM Allocation:
-000004  @WRITEBITA
-000024  @delay_ms1
-000039  @READBITA
-000050  @MUL88
-000077  strcmp
-0000BB  MAIN
-0000BB  @cinit1
-0000D9  @cinit2
+000004  @delay_ms1
+00001B  @cinit1
+00001B  MAIN
+00003B  @cinit2
 
 Project Directory:
     C:\Users\yunus\OneDrive\Masaüstü\Microchip_PIC16F887_FinalProject\Project\Final_CCS_Code_ForSlave\
 
 Project Files:
-    MainSlave.c                                             [31-Ara-24 17:03  CRC=6A6EEC7A]
+    MainSlave.c                                             [02-Oca-25 10:05  CRC=E0ABF95E]
     ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f887.h [08-Eyl-15 15:15  CRC=E224733F]
     ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\string.h [26-Mar-15 12:34  CRC=C4814297]
     ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stddef.h [05-Eyl-14 11:47  CRC=897CEC6C]
     ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h [03-Oca-08 14:55  CRC=2D1F019F]
 
-Source signature=F4CF91FA
+Source signature=6B0C9EDE
 Program memory checksum=0000
 Program memory CRC=0000
-Hex file CRC=FD9C
+Hex file CRC=D375
 
 Units:
     MainSlave (main)
