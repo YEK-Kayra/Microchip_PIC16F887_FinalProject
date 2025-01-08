@@ -11,23 +11,23 @@ Type=4
 1=main.c
 
 [defines]
-buildcount=227
+buildcount=231
 
 [Opened Files]
-1=main.c
-t1=1
+1=..\Final_CCS_Code_ForSlave\MainSlave.c
+t1=93
 Count=1
 2=..\Final_CCS_Code_ForSlave\MainSlave.c
 t2=1
 
 [ProjectLog]
-Days=9
+Days=10
 D1=22-12-2024
 D1_L=24
 D1_L1=[69479]Stopped Editing.
 D1_L2=[69635]Started Editing.
 D1_L3=[69697]Stopped Editing.
-TotalEdit=928
+TotalEdit=930
 TotalDebug=0
 D1_E=64
 D1_D=0
@@ -239,6 +239,18 @@ D9_L16=[61230]Stopped Editing.
 D9_L17=[61230]Project Closed.
 D9_L18=[74939]Project Opened.
 D9_L19=[78318]Project Closed.
+D10=02-01-2025
+D10_L=8
+D10_L1=[37725]Project Opened.
+D10_L2=[38046]Started Editing.
+D10_L3=[38348]Stopped Editing.
+D10_L4=[39011]Started Editing.
+D10_L5=[39093]Stopped Editing.
+D10_E=2
+D10_D=0
+D10_L6=[39093]Project Closed.
+D10_L7=[41004]Project Opened.
+D10_L8=[45515]Project Closed.
 [Units]
 Count=1
 1=main (main)

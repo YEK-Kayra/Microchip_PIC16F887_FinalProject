@@ -21,19 +21,19 @@ int8 password_counter = 0;    // Counter for entered characters, query statement
 
 void clear_EnteredPassword(void);
 
-#int_timer1
-void timer1_isr() //ZAMANLAYICI
-{
-   set_timer1(15536);
-   timer1_isr_counter++;
-   
-   if(timer1_isr_counter == 25){
-   
-      clear_EnteredPassword();
-      
-   }
-
-}
+//!#int_timer1
+//!void timer1_isr() //ZAMANLAYICI
+//!{
+//!   set_timer1(15536);
+//!   timer1_isr_counter++;
+//!   
+//!   if(timer1_isr_counter == 25){
+//!   
+//!      clear_EnteredPassword();
+//!      
+//!   }
+//!
+//!}
 
 
 // 4 rows and 3 columns representing the keypad layout
@@ -109,6 +109,6 @@ void main(void)
    }
 }
 
-void clear_EnteredPassword(void){
-   password_counter=0;
-}
+//!void clear_EnteredPassword(void){
+//!   password_counter=0;
+//!}

@@ -1,4 +1,4 @@
-CCS PCM C Compiler, Version 5.049, 5967               31-Ara-24 16:58
+CCS PCM C Compiler, Version 5.049, 5967               02-Oca-25 10:51
 
                Filename:   C:\Users\yunus\OneDrive\Masaüstü\Microchip_PIC16F887_FinalProject\Project\Final_CCS_Code_ForMaster\main.lst
 
@@ -4797,7 +4797,7 @@ CCS PCM C Compiler, Version 5.049, 5967               31-Ara-24 16:58
 139D:  GOTO   3A0
 139E:  BSF    03.5
 139F:  GOTO   38E
-....................   
+....................  
 ....................     delay_ms(1000); 
 13A0:  MOVLW  04
 13A1:  BSF    03.5
@@ -5954,7 +5954,7 @@ CCS PCM C Compiler, Version 5.049, 5967               31-Ara-24 16:58
 ....................  
 .................... //Function-4 
 .................... void adcSetting_Init(){ 
-....................      //-CONFIG--> Surfing Potentiometer & Timer Potentiometer 
+....................      //-CONFIG--> fing Potentiometer & Timer Potentiometer 
 ....................         setup_adc_ports(sAN0|sAN1); 
 02EC:  BSF    03.5
 02ED:  BSF    03.6

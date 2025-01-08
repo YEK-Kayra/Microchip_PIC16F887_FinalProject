@@ -13,7 +13,22 @@
 02D-031 emreID
 032     password_counter
 033-03E keypad
-03F     @delay_ms1.P1
+03F     MAIN.row
+040     MAIN.col
+041-042 strcmp.s1
+041     @delay_ms1.P1
+041     MAIN.@SCRATCH1
+042     @READBITA.P1
+042     @WRITEBITA.P2
+042     MAIN.@SCRATCH2
+043     @WRITEBITA.P1
+043     @MUL88.P2
+043-044 @READBITA.P3
+043-044 strcmp.s2
+043     MAIN.@SCRATCH3
+044     @MUL88.P1
+044-045 @WRITEBITA.P2
+045     strcmp.@SCRATCH1
 077     @SCRATCH
 078     @SCRATCH
 078     _RETURN_
@@ -25,25 +40,29 @@
 10D-10E @WRITE_PROGRAM_MEMORY8.P2
 
 ROM Allocation:
-000004  @delay_ms1
-00001B  @cinit1
-00001B  MAIN
-00003B  @cinit2
+000004  @WRITEBITA
+000024  @delay_ms1
+000039  @READBITA
+000050  @MUL88
+000077  strcmp
+0000BB  MAIN
+0000BB  @cinit1
+0000DB  @cinit2
 
 Project Directory:
     C:\Users\yunus\OneDrive\Masaüstü\Microchip_PIC16F887_FinalProject\Project\Final_CCS_Code_ForSlave\
 
 Project Files:
-    MainSlave.c                                             [02-Oca-25 10:05  CRC=E0ABF95E]
+    MainSlave.c                                             [02-Oca-25 10:51  CRC=A3F95764]
     ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f887.h [08-Eyl-15 15:15  CRC=E224733F]
     ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\string.h [26-Mar-15 12:34  CRC=C4814297]
     ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stddef.h [05-Eyl-14 11:47  CRC=897CEC6C]
     ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h [03-Oca-08 14:55  CRC=2D1F019F]
 
-Source signature=6B0C9EDE
+Source signature=2E59FCE4
 Program memory checksum=0000
 Program memory CRC=0000
-Hex file CRC=D375
+Hex file CRC=9883
 
 Units:
     MainSlave (main)

@@ -1,18 +1,18 @@
-CCS PCM C Compiler, Version 5.049, 5967               02-Oca-25 10:17
+CCS PCM C Compiler, Version 5.049, 5967               02-Oca-25 10:52
 
                Filename:   C:\Users\yunus\OneDrive\Masaüstü\Microchip_PIC16F887_FinalProject\Project\Final_CCS_Code_ForSlave\MainSlave.lst
 
-               ROM used:   116 words (1%)
+               ROM used:   415 words (5%)
                            Largest free fragment is 2048
-               RAM used:   36 (10%) at main() level
-                           37 (10%) worst case
+               RAM used:   41 (11%) at main() level
+                           43 (12%) worst case
                Stack used: 0 locations
                Stack size: 8
 
 *
 0000:  MOVLW  00
 0001:  MOVWF  0A
-0002:  GOTO   01B
+0002:  GOTO   0BB
 0003:  NOP
 .................... #include <16f887.h>   
 .................... //////////// Standard Header file for the PIC16F887 device //////////////// 
@@ -26,6 +26,101 @@ CCS PCM C Compiler, Version 5.049, 5967               02-Oca-25 10:17
 .................... //// form are not restricted in any way.                               //// 
 .................... /////////////////////////////////////////////////////////////////////////// 
 .................... #device PIC16F887 
+0004:  MOVF   42,W
+0005:  ANDLW  07
+0006:  MOVWF  77
+0007:  RRF    42,W
+0008:  MOVWF  78
+0009:  RRF    78,F
+000A:  RRF    78,F
+000B:  MOVLW  1F
+000C:  ANDWF  78,F
+000D:  MOVF   78,W
+000E:  ADDWF  44,W
+000F:  MOVWF  04
+0010:  BCF    03.7
+0011:  BTFSC  45.0
+0012:  BSF    03.7
+0013:  CLRF   78
+0014:  INCF   78,F
+0015:  INCF   77,F
+0016:  GOTO   018
+0017:  RLF    78,F
+0018:  DECFSZ 77,F
+0019:  GOTO   017
+001A:  MOVF   43,F
+001B:  BTFSC  03.2
+001C:  GOTO   020
+001D:  MOVF   78,W
+001E:  IORWF  00,F
+001F:  GOTO   023
+0020:  COMF   78,F
+0021:  MOVF   78,W
+0022:  ANDWF  00,F
+0023:  RETURN
+*
+0039:  MOVF   42,W
+003A:  ANDLW  07
+003B:  MOVWF  77
+003C:  RRF    42,W
+003D:  MOVWF  78
+003E:  RRF    78,F
+003F:  RRF    78,F
+0040:  MOVLW  1F
+0041:  ANDWF  78,F
+0042:  MOVF   78,W
+0043:  ADDWF  43,W
+0044:  MOVWF  04
+0045:  BCF    03.7
+0046:  BTFSC  44.0
+0047:  BSF    03.7
+0048:  MOVF   00,W
+0049:  MOVWF  78
+004A:  INCF   77,F
+004B:  GOTO   04D
+004C:  RRF    78,F
+004D:  DECFSZ 77,F
+004E:  GOTO   04C
+004F:  RETURN
+0050:  CLRF   77
+0051:  CLRF   78
+0052:  MOVF   43,W
+0053:  BCF    03.0
+0054:  BTFSC  44.0
+0055:  ADDWF  77,F
+0056:  RRF    77,F
+0057:  RRF    78,F
+0058:  BTFSC  44.1
+0059:  ADDWF  77,F
+005A:  RRF    77,F
+005B:  RRF    78,F
+005C:  BTFSC  44.2
+005D:  ADDWF  77,F
+005E:  RRF    77,F
+005F:  RRF    78,F
+0060:  BTFSC  44.3
+0061:  ADDWF  77,F
+0062:  RRF    77,F
+0063:  RRF    78,F
+0064:  BTFSC  44.4
+0065:  ADDWF  77,F
+0066:  RRF    77,F
+0067:  RRF    78,F
+0068:  BTFSC  44.5
+0069:  ADDWF  77,F
+006A:  RRF    77,F
+006B:  RRF    78,F
+006C:  BTFSC  44.6
+006D:  ADDWF  77,F
+006E:  RRF    77,F
+006F:  RRF    78,F
+0070:  BTFSC  44.7
+0071:  ADDWF  77,F
+0072:  RRF    77,F
+0073:  RRF    78,F
+0074:  BCF    0A.3
+0075:  BCF    0A.4
+0076:  GOTO   15A (RETURN)
 ....................  
 .................... #list 
 ....................  
@@ -227,9 +322,77 @@ CCS PCM C Compiler, Version 5.049, 5967               02-Oca-25 10:17
 .................... signed int8 strcmp(unsigned char *s1, unsigned char *s2) 
 .................... { 
 ....................    for (; *s1 == *s2; s1++, s2++) 
+0077:  MOVF   42,W
+0078:  MOVWF  7A
+0079:  MOVF   41,W
+007A:  MOVWF  04
+007B:  BCF    03.7
+007C:  BTFSC  7A.0
+007D:  BSF    03.7
+007E:  MOVF   00,W
+007F:  MOVWF  45
+0080:  MOVF   44,W
+0081:  MOVWF  7A
+0082:  MOVF   43,W
+0083:  MOVWF  04
+0084:  BCF    03.7
+0085:  BTFSC  7A.0
+0086:  BSF    03.7
+0087:  MOVF   00,W
+0088:  SUBWF  45,W
+0089:  BTFSS  03.2
+008A:  GOTO   0A2
 ....................       if (*s1 == '\0') 
+008B:  MOVF   42,W
+008C:  MOVWF  7A
+008D:  MOVF   41,W
+008E:  MOVWF  04
+008F:  BCF    03.7
+0090:  BTFSC  7A.0
+0091:  BSF    03.7
+0092:  MOVF   00,F
+0093:  BTFSS  03.2
+0094:  GOTO   098
 ....................          return(0); 
+0095:  MOVLW  00
+0096:  MOVWF  78
+0097:  GOTO   0BA
+0098:  MOVF   42,W
+0099:  MOVWF  7A
+009A:  MOVF   41,W
+009B:  INCF   41,F
+009C:  BTFSC  03.2
+009D:  INCF   42,F
+009E:  INCF   43,F
+009F:  BTFSC  03.2
+00A0:  INCF   44,F
+00A1:  GOTO   077
 ....................    return((*s1 < *s2) ? -1: 1); 
+00A2:  MOVF   42,W
+00A3:  MOVWF  7A
+00A4:  MOVF   41,W
+00A5:  MOVWF  04
+00A6:  BCF    03.7
+00A7:  BTFSC  42.0
+00A8:  BSF    03.7
+00A9:  MOVF   00,W
+00AA:  MOVWF  45
+00AB:  MOVF   44,W
+00AC:  MOVWF  7A
+00AD:  MOVF   43,W
+00AE:  MOVWF  04
+00AF:  BCF    03.7
+00B0:  BTFSC  44.0
+00B1:  BSF    03.7
+00B2:  MOVF   00,W
+00B3:  SUBWF  45,W
+00B4:  BTFSC  03.0
+00B5:  GOTO   0B8
+00B6:  MOVLW  FF
+00B7:  GOTO   0B9
+00B8:  MOVLW  01
+00B9:  MOVWF  78
+00BA:  RETURN
 .................... } 
 .................... /* standard template: int strcoll(const char *s1, const char *s2). 
 ....................    Compares s1 & s2; returns -1 if s1<s2, 0 if s1=s2, 1 if s1>s2 */ 
@@ -436,9 +599,9 @@ CCS PCM C Compiler, Version 5.049, 5967               02-Oca-25 10:17
 ....................    unsigned char *beg, *end; 
 ....................    static char *save; 
 *
-003C:  BCF    03.6
-003D:  CLRF   20
-003E:  CLRF   21
+00DC:  BCF    03.6
+00DD:  CLRF   20
+00DE:  CLRF   21
 ....................  
 ....................    beg = (s1)? s1: save; 
 ....................    beg += strspn(beg, s2); 
@@ -533,29 +696,27 @@ CCS PCM C Compiler, Version 5.049, 5967               02-Oca-25 10:17
 ....................  
 .................... #use delay(clock=4M) 
 *
-0004:  MOVLW  3F
-0005:  MOVWF  04
-0006:  BCF    03.7
-0007:  MOVF   00,W
-0008:  BTFSC  03.2
-0009:  GOTO   018
-000A:  MOVLW  01
-000B:  MOVWF  78
-000C:  CLRF   77
-000D:  DECFSZ 77,F
-000E:  GOTO   00D
-000F:  DECFSZ 78,F
-0010:  GOTO   00C
-0011:  MOVLW  4A
-0012:  MOVWF  77
-0013:  DECFSZ 77,F
-0014:  GOTO   013
-0015:  GOTO   016
-0016:  DECFSZ 00,F
-0017:  GOTO   00A
-0018:  BCF    0A.3
-0019:  BCF    0A.4
-001A:  GOTO   072 (RETURN)
+0024:  MOVLW  41
+0025:  MOVWF  04
+0026:  BCF    03.7
+0027:  MOVF   00,W
+0028:  BTFSC  03.2
+0029:  GOTO   038
+002A:  MOVLW  01
+002B:  MOVWF  78
+002C:  CLRF   77
+002D:  DECFSZ 77,F
+002E:  GOTO   02D
+002F:  DECFSZ 78,F
+0030:  GOTO   02C
+0031:  MOVLW  4A
+0032:  MOVWF  77
+0033:  DECFSZ 77,F
+0034:  GOTO   033
+0035:  GOTO   036
+0036:  DECFSZ 00,F
+0037:  GOTO   02A
+0038:  RETURN
 .................... #use fast_io(d)   
 .................... #use rs232(baud=9600, parity=N, uart1, bits=8)  
 ....................  
@@ -567,24 +728,24 @@ CCS PCM C Compiler, Version 5.049, 5967               02-Oca-25 10:17
 .................... char password[5];             // Collects the entered number characters, 5 characters including the null terminator '\0' 
 .................... char selcukID[5] = "1234";    // Selcuk's password 
 *
-003F:  MOVLW  31
-0040:  MOVWF  28
-0041:  MOVLW  32
-0042:  MOVWF  29
-0043:  MOVLW  33
-0044:  MOVWF  2A
-0045:  MOVLW  34
-0046:  MOVWF  2B
-0047:  CLRF   2C
+00DF:  MOVLW  31
+00E0:  MOVWF  28
+00E1:  MOVLW  32
+00E2:  MOVWF  29
+00E3:  MOVLW  33
+00E4:  MOVWF  2A
+00E5:  MOVLW  34
+00E6:  MOVWF  2B
+00E7:  CLRF   2C
 .................... char emreID[5]   = "4321";    // Emre's password 
-0048:  MOVWF  2D
-0049:  MOVLW  33
-004A:  MOVWF  2E
-004B:  MOVLW  32
-004C:  MOVWF  2F
-004D:  MOVLW  31
-004E:  MOVWF  30
-004F:  CLRF   31
+00E8:  MOVWF  2D
+00E9:  MOVLW  33
+00EA:  MOVWF  2E
+00EB:  MOVLW  32
+00EC:  MOVWF  2F
+00ED:  MOVLW  31
+00EE:  MOVWF  30
+00EF:  CLRF   31
 .................... int8 password_counter = 0;    // Counter for entered characters, query statements are triggered when it reaches 4 
 ....................  
 .................... //int8 timer1_isr_counter=0; 
@@ -614,71 +775,71 @@ CCS PCM C Compiler, Version 5.049, 5967               02-Oca-25 10:17
 ....................     {'7', '8', '9'}, 
 ....................     {'*', '0', '#'} 
 .................... }; 
-0050:  MOVWF  33
-0051:  MOVLW  32
-0052:  MOVWF  34
-0053:  MOVLW  33
-0054:  MOVWF  35
-0055:  MOVLW  34
-0056:  MOVWF  36
-0057:  MOVLW  35
-0058:  MOVWF  37
-0059:  MOVLW  36
-005A:  MOVWF  38
-005B:  MOVLW  37
-005C:  MOVWF  39
-005D:  MOVLW  38
-005E:  MOVWF  3A
-005F:  MOVLW  39
-0060:  MOVWF  3B
-0061:  MOVLW  2A
-0062:  MOVWF  3C
-0063:  MOVLW  30
-0064:  MOVWF  3D
-0065:  MOVLW  23
-0066:  MOVWF  3E
+00F0:  MOVWF  33
+00F1:  MOVLW  32
+00F2:  MOVWF  34
+00F3:  MOVLW  33
+00F4:  MOVWF  35
+00F5:  MOVLW  34
+00F6:  MOVWF  36
+00F7:  MOVLW  35
+00F8:  MOVWF  37
+00F9:  MOVLW  36
+00FA:  MOVWF  38
+00FB:  MOVLW  37
+00FC:  MOVWF  39
+00FD:  MOVLW  38
+00FE:  MOVWF  3A
+00FF:  MOVLW  39
+0100:  MOVWF  3B
+0101:  MOVLW  2A
+0102:  MOVWF  3C
+0103:  MOVLW  30
+0104:  MOVWF  3D
+0105:  MOVLW  23
+0106:  MOVWF  3E
 ....................  
 .................... void main(void)  
 *
-001B:  MOVF   03,W
-001C:  ANDLW  1F
-001D:  MOVWF  03
-001E:  BSF    03.5
-001F:  BSF    03.6
-0020:  BCF    07.3
-0021:  MOVLW  19
-0022:  BCF    03.6
-0023:  MOVWF  19
-0024:  MOVLW  A6
-0025:  MOVWF  18
-0026:  MOVLW  90
-0027:  BCF    03.5
-0028:  MOVWF  18
-0029:  MOVLW  2B
-002A:  MOVWF  22
-002B:  CLRF   32
-002C:  BSF    03.5
-002D:  BSF    03.6
-002E:  MOVF   09,W
-002F:  ANDLW  C0
-0030:  MOVWF  09
-0031:  BCF    03.6
-0032:  BCF    1F.4
-0033:  BCF    1F.5
-0034:  MOVLW  00
-0035:  BSF    03.6
-0036:  MOVWF  08
-0037:  BCF    03.5
-0038:  CLRF   07
-0039:  CLRF   08
-003A:  CLRF   09
-003B:  BCF    03.7
+00BB:  MOVF   03,W
+00BC:  ANDLW  1F
+00BD:  MOVWF  03
+00BE:  BSF    03.5
+00BF:  BSF    03.6
+00C0:  BCF    07.3
+00C1:  MOVLW  19
+00C2:  BCF    03.6
+00C3:  MOVWF  19
+00C4:  MOVLW  A6
+00C5:  MOVWF  18
+00C6:  MOVLW  90
+00C7:  BCF    03.5
+00C8:  MOVWF  18
+00C9:  MOVLW  2B
+00CA:  MOVWF  22
+00CB:  CLRF   32
+00CC:  BSF    03.5
+00CD:  BSF    03.6
+00CE:  MOVF   09,W
+00CF:  ANDLW  C0
+00D0:  MOVWF  09
+00D1:  BCF    03.6
+00D2:  BCF    1F.4
+00D3:  BCF    1F.5
+00D4:  MOVLW  00
+00D5:  BSF    03.6
+00D6:  MOVWF  08
+00D7:  BCF    03.5
+00D8:  CLRF   07
+00D9:  CLRF   08
+00DA:  CLRF   09
+00DB:  BCF    03.7
 .................... { 
 ....................    set_tris_d(0xF0);  
 *
-0067:  MOVLW  F0
-0068:  BSF    03.5
-0069:  MOVWF  08
+0107:  MOVLW  F0
+0108:  BSF    03.5
+0109:  MOVWF  08
 ....................     
 ....................     
 .................... //!   setup_timer_1(T1_INTERNAL | T1_DIV_BY_8); 
@@ -690,70 +851,206 @@ CCS PCM C Compiler, Version 5.049, 5967               02-Oca-25 10:17
 ....................     { 
 ....................        
 .................... //!         //Scan all rows(lines) sequentially 
-.................... //!         for(int8 row = 0; row < 4; row++) 
-.................... //!         { 
-.................... //!            
-.................... //!               output_d(0x00);                            //Clear all D port pins      
-.................... //!               output_bit(PIN_D0 + row, 1);               //Set the current line to "HIGH"       
-.................... //!               delay_ms(10);                              //Short delay for debounce to stabilize the button press               
-.................... //!       
-.................... //!               //Scan all columns sequentially 
-.................... //!               for(int8 col = 0; col < 3; col++) 
-.................... //!               { 
-.................... //!                     //If found, try to find the column that is HIGH 
-.................... //!                     if(input(PIN_D4 + col))  
-.................... //!                     {     
-.................... //!                        //Wait until the button is released 
-.................... //!                        while(input(PIN_D4 + col));    
-.................... //!                         
-.................... //!                        password[password_counter]=keypad[row][col];       //Save the selected row and column value to the array 
-.................... //!                        password_counter++; 
-.................... //!                         
-.................... //!                     } 
-.................... //!               
-.................... //!               } 
-.................... //!       
-.................... //!         } 
-.................... //!          
-.................... //!          
-.................... //!         if(password_counter==4) 
-.................... //!         { 
-.................... //!          
-.................... //!               if(strcmp(password, selcukID) == 0){ 
-.................... //!                  related_ID = '+';  
-.................... //!                  putc(related_ID); 
-.................... //!               } 
-.................... //!                
-.................... //!               else if(strcmp(password, emreID) == 0){ 
-.................... //!                  related_ID = '*';  
-.................... //!                  putc(related_ID); 
-.................... //!               } 
-.................... //!                
-.................... //!               else{ 
-.................... //!                  related_ID = '.';  
-.................... //!                  putc(related_ID); 
-.................... //!               } 
-.................... //!                
-.................... //!               password_counter=0; 
-.................... //!         } 
-....................       putc(related_ID); 
-006A:  BCF    03.5
-006B:  MOVF   22,W
-006C:  BTFSS  0C.4
-006D:  GOTO   06C
-006E:  MOVWF  19
+....................          for(int8 row = 0; row < 4; row++) 
+010A:  BCF    03.5
+010B:  CLRF   3F
+010C:  MOVF   3F,W
+010D:  SUBLW  03
+010E:  BTFSS  03.0
+010F:  GOTO   16D
+....................          { 
+....................             
+....................                output_d(0x00);                            //Clear all D port pins      
+0110:  CLRF   08
+....................                output_bit(PIN_D0 + row, 1);               //Set the current line to "HIGH"       
+0111:  MOVLW  40
+0112:  ADDWF  3F,W
+0113:  MOVWF  41
+0114:  MOVWF  42
+0115:  MOVLW  01
+0116:  MOVWF  43
+0117:  CLRF   45
+0118:  CLRF   44
+0119:  CALL   004
+011A:  MOVF   41,W
+011B:  MOVWF  42
+011C:  CLRF   43
+011D:  CLRF   45
+011E:  MOVLW  80
+011F:  MOVWF  44
+0120:  CALL   004
+....................                delay_ms(10);                              //Short delay for debounce to stabilize the button press               
+0121:  MOVLW  0A
+0122:  MOVWF  41
+0123:  CALL   024
+....................        
+....................                //Scan all columns sequentially 
+....................                for(int8 col = 0; col < 3; col++) 
+0124:  CLRF   40
+0125:  MOVF   40,W
+0126:  SUBLW  02
+0127:  BTFSS  03.0
+0128:  GOTO   16B
+....................                { 
+....................                      //If found, try to find the column that is HIGH 
+....................                      if(input(PIN_D4 + col))  
+0129:  MOVLW  44
+012A:  ADDWF  40,W
+012B:  MOVWF  41
+012C:  MOVWF  42
+012D:  MOVLW  01
+012E:  MOVWF  43
+012F:  CLRF   45
+0130:  MOVLW  80
+0131:  MOVWF  44
+0132:  CALL   004
+0133:  MOVF   41,W
+0134:  MOVWF  42
+0135:  CLRF   44
+0136:  CLRF   43
+0137:  CALL   039
+0138:  BTFSS  78.0
+0139:  GOTO   169
+....................                      {     
+....................                         //Wait until the button is released 
+....................                         while(input(PIN_D4 + col));    
+013A:  MOVLW  44
+013B:  ADDWF  40,W
+013C:  MOVWF  41
+013D:  MOVWF  42
+013E:  MOVLW  01
+013F:  MOVWF  43
+0140:  CLRF   45
+0141:  MOVLW  80
+0142:  MOVWF  44
+0143:  CALL   004
+0144:  MOVF   41,W
+0145:  MOVWF  42
+0146:  CLRF   44
+0147:  CLRF   43
+0148:  CALL   039
+0149:  BTFSC  78.0
+014A:  GOTO   13A
+....................                          
+....................                         password[password_counter]=keypad[row][col];       //Save the selected row and column value to the array 
+014B:  MOVLW  23
+014C:  ADDWF  32,W
+014D:  MOVWF  78
+014E:  CLRF   7A
+014F:  BTFSC  03.0
+0150:  INCF   7A,F
+0151:  MOVF   78,W
+0152:  MOVWF  41
+0153:  MOVF   7A,W
+0154:  MOVWF  42
+0155:  MOVF   3F,W
+0156:  MOVWF  43
+0157:  MOVLW  03
+0158:  MOVWF  44
+0159:  GOTO   050
+015A:  MOVF   40,W
+015B:  ADDWF  78,W
+015C:  ADDLW  33
+015D:  MOVWF  04
+015E:  BCF    03.7
+015F:  MOVF   00,W
+0160:  MOVWF  43
+0161:  MOVF   41,W
+0162:  MOVWF  04
+0163:  BCF    03.7
+0164:  BTFSC  42.0
+0165:  BSF    03.7
+0166:  MOVF   43,W
+0167:  MOVWF  00
+....................                         password_counter++; 
+0168:  INCF   32,F
+....................                          
+....................                      } 
+0169:  INCF   40,F
+016A:  GOTO   125
+....................                
+....................                } 
+016B:  INCF   3F,F
+016C:  GOTO   10C
+....................        
+....................          } 
+....................           
+....................           
+....................          if(password_counter==4) 
+016D:  MOVF   32,W
+016E:  SUBLW  04
+016F:  BTFSS  03.2
+0170:  GOTO   19A
+....................          { 
+....................           
+....................                if(strcmp(password, selcukID) == 0){ 
+0171:  CLRF   42
+0172:  MOVLW  23
+0173:  MOVWF  41
+0174:  CLRF   44
+0175:  MOVLW  28
+0176:  MOVWF  43
+0177:  CALL   077
+0178:  MOVF   78,F
+0179:  BTFSS  03.2
+017A:  GOTO   182
+....................                   related_ID = '+';  
+017B:  MOVLW  2B
+017C:  MOVWF  22
+....................                   putc(related_ID); 
+017D:  MOVF   22,W
+017E:  BTFSS  0C.4
+017F:  GOTO   17E
+0180:  MOVWF  19
+....................                } 
+0181:  GOTO   199
+....................                 
+....................                else if(strcmp(password, emreID) == 0){ 
+0182:  CLRF   42
+0183:  MOVLW  23
+0184:  MOVWF  41
+0185:  CLRF   44
+0186:  MOVLW  2D
+0187:  MOVWF  43
+0188:  CALL   077
+0189:  MOVF   78,F
+018A:  BTFSS  03.2
+018B:  GOTO   193
+....................                   related_ID = '*';  
+018C:  MOVLW  2A
+018D:  MOVWF  22
+....................                   putc(related_ID); 
+018E:  MOVF   22,W
+018F:  BTFSS  0C.4
+0190:  GOTO   18F
+0191:  MOVWF  19
+....................                } 
+0192:  GOTO   199
+....................                 
+....................                else{ 
+....................                   related_ID = '.';  
+0193:  MOVLW  2E
+0194:  MOVWF  22
+....................                   putc(related_ID); 
+0195:  MOVF   22,W
+0196:  BTFSS  0C.4
+0197:  GOTO   196
+0198:  MOVWF  19
+....................                } 
+....................                 
+....................                password_counter=0; 
+0199:  CLRF   32
+....................          } 
+....................        
 ....................       delay_ms(100); //50ms bekle. 
-006F:  MOVLW  64
-0070:  MOVWF  3F
-0071:  GOTO   004
-0072:  GOTO   06B
+019A:  MOVLW  64
+019B:  MOVWF  41
+019C:  CALL   024
+019D:  GOTO   10B
 ....................    } 
 .................... } 
 ....................  
-0073:  SLEEP
-....................  
-.................... //! 
-.................... //! 
+019E:  SLEEP
 .................... //!void clear_EnteredPassword(void){ 
 .................... //!   password_counter=0; 
 .................... //!} 

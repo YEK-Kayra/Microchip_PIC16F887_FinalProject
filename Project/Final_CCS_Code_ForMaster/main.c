@@ -353,18 +353,17 @@ while(1){//--------------------- BEGIN---MAIN WHILE(1)---BEGIN------------------
    eeprom_polishing_written_cost   = 0;
   
    //Wait until unlock the system
-//!   do{
-//!           SubSystem_lcd_IdleStatus();   //Greeting the customer
-//!           
-//!           if(kbhit())
-//!           {
-//!              readed_ID = getc();
-//!              SubSystem_uart_CheckTheMessage();
-//!           }      
-//!        
-//!    }while(systemLock!=1);
- 
-    readed_ID = '+';
+   do{
+           SubSystem_lcd_IdleStatus();   //Greeting the customer
+           
+           if(kbhit())
+           {
+              readed_ID = getc();
+              SubSystem_uart_CheckTheMessage();
+           }      
+        
+    }while(systemLock!=1);
+
     delay_ms(1000);
     
     
@@ -715,7 +714,7 @@ void interruptSetting_Init(){
 
 //Function-4
 void adcSetting_Init(){
-     //-CONFIG--> Surfing Potentiometer & Timer Potentiometer
+     //-CONFIG--> fing Potentiometer & Timer Potentiometer
         setup_adc_ports(sAN0|sAN1);
         setup_adc(adc_clock_div_32);
         delay_us(20);

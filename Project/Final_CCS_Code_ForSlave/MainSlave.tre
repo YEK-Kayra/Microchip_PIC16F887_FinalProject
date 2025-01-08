@@ -1,4 +1,14 @@
 읕MainSlave
-   읕MAIN  0/89  Ram=0
+   읕MAIN  0/228  Ram=5
       쳐@cinit1  (Inline)  Ram=0
-      읕@delay_ms1  0/23  Ram=1
+      쳐@WRITEBITA  0/32  Ram=6
+      쳐@WRITEBITA  0/32  Ram=6
+      쳐@delay_ms1  0/21  Ram=1
+      쳐@WRITEBITA  0/32  Ram=6
+      쳐@READBITA  0/23  Ram=5
+      쳐@WRITEBITA  0/32  Ram=6
+      쳐@READBITA  0/23  Ram=5
+      쳐@MUL88  0/39  Ram=2
+      쳐strcmp  0/68  Ram=5
+      쳐strcmp  0/68  Ram=5
+      읕@delay_ms1  0/21  Ram=1

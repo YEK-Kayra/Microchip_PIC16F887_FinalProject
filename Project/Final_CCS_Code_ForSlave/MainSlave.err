@@ -1,9 +1,4 @@
 >>> Warning 203 "MainSlave.c" Line 57(1,1): Condition always TRUE
->>> Warning 202 "MainSlave.c" Line 14(6,14): Variable never used:   password
->>> Warning 202 "MainSlave.c" Line 15(6,14): Variable never used:   selcukID
->>> Warning 202 "MainSlave.c" Line 16(6,12): Variable never used:   emreID
->>> Warning 202 "MainSlave.c" Line 17(6,22): Variable never used:   password_counter
->>> Warning 202 "MainSlave.c" Line 40(6,12): Variable never used:   keypad
-      Memory usage:   ROM=1%      RAM=10% - 10%
-      0 Errors,  6 Warnings.
+      Memory usage:   ROM=5%      RAM=11% - 12%
+      0 Errors,  1 Warnings.
 Build Successful.

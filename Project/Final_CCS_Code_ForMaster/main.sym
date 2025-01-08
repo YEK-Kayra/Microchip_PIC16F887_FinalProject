@@ -282,12 +282,12 @@ Project Directory:
     C:\Users\yunus\OneDrive\Masaüstü\Microchip_PIC16F887_FinalProject\Project\Final_CCS_Code_ForMaster\
 
 Project Files:
-    main.c                                                  [31-Ara-24 16:58  CRC=4319BEC0]
+    main.c                                                  [02-Oca-25 10:50  CRC=FC4C4381]
     ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f887.h [08-Eyl-15 15:15  CRC=E224733F]
     ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c [19-Eyl-13 16:38  CRC=D1A6378A]
     ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\math.h [16-Oca-15 10:40  CRC=6A8358B0]
 
-Source signature=CBEB1AE9
+Source signature=851D9FAA
 Program memory checksum=0000
 Program memory CRC=0000
 Hex file CRC=AE15
