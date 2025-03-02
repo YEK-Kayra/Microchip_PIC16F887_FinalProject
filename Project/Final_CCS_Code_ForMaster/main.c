@@ -1,4 +1,4 @@
-//Ister bisiklet ol ister tir, ne olursan ol yine gel
+//Ay Karanlığı
 
 #include <16f887.h>
 
