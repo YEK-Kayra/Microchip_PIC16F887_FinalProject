@@ -1,22 +1,52 @@
-# Derlenmiş CSS dosyaları (Sass, Less, vs.)
-*.css.map  
-*.scssc  
-*.sass-cache/  
-*.less-cache/  
+# Prerequisites
+*.d
 
-# Node.js / Frontend build araçları
-node_modules/  
-dist/  
-build/  
-.vscode/  
-.idea/  
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
 
-# Sistem dosyaları ve geçici dosyalar
-.DS_Store  
-Thumbs.db  
-*.log  
-*.tmp  
-*.bak  
+# Linker output
+*.ilk
+*.map
+*.exp
 
-# Rich Text Format dosyaları
-*.rtf  
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Kernel Module Compile Results
+*.mod*
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
