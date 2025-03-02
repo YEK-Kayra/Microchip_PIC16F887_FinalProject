@@ -141,7 +141,7 @@ unsigned int8 eeprom_ventilating_read_cost = 0;
 unsigned int8 eeprom_polishing_read_cost   = 0;
 
 //Keeps track of the last written address in EEPROM for each customer
-unsigned int8 Client0_last_address=0; //For Selçuk Bey's account
+unsigned int8 Client0_last_address=0; //For Selï¿½uk Bey's account
 unsigned int8 Client1_last_address=0; //For Emre Bey's account
 
 unsigned int8 IndexOfReadMemory=2; /**
@@ -343,7 +343,7 @@ while(1){//--------------------- BEGIN---MAIN WHILE(1)---BEGIN------------------
    readed_ID  = '.';   //Clear Id symbol
    systemLock = 0;
    OPS_Status = 56;    //Disable 
-   counter_StartOpsButtonTick=0;  //En son manalý deðiþiklik
+   counter_StartOpsButtonTick=0;  //En son manalï¿½ deï¿½iï¿½iklik
    allProcessComplate_flag = 0;
    
    //To prevent old values from being written to the system EEPROM.
@@ -655,7 +655,7 @@ while(1){//--------------------- BEGIN---MAIN WHILE(1)---BEGIN------------------
        //If the cancel operation button hasn't been pressed, it will return to the main menu again
       }while(OPS_Status!=55);
       
-  displayProcessCompletionStatus();//buraya koyarsan ana menüye gitmez ki
+  displayProcessCompletionStatus();//buraya koyarsan ana menï¿½ye gitmez ki
   
       
       
@@ -764,7 +764,7 @@ void SubSystem_lcd_IdleStatus(void){
 void NavigateOperationMenu(void){
    printf(lcd_putc, "\f"); // LCD'yi temizle
 
-    // 1. Seçenek
+    // 1. Seï¿½enek
     if (Index_OptionMenu == 0) {
         lcd_gotoxy(1, 1);
         printf(lcd_putc, "1-Kopuk Islem <-");
@@ -772,7 +772,7 @@ void NavigateOperationMenu(void){
         printf(lcd_putc, "2-Su Islem");   
     } 
 
-    // 2. Seçenek
+    // 2. Seï¿½enek
     if (Index_OptionMenu == 1) {
         lcd_gotoxy(1, 1);
         printf(lcd_putc, "2-Su Islem <-");
@@ -780,7 +780,7 @@ void NavigateOperationMenu(void){
         printf(lcd_putc, "3-Hava Islem");       
     }
     
-    // 3. Seçenek
+    // 3. Seï¿½enek
         if (Index_OptionMenu == 2) {
         lcd_gotoxy(1, 1);
         printf(lcd_putc, "3-Hava Islem <-");
@@ -788,7 +788,7 @@ void NavigateOperationMenu(void){
         printf(lcd_putc, "4-Cila Islem");   
     } 
 
-    // 4. Seçenek
+    // 4. Seï¿½enek
     if (Index_OptionMenu == 3) {
         lcd_gotoxy(1, 1);
         printf(lcd_putc, "4-Cila Islem <-");
@@ -796,7 +796,7 @@ void NavigateOperationMenu(void){
         printf(lcd_putc, "5-Kayit Islem");    
     }
     
-    // 5. Seçenek
+    // 5. Seï¿½enek
     if (Index_OptionMenu == 4) {
         lcd_gotoxy(1, 1);
         printf(lcd_putc, "5-Kayit Islem <-"); 
@@ -950,7 +950,7 @@ void DisplayRecordsSequentiallyOnLCD(){
  */
 void SubSystem_uart_CheckTheMessage(void){
    
-   if(readed_ID == '+'){      //Mr. Selçuk's ID
+   if(readed_ID == '+'){      //Mr. Selï¿½uk's ID
       ClientNumber = 0;       //System works for Mr. Selcuk
       lcd_gotoxy(4,1);
       printf(lcd_putc,"Hosgeldiniz");
@@ -1062,8 +1062,8 @@ void display_Selected_EEPROM_OpsVal_OnLCD(){
 
 void Read_EEPROM_OpsVal_from_EEPROMregs(){
     
-    // NE ZAMAN NEXT BUTONUNA BASILIR O ZAMAN SEÇÝM YAPILIR
-    // IndexOfReadMemory butonun üzerinde bulunduðu yer(next demeden önce)
+    // NE ZAMAN NEXT BUTONUNA BASILIR O ZAMAN SEï¿½ï¿½M YAPILIR
+    // IndexOfReadMemory butonun ï¿½zerinde bulunduï¿½u yer(next demeden ï¿½nce)
     
         if(ClientNumber == 0)
         {
