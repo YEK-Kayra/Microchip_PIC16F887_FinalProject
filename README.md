@@ -1,7 +1,7 @@
 
 # Fully Automatic Car Wash Machine - Microcontroller Project
 
-📄 [Download Project Report (PDF)](file:///C:/Users/yunus/OneDrive/Masa%C3%BCst%C3%BC/MikroProjesi_Rapor.pdf)
+📄 [Download Project Report (PDF)](https://github.com/YEK-Kayra/Microchip_PIC16F887_FinalProject/blob/main/Project%20Report.pdf)
 
 ## 📌 Project Overview
 This project implements a fully automatic car wash system using PIC microcontrollers (PIC16F887 and PIC16F877A). The system provides a user-friendly interface for customized car washing services including foaming, washing, drying, and polishing operations with secure password authentication and data persistence.
